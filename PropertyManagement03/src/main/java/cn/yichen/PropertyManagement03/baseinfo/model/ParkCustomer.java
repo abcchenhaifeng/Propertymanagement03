@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ParkCustomer {
+/**
+ * 2019年8月7日23:32:18
+ * @author YiChen(李冠永)
+ * #车位客户
+ *
+ */
+public class ParkCustomer implements Serializable {
     private Integer pcno;
 
     private Integer parkno;
@@ -72,4 +79,10 @@ public class ParkCustomer {
     public void setPcstatus(String pcstatus) {
         this.pcstatus = pcstatus == null ? null : pcstatus.trim();
     }
+
+	@Override
+	public String toString() {
+		return "ParkCustomer [pcno=" + pcno + ", parkno=" + parkno + ", customerno=" + customerno + ", carcode="
+				+ carcode + ", startdate=" + startdate + ", enddate=" + enddate + ", pcstatus=" + pcstatus + "]";
+	}
 }

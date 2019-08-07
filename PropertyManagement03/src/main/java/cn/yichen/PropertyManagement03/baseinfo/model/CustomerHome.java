@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CustomerHome {
+/**
+ * 2019年8月7日23:30:52
+ * @author YiChen(李冠永)
+ * #客户房间
+ *
+ */
+public class CustomerHome implements Serializable {
     private Integer chno;
 
     private Integer customerno;
@@ -102,4 +109,12 @@ public class CustomerHome {
     public void setChstatus(String chstatus) {
         this.chstatus = chstatus == null ? null : chstatus.trim();
     }
+
+	@Override
+	public String toString() {
+		return "CustomerHome [chno=" + chno + ", customerno=" + customerno + ", roomno=" + roomno + ", livingtypeno="
+				+ livingtypeno + ", receivedate=" + receivedate + ", livedate=" + livedate + ", feestartdate="
+				+ feestartdate + ", feeenddate=" + feeenddate + ", humancount=" + humancount + ", chstatus=" + chstatus
+				+ "]";
+	}
 }

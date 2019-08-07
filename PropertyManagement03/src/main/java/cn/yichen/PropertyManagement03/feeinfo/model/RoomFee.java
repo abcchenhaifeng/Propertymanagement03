@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.feeinfo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RoomFee {
+/**
+ * 2019年8月7日23:34:14
+ * @author YiChen(李冠永)
+ * #房间缴费
+ *
+ */
+public class RoomFee implements Serializable {
     private Integer roomfeeno;
 
     private String feeyear;

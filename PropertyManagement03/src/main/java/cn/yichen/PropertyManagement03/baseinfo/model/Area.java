@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
-public class Area {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:29:53
+ * @author YiChen(李冠永)
+ * #小区
+ *
+ */
+public class Area implements Serializable {
     private Integer areano;
 
     private String areaname;
@@ -100,4 +108,12 @@ public class Area {
     public void setTotalpack(Long totalpack) {
         this.totalpack = totalpack;
     }
+
+	@Override
+	public String toString() {
+		return "Area [areano=" + areano + ", areaname=" + areaname + ", aaddress=" + aaddress + ", developer="
+				+ developer + ", totalbuidingarea=" + totalbuidingarea + ", totalusearea=" + totalusearea
+				+ ", totalpackarea=" + totalpackarea + ", totalhome=" + totalhome + ", totalhouse=" + totalhouse
+				+ ", totalpack=" + totalpack + "]";
+	}
 }

@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.admin.model;
 
-public class SystemFunctionuser {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:29:10
+ * @author YiChen(李冠永)
+ * #系统功能权限
+ *
+ */
+public class SystemFunctionuser implements Serializable {
     private String userid;
 
     private Integer funno;

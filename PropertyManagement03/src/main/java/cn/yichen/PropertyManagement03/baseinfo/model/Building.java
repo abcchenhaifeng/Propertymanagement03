@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
-public class Building {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:30:06
+ * @author YiChen(李冠永)
+ * #楼宇(建筑)
+ *
+ */
+public class Building implements Serializable {
     private Integer buildingno;
 
     private Integer areano;
@@ -80,4 +88,11 @@ public class Building {
     public void setTotalhouse(Long totalhouse) {
         this.totalhouse = totalhouse;
     }
+
+	@Override
+	public String toString() {
+		return "Building [buildingno=" + buildingno + ", areano=" + areano + ", bcode=" + bcode + ", baddress="
+				+ baddress + ", buildingtypeno=" + buildingtypeno + ", direction=" + direction + ", totalhome="
+				+ totalhome + ", totalhouse=" + totalhouse + "]";
+	}
 }

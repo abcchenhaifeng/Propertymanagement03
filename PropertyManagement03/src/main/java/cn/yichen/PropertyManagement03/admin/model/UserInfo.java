@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.admin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
+/**
+ * 2019年8月7日23:29:35
+ * @author YiChen(李冠永)
+ * #系统操作员
+ *
+ */
+public class UserInfo implements Serializable {
     private String userid;
 
     private String userpassword;

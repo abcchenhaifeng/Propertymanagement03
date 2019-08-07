@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.feeinfo.model;
 
-public class FeeItem {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:33:13
+ * @author YiChen(李冠永)
+ * #收费项目
+ *
+ */
+public class FeeItem implements Serializable {
     private Integer itemno;
 
     private String itemcode;

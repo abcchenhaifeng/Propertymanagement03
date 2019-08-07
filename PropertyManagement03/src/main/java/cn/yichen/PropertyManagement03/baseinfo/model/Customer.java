@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Customer {
+/**
+ * 2019年8月7日23:30:32
+ * @author YiChen(李冠永)
+ * #客户
+ *
+ */
+public class Customer implements Serializable {
     private Short customerId;
 
     private Byte storeId;
@@ -92,4 +99,11 @@ public class Customer {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", storeId=" + storeId + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", addressId=" + addressId + ", active=" + active
+				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + "]";
+	}
 }

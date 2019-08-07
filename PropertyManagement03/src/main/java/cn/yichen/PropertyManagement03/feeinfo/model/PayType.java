@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.feeinfo.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class PayType {
+/**
+ * 2019年8月7日23:34:05
+ * @author YiChen(李冠永)
+ * #付款类型
+ *
+ */
+public class PayType implements Serializable {
     private Integer typeno;
 
     private String typename;

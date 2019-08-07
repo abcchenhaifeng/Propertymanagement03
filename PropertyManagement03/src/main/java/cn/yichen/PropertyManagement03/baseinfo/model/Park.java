@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
-public class Park {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:32:03
+ * @author YiChen(李冠永)
+ * #车位
+ *
+ */
+public class Park implements Serializable {
     private Integer parkno;
 
     private Integer typeno;
@@ -100,4 +108,11 @@ public class Park {
     public void setFeestatus(String feestatus) {
         this.feestatus = feestatus == null ? null : feestatus.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Park [parkno=" + parkno + ", typeno=" + typeno + ", parkcode=" + parkcode + ", buildingno=" + buildingno
+				+ ", location=" + location + ", area=" + area + ", parkstatus=" + parkstatus + ", rentprice="
+				+ rentprice + ", rentunit=" + rentunit + ", feestatus=" + feestatus + "]";
+	}
 }

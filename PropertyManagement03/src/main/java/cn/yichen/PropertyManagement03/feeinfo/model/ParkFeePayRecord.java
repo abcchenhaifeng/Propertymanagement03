@@ -1,8 +1,15 @@
 package cn.yichen.PropertyManagement03.feeinfo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ParkFeePayRecord {
+/**
+ * 2019年8月7日23:33:55
+ * @author YiChen(李冠永)
+ * #车位收费付款记录
+ *
+ */
+public class ParkFeePayRecord implements Serializable {
     private Integer payno;
 
     private Integer parkfeeno;

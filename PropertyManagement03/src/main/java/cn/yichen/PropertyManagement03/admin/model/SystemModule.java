@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.admin.model;
 
-public class SystemModule {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:29:26
+ * @author YiChen(李冠永)
+ * #系统模块
+ *
+ */
+public class SystemModule implements Serializable {
 	private Integer mno;
 
 	private String mname;

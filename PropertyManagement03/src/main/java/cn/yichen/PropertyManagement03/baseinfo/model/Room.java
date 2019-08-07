@@ -1,6 +1,14 @@
 package cn.yichen.PropertyManagement03.baseinfo.model;
 
-public class Room {
+import java.io.Serializable;
+
+/**
+ * 2019年8月7日23:32:43
+ * @author YiChen(李冠永)
+ * #房间
+ *
+ */
+public class Room implements Serializable {
     private Integer roomno;
 
     private Integer housetypeno;
@@ -100,4 +108,12 @@ public class Room {
     public void setRoomtype(String roomtype) {
         this.roomtype = roomtype == null ? null : roomtype.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Room [roomno=" + roomno + ", housetypeno=" + housetypeno + ", buildingno=" + buildingno
+				+ ", departmentcode=" + departmentcode + ", floor=" + floor + ", roomcode=" + roomcode
+				+ ", buildingarea=" + buildingarea + ", feearea=" + feearea + ", roomstatus=" + roomstatus
+				+ ", roomtype=" + roomtype + "]";
+	}
 }
