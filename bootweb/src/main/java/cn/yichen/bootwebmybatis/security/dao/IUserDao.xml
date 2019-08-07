@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，做sql隔离 -->
+<mapper namespace="cn.yichen.bootwebmybatis.security.dao.IUserDao">
+    <!-- 
+        id:sql语句唯一标识
+        parameterType:指定传入参数类型(对应javaBean类型，写原始型会自动包装为包装类)
+        resultType：返回结果类型
+        #{}:占位符号，起到占位作用，如果传入的是原始型，那么括号中的变量名称可以随意定义
+     -->
+     
+    <!-- 启动对给定命名空间的缓存并进行配置 -->
+    <cache></cache>
+    
+    <resultMap id="UserModelMap" type="User">
+    	<id column="USERID" property="id"/>
+    	<result column="username" property="username"/>
+    	<result column="userPassword" property="password"/>
+    	<result column="userRole" property="role"/>
+    	<result column="age" property="age"/>
+    	<result column="joindate" property="joinDate"/>
+    	<result column="status" property="status"/>
+    </resultMap>
+    
+    <resultMap id="UserModelMapWithRole" type="User" extends="UserModelMap">
+    	<collection property="roles"
+    		select="cn.yichen.bootwebmybatis.security.dao.IRoleDao.selectRoleByNo" column="RNO">
+    	</collection>
+    </resultMap>
+    
+    <sql id="userWhen">
+    	<if test="id != null"> and USERID like '%${id}%' </if>
+    	<if test="password != null"> and UserPASSWORD = #{password} </if>
+    	<if test="username != null"> and UserNAME like '%${username}%' </if>
+    	<if test="role != null"> and UserROLE = #{role} </if>
+    	<if test="age != null"> and age = #{age} </if>
+    	<if test="joinDate != null"> and joindate = #{joinDate} </if>
+    	<if test="status != null"> and status = #{status} </if>
+    </sql>
+     
+    <select id="selectListById" resultMap="UserModelMapWithRole" useCache="true">
+        select u.USERID, u.UserPASSWORD, u.UserNAME, u.UserROLE, u.age, u.joindate, u.status , 
+        r.RNO, r.RNAME
+        from userinfo u, userrole ur, roles r
+        where u.USERID = ur.USERID and ur.RNO = r.RNO and status != 'DISABLE' and u.USERID = #{id} 
+    </select>
+    
+    <select id="selectListByAll" resultMap="UserModelMap" useCache="true">
+        select USERID, UserPASSWORD, UserNAME, UserROLE, age, joindate, status 
+        from userinfo 
+        <where>
+        	status != 'DISABLE' 
+        	<include refid="userWhen"></include>
+        </where>
+    </select>
+    
+    <insert id="create" flushCache="true">
+		<!-- 主键返回策略
+		<selectKey keyColumn="USERID" keyProperty="id" resultType="java.lang.String" order="AFTER">
+			select uuid()
+		</selectKey>
+		 -->
+		insert into userinfo(USERID, UserPASSWORD, UserNAME, UserROLE, age, joindate, status) values(#{id}, #{password}, #{username}, #{role}, #{age}, #{joinDate}, 'N')
+    </insert>
+    
+    <insert id="addRole" flushCache="true">
+		<!-- 主键返回策略
+		<selectKey keyColumn="USERID" keyProperty="id" resultType="java.lang.String" order="AFTER">
+			select uuid()
+		</selectKey>
+		 -->
+		insert into userrole(USERID, RNO) values(#{id}, #{roleNo})
+    </insert>
+    
+    <insert id="addRoles" flushCache="true">
+		<!-- 主键返回策略
+		<selectKey keyColumn="USERID" keyProperty="id" resultType="java.lang.String" order="AFTER">
+			select uuid()
+		</selectKey>
+		 -->
+		insert into userrole(USERID, RNO) values
+		<foreach collection="roleNoList" item="roleNo" separator=",">
+			(#{id}, #{roleNo})
+		</foreach>
+    </insert>
+    
+    <delete id="delete" flushCache="true">
+        delete from userinfo where USERID = #{id}
+    </delete>
+    
+    <update id="update" flushCache="true">
+        update userinfo set UserPASSWORD = #{password}, UserNAME = #{username}, UserROLE = #{role}, age = #{age}, joindate = #{joinDate}, status = #{status} where USERID = #{id}
+    </update>
+</mapper>
