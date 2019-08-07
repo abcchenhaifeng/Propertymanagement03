@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * 用户model
  * 
- * @author YiChen
+ * @author YiChen(ychenli)
  *
  */
 @Alias("User")
