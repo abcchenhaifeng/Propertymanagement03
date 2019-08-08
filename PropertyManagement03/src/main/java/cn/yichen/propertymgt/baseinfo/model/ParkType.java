@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:32:31
  * @author YiChen(李冠永)
  * #车位类型
  *
  */
+@Alias("ParkType")
 public class ParkType implements Serializable {
     private Integer typeno;
 

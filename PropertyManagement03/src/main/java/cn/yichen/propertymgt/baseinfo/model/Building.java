@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:30:06
  * @author YiChen(李冠永)
  * #楼宇(建筑)
  *
  */
+@Alias("Building")
 public class Building implements Serializable {
     private Integer buildingno;
 

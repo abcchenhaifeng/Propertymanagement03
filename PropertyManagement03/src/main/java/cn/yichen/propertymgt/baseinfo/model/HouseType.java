@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:31:18
  * @author YiChen(李冠永)
  * #户型
  *
  */
+@Alias("HouseType")
 public class HouseType implements Serializable {
     private Integer typeno;
 

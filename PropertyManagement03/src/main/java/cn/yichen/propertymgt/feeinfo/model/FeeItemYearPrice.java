@@ -3,17 +3,31 @@ package cn.yichen.propertymgt.feeinfo.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 2019年8月7日23:33:24
  * @author YiChen(李冠永)
  * #收费项目年度价格
  *
  */
+@Alias("FeeItemYearPrice")
 public class FeeItemYearPrice implements Serializable {
     
     private String feeyear;
 
     private Integer itemno;
+    
+	private Double unitprice;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startdate;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date enddtae;
+
+    private String pricedesc;
 	
 	public String getFeeyear() {
 		return feeyear;
@@ -30,14 +44,6 @@ public class FeeItemYearPrice implements Serializable {
 	public void setItemno(Integer itemno) {
 		this.itemno = itemno;
 	}
-
-	private Double unitprice;
-
-    private Date startdate;
-
-    private Date enddtae;
-
-    private String pricedesc;
 
     public Double getUnitprice() {
         return unitprice;

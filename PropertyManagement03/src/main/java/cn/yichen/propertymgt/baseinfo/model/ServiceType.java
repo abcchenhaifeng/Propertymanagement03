@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:32:57
  * @author YiChen(李冠永)
  * #服务类型
  *
  */
+@Alias("ServiceType")
 public class ServiceType implements Serializable {
     private Integer typeno;
 

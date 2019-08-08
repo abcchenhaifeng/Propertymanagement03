@@ -3,16 +3,20 @@ package cn.yichen.propertymgt.baseinfo.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 2019年8月7日23:30:32
  * @author YiChen(李冠永)
  * #客户
  *
  */
+@Alias("Customer")
 public class Customer implements Serializable {
-    private Short customerId;
+    private Long customerId;
 
-    private Byte storeId;
+    private Long storeId;
 
     private String firstName;
 
@@ -20,29 +24,15 @@ public class Customer implements Serializable {
 
     private String email;
 
-    private Short addressId;
+    private Long addressId;
 
-    private Boolean active;
+	private Boolean active;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lastUpdate;
-
-    public Short getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Short customerId) {
-        this.customerId = customerId;
-    }
-
-    public Byte getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Byte storeId) {
-        this.storeId = storeId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -51,6 +41,18 @@ public class Customer implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName == null ? null : firstName.trim();
     }
+    
+    public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public void setStoreId(Long storeId) {
+		this.storeId = storeId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
 
     public String getLastName() {
         return lastName;
@@ -68,15 +70,19 @@ public class Customer implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public Short getAddressId() {
-        return addressId;
-    }
+    public Long getCustomerId() {
+		return customerId;
+	}
 
-    public void setAddressId(Short addressId) {
-        this.addressId = addressId;
-    }
+	public Long getStoreId() {
+		return storeId;
+	}
 
-    public Boolean getActive() {
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public Boolean getActive() {
         return active;
     }
 

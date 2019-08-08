@@ -3,12 +3,16 @@ package cn.yichen.propertymgt.baseinfo.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 2019年8月7日23:30:52
  * @author YiChen(李冠永)
  * #客户房间
  *
  */
+@Alias("CustomerHome")
 public class CustomerHome implements Serializable {
     private Integer chno;
 
@@ -18,15 +22,19 @@ public class CustomerHome implements Serializable {
 
     private Integer livingtypeno;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date receivedate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date livedate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date feestartdate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date feeenddate;
 
-    private Short humancount;
+    private Integer humancount;
 
     private String chstatus;
 
@@ -94,11 +102,11 @@ public class CustomerHome implements Serializable {
         this.feeenddate = feeenddate;
     }
 
-    public Short getHumancount() {
+    public Integer getHumancount() {
         return humancount;
     }
 
-    public void setHumancount(Short humancount) {
+    public void setHumancount(Integer humancount) {
         this.humancount = humancount;
     }
 

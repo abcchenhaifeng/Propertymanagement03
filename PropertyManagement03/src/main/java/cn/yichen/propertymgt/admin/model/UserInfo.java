@@ -3,12 +3,16 @@ package cn.yichen.propertymgt.admin.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 2019年8月7日23:29:35
  * @author YiChen(李冠永)
  * #系统操作员
  *
  */
+@Alias("UserInfo")
 public class UserInfo implements Serializable {
     private String userid;
 
@@ -20,6 +24,7 @@ public class UserInfo implements Serializable {
 
     private Integer age;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date joindate;
 
     private String status;

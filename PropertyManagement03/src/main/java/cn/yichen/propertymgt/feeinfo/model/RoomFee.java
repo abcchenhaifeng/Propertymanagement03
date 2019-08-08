@@ -3,12 +3,16 @@ package cn.yichen.propertymgt.feeinfo.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 2019年8月7日23:34:14
  * @author YiChen(李冠永)
  * #房间缴费
  *
  */
+@Alias("RoomFee")
 public class RoomFee implements Serializable {
     private Integer roomfeeno;
 
@@ -26,8 +30,10 @@ public class RoomFee implements Serializable {
 
     private Double derate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startdate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date enddate;
 
     private String feestatus;

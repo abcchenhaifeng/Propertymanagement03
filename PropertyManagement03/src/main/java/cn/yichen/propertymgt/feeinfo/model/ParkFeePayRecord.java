@@ -3,12 +3,16 @@ package cn.yichen.propertymgt.feeinfo.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 2019年8月7日23:33:55
  * @author YiChen(李冠永)
  * #车位收费付款记录
  *
  */
+@Alias("ParkFeePayRecord")
 public class ParkFeePayRecord implements Serializable {
     private Integer payno;
 
@@ -18,6 +22,7 @@ public class ParkFeePayRecord implements Serializable {
 
     private Double payamount;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date paydate;
 
     private String payperson;

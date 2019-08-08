@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.feeinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:33:13
  * @author YiChen(李冠永)
  * #收费项目
  *
  */
+@Alias("FeeItem")
 public class FeeItem implements Serializable {
     private Integer itemno;
 

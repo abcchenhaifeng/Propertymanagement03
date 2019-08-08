@@ -2,13 +2,16 @@ package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:29:10
  * @author YiChen(李冠永)
  * #系统功能权限
  *
  */
-public class SystemFunctionuser implements Serializable {
+@Alias("SystemFunctionUser")
+public class SystemFunctionUser implements Serializable {
     private String userid;
 
     private Integer funno;

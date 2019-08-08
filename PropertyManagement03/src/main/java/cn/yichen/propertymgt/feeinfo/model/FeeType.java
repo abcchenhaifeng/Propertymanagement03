@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.feeinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:33:35
  * @author YiChen(李冠永)
  * #收费类型
  *
  */
+@Alias("FeeType")
 public class FeeType implements Serializable {
     private Integer typeno;
 

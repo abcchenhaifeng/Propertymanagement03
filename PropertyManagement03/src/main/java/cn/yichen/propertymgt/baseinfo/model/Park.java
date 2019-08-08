@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:32:03
  * @author YiChen(李冠永)
  * #车位
  *
  */
+@Alias("Park")
 public class Park implements Serializable {
     private Integer parkno;
 

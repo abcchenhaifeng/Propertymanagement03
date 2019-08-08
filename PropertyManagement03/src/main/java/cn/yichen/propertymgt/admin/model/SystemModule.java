@@ -2,12 +2,15 @@ package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 2019年8月7日23:29:26
  * @author YiChen(李冠永)
  * #系统模块
  *
  */
+@Alias("SystemModule")
 public class SystemModule implements Serializable {
 	private Integer mno;
 
