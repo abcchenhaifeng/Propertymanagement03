@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.admin.mapper.IUserInfoMapper">
+
+	<cache />
+
+	<resultMap id="UserInfoMap" type="UserInfo">
+		<id column="USERID" property="id" />
+		<result column="UNAME" property="username" />
+		<result column="UPASSWORD" property="password" />
+		<result column="SEX" property="sex" />
+		<result column="AGE" property="age" />
+		<result column="Mobible" property="mobible" />
+		<result column="UserStatus" property="status" />
+	</resultMap>
+
+	<resultMap id="UserInfoMapWithFunction" type="UserInfo"
+		extends="UserInfoMap">
+		<collection property="functions"
+			select="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.selectFunctionByNo"
+			column="FUNNO">
+		</collection>
+	</resultMap>
+
+	<sql id="userInfoWhen">
+		<if test="id != null"> and USERID like '%${id}%' </if>
+		<if test="password != null"> and UPASSWORD = #{password} </if>
+		<if test="username != null"> and UNAME like '%${username}%' </if>
+		<if test="mobible != null"> and Mobible like '%${mobible}%' </if>
+		<if test="age != null"> and age = #{age} </if>
+		<if test="sex != null"> and SEX = #{sex} </if>
+		<if test="status != null"> and UserStatus = #{status} </if>
+	</sql>
+
+	<select id="selectUserInfoById" resultMap="UserInfoMapWithFunction">
+		select u.USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible, FUNNO
+		from UserInfo u, SystemFunctionUser fu
+		where u.USERID = #{id} and u.USERID = fu.USERID
+	</select>
+
+	<select id="selectListByAll" resultMap="UserInfoMap">
+		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
+		from UserInfo
+		<where>
+			<include refid="userInfoWhen"></include>
+		</where>
+	</select>
+</mapper>

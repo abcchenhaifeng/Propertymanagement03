@@ -8,22 +8,19 @@ import org.apache.ibatis.type.Alias;
 /**
  * 2019年8月7日23:27:01
  * 
- * @author YiChen(李冠永)
- * #系统功能
+ * @author YiChen(李冠永) #系统功能
  * 
  */
 @Alias("SystemFunction")
 public class SystemFunction implements Serializable {
-	private Integer funno;
+	private Integer no;
 
-	private Integer mno;
+	private String name;
 
-	private String funname;
-
-	private String funurl;
+	private String url;
 
 	private Integer levelno;
-	
+
 	private SystemModule module;
 
 	private List<UserInfo> userInfos;
@@ -35,7 +32,7 @@ public class SystemFunction implements Serializable {
 	public void setModule(SystemModule module) {
 		this.module = module;
 	}
-	
+
 	public List<UserInfo> getUserInfos() {
 		return userInfos;
 	}
@@ -44,36 +41,28 @@ public class SystemFunction implements Serializable {
 		this.userInfos = userInfos;
 	}
 
-	public Integer getFunno() {
-		return funno;
+	public Integer getNo() {
+		return no;
 	}
 
-	public void setFunno(Integer funno) {
-		this.funno = funno;
+	public void setNo(Integer no) {
+		this.no = no;
 	}
 
-	public Integer getMno() {
-		return mno;
+	public String getName() {
+		return name;
 	}
 
-	public void setMno(Integer mno) {
-		this.mno = mno;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getFunname() {
-		return funname;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setFunname(String funname) {
-		this.funname = funname == null ? null : funname.trim();
-	}
-
-	public String getFunurl() {
-		return funurl;
-	}
-
-	public void setFunurl(String funurl) {
-		this.funurl = funurl == null ? null : funurl.trim();
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Integer getLevelno() {
@@ -86,7 +75,7 @@ public class SystemFunction implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SystemFunction [funno=" + funno + ", mno=" + mno + ", funname=" + funname + ", funurl=" + funurl
-				+ ", levelno=" + levelno + ", module=" + module + ", userInfos=" + userInfos + "]";
+		return "SystemFunction [no=" + no + ", name=" + name + ", url=" + url + ", levelno=" + levelno + ", module="
+				+ module + ", userInfos=" + userInfos + "]";
 	}
 }
