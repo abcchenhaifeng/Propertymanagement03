@@ -1,11 +1,13 @@
 package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
 /**
  * 2019年8月7日23:27:01
+ * 
  * @author YiChen(李冠永)
  * #系统功能
  * 
@@ -21,6 +23,26 @@ public class SystemFunction implements Serializable {
 	private String funurl;
 
 	private Integer levelno;
+	
+	private SystemModule module;
+
+	private List<UserInfo> userInfos;
+
+	public SystemModule getModule() {
+		return module;
+	}
+
+	public void setModule(SystemModule module) {
+		this.module = module;
+	}
+	
+	public List<UserInfo> getUserInfos() {
+		return userInfos;
+	}
+
+	public void setUserInfos(List<UserInfo> userInfos) {
+		this.userInfos = userInfos;
+	}
 
 	public Integer getFunno() {
 		return funno;
@@ -64,7 +86,7 @@ public class SystemFunction implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Systemfunction [funno=" + funno + ", mno=" + mno + ", funname=" + funname + ", funurl=" + funurl
-				+ ", levelno=" + levelno + "]";
+		return "SystemFunction [funno=" + funno + ", mno=" + mno + ", funname=" + funname + ", funurl=" + funurl
+				+ ", levelno=" + levelno + ", module=" + module + ", userInfos=" + userInfos + "]";
 	}
 }

@@ -2,6 +2,7 @@ package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,8 +24,18 @@ public class UserInfo implements Serializable {
     private String userrole;
 
     private Integer age;
+    
+    private List<SystemFunction> functions; 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public List<SystemFunction> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(List<SystemFunction> functions) {
+		this.functions = functions;
+	}
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date joindate;
 
     private String status;
@@ -87,7 +98,8 @@ public class UserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Userinfo [userid=" + userid + ", userpassword=" + userpassword + ", username=" + username
-				+ ", userrole=" + userrole + ", age=" + age + ", joindate=" + joindate + ", status=" + status + "]";
+		return "UserInfo [userid=" + userid + ", userpassword=" + userpassword + ", username=" + username
+				+ ", userrole=" + userrole + ", age=" + age + ", functions=" + functions + ", joindate=" + joindate
+				+ ", status=" + status + "]";
 	}
 }
