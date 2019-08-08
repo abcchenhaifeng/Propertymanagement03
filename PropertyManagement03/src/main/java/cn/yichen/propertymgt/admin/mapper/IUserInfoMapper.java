@@ -35,18 +35,16 @@ public interface IUserInfoMapper {
 	public UserInfo selectUserInfoById(String id) throws Exception;
 	
 	// 获取用户列表
-	public List<UserInfo> selectListByAll(UserInfo userInfo) throws Exception;
+	public List<UserInfo> selectListByAll(@Param("userInfo") UserInfo userInfo) throws Exception;
 
 	// 按条件获取用户列表(分页)
 	public List<UserInfo> selectListByAllWithPage(@Param("userInfo") UserInfo userInfo, @Param("start") int start, @Param("rows") int rows) throws Exception;
 	
 	// 为用户增加功能
 	// 每次增加一个功能
-	public void addFunction(@Param("no") String no, @Param("funcNo") int funcNo) throws Exception;
+	@Insert("insert into SystemFunctionUser(USERID, FUNNO) values(#{id}, #{funNo})")
+	public void addFunction(@Param("id") String id, @Param("funNo") int funNo) throws Exception;
 
 	// 每次增加多个功能
-	public void addFunctions(@Param("no") String no, @Param("funcNos")  int[] funcNos) throws Exception;
-
-	// 取得指定用户的功能列表
-	public List<UserInfo> selectFunctionListByUser() throws Exception;
+	public void addFunctions(@Param("id") String id, @Param("funNos")  int[] funNos) throws Exception;
 }

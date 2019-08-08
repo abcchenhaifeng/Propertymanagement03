@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper">
+<mapper
+	namespace="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper">
 
 	<cache />
 
@@ -13,10 +14,57 @@
 		<result column="LevelNo" property="levelno" />
 	</resultMap>
 
-	<select id="selectFunctionByNo" resultMap="SystemFunctionMap">
+	<resultMap id="SystemFunctionMapWithModule"
+		type="SystemFunction" extends="SystemFunctionMap">
+		<association property="module"
+			select="cn.yichen.propertymgt.admin.mapper.ISystemModuleMapper.selectModuleByNo"
+			column="MNO">
+		</association>
+	</resultMap>
+
+	<sql id="systemFunctionWhen">
+		<if test="systemFunction != null">
+			<if test="systemFunction.no != null"> and FUNNO = #{systemFunction.no} </if>
+			<if test="systemFunction.module.no != null"> and MNO = #{systemFunction.module.no} </if>
+			<if test="systemFunction.name != null"> and FUNNAME like '%${systemFunction.name}%' </if>
+			<if test="systemFunction.url != null"> and FUNURL like '%${systemFunction.url}%' </if>
+			<if test="systemFunction.levelno != null"> and LevelNo = #{systemFunction.levelno} </if>
+		</if>
+	</sql>
+
+	<select id="selectFunctionByNo"
+		resultMap="SystemFunctionMap">
+		select FUNNO, FUNNAME, FUNURL, LevelNo, MNO
+		from
+		SystemFunction
+		where FUNNO = #{no}
+	</select>
+
+	<select id="selectFunctionByNoWithModule"
+		resultMap="SystemFunctionMapWithModule">
+		select FUNNO, FUNNAME, FUNURL, LevelNo, MNO
+		from
+		SystemFunction
+		where FUNNO = #{no}
+	</select>
+
+	<select id="selectListByAll" resultMap="SystemFunctionMap">
 		select FUNNO, FUNNAME, FUNURL, LevelNo, MNO
 		from SystemFunction
-		where FUNNO = #{no}
+		<where>
+			<include refid="systemFunctionWhen"></include>
+		</where>
+	</select>
+
+	<select id="selectListByAllWithPage"
+		resultMap="SystemFunctionMap">
+		select FUNNO, FUNNAME, FUNURL, LevelNo, MNO
+		from SystemFunction
+		<where>
+			<include refid="systemFunctionWhen"></include>
+			and FUNNO >= (SELECT FUNNO FROM SystemFunction ORDER BY FUNNO LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
 	</select>
 
 </mapper>
