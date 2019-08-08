@@ -7,109 +7,153 @@ import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 2019年8月7日23:30:32
- * @author YiChen(李冠永)
- * #客户
+ * 
+ * @date:2019年8月8日下午8:58:25
+ * @author LiYi(李海宏)
+ * @Description：根据字段值与属性的关系进行更改
  *
  */
 @Alias("Customer")
 public class Customer implements Serializable {
-    private Long customerId;
+    private String customerNo;  //客户序号
 
-    private Long storeId;
+    private String typeNo;     //客户类型序号
 
-    private String firstName;
+    private String cname; //客户名称
 
-    private String lastName;
-
-    private String email;
-
-    private Long addressId;
-
-	private Boolean active;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createDate;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date lastUpdate;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName == null ? null : firstName.trim();
-    }
+    private String contact;  //联系人姓名
     
-    public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+    private String cardcode;   //身份证号码
+
+    private String mobile;  //手机号
+    
+    private String telephone;   //电话
+    
+    private String fax;     //传真
+    
+    private String qq;      //qq
+    
+    private String wechat;  //微信
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date feeStartDate;  //收费开始日期
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date feeEndDate;  //收费截止日期
+
+	private Boolean cstatus;   //客户状态
+
+	public String getCustomerNo() {
+		return customerNo;
 	}
 
-	public void setStoreId(Long storeId) {
-		this.storeId = storeId;
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
 	}
 
-	public void setAddressId(Long addressId) {
-		this.addressId = addressId;
+	public String getTypeNo() {
+		return typeNo;
 	}
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName == null ? null : lastName.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public Long getCustomerId() {
-		return customerId;
+	public void setTypeNo(String typeNo) {
+		this.typeNo = typeNo;
 	}
 
-	public Long getStoreId() {
-		return storeId;
+	public String getCname() {
+		return cname;
 	}
 
-	public Long getAddressId() {
-		return addressId;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 
-	public Boolean getActive() {
-        return active;
-    }
+	public String getContact() {
+		return contact;
+	}
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public String getCardcode() {
+		return cardcode;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setCardcode(String cardcode) {
+		this.cardcode = cardcode;
+	}
 
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getWechat() {
+		return wechat;
+	}
+
+	public void setWechat(String wechat) {
+		this.wechat = wechat;
+	}
+
+	public Date getFeeStartDate() {
+		return feeStartDate;
+	}
+
+	public void setFeeStartDate(Date feeStartDate) {
+		this.feeStartDate = feeStartDate;
+	}
+
+	public Date getFeeEndDate() {
+		return feeEndDate;
+	}
+
+	public void setFeeEndDate(Date feeEndDate) {
+		this.feeEndDate = feeEndDate;
+	}
+
+	public Boolean getCstatus() {
+		return cstatus;
+	}
+
+	public void setCstatus(Boolean cstatus) {
+		this.cstatus = cstatus;
+	}
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", storeId=" + storeId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", addressId=" + addressId + ", active=" + active
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + "]";
+		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
+				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
+				+ ", qq=" + qq + ", wechat=" + wechat + ", feeStartDate=" + feeStartDate + ", feeEndDate=" + feeEndDate
+				+ ", cstatus=" + cstatus + "]";
 	}
+
+	
 }

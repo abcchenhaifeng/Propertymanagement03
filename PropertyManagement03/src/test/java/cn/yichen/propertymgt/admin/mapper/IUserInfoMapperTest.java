@@ -57,6 +57,10 @@ public class IUserInfoMapperTest {
 	}
 
 	@Test
+	public void testSelectListByAll1() {
+		fail("Not yet implemented");
+	}
+	@Test
 	public void testAddFunction() {
 		fail("Not yet implemented");
 	}
