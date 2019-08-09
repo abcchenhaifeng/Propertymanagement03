@@ -10,7 +10,7 @@ import cn.yichen.propertymgt.baseinfo.model.BuildingType;
  * 
  * @data 2019年8月8日 下午3:42:46
  * @author 陈海锋
- * @Desccription:
+ * @Desccription:实现客户类Mapper(Dao)层接口
  *
  */
 @Mapper
