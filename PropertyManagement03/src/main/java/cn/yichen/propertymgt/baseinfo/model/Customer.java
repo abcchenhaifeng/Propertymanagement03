@@ -41,7 +41,7 @@ public class Customer implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date feeEndDate;  //收费截止日期
 
-	private Boolean cstatus;   //客户状态
+	private String cstatus;   //客户状态
 
 	public String getCustomerNo() {
 		return customerNo;
@@ -139,11 +139,11 @@ public class Customer implements Serializable {
 		this.feeEndDate = feeEndDate;
 	}
 
-	public Boolean getCstatus() {
+	public String getCstatus() {
 		return cstatus;
 	}
 
-	public void setCstatus(Boolean cstatus) {
+	public void setCstatus(String cstatus) {
 		this.cstatus = cstatus;
 	}
 

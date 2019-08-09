@@ -23,8 +23,7 @@
 	</resultMap>
 
 	<select id="selectCustomerById" resultMap="CustomerMap">
-		select CustomerNo, TYPENO, CNAME, Contact, CardCode, Mobile,Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,CStatus
-		from Customer
+		select * from Customer
 		where CustomerNo = #{customerNo} 
 	</select>
 

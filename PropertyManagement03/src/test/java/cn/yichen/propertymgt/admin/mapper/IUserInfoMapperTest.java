@@ -44,24 +44,18 @@ public class IUserInfoMapperTest {
 	}
 
 	
-	/* 
 	@Test 
 	 public void testSelectListByAll() throws Exception { 
 		 UserInfo userInfo= new UserInfo(); 
-		 userInfo.setId("y"); mapper.selectListByAll(userInfo); 
+		 userInfo.setId("y"); 
+		 mapper.selectListByAll(userInfo); 
       }
-	 */
 
 	@Test
 	public void testSelectListByAllWithPage() throws Exception {
 		mapper.selectListByAllWithPage(null, 1, 2);
 	}
 
-	@Test
-	public void testSelectListByAll() {
-		fail("Not yet implemented");
-	}
-	
 	
 	/*
 	 * @Test public void testAddFunction() { fail("Not yet implemented"); }

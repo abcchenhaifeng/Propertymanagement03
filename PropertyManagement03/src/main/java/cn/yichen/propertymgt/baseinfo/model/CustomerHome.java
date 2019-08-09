@@ -7,66 +7,66 @@ import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 2019年8月7日23:30:52
- * @author YiChen(李冠永)
- * #客户房间
- *
+ * 
+ * @date:2019年8月9日 上午9:37:53
+ * @author LiYi(李海宏）
+ * @description:对客户房间表进行检查并调整字段类型
  */
 @Alias("CustomerHome")
 public class CustomerHome implements Serializable {
-    private Integer chno;
+    private String chno;      //客户房间号                 
 
-    private Integer customerno;
+    private String customerno;   //客户号
 
-    private Integer roomno;
+    private String roomno;       //房间号
 
-    private Integer livingtypeno;
+    private String livingtypeno;   //居住类型号
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")     //入房日期
     private Date receivedate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")     //收房日期  
     private Date livedate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")    //缴费开始日期
     private Date feestartdate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")    //缴费结束日期
     private Date feeenddate;
 
-    private Integer humancount;
+    private Integer humancount;               //居住人数
 
-    private String chstatus;
+    private String chstatus;                  //客户状态
 
-    public Integer getChno() {
+    public String getChno() {
         return chno;
     }
 
-    public void setChno(Integer chno) {
+    public void setChno(String chno) {
         this.chno = chno;
     }
 
-    public Integer getCustomerno() {
+    public String getCustomerno() {
         return customerno;
     }
 
-    public void setCustomerno(Integer customerno) {
+    public void setCustomerno(String customerno) {
         this.customerno = customerno;
     }
 
-    public Integer getRoomno() {
+    public String getRoomno() {
         return roomno;
     }
 
-    public void setRoomno(Integer roomno) {
+    public void setRoomno(String roomno) {
         this.roomno = roomno;
     }
 
-    public Integer getLivingtypeno() {
+    public String getLivingtypeno() {
         return livingtypeno;
     }
 
-    public void setLivingtypeno(Integer livingtypeno) {
+    public void setLivingtypeno(String livingtypeno) {
         this.livingtypeno = livingtypeno;
     }
 
