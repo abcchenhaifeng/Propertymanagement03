@@ -32,13 +32,13 @@ public interface ICustomerHomeMapper {
 	@Update("update CustomerHome set CustomerNo=#{customerno}, RoomNo=#{roomno}, LivingTypeNo=#{livingtypeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}")
 	public void update(CustomerHome chome) throws Exception;
 
-	// 根据id查询, 返回客户
+	// 根据id查询, 返回客户房间类型
 	public CustomerHome selectCustomerHomeById(String id) throws Exception;
 	
-	// 获取客户列表
+	// 获取客户房间列表
 	public List<CustomerHome> selectListByAll(CustomerHome chome) throws Exception;
 
-	// 按条件获取客户列表(分页)
+	// 按条件获取客户房间列表(分页)
 	public List<CustomerHome> selectListByAllWithPage(@Param("chome") CustomerHome chome, @Param("start") int start, @Param("rows") int rows) throws Exception;
 
 	

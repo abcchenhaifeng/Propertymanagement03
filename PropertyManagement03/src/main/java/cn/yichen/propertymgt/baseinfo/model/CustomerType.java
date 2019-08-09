@@ -5,16 +5,16 @@ import java.io.Serializable;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:31:06
- * @author YiChen(李冠永)
- * #客户类型
- *
+ * 
+ * @date:2019年8月9日 下午1:28:22
+ * @author LiYi(李海宏）
+ * @description:针对客户类型表进行增删改查基本操作，为后期多表操作做铺垫
  */
 @Alias("CustomerType")
 public class CustomerType implements Serializable {
-    private Integer typeno;
+    private Integer typeno;     //客户类型编号
 
-    private String typename;
+    private String typename;    //客户类型名称
 
     public Integer getTypeno() {
         return typeno;
