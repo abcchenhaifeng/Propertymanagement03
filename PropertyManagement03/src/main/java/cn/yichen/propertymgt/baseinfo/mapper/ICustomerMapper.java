@@ -15,7 +15,7 @@ import cn.yichen.propertymgt.baseinfo.model.Customer;
  * 
  * @date:2019年8月8日下午8:42:25
  * @author LiYi(李海宏)
- * @Description：实现客户Mapper(Dao)层接口
+ * @Description：实现客户类Mapper(Dao)层接口
  *
  */
 @Mapper
