@@ -19,9 +19,8 @@
 
 	<resultMap id="UserInfoMapWithFunction" type="UserInfo"
 		extends="UserInfoMap">
-		<collection property="functions" resultMap="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.SystemFunctionMapWithModule">
-			<!-- select="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.selectFunctionByNoWithModule"> -->
-			
+		<collection property="functions"
+			resultMap="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.SystemFunctionMapWithModule">
 		</collection>
 	</resultMap>
 
@@ -37,13 +36,10 @@
 		</if>
 	</sql>
 
-	<select id="selectUserInfoById"
-		resultMap="UserInfoMapWithFunction">
-		select u.USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX,
-		Mobible ,FUNNO
-		from UserInfo u, SystemFunctionUser fu
-		where u.USERID =
-		#{id} and u.USERID = fu.USERID
+	<select id="selectUserInfoById" resultMap="UserInfoMapWithFunction">
+		select u.*, f.*, m.MNAME
+		from UserInfo u, SystemFunctionUser fu, SystemFunction f, SystemModule m
+		where u.USERID = #{id} and u.USERID = fu.USERID and fu.FUNNO = f.FUNNO and f.MNO = m.MNO
 	</select>
 
 	<select id="selectListByAll" resultMap="UserInfoMap">

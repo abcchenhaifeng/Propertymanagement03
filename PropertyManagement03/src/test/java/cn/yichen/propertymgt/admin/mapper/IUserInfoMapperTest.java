@@ -57,14 +57,7 @@ public class IUserInfoMapperTest {
 	}
 
 	
-	/*
-	 * @Test public void testAddFunction() { fail("Not yet implemented"); }
-	 */
-	 
-
-	
-	 @Test public void testAddFunction() throws Exception
-	 { 
+	 @Test public void testAddFunction() throws Exception { 
 		 mapper.addFunction("yichen", 8); 
      }
 	 

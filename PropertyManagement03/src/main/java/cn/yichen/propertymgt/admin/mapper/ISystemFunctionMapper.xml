@@ -17,8 +17,7 @@
 	<resultMap id="SystemFunctionMapWithModule"
 		type="SystemFunction" extends="SystemFunctionMap">
 		<association property="module"
-			select="cn.yichen.propertymgt.admin.mapper.ISystemModuleMapper.selectModuleByNo"
-			column="MNO">
+			resultMap="cn.yichen.propertymgt.admin.mapper.ISystemModuleMapper.SystemModuleMap">
 		</association>
 	</resultMap>
 
@@ -42,10 +41,9 @@
 
 	<select id="selectFunctionByNoWithModule"
 		resultMap="SystemFunctionMapWithModule">
-		select FUNNO, FUNNAME, FUNURL, LevelNo, MNO
-		from
-		SystemFunction
-		where FUNNO = #{no}
+		select FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
+		from SystemFunction f, SystemModule m
+		where FUNNO = #{no} and f.MNO = m.MNO
 	</select>
 
 	<select id="selectListByAll" resultMap="SystemFunctionMap">
