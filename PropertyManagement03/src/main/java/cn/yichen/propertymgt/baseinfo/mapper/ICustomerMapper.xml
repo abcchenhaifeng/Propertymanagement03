@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper">
+
+	<cache />
+
+	<resultMap id="CustomerMap" type="Customer">
+		<id column="CustomerNo" property="customerNo" />
+		<result column="TYPENO" property="typeNo" />
+		<result column="CNAME" property="cname" />
+		<result column="Contact" property="contact" />
+		<result column="CardCode" property="cardcode" />
+		<result column="Mobile" property="mobile" />
+		<result column="Tel" property="telephone" />
+		<result column="Fax" property="fax" />
+		<result column="QQ" property="qq" />
+		<result column="WeiXin" property="wechat" />
+		<result column="FeeStartDate" property="feeStartDate" />
+		<result column="FeeEndDate" property="feeEndDate" />
+		<result column="CStatus" property="cstatus" />
+	</resultMap>
+
+	<select id="selectCustomerById" resultMap="CustomerMap">
+		select CustomerNo, TYPENO, CNAME, Contact, CardCode, Mobile,Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,CStatus
+		from Customer
+		where CustomerNo = #{customerNo} 
+	</select>
+
+	<select id="selectListByAll" resultMap="CustomerMap">
+		select * from Customer
+	</select>
+	
+     <select id="selectListByAllWithPage" resultMap="CustomerMap">
+		select * from Customer limit #{start},#{rows}
+	</select>
+	
+</mapper>

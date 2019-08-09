@@ -1,5 +1,7 @@
 package cn.yichen.propertymgt.admin.mapper;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +43,14 @@ public class IUserInfoMapperTest {
 		System.out.println(userInfo);
 	}
 
-	@Test
-	public void testSelectListByAll() throws Exception {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setId("y");
-		mapper.selectListByAll(userInfo);
-	}
+	
+	/* 
+	@Test 
+	 public void testSelectListByAll() throws Exception { 
+		 UserInfo userInfo= new UserInfo(); 
+		 userInfo.setId("y"); mapper.selectListByAll(userInfo); 
+      }
+	 */
 
 	@Test
 	public void testSelectListByAllWithPage() throws Exception {
@@ -54,9 +58,22 @@ public class IUserInfoMapperTest {
 	}
 
 	@Test
-	public void testAddFunction() throws Exception {
-		mapper.addFunction("yichen", 8);
+	public void testSelectListByAll() {
+		fail("Not yet implemented");
 	}
+	
+	
+	/*
+	 * @Test public void testAddFunction() { fail("Not yet implemented"); }
+	 */
+	 
+
+	
+	 @Test public void testAddFunction() throws Exception
+	 { 
+		 mapper.addFunction("yichen", 8); 
+     }
+	 
 
 	@Test
 	public void testAddFunctions() throws Exception {
