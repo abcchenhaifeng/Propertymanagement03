@@ -11,9 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.neusoft.busmis.security.model.UserModel;
-
-import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 
 @RunWith(SpringRunner.class)

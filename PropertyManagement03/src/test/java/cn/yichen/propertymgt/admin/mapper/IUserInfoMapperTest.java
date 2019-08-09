@@ -1,8 +1,7 @@
 package cn.yichen.propertymgt.admin.mapper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,35 +43,42 @@ public class IUserInfoMapperTest {
 		System.out.println(userInfo);
 	}
 
+	
+	/* 
+	@Test 
+	 public void testSelectListByAll() throws Exception { 
+		 UserInfo userInfo= new UserInfo(); 
+		 userInfo.setId("y"); mapper.selectListByAll(userInfo); 
+      }
+	 */
+
 	@Test
-	public void testSelectListByAll() throws Exception {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setId("y");
-		mapper.selectListByAll(userInfo);
+	public void testSelectListByAllWithPage() throws Exception {
+		mapper.selectListByAllWithPage(null, 1, 2);
 	}
 
 	@Test
-	public void testSelectListByAllWithPage() {
+	public void testSelectListByAll() {
 		fail("Not yet implemented");
 	}
+	
+	
+	/*
+	 * @Test public void testAddFunction() { fail("Not yet implemented"); }
+	 */
+	 
+
+	
+	 @Test public void testAddFunction() throws Exception
+	 { 
+		 mapper.addFunction("yichen", 8); 
+     }
+	 
 
 	@Test
-	public void testSelectListByAll1() {
-		fail("Not yet implemented");
-	}
-	@Test
-	public void testAddFunction() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddFunctions() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSelectFunctionListByUser() {
-		fail("Not yet implemented");
+	public void testAddFunctions() throws Exception {
+		int[] funNos = {1, 2, 3, 4};
+		mapper.addFunctions("yichen", funNos);
 	}
 
 }
