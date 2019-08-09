@@ -20,7 +20,7 @@ import cn.yichen.propertymgt.admin.model.UserInfo;
 public interface IUserInfoMapper {
 
 	// 添加
-	@Insert("insert into UserInfo(USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible) values(#{id}, #{password}, #{username}, #{status}, #{age}, #{sex}, #{mobible})")
+	@Insert("insert into UserInfo(USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible) values(#{id}, #{password}, #{username}, 'N', #{age}, #{sex}, #{mobible})")
 	public void create(UserInfo userInfo) throws Exception;
 
 	// 删除
