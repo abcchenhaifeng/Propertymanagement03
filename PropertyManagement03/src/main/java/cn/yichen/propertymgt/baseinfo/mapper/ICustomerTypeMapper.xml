@@ -24,4 +24,17 @@
 		select * from CustomerType limit #{start},#{rows}
 	</select>
 	
+	
+	<resultMap id="CustomerTypeMapByIdWithNo" type="CustomerType" extends="CustomerTypeMap">
+		<association property="customer"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper.CustomerMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectCustomerTypeByIdWithinfo" resultMap="CustomerTypeMapByIdWithNo">
+	select ct.TYPENAME,c.*
+	from Customer c, CustomerType ct
+	where ct.TYPENO = #{typeno}  and ct.typeNo = c.typeNo
+	</select>
+	
 </mapper>

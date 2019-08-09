@@ -42,6 +42,16 @@ public class Customer implements Serializable {
     private Date feeEndDate;  //收费截止日期
 
 	private String cstatus;   //客户状态
+	
+	private CustomerType customertype;   //多对一，一个客户只能对应一种客户类型
+
+	public CustomerType getCtypeno() {
+		return customertype;
+	}
+
+	public void setCtypeno(CustomerType customertype) {
+		this.customertype = customertype;
+	}
 
 	public String getCustomerNo() {
 		return customerNo;
@@ -152,8 +162,9 @@ public class Customer implements Serializable {
 		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
 				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
 				+ ", qq=" + qq + ", wechat=" + wechat + ", feeStartDate=" + feeStartDate + ", feeEndDate=" + feeEndDate
-				+ ", cstatus=" + cstatus + "]";
+				+ ", cstatus=" + cstatus + ", customertype=" + customertype + "]";
 	}
 
+	
 	
 }

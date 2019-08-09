@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import cn.yichen.propertymgt.baseinfo.model.Customer;
 import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 
 @RunWith(SpringRunner.class)
@@ -68,5 +69,20 @@ public class ICustomerTypeMapperTest {
 			System.out.println(ls);
 		}
 	}
+	
+	@Test
+	public void testSelectCustomerTypeByIdWithinfo() throws Exception {
+		CustomerType ctype = mapper.selectCustomerTypeByIdWithinfo("1");
+		
+		System.out.println(ctype.getCustomer().size());
+		
+		List<Customer> list=ctype.getCustomer();
+		
+		for(Customer ls:list)
+		{
+			System.out.println(ls);
+		}
+	}
+
 
 }

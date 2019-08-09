@@ -74,6 +74,12 @@ public class ICustomerMapperTest {
 			System.out.println(ls);
 		}
 	}
+	
+	@Test
+	public void testSelectCustomerByIdWithType() throws Exception {
+		Customer customer = mapper.selectCustomerByIdWithType("2");
+		System.out.println(customer);
+	}
 
 
 }
