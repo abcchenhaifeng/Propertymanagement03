@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.yichen.propertymgt.admin.mapper.IUserInfoMapper">
+<mapper
+	namespace="cn.yichen.propertymgt.admin.mapper.IUserInfoMapper">
 
 	<cache />
 
@@ -18,9 +19,9 @@
 
 	<resultMap id="UserInfoMapWithFunction" type="UserInfo"
 		extends="UserInfoMap">
-		<collection property="functions"
-			select="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.selectFunctionByNoWithModule"
-			column="FUNNO">
+		<collection property="functions" resultMap="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.SystemFunctionMapWithModule">
+			<!-- select="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.selectFunctionByNoWithModule"> -->
+			
 		</collection>
 	</resultMap>
 
@@ -36,15 +37,19 @@
 		</if>
 	</sql>
 
-	<select id="selectUserInfoById" resultMap="UserInfoMapWithFunction">
-		select u.USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible ,FUNNO
+	<select id="selectUserInfoById"
+		resultMap="UserInfoMapWithFunction">
+		select u.USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX,
+		Mobible ,FUNNO
 		from UserInfo u, SystemFunctionUser fu
-		where u.USERID = #{id} and u.USERID = fu.USERID
+		where u.USERID =
+		#{id} and u.USERID = fu.USERID
 	</select>
 
 	<select id="selectListByAll" resultMap="UserInfoMap">
 		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
-		from UserInfo
+		from
+		UserInfo
 		<where>
 			<include refid="userInfoWhen"></include>
 		</where>
@@ -52,18 +57,21 @@
 
 	<select id="selectListByAllWithPage" resultMap="UserInfoMap">
 		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
-		from UserInfo
+		from
+		UserInfo
 		<where>
 			<include refid="userInfoWhen"></include>
-			and USERID >= (SELECT USERID FROM UserInfo ORDER BY USERID LIMIT #{start}, 1) LIMIT #{rows}
+			and USERID >= (SELECT USERID FROM UserInfo ORDER BY USERID LIMIT
+			#{start}, 1) LIMIT #{rows}
 		</where>
 	</select>
-	
+
 	<insert id="addFunctions">
-		insert into SystemFunctionUser(USERID, FUNNO) 
+		insert into SystemFunctionUser(USERID, FUNNO)
 		values
 		<foreach collection="funNos" item="funNo" separator=",">
-			(#{id}, #{funNo})
+			(#{id},
+			#{funNo})
 		</foreach>
 	</insert>
 </mapper>
