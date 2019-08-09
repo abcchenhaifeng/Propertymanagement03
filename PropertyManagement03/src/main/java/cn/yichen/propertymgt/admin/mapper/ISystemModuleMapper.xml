@@ -22,7 +22,7 @@
 	<sql id="systemModuleWhen">
 		<if test="systemModule != null">
 			<if test="systemModule.no != null"> and MNO = #{systemModule.no} </if>
-			<if test="systemModule.name != null"> and MNAME = #{systemModule.name} </if>
+			<if test="systemModule.name != null"> and MNAME like '%${systemModule.name}%' </if>
 		</if>
 	</sql>
 
@@ -56,5 +56,12 @@
 			and MNO >= (SELECT MNO FROM SystemModule ORDER BY MNO LIMIT #{start}, 1) LIMIT #{rows}
 		</where>
 	</select>
-
+	
+	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
+	<select id="selectCountByAll" resultType="int">
+		select IFNULL(count(MNO), 0) from SystemModule
+		<where>
+			<include refid="systemModuleWhen"></include>
+		</where>
+	</select>
 </mapper>

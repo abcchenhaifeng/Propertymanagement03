@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
-import cn.yichen.propertymgt.admin.model.SystemFunction;
 import cn.yichen.propertymgt.admin.model.SystemModule;
 
 /**
@@ -35,13 +34,17 @@ public interface ISystemModuleMapper {
 
 	// 根据id查询, 返回功能
 	public SystemModule selectModuleByNo(int no) throws Exception;
-	
+
 	// 根据id查询, 返回功能
 	public SystemModule selectModuleByNoWithFunctions(int no) throws Exception;
-	
+
 	// 获取功能列表
 	public List<SystemModule> selectListByAll(@Param("systemModule") SystemModule systemModule) throws Exception;
 
 	// 按条件获取功能列表(分页)
-	public List<SystemModule> selectListByAllWithPage(@Param("systemModule")  SystemModule systemModule, @Param("start") int start, @Param("rows") int rows) throws Exception;
+	public List<SystemModule> selectListByAllWithPage(@Param("systemModule") SystemModule systemModule,
+			@Param("start") int start, @Param("rows") int rows) throws Exception;
+
+	// 获取个数
+	public int selectCountByAll(@Param("systemModule") SystemModule systemModule) throws Exception;
 }

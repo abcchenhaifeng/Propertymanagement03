@@ -1,5 +1,7 @@
 package cn.yichen.propertymgt.admin.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +34,12 @@ public class UserInfoController {
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户列表page: " + page + " -- rows: " + rows);
-		result.setCount(service.getCountByAll());
-		result.setPageCount(service.getPagaCountByAll(rows));
+		
+		int count = service.getCountByAll(userInfo);
+		int pageCount = (count%rows==0 && count>rows ? count/rows : count/rows+1);
+		
+		result.setCount(count);
+		result.setPageCount(pageCount);
 		result.setList(service.getListByAllWithPage(userInfo, page, rows));
 		result.setPage(page);
 		result.setRows(rows);
@@ -41,7 +47,7 @@ public class UserInfoController {
 		return result;
 	}
 
-	// 取得用户
+	// 获取用户
 	@GetMapping("/get")
 	public UserInfo get(String id) throws Exception {
 		return service.getUserById(id);
@@ -73,5 +79,41 @@ public class UserInfoController {
 	public ResultMessage<UserInfo> active(String id) throws Exception {
 		service.active(id);
 		return new ResultMessage<UserInfo>("OK", "激活用户成功");
+	}
+	
+	// 用户登录
+	@PostMapping("/login")
+	public ResultMessage<UserInfo> login(String id, String password, HttpSession httpSession) throws Exception {
+		
+		boolean validate = false;
+		UserInfo userInfo = service.getUserById(id);
+		if ( userInfo != null && userInfo.getPassword().equals(password) )
+			validate =  true;
+		
+		httpSession.setAttribute("login_user", userInfo);
+		
+		return new ResultMessage<UserInfo>(validate ? "OK" : "ERROR", validate ? "用户登录成功" : "用户登录失败");
+	}
+	
+	// 用户退出
+	@PostMapping("/logout")
+	public ResultMessage<UserInfo> logout(String id, HttpSession httpSession) throws Exception {
+		
+		httpSession.removeAttribute("login_user");
+		return new ResultMessage<UserInfo>("OK",  "用户注销成功");
+	}
+	
+	// 添加功能
+	@PostMapping("/add/function")
+	public ResultMessage<UserInfo> addFunction(String id, int funNo) throws Exception {
+		service.addFunction(id, funNo);
+		return new ResultMessage<UserInfo>("OK",  "添加功能成功");
+	}
+	
+	// 批量添加功能
+	@PostMapping("/add/functions")
+	public ResultMessage<UserInfo> addFunctions(String id, int[] funNos) throws Exception {
+		service.addFunctions(id, funNos);
+		return new ResultMessage<UserInfo>("OK",  "批量添加功能成功");
 	}
 }

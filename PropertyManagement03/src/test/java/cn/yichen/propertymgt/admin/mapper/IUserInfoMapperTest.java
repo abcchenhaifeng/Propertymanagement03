@@ -67,5 +67,15 @@ public class IUserInfoMapperTest {
 		int[] funNos = {1, 2, 3, 4};
 		mapper.addFunctions("yichen", funNos);
 	}
+	
+	@Test
+	public void testSelectCountByAll() throws Exception {
+		mapper.selectCountByAll(null);
+	}
+	
+	@Test
+	public void testDeleteFunction() throws Exception {
+		mapper.deleteFunction("yichen", 9);
+	}
 
 }

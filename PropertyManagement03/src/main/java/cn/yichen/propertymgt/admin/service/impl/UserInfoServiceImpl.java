@@ -26,7 +26,10 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	
 	@Override
 	public void register(UserInfo userInfo) throws Exception {
+		userInfo.setStatus("N");
 		mapper.create(userInfo);
+		
+		// Do Something...
 	}
 	
 	@Override
@@ -44,10 +47,6 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		UserInfo userInfo = mapper.selectUserInfoById(id);
 		userInfo.setPassword(password);
 		mapper.update(userInfo);
-	}
-
-	@Override
-	public void changeFunvtion(String id, int funNO) throws Exception {
 	}
 
 	@Override
@@ -99,14 +98,25 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		return mapper.selectUserInfoById(id);
 	}
 
-	public int getCountByAll() {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override
+	@Transactional(readOnly = true)
+	public int getCountByAll(UserInfo userInfo) throws Exception {
+		return mapper.selectCountByAll(userInfo);
 	}
 
-	public int getPagaCountByAll(int rows) {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override
+	public void addFunction(String id, int funNo) throws Exception {
+		mapper.addFunction(id, funNo);
+	}
+	
+	@Override
+	public void addFunctions(String id, int[] funNos) throws Exception {
+		mapper.addFunctions(id, funNos);
+	}
+
+	@Override
+	public void deleteFunction(String id, int funNo) throws Exception {
+		mapper.deleteFunction(id, funNo);
 	}
 
 }
