@@ -8,19 +8,31 @@ import org.apache.ibatis.type.Alias;
 /**
  * 2019年8月7日23:29:26
  * 
- * @author YiChen(李冠永) #系统模块
- *
+ * @author YiChen(李冠永) 
+ * @Description 系统模块
  */
 @Alias("SystemModule")
 public class SystemModule implements Serializable {
-	private Integer mno;
+	private Integer no;
 
-	private String mname;
+	private String name;
 
 	private List<SystemFunction> functions;
 
-	public Integer getMno() {
-		return mno;
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<SystemFunction> getFunctions() {
@@ -31,20 +43,9 @@ public class SystemModule implements Serializable {
 		this.functions = functions;
 	}
 
-	public void setMno(Integer mno) {
-		this.mno = mno;
-	}
-
-	public String getMname() {
-		return mname;
-	}
-
-	public void setMname(String mname) {
-		this.mname = mname == null ? null : mname.trim();
-	}
-
 	@Override
 	public String toString() {
-		return "SystemModule [mno=" + mno + ", mname=" + mname + ", functions=" + functions + "]";
+		return "SystemModule [no=" + no + ", name=" + name + ", functions=" + functions + "]";
 	}
+
 }
