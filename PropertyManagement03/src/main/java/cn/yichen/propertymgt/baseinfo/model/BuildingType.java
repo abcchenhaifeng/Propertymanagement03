@@ -1,8 +1,11 @@
 package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
+
+
 
 /**
  * 2019年8月7日23:30:19
@@ -10,8 +13,17 @@ import org.apache.ibatis.type.Alias;
  * #建筑类型
  *
  */
+/**
+ * 
+ * @data:2019年8月8日下午9:49:42
+ * @author： 陈海锋
+ * @Description:
+ *
+ */
 @Alias("BuildingType")
 public class BuildingType implements Serializable {
+	
+	
     private Integer typeno;
 
     private String typename;
@@ -27,7 +39,7 @@ public class BuildingType implements Serializable {
     public String getTypename() {
         return typename;
     }
-
+    
     public void setTypename(String typename) {
         this.typename = typename == null ? null : typename.trim();
     }
@@ -36,4 +48,9 @@ public class BuildingType implements Serializable {
 	public String toString() {
 		return "BuildingType [typeno=" + typeno + ", typename=" + typename + "]";
 	}
+	private List<BuildingType> typenos=null;
+	
+	
+	
+	
 }
