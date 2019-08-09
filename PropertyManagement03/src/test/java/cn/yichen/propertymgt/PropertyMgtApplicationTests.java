@@ -1,4 +1,4 @@
-package cn.yichen.PropertyManagement03;
+package cn.yichen.propertymgt;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PropertyManagement03ApplicationTests {
+public class PropertyMgtApplicationTests {
 
 	@Test
 	public void contextLoads() {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.yichen.propertymgt.admin.mapper.ISystemModuleMapper">
+
+	<cache />
+
+	<resultMap id="SystemModuleMap" type="SystemModule">
+		<id column="MNO" property="no" />
+		<result column="MNAME" property="name" />
+	</resultMap>
+
+	<resultMap id="SystemModuleMapWithFunction"
+		type="SystemModule" extends="SystemModuleMap">
+		<collection property="functions"
+			select="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.selectFunctionByNo"
+			column="FUNNO">
+		</collection>
+	</resultMap>
+
+	<sql id="systemModuleWhen">
+		<if test="systemModule != null">
+			<if test="systemModule.no != null"> and MNO = #{systemModule.no} </if>
+			<if test="systemModule.name != null"> and MNAME = #{systemModule.name} </if>
+		</if>
+	</sql>
+
+	<select id="selectModuleByNo" resultMap="SystemModuleMap">
+		select MNO, MNAME
+		from
+		SystemModule
+		where MNO = #{no}
+	</select>
+
+	<select id="selectModuleByNoWithFunctions"
+		resultMap="SystemModuleMapWithFunction">
+		select MNO, MNAME
+		from
+		SystemModule
+		where MNO = #{no}
+	</select>
+
+	<select id="selectListByAll" resultMap="SystemModuleMap">
+		select MNO, MNAME
+		from SystemModule
+		<where>
+			<include refid="systemModuleWhen"></include>
+		</where>
+	</select>
+
+	<select id="selectListByAllWithPage" resultMap="SystemModuleMap">
+		select MNO, MNAME
+		from SystemModule
+		<where>
+			<include refid="systemModuleWhen"></include>
+			and MNO >= (SELECT MNO FROM SystemModule ORDER BY MNO LIMIT #{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+
+</mapper>

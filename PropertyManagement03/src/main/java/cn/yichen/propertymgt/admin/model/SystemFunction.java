@@ -1,57 +1,68 @@
 package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
 /**
  * 2019年8月7日23:27:01
- * @author YiChen(李冠永)
- * #系统功能
+ * 
+ * @author YiChen(李冠永) #系统功能
  * 
  */
 @Alias("SystemFunction")
 public class SystemFunction implements Serializable {
-	private Integer funno;
+	private Integer no;
 
-	private Integer mno;
+	private String name;
 
-	private String funname;
-
-	private String funurl;
+	private String url;
 
 	private Integer levelno;
 
-	public Integer getFunno() {
-		return funno;
+	private SystemModule module;
+
+	private List<UserInfo> userInfos;
+
+	public SystemModule getModule() {
+		return module;
 	}
 
-	public void setFunno(Integer funno) {
-		this.funno = funno;
+	public void setModule(SystemModule module) {
+		this.module = module;
 	}
 
-	public Integer getMno() {
-		return mno;
+	public List<UserInfo> getUserInfos() {
+		return userInfos;
 	}
 
-	public void setMno(Integer mno) {
-		this.mno = mno;
+	public void setUserInfos(List<UserInfo> userInfos) {
+		this.userInfos = userInfos;
 	}
 
-	public String getFunname() {
-		return funname;
+	public Integer getNo() {
+		return no;
 	}
 
-	public void setFunname(String funname) {
-		this.funname = funname == null ? null : funname.trim();
+	public void setNo(Integer no) {
+		this.no = no;
 	}
 
-	public String getFunurl() {
-		return funurl;
+	public String getName() {
+		return name;
 	}
 
-	public void setFunurl(String funurl) {
-		this.funurl = funurl == null ? null : funurl.trim();
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Integer getLevelno() {
@@ -64,7 +75,7 @@ public class SystemFunction implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Systemfunction [funno=" + funno + ", mno=" + mno + ", funname=" + funname + ", funurl=" + funurl
-				+ ", levelno=" + levelno + "]";
+		return "SystemFunction [no=" + no + ", name=" + name + ", url=" + url + ", levelno=" + levelno + ", module="
+				+ module + ", userInfos=" + userInfos + "]";
 	}
 }

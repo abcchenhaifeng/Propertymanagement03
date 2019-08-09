@@ -1,39 +1,51 @@
 package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
 /**
  * 2019年8月7日23:29:26
- * @author YiChen(李冠永)
- * #系统模块
- *
+ * 
+ * @author YiChen(李冠永) 
+ * @Description 系统模块
  */
 @Alias("SystemModule")
 public class SystemModule implements Serializable {
-	private Integer mno;
+	private Integer no;
 
-	private String mname;
+	private String name;
 
-	public Integer getMno() {
-		return mno;
+	private List<SystemFunction> functions;
+
+	public Integer getNo() {
+		return no;
 	}
 
-	public void setMno(Integer mno) {
-		this.mno = mno;
+	public void setNo(Integer no) {
+		this.no = no;
 	}
 
-	public String getMname() {
-		return mname;
+	public String getName() {
+		return name;
 	}
 
-	public void setMname(String mname) {
-		this.mname = mname == null ? null : mname.trim();
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<SystemFunction> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(List<SystemFunction> functions) {
+		this.functions = functions;
 	}
 
 	@Override
 	public String toString() {
-		return "Systemmodule [mno=" + mno + ", mname=" + mname + "]";
+		return "SystemModule [no=" + no + ", name=" + name + ", functions=" + functions + "]";
 	}
+
 }

@@ -2,92 +2,103 @@ package cn.yichen.propertymgt.admin.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 2019年8月7日23:29:35
- * @author YiChen(李冠永)
- * #系统操作员
+ * 
+ * @author YiChen(李冠永) #系统操作员
  *
  */
 @Alias("UserInfo")
 public class UserInfo implements Serializable {
-    private String userid;
+	private String id;
 
-    private String userpassword;
+	private String password;
 
-    private String username;
+	private String username;
 
-    private String userrole;
+	private String status;
 
-    private Integer age;
+	private Integer age;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date joindate;
+	private String sex;
 
-    private String status;
+	private String mobible;
 
-    public String getUserid() {
-        return userid;
-    }
+	private List<SystemFunction> functions;
 
-    public void setUserid(String userid) {
-        this.userid = userid == null ? null : userid.trim();
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getUserpassword() {
-        return userpassword;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword == null ? null : userpassword.trim();
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getUserrole() {
-        return userrole;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setUserrole(String userrole) {
-        this.userrole = userrole == null ? null : userrole.trim();
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    public Date getJoindate() {
-        return joindate;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public void setJoindate(Date joindate) {
-        this.joindate = joindate;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
+	public String getMobible() {
+		return mobible;
+	}
+
+	public void setMobible(String mobible) {
+		this.mobible = mobible;
+	}
+
+	public List<SystemFunction> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(List<SystemFunction> functions) {
+		this.functions = functions;
+	}
 
 	@Override
 	public String toString() {
-		return "Userinfo [userid=" + userid + ", userpassword=" + userpassword + ", username=" + username
-				+ ", userrole=" + userrole + ", age=" + age + ", joindate=" + joindate + ", status=" + status + "]";
+		return "UserInfo [id=" + id + ", password=" + password + ", username=" + username + ", status=" + status
+				+ ", age=" + age + ", sex=" + sex + ", mobible=" + mobible + ", functions=" + functions + "]";
 	}
+
 }
