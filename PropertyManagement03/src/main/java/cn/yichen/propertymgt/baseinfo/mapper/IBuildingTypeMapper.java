@@ -2,7 +2,10 @@ package cn.yichen.propertymgt.baseinfo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import cn.yichen.propertymgt.baseinfo.model.BuildingType;
 
@@ -15,11 +18,41 @@ import cn.yichen.propertymgt.baseinfo.model.BuildingType;
  */
 @Mapper
 public interface IBuildingTypeMapper {
+	//添加
+	@Insert("insert into BuildingType(TYPENO,TYPENAME) values(#{typeno},#{typename})")
 	public void create(BuildingType typeno) throws Exception;
+	//更新
+	@Update("updata BuildingType set TYPENO=#{typeno},TYPENAME=#{typename} where TYPENO=#{typeno}")
 	public void update(BuildingType typeno) throws Exception;
-	public void delete(BuildingType typeno) throws Exception;
-	//只取得模块列表，不取得关联的功能列表。	
-	public List<BuildingType> selectListByAll() throws Exception;
+	//删除
+	@Delete("delete from BuildingType where TYPENO = #{typeno}")
+	public void delete(String id) throws Exception;
+	
+	public BuildingType selectBuildingTypeById(String id) throws Exception;
+	
+	//只取得模块列表，不取得关联的功能列表。
+	public List<BuildingType> selectListByAll(BuildingType typeno) throws Exception;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//取得模块列表，并取得关联的功能属性列表，使用内嵌式select方式
 	public List<BuildingType> selectListByAllWithFunctionsByNestedSelect() throws Exception;
 	//取得模块列表，并取得关联的功能属性列表，使用内嵌式ResultMap方式

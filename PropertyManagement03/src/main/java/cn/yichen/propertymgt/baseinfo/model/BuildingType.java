@@ -48,7 +48,6 @@ public class BuildingType implements Serializable {
 	public String toString() {
 		return "BuildingType [typeno=" + typeno + ", typename=" + typename + "]";
 	}
-	private List<BuildingType> typenos=null;
 	
 	
 	
