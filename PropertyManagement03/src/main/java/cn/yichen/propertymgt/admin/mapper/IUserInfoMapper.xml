@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.yichen.propertymgt.admin.mapper.IUserInfoMapper">
+<mapper
+	namespace="cn.yichen.propertymgt.admin.mapper.IUserInfoMapper">
 
 	<cache />
 
@@ -19,15 +20,15 @@
 	<resultMap id="UserInfoMapWithFunction" type="UserInfo"
 		extends="UserInfoMap">
 		<collection property="functions"
-			select="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.selectFunctionByNoWithModule"
-			column="FUNNO">
+			resultMap="cn.yichen.propertymgt.admin.mapper.ISystemFunctionMapper.SystemFunctionMapWithModule">
 		</collection>
 	</resultMap>
 
 	<sql id="userInfoWhen">
 		<if test="userInfo != null">
 			<if test="userInfo.id != null"> and USERID like '%${userInfo.id}%' </if>
-			<if test="userInfo.password != null"> and UPASSWORD = #{userInfo.password} </if>
+			<!-- <if test="userInfo.password != null"> and UPASSWORD = #{userInfo.password} 
+				</if> -->
 			<if test="userInfo.username != null"> and UNAME like '%${userInfo.username}%' </if>
 			<if test="userInfo.mobible != null"> and Mobible like '%${userInfo.mobible}%' </if>
 			<if test="userInfo.age != null"> and age = #{userInfo.age} </if>
@@ -36,15 +37,19 @@
 		</if>
 	</sql>
 
-	<select id="selectUserInfoById" resultMap="UserInfoMapWithFunction">
-		select u.USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible ,FUNNO
-		from UserInfo u, SystemFunctionUser fu
-		where u.USERID = #{id} and u.USERID = fu.USERID
+	<select id="selectUserInfoById"
+		resultMap="UserInfoMapWithFunction">
+		select u.*, f.*, m.MNAME
+		from UserInfo u, SystemFunctionUser
+		fu, SystemFunction f, SystemModule m
+		where u.USERID = #{id} and
+		u.USERID = fu.USERID and fu.FUNNO = f.FUNNO and f.MNO = m.MNO
 	</select>
 
 	<select id="selectListByAll" resultMap="UserInfoMap">
 		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
-		from UserInfo
+		from
+		UserInfo
 		<where>
 			<include refid="userInfoWhen"></include>
 		</where>
@@ -52,18 +57,28 @@
 
 	<select id="selectListByAllWithPage" resultMap="UserInfoMap">
 		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
-		from UserInfo
+		from
+		UserInfo
 		<where>
 			<include refid="userInfoWhen"></include>
-			and USERID >= (SELECT USERID FROM UserInfo ORDER BY USERID LIMIT #{start}, 1) LIMIT #{rows}
+			and USERID >= (SELECT USERID FROM UserInfo ORDER BY USERID LIMIT
+			#{start}, 1) LIMIT #{rows}
 		</where>
 	</select>
-	
+
 	<insert id="addFunctions">
-		insert into SystemFunctionUser(USERID, FUNNO) 
+		insert into SystemFunctionUser(USERID, FUNNO)
 		values
 		<foreach collection="funNos" item="funNo" separator=",">
 			(#{id}, #{funNo})
 		</foreach>
 	</insert>
+
+	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
+	<select id="selectCountByAll" resultType="int">
+		select IFNULL(count(USERID), 0) from UserInfo
+		<where>
+			<include refid="userInfoWhen"></include>
+		</where>
+	</select>
 </mapper>

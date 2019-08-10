@@ -23,8 +23,7 @@
 	</resultMap>
 
 	<select id="selectCustomerById" resultMap="CustomerMap">
-		select CustomerNo, TYPENO, CNAME, Contact, CardCode, Mobile,Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,CStatus
-		from Customer
+		select * from Customer
 		where CustomerNo = #{customerNo} 
 	</select>
 
@@ -36,4 +35,15 @@
 		select * from Customer limit #{start},#{rows}
 	</select>
 	
+	<resultMap id="CustomerMapByIdWithType" type="Customer" extends="CustomerMap">
+		<association property="customertype"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerTypeMapper.CustomerTypeMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectCustomerByIdWithType" resultMap="CustomerMapByIdWithType">
+	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
+	from Customer c, CustomerType ct
+	where CustomerNo = #{customerNo}  and c.typeNo = ct.typeNo
+	</select>
 </mapper>

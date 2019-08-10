@@ -31,7 +31,7 @@ public class ICustomerMapperTest {
 	@Test
 	public void testSelectCustomerById() throws Exception {
 
-		Customer customer = mapper.selectCustomerById("6");
+		Customer customer = mapper.selectCustomerById("7");
 		System.out.println(customer);
 		
 	}
@@ -40,8 +40,8 @@ public class ICustomerMapperTest {
 	@Test
 	public void testCreate() throws Exception {
 		Customer customer = new Customer();
-		customer.setCustomerNo("7");
-		customer.setCname("李天霸");
+		customer.setCustomerNo("8");
+		customer.setCname("李元天霸");
 		mapper.create(customer);
 	}
 
@@ -49,24 +49,36 @@ public class ICustomerMapperTest {
 	@Test
 	public void testUpdate() throws Exception {
 		Customer customer =  mapper.selectCustomerById("7");
-		customer.setCname("李元霸");
+		customer.setCname("李元天霸");
 		mapper.update(customer);
 	}
 
 	//测试选择所有
 	@Test
 	public void testSelectListByAll() throws Exception {
-		Customer customer = new Customer();
-		List<Customer> list = mapper.selectListByAll(customer);
-		for (Customer ls : list) {
-			System.out.print(ls);
+		List<Customer> list = mapper.selectListByAll(new Customer());
+		System.out.println(list.size());
+		for(Customer ls:list)
+		{
+			System.out.println(ls);
 		}
 	}
 
 	@Test
 	public void testSelectListByAllWithPage() throws Exception{
 		Customer customer = new Customer();
-		
+		List<Customer> list = mapper.selectListByAllWithPage(customer, 2, 2);
+		System.out.println(list.size());
+		for(Customer ls:list)
+		{
+			System.out.println(ls);
+		}
+	}
+	
+	@Test
+	public void testSelectCustomerByIdWithType() throws Exception {
+		Customer customer = mapper.selectCustomerByIdWithType("2");
+		System.out.println(customer);
 	}
 
 

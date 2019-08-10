@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper">
+
+	<cache />
+
+	<resultMap id="CustomerHomeMap" type="CustomerHome">
+		<id column="CHNO" property="chno" />
+		<result column="CustomerNo" property="customerno" />
+		<result column="RoomNo" property="roomno" />
+		<result column="LivingTypeNo" property="livingtypeno" />
+		<result column="ReceiveDate" property="receivedate" />
+		<result column="LiveDate" property="livedate" />
+		<result column="FeeStartDate" property="feestartdate" />
+		<result column="FeeEndDate" property="feeenddate" />
+		<result column="HumanCount" property="humancount" />
+		<result column="CHStatus" property="chstatus" />
+	</resultMap>
+
+	<select id="selectCustomerHomeById" resultMap="CustomerHomeMap">
+		select * from CustomerHome
+		where CHNO = #{chno} 
+	</select>
+
+	<select id="selectListByAll" resultMap="CustomerHomeMap">
+		select * from CustomerHome
+	</select>
+	
+     <select id="selectListByAllWithPage" resultMap="CustomerHomeMap">
+		select * from CustomerHome limit #{start},#{rows}
+	</select>
+	
+</mapper>

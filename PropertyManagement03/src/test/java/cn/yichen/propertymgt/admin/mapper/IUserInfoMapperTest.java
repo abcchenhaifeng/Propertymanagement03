@@ -44,33 +44,20 @@ public class IUserInfoMapperTest {
 	}
 
 	
-	/* 
 	@Test 
 	 public void testSelectListByAll() throws Exception { 
 		 UserInfo userInfo= new UserInfo(); 
-		 userInfo.setId("y"); mapper.selectListByAll(userInfo); 
+		 userInfo.setId("y"); 
+		 mapper.selectListByAll(userInfo); 
       }
-	 */
 
 	@Test
 	public void testSelectListByAllWithPage() throws Exception {
 		mapper.selectListByAllWithPage(null, 1, 2);
 	}
 
-	@Test
-	public void testSelectListByAll() {
-		fail("Not yet implemented");
-	}
 	
-	
-	/*
-	 * @Test public void testAddFunction() { fail("Not yet implemented"); }
-	 */
-	 
-
-	
-	 @Test public void testAddFunction() throws Exception
-	 { 
+	 @Test public void testAddFunction() throws Exception { 
 		 mapper.addFunction("yichen", 8); 
      }
 	 
@@ -79,6 +66,16 @@ public class IUserInfoMapperTest {
 	public void testAddFunctions() throws Exception {
 		int[] funNos = {1, 2, 3, 4};
 		mapper.addFunctions("yichen", funNos);
+	}
+	
+	@Test
+	public void testSelectCountByAll() throws Exception {
+		mapper.selectCountByAll(null);
+	}
+	
+	@Test
+	public void testDeleteFunction() throws Exception {
+		mapper.deleteFunction("yichen", 9);
 	}
 
 }

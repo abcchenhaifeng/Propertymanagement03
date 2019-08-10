@@ -15,33 +15,43 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Alias("Customer")
 public class Customer implements Serializable {
-    private String customerNo;  //客户序号
+	private String customerNo; // 客户序号
 
-    private String typeNo;     //客户类型序号
+	private String typeNo; // 客户类型序号
 
-    private String cname; //客户名称
+	private String cname; // 客户名称
 
-    private String contact;  //联系人姓名
-    
-    private String cardcode;   //身份证号码
+	private String contact; // 联系人姓名
 
-    private String mobile;  //手机号
-    
-    private String telephone;   //电话
-    
-    private String fax;     //传真
-    
-    private String qq;      //qq
-    
-    private String wechat;  //微信
+	private String cardcode; // 身份证号码
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date feeStartDate;  //收费开始日期
+	private String mobile; // 手机号
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date feeEndDate;  //收费截止日期
+	private String telephone; // 电话
 
-	private Boolean cstatus;   //客户状态
+	private String fax; // 传真
+
+	private String qq; // qq
+
+	private String wechat; // 微信
+	
+	private String cstatus; // 客户状态
+
+	private CustomerType customertype; // 多对一，一个客户只能对应一种客户类型
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date feeStartDate; // 收费开始日期
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date feeEndDate; // 收费截止日期
+
+	public CustomerType getCtypeno() {
+		return customertype;
+	}
+
+	public void setCtypeno(CustomerType customertype) {
+		this.customertype = customertype;
+	}
 
 	public String getCustomerNo() {
 		return customerNo;
@@ -139,11 +149,11 @@ public class Customer implements Serializable {
 		this.feeEndDate = feeEndDate;
 	}
 
-	public Boolean getCstatus() {
+	public String getCstatus() {
 		return cstatus;
 	}
 
-	public void setCstatus(Boolean cstatus) {
+	public void setCstatus(String cstatus) {
 		this.cstatus = cstatus;
 	}
 
@@ -152,8 +162,7 @@ public class Customer implements Serializable {
 		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
 				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
 				+ ", qq=" + qq + ", wechat=" + wechat + ", feeStartDate=" + feeStartDate + ", feeEndDate=" + feeEndDate
-				+ ", cstatus=" + cstatus + "]";
+				+ ", cstatus=" + cstatus + ", customertype=" + customertype + "]";
 	}
 
-	
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.ICustomerTypeMapper">
+
+	<cache />
+
+	<resultMap id="CustomerTypeMap" type="CustomerType">
+		<id column="TYPENO" property="typeno" />
+		<result column="TYPENAME" property="typename" />
+	</resultMap>
+
+	<select id="selectCustomerTypeById" resultMap="CustomerTypeMap">
+		select * from CustomerType
+		where TYPENO = #{typeno} 
+	</select>
+
+	<select id="selectListByAll" resultMap="CustomerTypeMap">
+		select * from CustomerType
+	</select>
+	
+     <select id="selectListByAllWithPage" resultMap="CustomerTypeMap">
+		select * from CustomerType limit #{start},#{rows}
+	</select>
+	
+	
+	<resultMap id="CustomerTypeMapByIdWithNo" type="CustomerType" extends="CustomerTypeMap">
+		<association property="customer"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper.CustomerMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectCustomerTypeByIdWithinfo" resultMap="CustomerTypeMapByIdWithNo">
+	select ct.TYPENAME,c.*
+	from Customer c, CustomerType ct
+	where ct.TYPENO = #{typeno}  and ct.typeNo = c.typeNo
+	</select>
+	
+</mapper>

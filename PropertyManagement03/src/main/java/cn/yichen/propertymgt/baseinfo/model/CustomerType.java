@@ -1,22 +1,33 @@
 package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:31:06
- * @author YiChen(李冠永)
- * #客户类型
- *
+ * 
+ * @date:2019年8月9日 下午1:28:22
+ * @author LiYi(李海宏）
+ * @description:针对客户类型表进行增删改查基本操作，为后期多表操作做铺垫
  */
 @Alias("CustomerType")
 public class CustomerType implements Serializable {
-    private Integer typeno;
+    private Integer typeno;     //客户类型编号
 
-    private String typename;
+    private String typename;    //客户类型名称
+    
+    private List<Customer> customer;   //一对多，一种客户类型可能被多个用户拥有
 
-    public Integer getTypeno() {
+    public List<Customer> getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(List<Customer> customer) {
+		this.customer = customer;
+	}
+
+	public Integer getTypeno() {
         return typeno;
     }
 
@@ -34,6 +45,8 @@ public class CustomerType implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CustomerType [typeno=" + typeno + ", typename=" + typename + "]";
+		return "CustomerType [typeno=" + typeno + ", typename=" + typename + ", customer=" + customer + "]";
 	}
+
+	
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
+import cn.yichen.propertymgt.admin.model.SystemModule;
 import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 
@@ -41,5 +42,7 @@ public interface ICustomerMapper {
 
 		// 按条件获取客户列表(分页)
 		public List<Customer> selectListByAllWithPage(@Param("customer") Customer customer, @Param("start") int start, @Param("rows") int rows) throws Exception;
-	
+		
+		// 根据id查询, 在返回客户的同时返回客户类型
+		public Customer selectCustomerByIdWithType(String id) throws Exception;
 }

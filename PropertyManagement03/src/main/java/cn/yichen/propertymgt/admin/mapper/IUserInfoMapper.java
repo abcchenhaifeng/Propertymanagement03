@@ -12,8 +12,8 @@ import cn.yichen.propertymgt.admin.model.UserInfo;
 
 /**
  * 2019年8月8日15:01:43
- * @author YiChen(李冠永)
- * #系统操作员Mapper(Dao)接口
+ * 
+ * @author YiChen(李冠永) #系统操作员Mapper(Dao)接口
  *
  */
 @Mapper
@@ -33,18 +33,26 @@ public interface IUserInfoMapper {
 
 	// 根据id查询, 返回用户
 	public UserInfo selectUserInfoById(String id) throws Exception;
-	
+
 	// 获取用户列表
 	public List<UserInfo> selectListByAll(@Param("userInfo") UserInfo userInfo) throws Exception;
 
 	// 按条件获取用户列表(分页)
-	public List<UserInfo> selectListByAllWithPage(@Param("userInfo") UserInfo userInfo, @Param("start") int start, @Param("rows") int rows) throws Exception;
-	
+	public List<UserInfo> selectListByAllWithPage(@Param("userInfo") UserInfo userInfo, @Param("start") int start,
+			@Param("rows") int rows) throws Exception;
+
+	// 获取个数
+	public int selectCountByAll(@Param("userInfo") UserInfo userInfo) throws Exception;
+
 	// 为用户增加功能
 	// 每次增加一个功能
 	@Insert("insert into SystemFunctionUser(USERID, FUNNO) values(#{id}, #{funNo})")
 	public void addFunction(@Param("id") String id, @Param("funNo") int funNo) throws Exception;
 
 	// 每次增加多个功能
-	public void addFunctions(@Param("id") String id, @Param("funNos")  int[] funNos) throws Exception;
+	public void addFunctions(@Param("id") String id, @Param("funNos") int[] funNos) throws Exception;
+
+	// 删除功能
+	@Insert("delete from SystemFunctionUser where USERID = #{id} and FUNNO = #{funNo}")
+	public void deleteFunction(@Param("id") String id, @Param("funNo") int funNo) throws Exception;
 }
