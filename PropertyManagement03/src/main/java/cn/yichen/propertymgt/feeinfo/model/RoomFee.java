@@ -2,14 +2,18 @@ package cn.yichen.propertymgt.feeinfo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
+
 /**
- * 2019年8月7日23:34:14
- * @author YiChen(李冠永)
- * #房间缴费
+ * 
+ * @date:2019年8月10日下午9:51:16
+ * @author LiYi(李海宏)
+ * @Description：房间缴费
  *
  */
 @Alias("RoomFee")
@@ -37,8 +41,18 @@ public class RoomFee implements Serializable {
     private Date enddate;
 
     private String feestatus;
+    
+    private List<CustomerHome> customerhome;
 
-    public Integer getRoomfeeno() {
+    public List<CustomerHome> getCustomerhome() {
+		return customerhome;
+	}
+
+	public void setCustomerhome(List<CustomerHome> customerhome) {
+		this.customerhome = customerhome;
+	}
+
+	public Integer getRoomfeeno() {
         return roomfeeno;
     }
 
@@ -128,8 +142,19 @@ public class RoomFee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Roomfee [roomfeeno=" + roomfeeno + ", feeyear=" + feeyear + ", feemonth=" + feemonth + ", roomno="
+		return "RoomFee [roomfeeno=" + roomfeeno + ", feeyear=" + feeyear + ", feemonth=" + feemonth + ", roomno="
 				+ roomno + ", feeitemno=" + feeitemno + ", spay=" + spay + ", apay=" + apay + ", derate=" + derate
-				+ ", startdate=" + startdate + ", enddate=" + enddate + ", feestatus=" + feestatus + "]";
+				+ ", startdate=" + startdate + ", enddate=" + enddate + ", feestatus=" + feestatus + ", customerhome="
+				+ customerhome + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "Roomfee [roomfeeno=" + roomfeeno
+	 * + ", feeyear=" + feeyear + ", feemonth=" + feemonth + ", roomno=" + roomno +
+	 * ", feeitemno=" + feeitemno + ", spay=" + spay + ", apay=" + apay +
+	 * ", derate=" + derate + ", startdate=" + startdate + ", enddate=" + enddate +
+	 * ", feestatus=" + feestatus + "]"; }
+	 */
+    
+    
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
+import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 
 /**
  * 
@@ -41,6 +42,12 @@ public interface ICustomerHomeMapper {
 	// 按条件获取客户房间列表(分页)
 	public List<CustomerHome> selectListByAllWithPage(@Param("chome") CustomerHome chome, @Param("start") int start, @Param("rows") int rows) throws Exception;
 
+	// 按客户号查询房间信息
+	public CustomerHome selectCustomerHomeByCustomerNo(String id) throws Exception;
 	
+	
+	// 根据id查询, 在返回客户类型的同时返回缴费信息
+	public CustomerHome selectCustomerHomeByIdWithRoomFee(String id) throws Exception;
+
 	
 }

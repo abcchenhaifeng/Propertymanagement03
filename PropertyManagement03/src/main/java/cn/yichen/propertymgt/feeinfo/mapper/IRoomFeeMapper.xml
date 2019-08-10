@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.yichen.propertymgt.feeinfo.mapper.IRoomFeeMapper">
+
+	<cache />
+
+	<resultMap id="RoomFeeMap" type="RoomFee">
+		<id column="RoomFeeNo" property="roomfeeno" />
+		<result column="FeeYEAR" property="feeyear" />
+		<result column="FeeMonth" property="feemonth" />
+		<result column="RoomNo" property="roomno" />
+		<result column="FeeItemNo" property="feeitemno" />
+		<result column="SPay" property="spay" />
+		<result column="Apay" property="apay" />
+		<result column="Derate" property="derate" />
+		<result column="StartDate" property="startdate" />
+		<result column="EndDate" property="enddate" />
+		<result column="FeeStatus" property="feestatus" />
+	</resultMap>
+
+    <select id="selectRoomFeeById" resultMap="RoomFeeMap">
+		select * from RoomFee
+		where RoomFeeNo = #{roomfeeno} 
+	</select>
+	
+	<select id="selectListByAll" resultMap="RoomFeeMap">
+		select * from RoomFee
+	</select>
+
+	<select id="selectListByAllWithPage" resultMap="RoomFeeMap">
+		select * from RoomFee limit #{start},#{rows}
+	</select>
+
+    <!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
+	<select id="selectCountByAll" resultType="int">
+		select IFNULL(count(RoomFeeNo), 0) from RoomFee
+	</select> 
+	
+	<resultMap id="RoomFeeMapByCustomerHomeNo" type="RoomFee" extends="RoomFeeMap">
+		<association property="customerhome"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper.CustomerHomeMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectRoomFeeByIdWithCustomerHome" resultMap="RoomFeeMapByCustomerHomeNo">
+	select ct.*,RoomFeeNo, FeeYEAR, FeeMonth,FeeItemNo, SPay, Apay, Derate,FeeStatus
+	from CustomerHome ct,RoomFee r
+	where ct.RoomNo = #{roomno}  and ct.RoomNo = r.RoomNo
+	</select>
+</mapper>

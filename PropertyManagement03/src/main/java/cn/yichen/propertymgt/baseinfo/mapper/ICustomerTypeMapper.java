@@ -43,5 +43,6 @@ public interface ICustomerTypeMapper {
 
 	// 根据id查询, 在返回客户类型的同时返回客户信息
 	public CustomerType selectCustomerTypeByIdWithinfo(String id) throws Exception;
+
 	
 }

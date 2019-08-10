@@ -32,4 +32,30 @@
 		select * from CustomerHome limit #{start},#{rows}
 	</select>
 	
+	
+	<resultMap id="CustomerHomeMapByCustomerNo" type="CustomerHome" extends="CustomerHomeMap">
+		<association property="customer"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper.CustomerMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectCustomerHomeByCustomerNo" resultMap="CustomerHomeMapByCustomerNo">
+	select ct.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus
+	from Customer c, CustomerHome ct
+	where ct.CustomerNo = #{customerno}  and ct.customerno = c.customerno
+	</select>
+	
+	
+	<resultMap id="CustomerHomeMapByRoomFeeNo" type="CustomerHome" extends="CustomerHomeMap">
+		<association property="roomfee"
+			resultMap="cn.yichen.propertymgt.feeinfo.mapper.IRoomFeeMapper.RoomFeeMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectCustomerHomeByIdWithRoomFee" resultMap="CustomerHomeMapByRoomFeeNo">
+	select ct.*,RoomFeeNo, FeeYEAR, FeeMonth,FeeItemNo, SPay, Apay, Derate,FeeStatus
+	from CustomerHome ct,RoomFee r
+	where ct.RoomNo = #{roomno}  and ct.RoomNo = r.RoomNo
+	</select>
+	
 </mapper>

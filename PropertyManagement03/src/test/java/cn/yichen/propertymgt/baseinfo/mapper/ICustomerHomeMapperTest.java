@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import cn.yichen.propertymgt.baseinfo.model.Customer;
 import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
+import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -68,4 +70,20 @@ public class ICustomerHomeMapperTest {
 		}
 	}
 
+	@Test
+	public void testSelectCustomerHomeByCustomerNo() throws Exception {
+		CustomerHome chome = mapper.selectCustomerHomeByCustomerNo("1");
+		System.out.println(chome);
+		/*
+		 * List<Customer> list = chome.getCustomer(); for (Customer customer : list) {
+		 * System.out.println(customer); }
+		 */
+		
+	}
+	
+	@Test
+	public void testSelectCustomerHomeByIdWithRoomFee() throws Exception {
+		CustomerHome chome = mapper.selectCustomerHomeByIdWithRoomFee("688");
+		System.out.println(chome);
+	}
 }

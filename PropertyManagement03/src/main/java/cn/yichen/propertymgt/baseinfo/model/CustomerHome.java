@@ -2,9 +2,12 @@ package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import cn.yichen.propertymgt.feeinfo.model.RoomFee;
 
 /**
  * 
@@ -21,8 +24,28 @@ public class CustomerHome implements Serializable {
     private String roomno;       //房间号
 
     private String livingtypeno;   //居住类型号
+    
+    private List<Customer> customer;   //客户信息
+    
+    private List<RoomFee> roomfee;    //缴费信息
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")     //入房日期
+    public List<RoomFee> getRoomfee() {
+		return roomfee;
+	}
+
+	public void setRoomfee(List<RoomFee> roomfee) {
+		this.roomfee = roomfee;
+	}
+
+	public List<Customer> getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(List<Customer> customer) {
+		this.customer = customer;
+	}
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")     //入房日期
     private Date receivedate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")     //收房日期  
@@ -121,8 +144,12 @@ public class CustomerHome implements Serializable {
 	@Override
 	public String toString() {
 		return "CustomerHome [chno=" + chno + ", customerno=" + customerno + ", roomno=" + roomno + ", livingtypeno="
-				+ livingtypeno + ", receivedate=" + receivedate + ", livedate=" + livedate + ", feestartdate="
-				+ feestartdate + ", feeenddate=" + feeenddate + ", humancount=" + humancount + ", chstatus=" + chstatus
-				+ "]";
+				+ livingtypeno + ", customer=" + customer + ", roomfee=" + roomfee + ", receivedate=" + receivedate
+				+ ", livedate=" + livedate + ", feestartdate=" + feestartdate + ", feeenddate=" + feeenddate
+				+ ", humancount=" + humancount + ", chstatus=" + chstatus + "]";
 	}
+
+	
+
+	
 }

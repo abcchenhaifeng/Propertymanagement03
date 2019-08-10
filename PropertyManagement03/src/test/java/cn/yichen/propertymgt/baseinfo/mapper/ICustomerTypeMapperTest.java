@@ -20,7 +20,7 @@ public class ICustomerTypeMapperTest {
 
 	@Autowired
 	private ICustomerTypeMapper mapper;
-	
+
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -54,8 +54,7 @@ public class ICustomerTypeMapperTest {
 	public void testSelectListByAll() throws Exception {
 		CustomerType ctype = new CustomerType();
 		List<CustomerType> list = mapper.selectListByAll(ctype);
-		for(CustomerType ls:list)
-		{
+		for (CustomerType ls : list) {
 			System.out.println(ls);
 		}
 	}
@@ -64,25 +63,24 @@ public class ICustomerTypeMapperTest {
 	public void testSelectListByAllWithPage() throws Exception {
 		CustomerType ctype = new CustomerType();
 		List<CustomerType> list = mapper.selectListByAllWithPage(ctype, 1, 1);
-		for(CustomerType ls:list)
-		{
-			System.out.println(ls);
-		}
-	}
-	
-	@Test
-	public void testSelectCustomerTypeByIdWithinfo() throws Exception {
-		CustomerType ctype = mapper.selectCustomerTypeByIdWithinfo("1");
-		
-		System.out.println(ctype.getCustomer().size());
-		
-		List<Customer> list=ctype.getCustomer();
-		
-		for(Customer ls:list)
-		{
+		for (CustomerType ls : list) {
 			System.out.println(ls);
 		}
 	}
 
+	@Test
+	public void testSelectCustomerTypeByIdWithinfo() throws Exception {
+		CustomerType ctype = mapper.selectCustomerTypeByIdWithinfo("1");
+
+		System.out.println(ctype);
+
+		/*
+		 * System.out.println(ctype.getCustomer().size());
+		 * 
+		 * List<Customer> list=ctype.getCustomer();
+		 * 
+		 * for(Customer ls:list) { System.out.println(ls); }
+		 */
+	}
 
 }
