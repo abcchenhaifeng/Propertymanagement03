@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YC物业管理系统</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="dist/css/layout.css" type="text/css"
+	media="screen" />
+<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="dist/css/ie.css" type="text/css" media="screen" />
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script src="dist/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="dist/js/hideshow.js" type="text/javascript"></script>
+<script src="dist/bootstrap/js/bootstrap.bundle.min.js"
+	type="text/javascript"></script>
+<script src="dist/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="dist/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+<script src="dist/js/jquery.equalHeight.js" type="text/javascript"></script>
+
+<!-- js/index.js -->
+<script src="js/index.js" type="text/javascript"></script>
+<!-- js/user/*.js -->
+<script src="js/user/main.js" type="text/javascript"></script>
+</head>
+<body>
+	<header id="header">
+		<div>
+			<h1 class="site_title" style="text-align: center;">
+				<a href="javascript:">YC物业管理系统</a>
+			</h1>
+			<h2 class="section_title">主页</h2>
+
+			<div class="input-group"
+				style="display: inline-block; width: auto; margin: 5px auto;">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+						style="background: url(dist/images/icn_login_user.png) no-repeat center; background-size: cover; width: 3rem; height: 3rem; border: none;">
+					</button>
+					<div class="dropdown-menu">
+						<a id="icn_user_profile" class="dropdown-item" target="body"
+							href="javascript: ">详情</a>
+						<div role="separator" class="dropdown-divider"></div>
+						<a id="user_logout" class="dropdown-item" href="javascript: ">退出</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- -- -- -- -- -- -- -- -- -- -- end of header bar -- -- -- -- -- -- -- -- -- -- -->
+
+	<section id="secondary_bar">
+		<div class="user">
+			<p class="user_inner">
+				<!-- -- -- -- -- -- -- inner [.user].js -- -- -- -- -- -- -- -->
+				<span id="login_username">login_username</span> <span
+					style="loat: right; position: absolute; right: 0;"
+					id="login_messages">(<a href="javascript:">3 Messages</a>)
+				</span>
+			</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<!-- -- -- -- -- -- -- inner [#breadcrumbs].js -- -- -- -- -- -- -- -->
+			<article class="breadcrumbs" id="breadcrumbs">
+				<a href="/">YC物业管理系统</a>
+				<div class="breadcrumb_divider"></div>
+				<a class="current">安全模块</a>
+				<div class="breadcrumb_divider"></div>
+				<a class="current">用户管理</a>
+			</article>
+		</div>
+	</section>
+	<!-- -- -- -- -- -- -- -- -- -- -- end of secondary bar -- -- -- -- -- -- -- -- -- -- -->
+
+	<aside id="sidebar" class="column">
+		<form class="quick_search">
+			<input type="text" value="Quick Search"
+				onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+		</form>
+		<hr />
+
+		<!-- -- -- -- -- -- -- inner [#sidebar_menu].js -- -- -- -- -- -- -- -->
+		<div id="sidebar_menu">
+			<div class="menu_column">
+				<h3>系统参数</h3>
+				<ul class="toggle">
+					<li>
+						<h4>
+							<span class="icn_profile"
+								style="margin: 0; display: inline-block;"> <a
+								style="text-decoration: none;">登录账号管理</a>
+							</span>
+						</h4>
+						<ul class="toggle">
+							<li class="icn_add_user"><a id="add_user"
+								href="user/preAdd.do">Add New User</a></li>
+							<li class="icn_view_users"><a id="view_users"
+								href="user/list.do">View Users</a></li>
+							<li class="icn_profile"><a id="user_profile"
+								href="user/info.do?id=${login_user.id }">Your Profile</a></li>
+						</ul>
+					</li>
+					<li class="icn_edit_article"><a href="#">Edit Articles</a></li>
+					<li class="icn_categories"><a href="#">Categories</a></li>
+					<li class="icn_tags"><a href="#">Tags</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="footer_box clear">
+				<hr />
+				<p>
+					<strong>Copyright &copy; <span id="date_year"></span>
+						yichen.cn YC客运管理系统
+					</strong>
+				</p>
+				<p>
+					Author Links <abbr><strong><a
+							href="https://ychenli.github.io">YiChen</a></strong></abbr>
+				</p>
+			</div>
+		</footer>
+		<!-- -- -- -- -- -- -- -- -- end of sidebar.footer -- -- -- -- -- -- -- -- -->
+
+	</aside>
+	<!-- -- -- -- -- -- -- -- -- -- -- end of sidebar -- -- -- -- -- -- -- -- -- -- -->
+
+	<section id="main" class="column" style="height: 100%">
+		<h4 id="alert_info" class="alert_info" style="text-align: center;">欢迎来到YC客运管理系统</h4>
+		<div class="clear"></div>
+		<div id="container">
+			<!-- -- -- -- -- -- -- inner [#container].js -- -- -- -- -- -- -- -->
+		</div>
+	</section>
+	<!-- -- -- -- -- -- -- -- -- -- -- end of section -- -- -- -- -- -- -- -- -- -- -->
+</body>
+</html>
