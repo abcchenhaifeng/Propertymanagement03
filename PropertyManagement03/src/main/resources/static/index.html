@@ -43,7 +43,7 @@
 						style="background: url(dist/images/icn_login_user.png) no-repeat center; background-size: cover; width: 3rem; height: 3rem; border: none;">
 					</button>
 					<div class="dropdown-menu">
-						<a id="icn_user_profile" class="dropdown-item" target="body"
+						<a id="icn_user_profile" class="dropdown-item"
 							href="javascript: ">详情</a>
 						<div role="separator" class="dropdown-divider"></div>
 						<a id="user_logout" class="dropdown-item" href="javascript: ">退出</a>
@@ -68,11 +68,11 @@
 		<div class="breadcrumbs_container">
 			<!-- -- -- -- -- -- -- inner [#breadcrumbs].js -- -- -- -- -- -- -- -->
 			<article class="breadcrumbs" id="breadcrumbs">
-				<a href="/">YC物业管理系统</a>
+				<a href="/">主页</a>
 				<div class="breadcrumb_divider"></div>
-				<a class="current">安全模块</a>
+				<a class="current">系统参数</a>
 				<div class="breadcrumb_divider"></div>
-				<a class="current">用户管理</a>
+				<a class="current">登录账号管理</a>
 			</article>
 		</div>
 	</section>
@@ -98,12 +98,12 @@
 							</span>
 						</h4>
 						<ul class="toggle">
-							<li class="icn_add_user"><a id="add_user"
-								href="user/preAdd.do">Add New User</a></li>
-							<li class="icn_view_users"><a id="view_users"
-								href="user/list.do">View Users</a></li>
-							<li class="icn_profile"><a id="user_profile"
-								href="user/info.do?id=${login_user.id }">Your Profile</a></li>
+							<li class="icn_add_user"><a id="add_user" class="link"
+								href="userinfo/add.html">注册账号</a></li>
+							<li class="icn_view_users"><a id="view_users" class="link"
+								href="userinfo/list.html">显示账号列表</a></li>
+							<li class="icn_profile"><a id="user_profile" class="link"
+								href="userinfo/details.html">我的详情</a></li>
 						</ul>
 					</li>
 					<li class="icn_edit_article"><a href="#">Edit Articles</a></li>
@@ -122,7 +122,7 @@
 					</strong>
 				</p>
 				<p>
-					Author Links <abbr><strong><a
+					Author Links <abbr><strong><a target="_blank"
 							href="https://ychenli.github.io">YiChen</a></strong></abbr>
 				</p>
 			</div>

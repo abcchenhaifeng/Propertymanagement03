@@ -4,6 +4,16 @@
  * @Description 首页前端控制JS
  */
 
+$(() => {
+	
+	$(".menu_column a.link").on("click", function(e) {
+		
+		$("section#main #container").load($(this).attr("href"));
+		e.preventDefault();
+	});
+});
+
+
 let default_alert_info;
 $(function() {
 

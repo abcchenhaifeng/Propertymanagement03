@@ -1,0 +1,39 @@
+<form action="search.do" method="get">
+	<div class="input-group mb-3" style="width: 80%; margin: 20px auto 0 auto; ">
+		<input type="search" name="search" class="form-control" placeholder="输入查询条件"  aria-label="输入查询条件"  aria-describedby="button-addon2">
+		<div class="input-group-append">
+			<input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="查询">
+		</div>
+	</div>
+</form>
+
+<table class="table table-striped"
+	style="width: 95%; margin: 0 auto 1rem;">
+	<tr>
+		<th>ID</th>
+		<th>PASSWORD</th>
+		<th>USERNAME</th>
+		<th>ROLE</th>
+		<th>AGE</th>
+		<th>JOIN_DATE</th>
+		<th>STATUS</th>
+		<th style="text-align: center;">
+			<a href="/" class="btn btn-outline-secondary">添加</a>
+			<a href="javascript: " onclick="return confirm('删除选中项？')" class="btn btn-outline-secondary">删除</a>
+		</th>
+	</tr>
+	<tr>
+		<td>id</td>
+		<td>password</td>
+		<td>username</td>
+		<td>role</td>
+		<td>age</td>
+		<td>2019</td>
+		<td>激活/冻结</td>
+		<th style="text-align: center;">
+			<a href="/" class="btn btn-primary">修改</a> 
+			<a href="/" onclick="return confirm('确定要删除吗？')" class="btn btn-primary">删除</a> 
+			<a href="active.do?id=${user.id }" class="btn btn-primary">激活</a>
+		</th>
+	</tr>
+</table>
