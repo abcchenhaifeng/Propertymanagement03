@@ -16,6 +16,8 @@ var login_user = {
 	name : ""
 };
 
+var dialogArea = $("section#main #dialog");
+
 $(() => {
 
 	$(".menu_column a.link").on("click", function(e) {
@@ -25,10 +27,12 @@ $(() => {
 			$("section#main #container").load(url);
 		} else {
 			$("section#main #dialog").load(url, () => {
-				var dialogArea = $("section#main #dialog");
+				
+				dialogArea = $("section#main #dialog");
 				dialogArea.dialog({
 					title: $(this).attr("title"),
 					width: "80%",
+					maxWidth: "845px",
 					close: function(event, ui) {
 						dialogArea.dialog("destroy");
 						dialogArea.html("");
@@ -76,7 +80,6 @@ $(function() {
 });
 
 function closeDialog() {
-	var dialogArea = $("section#main #dialog");
 	dialogArea.dialog("destroy");
 	dialogArea.html("");
 }

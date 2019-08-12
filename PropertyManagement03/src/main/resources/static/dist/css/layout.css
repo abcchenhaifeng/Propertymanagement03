@@ -26,6 +26,11 @@ a, a:link, a:visited, a:hover {
 }
 
 
+/* dialog */
+.ui-dialog.ui-widget-content {
+	max-width: 845px;
+}
+
 /* Header */
 
 header#header {

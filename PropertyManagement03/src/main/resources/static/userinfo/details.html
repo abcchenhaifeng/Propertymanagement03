@@ -1,68 +1,68 @@
-<script type="text/javascript" src="js/user/details.js" ></script>
+<script type="text/javascript" src="js/user/details.js"></script>
 <div style="width: 75%; margin: 5% auto auto auto;">
 	<form id="details" action="user/modify" method="post">
-		<input type="hidden" name="status" value="${user.status }">
+		<input type="hidden" name="status" value="Y">
 		<div class="input-group input-group-lg">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-lg">　　账号</span>
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;&emsp;账号</span>
 			</div>
-			<input type="text" name="id" value="${user.id }" class="form-control"
+			<input type="text" name="id" value="" class="form-control" 
 				aria-label="Sizing example input"
-				aria-describedby="inputGroup-sizing-lg" ${emptyuser.id ? "" : "readonly" }>
+				aria-describedby="inputGroup-sizing-lg" >
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-lg">　用户名</span>
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;用户名</span>
 			</div>
-			<input type="text" name="username" value="${user.username }"
+			<input type="text" name="username" value=""
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg">
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-lg">　　密码</span>
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;&emsp;密码</span>
 			</div>
-			<input type="text" name="password" value="${user.password }"
+			<input type="text" name="password" value=""
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg">
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-lg">　　角色</span>
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;&emsp;性别</span>
 			</div>
-			<input type="text" name="role" value="${user.role }"
+			<select name="sex" class="form-control" aria-label="Sizing example input" 
+				aria-describedby="inputGroup-sizing-lg">
+				<option value="男">男</option>
+				<option value="女">女</option>
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;&emsp;年龄</span>
+			</div>
+			<input type="number" name="age" value="" min="0" max="200"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg">
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-lg">　　年龄</span>
+				<span class="input-group-text" id="inputGroup-sizing-lg">手机号码</span>
 			</div>
-			<input type="number" name="age"
-				value="${empty user.age ? 0 : user.age }" min="0" max="200"
-				class="form-control" aria-label="Sizing example input"
+			<input type="tel" name="mobible" value="" class="form-control"
+				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg">
-		</div>
-		<br>
-		<div class="input-group input-group-lg">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-lg">入职时间</span>
-			</div>
-			<input type="date" name="joinDate" value="<fmt:formatDate value="
-				${user.joinDate }" pattern="yyyy-MM-dd" />" class="form-control"
-			aria-label="Sizing example input"
-			aria-describedby="inputGroup-sizing-lg">
 		</div>
 		<br>
 		<div class="input-group">
-			<input type="text" class="form-control" value="${msg }"
+			<input type="text" class="form-control" value=""
 				disabled="disabled">
 			<div class="input-group-append" id="button-addon4">
-				<a href="javascript: window.history.back(-1);"
+				<a href="javascript: closeDialog()"
 					class="btn btn-primary">返回</a>&nbsp;
 				<button class="btn btn-primary" type="submit">修改</button>
 			</div>
