@@ -23,7 +23,7 @@ import cn.yichen.propertymgt.baseinfo.model.Customer;
 public interface ICustomerMapper {
 
 	    // 添加
-		@Insert("insert into Customer(CustomerNo, TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus) values(#{customerNo}, #{typeNo}, #{cname},#{contact}, #{cardcode}, #{mobile}, #{telephone}, #{fax},#{qq},#{wechat},#{feeStartDate},#{feeEndDate},#{cstatus})")
+		@Insert("insert into Customer(CustomerNo, TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus,Password) values(#{customerNo}, #{typeNo}, #{cname},#{contact}, #{cardcode}, #{mobile}, #{telephone}, #{fax},#{qq},#{wechat},#{feeStartDate},#{feeEndDate},#{cstatus},#{password)")
 		public void create(Customer customer) throws Exception;
 
 		// 删除
@@ -31,7 +31,7 @@ public interface ICustomerMapper {
 		public void delete(String id) throws Exception;
 
 		// 更新
-		@Update("update Customer set TypeNo=#{typeNo}, Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, Tel=#{telephone}, Fax=#{fax}, QQ=#{qq}, WeiXin=#{wechat}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus} where CustomerNo=#{customerNo}")
+		@Update("update Customer set TypeNo=#{typeNo}, Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, Tel=#{telephone}, Fax=#{fax}, QQ=#{qq}, WeiXin=#{wechat}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus},Password=#{password}where CustomerNo=#{customerNo}")
 		public void update(Customer customer) throws Exception;
 
 		// 根据id查询, 返回客户
@@ -45,4 +45,7 @@ public interface ICustomerMapper {
 		
 		// 根据id查询, 在返回客户的同时返回客户类型
 		public Customer selectCustomerByIdWithType(String id) throws Exception;
+		
+		// 获取个数
+		public int selectCountByAll(@Param("customer") Customer customer) throws Exception;
 }

@@ -20,6 +20,7 @@
 		<result column="FeeStartDate" property="feeStartDate" />
 		<result column="FeeEndDate" property="feeEndDate" />
 		<result column="CStatus" property="cstatus" />
+		<result column="Password" property="password" />
 	</resultMap>
 
 	<select id="selectCustomerById" resultMap="CustomerMap">
@@ -42,8 +43,13 @@
 	</resultMap>
 	
 	<select id="selectCustomerByIdWithType" resultMap="CustomerMapByIdWithType">
-	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
+	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus,Password,ct.TYPENAME
 	from Customer c, CustomerType ct
 	where CustomerNo = #{customerNo}  and c.typeNo = ct.typeNo
+	</select>
+	
+	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
+	<select id="selectCountByAll" resultType="int">
+		select IFNULL(count(CustomerNo), 0) from Customer
 	</select>
 </mapper>

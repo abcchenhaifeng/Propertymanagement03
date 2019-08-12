@@ -36,6 +36,8 @@ public class Customer implements Serializable {
 	private String wechat; // 微信
 	
 	private String cstatus; // 客户状态
+	
+	private String password;  //登陆密码
 
 	private CustomerType customertype; // 多对一，一个客户只能对应一种客户类型
 
@@ -157,12 +159,32 @@ public class Customer implements Serializable {
 		this.cstatus = cstatus;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public CustomerType getCustomertype() {
+		return customertype;
+	}
+
+	public void setCustomertype(CustomerType customertype) {
+		this.customertype = customertype;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
 				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
-				+ ", qq=" + qq + ", wechat=" + wechat + ", feeStartDate=" + feeStartDate + ", feeEndDate=" + feeEndDate
-				+ ", cstatus=" + cstatus + ", customertype=" + customertype + "]";
+				+ ", qq=" + qq + ", wechat=" + wechat + ", cstatus=" + cstatus + ", password=" + password
+				+ ", customertype=" + customertype + ", feeStartDate=" + feeStartDate + ", feeEndDate=" + feeEndDate
+				+ "]";
 	}
+	
+	
+	
 
 }

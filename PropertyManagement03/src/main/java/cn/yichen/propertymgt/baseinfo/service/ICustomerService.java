@@ -1,5 +1,8 @@
 package cn.yichen.propertymgt.baseinfo.service;
 
+import java.util.List;
+
+import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 
 /**
@@ -11,9 +14,22 @@ import cn.yichen.propertymgt.baseinfo.model.Customer;
  */
 public interface ICustomerService {
 
-	//注册用户
-	public void register(Customer customer) throws Exception;
+	// 修改密码
+	public void changePassword(String id, String password) throws Exception;
+
+	// 检验合法性
+	public boolean validate(String id, String password) throws Exception;
+
 	
-	//修改用户
-	public void modify(Customer customer) throws Exception;
+	// 按条件获取客户列表
+	public List<Customer> getListByAll(Customer customer) throws Exception;
+
+	// 按条件获取客户列表(分页)
+	public List<Customer> getListByAllWithPage(Customer customer, int page, int rows) throws Exception;
+	
+	// 获取个数
+	public int getCountByAll(Customer customer) throws Exception;
+	
+	// 按ID获取用户
+	public Customer getCustomerById(String id) throws Exception;
 }

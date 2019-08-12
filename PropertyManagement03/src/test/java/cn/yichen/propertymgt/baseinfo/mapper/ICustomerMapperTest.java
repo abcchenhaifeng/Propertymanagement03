@@ -31,7 +31,7 @@ public class ICustomerMapperTest {
 	@Test
 	public void testSelectCustomerById() throws Exception {
 
-		Customer customer = mapper.selectCustomerById("7");
+		Customer customer = mapper.selectCustomerById("1");
 		System.out.println(customer);
 		
 	}
@@ -82,4 +82,9 @@ public class ICustomerMapperTest {
 	}
 
 
+	@Test
+	public void testSelectCountByAll() throws Exception {
+		int i = mapper.selectCountByAll(new Customer());
+		System.out.println(i);
+	}
 }

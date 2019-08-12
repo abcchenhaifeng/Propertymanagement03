@@ -40,7 +40,7 @@
 	</resultMap>
 	
 	<select id="selectCustomerHomeByCustomerNo" resultMap="CustomerHomeMapByCustomerNo">
-	select ct.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus
+	select ct.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus,password
 	from Customer c, CustomerHome ct
 	where ct.CustomerNo = #{customerno}  and ct.customerno = c.customerno
 	</select>
