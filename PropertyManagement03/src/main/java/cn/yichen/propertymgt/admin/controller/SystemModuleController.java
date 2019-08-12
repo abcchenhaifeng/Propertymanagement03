@@ -59,8 +59,11 @@ public class SystemModuleController {
 
 	// 获取
 	@GetMapping("/get")
-	public SystemModule get(int no) throws Exception {
-		return service.getModuleByNo(no);
+	public ResultMessage<SystemModule> get(int no) throws Exception {
+		ResultMessage<SystemModule> result = new ResultMessage<SystemModule>("OK", "获取系统模块详情");
+		result.setModel(service.getModuleByNo(no));
+
+		return result;
 	}
 
 	// 增加

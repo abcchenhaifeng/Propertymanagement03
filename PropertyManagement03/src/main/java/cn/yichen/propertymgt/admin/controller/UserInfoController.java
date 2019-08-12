@@ -49,8 +49,10 @@ public class UserInfoController {
 
 	// 获取用户
 	@GetMapping("/get")
-	public UserInfo get(String id) throws Exception {
-		return service.getUserById(id);
+	public ResultMessage<UserInfo> get(String id) throws Exception {
+		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户详情");
+		result.setModel(service.getUserById(id));
+		return result;
 	}
 
 	// 增加用户

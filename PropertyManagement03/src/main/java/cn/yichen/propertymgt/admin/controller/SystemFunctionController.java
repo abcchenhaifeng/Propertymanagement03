@@ -59,8 +59,11 @@ public class SystemFunctionController {
 
 	// 获取
 	@GetMapping("/get")
-	public SystemFunction get(int no) throws Exception {
-		return service.getFunctionByNo(no);
+	public ResultMessage<SystemFunction> get(int no) throws Exception {
+		ResultMessage<SystemFunction> result = new ResultMessage<SystemFunction>("OK", "获取系统功能详情");
+		result.setModel(service.getFunctionByNo(no));
+
+		return result;
 	}
 
 	// 增加
