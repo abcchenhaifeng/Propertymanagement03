@@ -7,8 +7,22 @@
 $(() => {
 	
 	$(".menu_column a.link").on("click", function(e) {
+		var url = $(this).attr("href");
+		if ( /(list)|(main).html$/.test(url) ) {
+			$("section#main #container").load(url);
+		} else {
+			$("section#main #dialog").load(url, () => {
+				var dialogArea = $("section#main #dialog");
+				dialogArea.dialog({
+					title : dialogArea.attr("title"),
+					width : "80%",
+					close: function( event, ui ) {
+						dialogArea.dialog("destroy");
+					}
+				});
+			});
+		}
 		
-		$("section#main #container").load($(this).attr("href"));
 		e.preventDefault();
 	});
 });

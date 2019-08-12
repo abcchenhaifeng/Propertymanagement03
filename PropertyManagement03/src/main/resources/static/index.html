@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="dist/css/layout.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="dist/bootstrap3-dialog/css/bootstrap-dialog.min.css">
+<link rel="stylesheet" href="dist/jqueryui/jquery-ui.css">
 
 <!--[if lt IE 9]>
 <link rel="stylesheet" href="dist/css/ie.css" type="text/css" media="screen" />
@@ -21,6 +23,9 @@
 <script src="dist/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="dist/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script src="dist/js/jquery.equalHeight.js" type="text/javascript"></script>
+<script src="dist/bootstrap3-dialog/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+<script src="dist/jqueryform/jquery.form.min.js" type="text/javascript"></script>
+<script src="dist/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
 
 <!-- js/index.js -->
 <script src="js/index.js" type="text/javascript"></script>
@@ -43,8 +48,7 @@
 						style="background: url(dist/images/icn_login_user.png) no-repeat center; background-size: cover; width: 3rem; height: 3rem; border: none;">
 					</button>
 					<div class="dropdown-menu">
-						<a id="icn_user_profile" class="dropdown-item"
-							href="javascript: ">详情</a>
+						<a id="icn_user_profile" class="dropdown-item" href="javascript: ">详情</a>
 						<div role="separator" class="dropdown-divider"></div>
 						<a id="user_logout" class="dropdown-item" href="javascript: ">退出</a>
 					</div>
@@ -99,7 +103,7 @@
 						</h4>
 						<ul class="toggle">
 							<li class="icn_add_user"><a id="add_user" class="link"
-								href="userinfo/add.html">注册账号</a></li>
+								method="add" title="注册账号" href="userinfo/add.html">注册账号</a></li>
 							<li class="icn_view_users"><a id="view_users" class="link"
 								href="userinfo/list.html">显示账号列表</a></li>
 							<li class="icn_profile"><a id="user_profile" class="link"
@@ -137,6 +141,9 @@
 		<div class="clear"></div>
 		<div id="container">
 			<!-- -- -- -- -- -- -- inner [#container].js -- -- -- -- -- -- -- -->
+		</div>
+		<div id="dialog">
+			<!-- alert dialog -->
 		</div>
 	</section>
 	<!-- -- -- -- -- -- -- -- -- -- -- end of section -- -- -- -- -- -- -- -- -- -- -->
