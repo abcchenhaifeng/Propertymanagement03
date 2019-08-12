@@ -87,4 +87,10 @@ public class ICustomerMapperTest {
 		int i = mapper.selectCountByAll(new Customer());
 		System.out.println(i);
 	}
+	
+	@Test
+	public void testSelectCustomerByIdWithHome() throws Exception {
+		Customer CustomerWithHome = mapper.selectCustomerByIdWithHome("1");
+		System.out.println(CustomerWithHome);
+	}
 }

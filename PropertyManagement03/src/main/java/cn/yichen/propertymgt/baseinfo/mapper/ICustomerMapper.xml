@@ -48,6 +48,18 @@
 	where CustomerNo = #{customerNo}  and c.typeNo = ct.typeNo
 	</select>
 	
+	<resultMap id="CustomerMapByIdWithHome" type="Customer" extends="CustomerMap">
+		<association property="customerhome"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper.CustomerHomeMap">
+		</association>
+	</resultMap>
+	
+	<select id="selectCustomerByIdWithHome" resultMap="CustomerMapByIdWithHome">
+	select c.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus 
+	from Customer c, CustomerHome ch
+	where c.CustomerNo = #{customerNo}  and c.customerNo = ch.customerNo
+	</select>
+	
 	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
 	<select id="selectCountByAll" resultType="int">
 		select IFNULL(count(CustomerNo), 0) from Customer

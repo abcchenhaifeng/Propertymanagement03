@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Customer> getListByAllWithPage(Customer customer, int page, int rows) throws Exception {
-		return mapper.selectListByAllWithPage(customer, page, rows);
+		return mapper.selectListByAllWithPage(customer, rows*(page-1), rows);
 	}
 
 	@Override
@@ -62,6 +62,21 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Transactional(readOnly = true)
 	public Customer getCustomerById(String id) throws Exception {
 		return mapper.selectCustomerById(id);
+	}
+
+	//取得部门页数
+	@Override
+	@Transactional(readOnly = true)
+	public int getPagaCountByAll(int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountByAll(new Customer());
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
 	}
 	
 	

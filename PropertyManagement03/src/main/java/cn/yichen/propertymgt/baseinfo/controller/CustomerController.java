@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 import cn.yichen.propertymgt.baseinfo.service.impl.CustomerServiceImpl;
 import cn.yichen.propertymgt.vo.ResultMessage;
@@ -28,25 +29,44 @@ public class CustomerController {
 	private CustomerServiceImpl service;
 
 	// [按条件]取得用户列表，有分页
-	@GetMapping("/list")
+	@GetMapping(value="/list/all/page")
 	public ResultMessage<Customer> list(Customer customer,
 			@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 
-		ResultMessage<Customer> result = new ResultMessage<Customer>("OK", "取得用户列表page: " + page + " -- rows: " + rows);
 		
-		int count = service.getCountByAll(customer);
-		int pageCount = (count%rows==0 && count>rows ? count/rows : count/rows+1);
-		
-		result.setCount(count);
-		result.setPageCount(pageCount);
-		result.setList(service.getListByAllWithPage(customer, page, rows));
-		result.setPage(page);
-		result.setRows(rows);
+		 ResultMessage<Customer> result = new ResultMessage<Customer>("OK",
+		 "取得用户列表page: " + page + " -- rows: " + rows);
+		 
+		 int count = service.getCountByAll(customer); int pageCount = (count%rows==0
+		 && count>rows ? count/rows : count/rows+1);
+		 
+		 result.setCount(count); 
+		 result.setPageCount(pageCount);
+		 result.setList(service.getListByAllWithPage(customer, page, rows));
+		 result.setPage(page); 
+		 result.setRows(rows);
+		  
+		 return result;
 
-		return result;
+		
 	}
 
+	/*
+	//取得所有部门列表，有分页
+	@GetMapping(value="/list/all/page")
+	public ResultMessage<Customer> getListByAllWitPage(@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+		Customer customer = new Customer();
+		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得部门列表分页模式成功");
+		result.setCount(service.getCountByAll(customer));
+		result.setPageCount(service.getPagaCountByAll(rows));
+		result.setList(service.getListByAllWithPage(customer,rows, page));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
+	}
+	*/
 	// 获取用户
 	@GetMapping("/get")
 	public Customer get(String id) throws Exception {

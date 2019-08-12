@@ -46,6 +46,11 @@ public interface ICustomerMapper {
 		// 根据id查询, 在返回客户的同时返回客户类型
 		public Customer selectCustomerByIdWithType(String id) throws Exception;
 		
+		// 根据id查询, 在返回客户的同时返回客户房间
+		public Customer selectCustomerByIdWithHome(String id) throws Exception;
+		
 		// 获取个数
 		public int selectCountByAll(@Param("customer") Customer customer) throws Exception;
 }
+
+

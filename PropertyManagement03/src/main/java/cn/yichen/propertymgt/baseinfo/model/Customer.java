@@ -40,6 +40,16 @@ public class Customer implements Serializable {
 	private String password;  //登陆密码
 
 	private CustomerType customertype; // 多对一，一个客户只能对应一种客户类型
+	
+	private CustomerHome customerhome; //一对一，一个客户只能对应一个客户房间
+
+	public CustomerHome getCustomerhone() {
+		return customerhome;
+	}
+
+	public void setCustomerhone(CustomerHome customerhome) {
+		this.customerhome = customerhome;
+	}
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date feeStartDate; // 收费开始日期
@@ -180,11 +190,7 @@ public class Customer implements Serializable {
 		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
 				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
 				+ ", qq=" + qq + ", wechat=" + wechat + ", cstatus=" + cstatus + ", password=" + password
-				+ ", customertype=" + customertype + ", feeStartDate=" + feeStartDate + ", feeEndDate=" + feeEndDate
-				+ "]";
+				+ ", customertype=" + customertype + ", customerhone=" + customerhome + ", feeStartDate=" + feeStartDate
+				+ ", feeEndDate=" + feeEndDate + "]";
 	}
-	
-	
-	
-
 }

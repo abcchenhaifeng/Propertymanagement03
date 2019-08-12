@@ -32,4 +32,7 @@ public interface ICustomerService {
 	
 	// 按ID获取用户
 	public Customer getCustomerById(String id) throws Exception;
+	
+	//取得部门页数
+	public int getPagaCountByAll(int rows) throws Exception;
 }
