@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper">
+	
+	<cache />
+	
+	<resultMap id="RoomMap" type="Room">
+		<id column ="ROOMNO" property="roomno"/>
+		<result column="HouseTypeNo" property="housetypeno" />	
+		<result column="BuildingNo" property="buildingno" />
+		<result column="DepartmentCode" property="departmentcode" />
+		<result column="Floor" property="floor" />
+		<result column="RoomCode" property="roomcode" />
+		<result column="BuildingArea" property="buildingarea" />
+		<result column="FeeArea" property="feearea" />
+		<result column="RoomStatus" property="roomstatus" />
+		<result column="RoomType" property="roomtype" />
+	</resultMap>
+	
+	
+	<select id="selectRoomById" resultMap="RoomMap">
+		select * from Room
+		where ROOMNO =#{roomno}
+	</select>
+
+
+</mapper>
+
+

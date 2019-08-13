@@ -1,21 +1,14 @@
 package cn.yichen.propertymgt.baseinfo.mapper;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
-import javax.swing.Spring;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import cn.yichen.propertymgt.baseinfo.model.Customer;
 import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
-import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

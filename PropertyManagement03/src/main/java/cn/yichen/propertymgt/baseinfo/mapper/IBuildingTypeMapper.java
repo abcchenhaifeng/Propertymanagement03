@@ -22,7 +22,7 @@ public interface IBuildingTypeMapper {
 	@Insert("insert into BuildingType(TYPENO,TYPENAME) values(#{typeno},#{typename})")
 	public void create(BuildingType typeno) throws Exception;
 	//更新
-	@Update("updata BuildingType set TYPENO=#{typeno},TYPENAME=#{typename} where TYPENO=#{typeno}")
+	@Update("updata BuildingType set TYPENAME=#{typename} where TYPENO=#{typeno}")
 	public void update(BuildingType typeno) throws Exception;
 	//删除
 	@Delete("delete from BuildingType where TYPENO = #{typeno}")

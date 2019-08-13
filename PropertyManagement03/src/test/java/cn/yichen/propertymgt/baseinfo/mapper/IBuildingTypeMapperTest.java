@@ -24,15 +24,15 @@ public class IBuildingTypeMapperTest {
 	@Test
 	public void testCreate() throws Exception {
 		BuildingType BuildingType = new BuildingType();
-		BuildingType.setTypeno(8);
+		BuildingType.setTypeno(5);
 		BuildingType.setTypename("威武型");
         mapper.create(BuildingType);
 	}
 
 	@Test
 	public void testUpdate() throws Exception {
-		BuildingType BuildingType = mapper.selectBuildingTypeById("7");
-		BuildingType.setTypename("简便型");
+		BuildingType BuildingType = mapper.selectBuildingTypeById("5");
+		BuildingType.setTypename("简易型");
 		mapper.update(BuildingType);
 	}
 	

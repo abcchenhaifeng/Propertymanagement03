@@ -5,54 +5,55 @@ import java.io.Serializable;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:32:43
- * @author YiChen(李冠永)
- * #房间
+ * 
+ * @data:2019年8月12日下午9:17:22
+ * @author： 陈海锋
+ * @Description:房间
  *
  */
 @Alias("Room")
 public class Room implements Serializable {
-    private Integer roomno;
+    private String roomno;				//房间编号
 
-    private Integer housetypeno;
+    private String housetypeno;			//房屋户型编号
 
-    private Integer buildingno;
+    private String buildingno;			//楼宇编号
 
-    private String departmentcode;
+    private String departmentcode;		//单元
 
-    private String floor;
+    private String floor;				//楼层
 
-    private String roomcode;
+    private String roomcode;			//房间号
 
-    private Double buildingarea;
+    private Double buildingarea;		//使用面积
 
-    private Double feearea;
+    private Double feearea;				//缴费面积
 
-    private String roomstatus;
+    private String roomstatus;			//房间状态(空闲/入住)
 
-    private String roomtype;
+    private String roomtype;			//房间类型(room 住宅House公建)
 
-    public Integer getRoomno() {
+    public String getRoomno() {
         return roomno;
     }
 
-    public void setRoomno(Integer roomno) {
+    public void setRoomno(String roomno) {
         this.roomno = roomno;
     }
 
-    public Integer getHousetypeno() {
+    public String getHousetypeno() {
         return housetypeno;
     }
 
-    public void setHousetypeno(Integer housetypeno) {
+    public void setHousetypeno(String housetypeno) {
         this.housetypeno = housetypeno;
     }
 
-    public Integer getBuildingno() {
+    public String getBuildingno() {
         return buildingno;
     }
 
-    public void setBuildingno(Integer buildingno) {
+    public void setBuildingno(String buildingno) {
         this.buildingno = buildingno;
     }
 
