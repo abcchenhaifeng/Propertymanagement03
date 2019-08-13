@@ -10,7 +10,7 @@ margin: 0;
 padding: 0;
 font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
 background: #F8F8F8;
-font-size: .93rem;
+font-size: .93rem !important;
 }
 
 .clear {
@@ -33,6 +33,11 @@ a, a:link, a:visited, a:hover {
 
 .ui-jqgrid .ui-jqgrid-htable .ui-th-div {
 	height: auto !important;
+}
+
+.red {
+	background: #ff3c3c none repeat scroll 0% 0% !important;
+	color: wheat !important;
 }
 
 /* Header */

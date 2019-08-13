@@ -26,7 +26,7 @@ public interface IRoomMapper {
 	public void delete (String id) throws Exception;
 	
 	//更新
-	@Update("update Room set HouseTypeNo=#{housetypeno},BuildingNo=#{buildingno},DepartmentCode=#{departmentcode],Floor=#{floor},RoomCode={roomcode},BuildingArea=#{building},FeeArea=#{feearea},RoomStatus=#{roomstatus},RoomType=#{roomtype} where ROOMNO=#{roomno}")
+	@Update("update Room set HouseTypeNo=#{housetypeno},BuildingNo=#{buildingno},DepartmentCode=#{departmentcode},Floor=#{floor},RoomCode={roomcode},BuildingArea=#{building},FeeArea=#{feearea},RoomStatus=#{roomstatus},RoomType=#{roomtype} where ROOMNO=#{roomno}")
 	public void update () throws Exception;
 	
 	// 根据id查询, 返回客户

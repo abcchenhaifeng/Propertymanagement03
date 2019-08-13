@@ -99,7 +99,7 @@ function showMessage(e, text, timeout, flag) {
 		if(flag)
 			sessionStorage.setItem(e, text);
 
-		$(e).stop().fadeTo(200, 0).html(text).fadeTo(200, 1);
+		$(e).stop().fadeTo(200, 0).addClass("red").html(text).fadeTo(200, 1);
 		if(timeout === null)
 			timeout = 5000;
 		defaultMessage(e, timeout);
@@ -111,6 +111,6 @@ function defaultMessage(e, timeout) {
 		timeout = 5000;
 	window.setTimeout(function() {
 		sessionStorage.removeItem(e)
-		$(e).stop().fadeTo(200, 0).html(default_alert_info).fadeTo(200, 1);
+		$(e).stop().fadeTo(200, 0).removeClass("red").html(default_alert_info).fadeTo(200, 1);
 	}, timeout);
 }
