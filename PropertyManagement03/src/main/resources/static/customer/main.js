@@ -1,60 +1,36 @@
 
 $(function(){
-	var remote="http://localhost:8080/";
+	//var remote="http://localhost:8080/";
+	var remote="http://localhost/";
 	var rows=2;
 	var page=2;
 	var pageCount=0;
 	var CustomerNo=0; //选择的客户编号
-	//设置系统页面标题
-	$("span#mainpagetille").html("客户信息管理");
-	//取得客户列表，分页模式
-	$.getJSON(remote+"customer/list/all/page",{page:page,rows:rows},function(data){
+	
+	//嵌入列表页面
+	function getListInfo(){
+		//设置系统页面标题
+		$("span#mainpagetille").html("客户信息管理");
+		//取得客户列表，分页模式
+		
+		//调用后台取得客户列表REST API
+		$.getJSON(remote+"customer/list/all/page",{rows:rows,page:page},function(data){
 			//显示个数和页数
 			$("span#count").html(data.count);
 			$("span#pagecount").html(data.page+"/"+data.pageCount);
 			pageCount=data.pageCount;
 			//显示列表
-		/*
-		 * private String customerNo; // 客户序号
-
-	private String typeNo; // 客户类型序号
-
-	private String cname; // 客户名称
-
-	private String contact; // 联系人姓名
-
-	private String cardcode; // 身份证号码
-
-	private String mobile; // 手机号
-
-	private String telephone; // 电话
-
-	private Date feeStartDate; // 收费开始日期
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date feeEndDate; // 收费截止日期
-	
-	private String cstatus; // 客户状态
-	
-	private String password;  //登陆密码
-
-	private CustomerType customertype; // 多对一，一个客户只能对应一种客户类型
-	
-	private CustomerHome customerhome; //一对一，一个客户只能对应一个客户房间
-		 */	
-			
 			$("table#CustomerTable tbody").html("");
 			for(var i=0;i<data.list.length;i++){
 				var tr="<tr id='"+data.list[i].no+"'>" +
 				        "<td>"+data.list[i].customerNo+"</td>" +
-				        "<td>"+data.list[i].typeNo+"</td>" +
+				        "<td>"+data.list[i].ctypeno.typeno+"</td>" +
 						"<td>"+data.list[i].cname+"</td>" +
 						"<td>"+data.list[i].contact+"</td>" +
 						"<td>"+data.list[i].mobile+"</td>" +
 						"<td>"+data.list[i].feeStartDate+"</td>" +
 						"<td>"+data.list[i].feeEndDate+"</td>" +
 						"<td>"+data.list[i].cstatus+"</td>" +
-						"<td>"+data.list[i].customerhone.roomno+
 				        "</td></tr>";
 				$("table#CustomerTable tbody").append(tr);
 			}
@@ -65,10 +41,6 @@ $(function(){
 				$(this).css("background-color","#CDCD9A");
 			});
 	 });
-	//嵌入列表页面
-	function getListInfo(){
-		//调用后台取得客户列表REST API
-		
 		
 	}	
 	//定义分页导航链接处理事件
@@ -102,30 +74,17 @@ $(function(){
 	
 	//初始调用取得分页列表数据
 	getListInfo();
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
+
 	//点击增加链接处理，嵌入add.html
 	$("a#CustomerAddLink").off().on("click",function(event){
 				
-		$("div#DepartmentDialogArea").load("customer/add.html",function(){
-			$("div#DepartmentDialogArea" ).dialog({
+		$("div#CustomerDialogArea").load("customer/add.html",function(){
+			$("div#CustomerDialogArea" ).dialog({
 				title:"增加部门",
 				width:600
 			});
 			
-			$("form#DepartmentAddForm").ajaxForm(function(result){
+			$("form#CustomerAddForm").ajaxForm(function(result){
 				if(result.status=="OK"){
 					getListInfo(); 
 				}
@@ -135,21 +94,21 @@ $(function(){
 		            title: '部门操作信息',
 		            message:result.message
 		        });
-				$("div#DepartmentDialogArea" ).dialog( "close" );
-				$("div#DepartmentDialogArea" ).dialog( "destroy" );
-				$("div#DepartmentDialogArea").html("");
+				$("div#CustomerDialogArea" ).dialog( "close" );
+				$("div#CustomerDialogArea" ).dialog( "destroy" );
+				$("div#CustomerDialogArea").html("");
 				
 			});
 			//点击取消按钮处理
 			$("input[value='取消']").on("click",function(){
-				$( "div#DepartmentDialogArea" ).dialog( "close" );
-				$( "div#DepartmentDialogArea" ).dialog( "destroy" );
-				$("div#DepartmentDialogArea").html("");
+				$( "div#CustomerDialogArea" ).dialog( "close" );
+				$( "div#CustomerDialogArea" ).dialog( "destroy" );
+				$("div#CustomerDialogArea").html("");
 			});
 		});
 		
 	});
-	
+	/*
 	//点击修改按钮事件处理
 	$("a#DepartmentModifyLink").off().on("click",function(event){
 		if(departmentNo==0){

@@ -2,6 +2,8 @@ package cn.yichen.propertymgt.baseinfo.mapper;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Before;
@@ -40,15 +42,22 @@ public class ICustomerMapperTest {
 	@Test
 	public void testCreate() throws Exception {
 		Customer customer = new Customer();
-		customer.setCustomerNo("8");
+		//Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin
 		customer.setCname("李元天霸");
+		customer.setCardcode("3");
+		customer.setContact("丽皇");
+		customer.setMobile("1");
+		DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+		customer.setFeeEndDate(df.parse("2019-12-09"));
+		customer.setFeeStartDate(df.parse("2019-12-09"));
+		customer.setCstatus("N");
 		mapper.create(customer);
 	}
 
 	//测试更新操作
 	@Test
 	public void testUpdate() throws Exception {
-		Customer customer =  mapper.selectCustomerById("7");
+		Customer customer =  mapper.selectCustomerById("2");
 		customer.setCname("李元天霸");
 		mapper.update(customer);
 	}
@@ -88,9 +97,18 @@ public class ICustomerMapperTest {
 		System.out.println(i);
 	}
 	
+//	@Test
+//	public void testSelectCustomerByIdandHomeWithPage() throws Exception {
+//		List<Customer> list = mapper.selectCustomerByAllandHomeWithPage(2, 2);
+//		System.out.println(list.size());
+//		for(Customer ls:list)
+//		{
+//			System.out.println(ls);
+//		}
+//	}
 	@Test
-	public void testSelectCustomerByIdandHomeWithPage() throws Exception {
-		List<Customer> list = mapper.selectCustomerByAllandHomeWithPage(2, 2);
+	public void testSelectCustomerByAllWithType() throws Exception{
+		List<Customer> list = mapper.selectCustomerByAllWithType();
 		System.out.println(list.size());
 		for(Customer ls:list)
 		{
@@ -98,5 +116,15 @@ public class ICustomerMapperTest {
 		}
 	}
 	
+	@Test
+	public void testSelectCustomerByAllAndTypeWithPage() throws Exception {
+		List<Customer> list = mapper.selectCustomerByAllAndTypeWithPage(1, 1);
+		System.out.println(list.size());
+		for(Customer ls:list)
+		{
+			System.out.println(ls);
+		}
+	}
+
 	
 }

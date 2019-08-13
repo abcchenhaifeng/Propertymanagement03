@@ -8,19 +8,14 @@
 
 	<resultMap id="CustomerMap" type="Customer">
 		<id column="CustomerNo" property="customerNo" />
-		<result column="TYPENO" property="typeNo" />
+		<!--result column="TYPENO" property="typeNo" /-->
 		<result column="CNAME" property="cname" />
 		<result column="Contact" property="contact" />
 		<result column="CardCode" property="cardcode" />
 		<result column="Mobile" property="mobile" />
-		<result column="Tel" property="telephone" />
-		<result column="Fax" property="fax" />
-		<result column="QQ" property="qq" />
-		<result column="WeiXin" property="wechat" />
 		<result column="FeeStartDate" property="feeStartDate" />
 		<result column="FeeEndDate" property="feeEndDate" />
 		<result column="CStatus" property="cstatus" />
-		<result column="Password" property="password" />
 	</resultMap>
 
 	<select id="selectCustomerById" resultMap="CustomerMap">
@@ -43,11 +38,23 @@
 	</resultMap>
 	
 	<select id="selectCustomerByIdWithType" resultMap="CustomerMapByIdWithType">
-	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus,Password,ct.TYPENAME
+	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile, FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
 	from Customer c, CustomerType ct
 	where CustomerNo = #{customerNo}  and c.typeNo = ct.typeNo
 	</select>
 	
+	<select id="selectCustomerByAllWithType" resultMap="CustomerMapByIdWithType">
+	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile, FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
+	from Customer c, CustomerType ct
+	where c.typeNo = ct.typeNo
+	</select>
+	
+	<select id="selectCustomerByAllAndTypeWithPage" resultMap="CustomerMapByIdWithType">
+	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
+	from Customer c, CustomerType ct
+	where c.typeNo = ct.typeNo limit #{start},#{rows}
+	</select>
+	<!-- 
 	<resultMap id="CustomerMapByIdWithHome" type="Customer" extends="CustomerMap">
 		<association property="customerhome"
 			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper.CustomerHomeMap">
@@ -60,15 +67,17 @@
 	where c.CustomerNo = #{customerNo}  and c.customerNo = ch.customerNo
 	</select>
 	
+	<select id="selectCustomerByAllandHomeWithPage" resultMap="CustomerMapByIdWithHome">
+	select c.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus 
+	from Customer c, CustomerHome ch
+	where c.customerNo = ch.customerNo limit #{start},#{rows}
+	</select>
+	 -->
 	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
 	<select id="selectCountByAll" resultType="int">
 		select IFNULL(count(CustomerNo), 0) from Customer
 	</select>
 	
 	
-	<select id="selectCustomerByAllandHomeWithPage" resultMap="CustomerMapByIdWithHome">
-	select c.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus 
-	from Customer c, CustomerHome ch
-	where c.customerNo = ch.customerNo limit #{start},#{rows}
-	</select>
+	
 </mapper>

@@ -2,6 +2,7 @@ package cn.yichen.propertymgt.baseinfo.service;
 
 import java.util.List;
 
+
 import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 
@@ -13,12 +14,6 @@ import cn.yichen.propertymgt.baseinfo.model.Customer;
  *
  */
 public interface ICustomerService {
-
-	// 修改密码
-	public void changePassword(String id, String password) throws Exception;
-
-	// 检验合法性
-	public boolean validate(String id, String password) throws Exception;
 
 	
 	// 按条件获取客户列表
@@ -37,5 +32,13 @@ public interface ICustomerService {
 	public int getPagaCountByAll(int rows) throws Exception;
 	
 	// 按条件获取客户列表(分页)
-	public List<Customer> getListByAllandHomeWithPage( int page, int rows) throws Exception;
+	//public List<Customer> getListByAllandHomeWithPage( int page, int rows) throws Exception;
+	
+	
+	// 按条件获取客户列表(分页)
+	public List<Customer> getListByAllandTypeWithPage( int page, int rows) throws Exception;
+	
+	//增加
+	public void add(Customer department) throws Exception;
+
 }

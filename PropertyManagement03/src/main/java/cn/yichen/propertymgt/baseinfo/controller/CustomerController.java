@@ -58,12 +58,13 @@ public class CustomerController {
 	
 	//取得所有部门列表，有分页
 	@GetMapping(value="/list/all/page")
-	public ResultMessage<Customer> getListByAllWitPage(@RequestParam(required = false,defaultValue ="3") Integer rows,@RequestParam(required = false,defaultValue = "2") Integer page) throws Exception{
+	public ResultMessage<Customer> getListByAllWitPage(@RequestParam(required = false,defaultValue ="10") Integer rows,@RequestParam(required = false,defaultValue = "1") Integer page) throws Exception{
 		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得部门列表分页模式成功");
 		result.setCount(service.getCountByAll());
 		result.setPageCount(service.getPagaCountByAll(rows));
 		//result.setList(service.getListByAllWithPage(rows, page));
-		result.setList(service.getListByAllandHomeWithPage(rows, page));
+		//result.setList(service.getListByAllandHomeWithPage(rows, page));
+		result.setList(service.getListByAllandTypeWithPage(rows,page));
 		result.setPage(page);
 		result.setRows(rows);
 		
@@ -75,27 +76,36 @@ public class CustomerController {
 	public Customer get(String id) throws Exception {
 		return service.getCustomerById(id);
 	}
-
-	// 用户登录
-	@PostMapping("/login")
-	public ResultMessage<Customer> login(String id, String password, HttpSession httpSession) throws Exception {
-		
-		boolean validate = false;
-		Customer customer = service.getCustomerById(id);
-		if ( customer != null && customer.getPassword().equals(password) )
-			validate =  true;
-		
-		httpSession.setAttribute("login_user", customer);
-		
-		return new ResultMessage<Customer>(validate ? "OK" : "ERROR", validate ? "用户登录成功" : "用户登录失败");
+	
+	
+	//增加部门
+	@RequestMapping("/add")
+	public ResultMessage<Customer> add(Customer customer) throws Exception {
+		service.add(customer);
+		return new ResultMessage<Customer>("OK","增加部门成功");
 	}
 	
-	// 用户退出
-	@PostMapping("/logout")
-	public ResultMessage<Customer> logout(String id, HttpSession httpSession) throws Exception {
-		
-		httpSession.removeAttribute("login_user");
-		return new ResultMessage<Customer>("OK",  "用户注销成功");
+	/*
+	//修改部门
+	@PostMapping("/modify")
+	public ResultMessage<Customer> modify(Customer customer) throws Exception {
+		service.modify(customer);
+		return new ResultMessage<Customer>("OK","修改部门成功");
 	}
-	
+	//删除部门
+	@PostMapping("/delete")
+	public ResultMessage<Customer> delete(Customer customer) throws Exception {
+		service.delete(customer);
+		return new ResultMessage<Customer>("OK","删除部门成功");
+	}
+	//取得指定的部门
+	@GetMapping("/get")
+	public ResultMessage<Customer> getByNo(int no) throws Exception{
+		
+		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得部门成功");
+		result.setModel(service.getByNo(no));
+		return result;
+		
+	}
+	*/
 }

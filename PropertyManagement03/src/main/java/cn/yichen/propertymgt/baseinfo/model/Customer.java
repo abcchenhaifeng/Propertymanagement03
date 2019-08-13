@@ -6,6 +6,8 @@ import java.util.Date;
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * @date:2019年8月8日下午8:58:25
@@ -15,9 +17,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Alias("Customer")
 public class Customer implements Serializable {
-	private String customerNo; // 客户序号
+	private int customerNo; // 客户序号
 
-	private String typeNo; // 客户类型序号
+	//private String typeNo; // 客户类型序号
 
 	private String cname; // 客户名称
 
@@ -26,18 +28,8 @@ public class Customer implements Serializable {
 	private String cardcode; // 身份证号码
 
 	private String mobile; // 手机号
-
-	private String telephone; // 电话
-
-	private String fax; // 传真
-
-	private String qq; // qq
-
-	private String wechat; // 微信
 	
 	private String cstatus; // 客户状态
-	
-	private String password;  //登陆密码
 
 	private CustomerType customertype; // 多对一，一个客户只能对应一种客户类型
 	
@@ -52,9 +44,11 @@ public class Customer implements Serializable {
 	}
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date feeStartDate; // 收费开始日期
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date feeEndDate; // 收费截止日期
 
 	public CustomerType getCtypeno() {
@@ -65,21 +59,19 @@ public class Customer implements Serializable {
 		this.customertype = customertype;
 	}
 
-	public String getCustomerNo() {
+	public int getCustomerNo() {
 		return customerNo;
 	}
 
-	public void setCustomerNo(String customerNo) {
+	public void setCustomerNo(int customerNo) {
 		this.customerNo = customerNo;
 	}
 
-	public String getTypeNo() {
-		return typeNo;
-	}
-
-	public void setTypeNo(String typeNo) {
-		this.typeNo = typeNo;
-	}
+	/*
+	 * public String getTypeNo() { return typeNo; }
+	 * 
+	 * public void setTypeNo(String typeNo) { this.typeNo = typeNo; }
+	 */
 
 	public String getCname() {
 		return cname;
@@ -113,38 +105,6 @@ public class Customer implements Serializable {
 		this.mobile = mobile;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	public String getQq() {
-		return qq;
-	}
-
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-
-	public String getWechat() {
-		return wechat;
-	}
-
-	public void setWechat(String wechat) {
-		this.wechat = wechat;
-	}
-
 	public Date getFeeStartDate() {
 		return feeStartDate;
 	}
@@ -169,28 +129,25 @@ public class Customer implements Serializable {
 		this.cstatus = cstatus;
 	}
 
-	public String getPassword() {
-		return password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public CustomerType getCustomertype() {
-		return customertype;
-	}
-
-	public void setCustomertype(CustomerType customertype) {
-		this.customertype = customertype;
-	}
 
 	@Override
 	public String toString() {
-		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
-				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
-				+ ", qq=" + qq + ", wechat=" + wechat + ", cstatus=" + cstatus + ", password=" + password
-				+ ", customertype=" + customertype + ", customerhome=" + customerhome + ", feeStartDate=" + feeStartDate
-				+ ", feeEndDate=" + feeEndDate + "]";
+		return "Customer [customerNo=" + customerNo + ", cname=" + cname + ", contact=" + contact + ", cardcode="
+				+ cardcode + ", mobile=" + mobile + ", cstatus=" + cstatus + ", customertype="
+				+ customertype + ", customerhome=" + customerhome + ", feeStartDate=" + feeStartDate + ", feeEndDate="
+				+ feeEndDate + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "Customer [customerNo=" +
+	 * customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" +
+	 * contact + ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" +
+	 * telephone + ", fax=" + fax + ", qq=" + qq + ", wechat=" + wechat +
+	 * ", cstatus=" + cstatus + ", password=" + password + ", customertype=" +
+	 * customertype + ", customerhome=" + customerhome + ", feeStartDate=" +
+	 * feeStartDate + ", feeEndDate=" + feeEndDate + "]"; }
+	 */
+	
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
@@ -25,20 +26,6 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Autowired
 	private ICustomerMapper mapper;
 
-	@Override
-	public void changePassword(String id, String password) throws Exception {
-		Customer customer = mapper.selectCustomerById(id);
-		customer.setPassword(password);
-		mapper.update(customer);
-	}
-
-	@Override
-	public boolean validate(String id, String password) throws Exception {
-		Customer customer = mapper.selectCustomerById(id);
-		if ( customer != null && customer.getPassword().equals(password) )
-			return true;
-		return false;
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -80,10 +67,22 @@ public class CustomerServiceImpl implements ICustomerService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<Customer> getListByAllandHomeWithPage(int page, int rows) throws Exception {
-		return mapper.selectCustomerByAllandHomeWithPage(rows*(page-1), rows);
+	public List<Customer> getListByAllandTypeWithPage(int rows, int page) throws Exception {
+		return mapper.selectCustomerByAllAndTypeWithPage(rows*(page-1), rows);
 	}
+
+	@Override
+	public void add(Customer customer) throws Exception {
+		//增加
+		mapper.create(customer);
+		
+	}
+
+//	@Override
+//	@Transactional(readOnly = true)
+//	public List<Customer> getListByAllandHomeWithPage(int page, int rows) throws Exception {
+//		return mapper.selectCustomerByAllandHomeWithPage(rows*(page-1), rows);
+//	}
 
 
 	
