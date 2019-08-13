@@ -42,20 +42,20 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Customer> getListByAll(Customer customer) throws Exception {
-		return mapper.selectListByAll(customer);
+	public List<Customer> getListByAll() throws Exception {
+		return mapper.selectListByAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Customer> getListByAllWithPage(Customer customer, int page, int rows) throws Exception {
-		return mapper.selectListByAllWithPage(customer, rows*(page-1), rows);
+	public List<Customer> getListByAllWithPage(int page, int rows) throws Exception {
+		return mapper.selectListByAllWithPage( rows*(page-1), rows);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public int getCountByAll(Customer customer) throws Exception {
-		return mapper.selectCountByAll(customer);
+	public int getCountByAll( ) throws Exception {
+		return mapper.selectCountByAll();
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Transactional(readOnly = true)
 	public int getPagaCountByAll(int rows) throws Exception {
 		int pageCount=0;
-		int count=this.getCountByAll(new Customer());
+		int count=this.getCountByAll();
 		if(count%rows==0) {
 			pageCount=count/rows;
 		}
@@ -78,8 +78,13 @@ public class CustomerServiceImpl implements ICustomerService {
 		}
 		return pageCount;
 	}
-	
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Customer> getListByAllandHomeWithPage(int page, int rows) throws Exception {
+		return mapper.selectCustomerByAllandHomeWithPage(rows*(page-1), rows);
+	}
+
 
 	
 }

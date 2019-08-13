@@ -1,37 +1,75 @@
-/**
- * 部门的前端控制JS
- * 作者：吕海东
- * 
- */
+
 $(function(){
-	var rows=10;
-	var page=1;
+	var remote="http://localhost:8080/";
+	var rows=2;
+	var page=2;
 	var pageCount=0;
 	var CustomerNo=0; //选择的客户编号
-	
 	//设置系统页面标题
 	$("span#mainpagetille").html("客户信息管理");
 	//取得客户列表，分页模式
+	$.getJSON(remote+"customer/list/all/page",{page:page,rows:rows},function(data){
+			//显示个数和页数
+			$("span#count").html(data.count);
+			$("span#pagecount").html(data.page+"/"+data.pageCount);
+			pageCount=data.pageCount;
+			//显示列表
+		/*
+		 * private String customerNo; // 客户序号
+
+	private String typeNo; // 客户类型序号
+
+	private String cname; // 客户名称
+
+	private String contact; // 联系人姓名
+
+	private String cardcode; // 身份证号码
+
+	private String mobile; // 手机号
+
+	private String telephone; // 电话
+
+	private Date feeStartDate; // 收费开始日期
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date feeEndDate; // 收费截止日期
+	
+	private String cstatus; // 客户状态
+	
+	private String password;  //登陆密码
+
+	private CustomerType customertype; // 多对一，一个客户只能对应一种客户类型
+	
+	private CustomerHome customerhome; //一对一，一个客户只能对应一个客户房间
+		 */	
+			
+			$("table#CustomerTable tbody").html("");
+			for(var i=0;i<data.list.length;i++){
+				var tr="<tr id='"+data.list[i].no+"'>" +
+				        "<td>"+data.list[i].customerNo+"</td>" +
+				        "<td>"+data.list[i].typeNo+"</td>" +
+						"<td>"+data.list[i].cname+"</td>" +
+						"<td>"+data.list[i].contact+"</td>" +
+						"<td>"+data.list[i].mobile+"</td>" +
+						"<td>"+data.list[i].feeStartDate+"</td>" +
+						"<td>"+data.list[i].feeEndDate+"</td>" +
+						"<td>"+data.list[i].cstatus+"</td>" +
+						"<td>"+data.list[i].customerhone.roomno+
+				        "</td></tr>";
+				$("table#CustomerTable tbody").append(tr);
+			}
+			//定义表格行的点击时间，取得选择的客户编号
+			$("table#CustomerTable tbody tr").on("click",function(){
+				CustomerNo=$(this).attr("id");
+				$("table#CustomerTable tbody tr").css("background-color","#FFFFFF");
+				$(this).css("background-color","#CDCD9A");
+			});
+	 });
+	//嵌入列表页面
 	function getListInfo(){
 		//调用后台取得客户列表REST API
-		$.getJSON("customer/list/all/page",{customer:customer,page:page,rows:rows},function(data){
-				//显示个数和页数
-				$("span#count").html(data.count);
-				$("span#pagecount").html(data.page+"/"+data.pageCount);
-				pageCount=data.pageCount;
-				//显示列表
-				$("table#CustomerTable tbody").html("");
-				for(var i=0;i<data.list.length;i++){
-					var tr="<tr id='"+data.list[i].no+"'><td>"+data.list[i].code+"</td><td>"+data.list[i].name+"</td></tr>";
-					$("table#CustomerTable tbody").append(tr);
-				}
-				//定义表格行的点击时间，取得选择的客户编号
-				$("table#CustomerTable tbody tr").on("click",function(){
-					CustomerNo=$(this).attr("id");
-					$("table#CustomerTable tbody tr").css("background-color","#FFFFFF");
-					$(this).css("background-color","#CDCD9A");
-				});
-		 });
+		
+		
 	}	
 	//定义分页导航链接处理事件
 	$("div#page_nav a").on("click",function(event){

@@ -22,17 +22,20 @@ public interface ICustomerService {
 
 	
 	// 按条件获取客户列表
-	public List<Customer> getListByAll(Customer customer) throws Exception;
+	public List<Customer> getListByAll() throws Exception;
 
 	// 按条件获取客户列表(分页)
-	public List<Customer> getListByAllWithPage(Customer customer, int page, int rows) throws Exception;
+	public List<Customer> getListByAllWithPage( int page, int rows) throws Exception;
 	
 	// 获取个数
-	public int getCountByAll(Customer customer) throws Exception;
+	public int getCountByAll() throws Exception;
 	
 	// 按ID获取用户
 	public Customer getCustomerById(String id) throws Exception;
 	
 	//取得部门页数
 	public int getPagaCountByAll(int rows) throws Exception;
+	
+	// 按条件获取客户列表(分页)
+	public List<Customer> getListByAllandHomeWithPage( int page, int rows) throws Exception;
 }

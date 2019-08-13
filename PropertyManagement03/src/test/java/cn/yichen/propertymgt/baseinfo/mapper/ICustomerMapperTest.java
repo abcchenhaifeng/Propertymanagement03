@@ -56,7 +56,7 @@ public class ICustomerMapperTest {
 	//测试选择所有
 	@Test
 	public void testSelectListByAll() throws Exception {
-		List<Customer> list = mapper.selectListByAll(new Customer());
+		List<Customer> list = mapper.selectListByAll();
 		System.out.println(list.size());
 		for(Customer ls:list)
 		{
@@ -67,7 +67,7 @@ public class ICustomerMapperTest {
 	@Test
 	public void testSelectListByAllWithPage() throws Exception{
 		Customer customer = new Customer();
-		List<Customer> list = mapper.selectListByAllWithPage(customer, 2, 2);
+		List<Customer> list = mapper.selectListByAllWithPage( 2, 2);
 		System.out.println(list.size());
 		for(Customer ls:list)
 		{
@@ -84,13 +84,19 @@ public class ICustomerMapperTest {
 
 	@Test
 	public void testSelectCountByAll() throws Exception {
-		int i = mapper.selectCountByAll(new Customer());
+		int i = mapper.selectCountByAll();
 		System.out.println(i);
 	}
 	
 	@Test
-	public void testSelectCustomerByIdWithHome() throws Exception {
-		Customer CustomerWithHome = mapper.selectCustomerByIdWithHome("1");
-		System.out.println(CustomerWithHome);
+	public void testSelectCustomerByIdandHomeWithPage() throws Exception {
+		List<Customer> list = mapper.selectCustomerByAllandHomeWithPage(2, 2);
+		System.out.println(list.size());
+		for(Customer ls:list)
+		{
+			System.out.println(ls);
+		}
 	}
+	
+	
 }

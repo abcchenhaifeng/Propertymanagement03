@@ -28,9 +28,10 @@ public class CustomerController {
 	@Autowired
 	private CustomerServiceImpl service;
 
+	/*
 	// [按条件]取得用户列表，有分页
 	@GetMapping(value="/list/all/page")
-	public ResultMessage<Customer> list(Customer customer,
+	public ResultMessage<Customer> list(
 			@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 
@@ -38,12 +39,13 @@ public class CustomerController {
 		 ResultMessage<Customer> result = new ResultMessage<Customer>("OK",
 		 "取得用户列表page: " + page + " -- rows: " + rows);
 		 
-		 int count = service.getCountByAll(customer); int pageCount = (count%rows==0
+		 int count = service.getCountByAll(); 
+		 int pageCount = (count%rows==0
 		 && count>rows ? count/rows : count/rows+1);
 		 
 		 result.setCount(count); 
 		 result.setPageCount(pageCount);
-		 result.setList(service.getListByAllWithPage(customer, page, rows));
+		 result.setList(service.getListByAllWithPage(page, rows));
 		 result.setPage(page); 
 		 result.setRows(rows);
 		  
@@ -51,22 +53,23 @@ public class CustomerController {
 
 		
 	}
+*/
 
-	/*
+	
 	//取得所有部门列表，有分页
 	@GetMapping(value="/list/all/page")
-	public ResultMessage<Customer> getListByAllWitPage(@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
-		Customer customer = new Customer();
+	public ResultMessage<Customer> getListByAllWitPage(@RequestParam(required = false,defaultValue ="3") Integer rows,@RequestParam(required = false,defaultValue = "2") Integer page) throws Exception{
 		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得部门列表分页模式成功");
-		result.setCount(service.getCountByAll(customer));
+		result.setCount(service.getCountByAll());
 		result.setPageCount(service.getPagaCountByAll(rows));
-		result.setList(service.getListByAllWithPage(customer,rows, page));
+		//result.setList(service.getListByAllWithPage(rows, page));
+		result.setList(service.getListByAllandHomeWithPage(rows, page));
 		result.setPage(page);
 		result.setRows(rows);
 		
 		return result;
 	}
-	*/
+	
 	// 获取用户
 	@GetMapping("/get")
 	public Customer get(String id) throws Exception {

@@ -190,7 +190,7 @@ public class Customer implements Serializable {
 		return "Customer [customerNo=" + customerNo + ", typeNo=" + typeNo + ", cname=" + cname + ", contact=" + contact
 				+ ", cardcode=" + cardcode + ", mobile=" + mobile + ", telephone=" + telephone + ", fax=" + fax
 				+ ", qq=" + qq + ", wechat=" + wechat + ", cstatus=" + cstatus + ", password=" + password
-				+ ", customertype=" + customertype + ", customerhone=" + customerhome + ", feeStartDate=" + feeStartDate
+				+ ", customertype=" + customertype + ", customerhome=" + customerhome + ", feeStartDate=" + feeStartDate
 				+ ", feeEndDate=" + feeEndDate + "]";
 	}
 }

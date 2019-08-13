@@ -38,10 +38,10 @@ public interface ICustomerMapper {
 		public Customer selectCustomerById(String id) throws Exception;
 		
 		// 获取客户列表
-		public List<Customer> selectListByAll(Customer customer) throws Exception;
+		public List<Customer> selectListByAll() throws Exception;
 
 		// 按条件获取客户列表(分页)
-		public List<Customer> selectListByAllWithPage(@Param("customer") Customer customer, @Param("start") int start, @Param("rows") int rows) throws Exception;
+		public List<Customer> selectListByAllWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 		
 		// 根据id查询, 在返回客户的同时返回客户类型
 		public Customer selectCustomerByIdWithType(String id) throws Exception;
@@ -50,7 +50,10 @@ public interface ICustomerMapper {
 		public Customer selectCustomerByIdWithHome(String id) throws Exception;
 		
 		// 获取个数
-		public int selectCountByAll(@Param("customer") Customer customer) throws Exception;
+		public int selectCountByAll() throws Exception;
+		
+		// 按条件获取客户列表(分页)
+		public List<Customer> selectCustomerByAllandHomeWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 }
 
 

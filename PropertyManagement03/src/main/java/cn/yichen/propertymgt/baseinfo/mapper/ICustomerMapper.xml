@@ -64,4 +64,11 @@
 	<select id="selectCountByAll" resultType="int">
 		select IFNULL(count(CustomerNo), 0) from Customer
 	</select>
+	
+	
+	<select id="selectCustomerByAllandHomeWithPage" resultMap="CustomerMapByIdWithHome">
+	select c.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus 
+	from Customer c, CustomerHome ch
+	where c.customerNo = ch.customerNo limit #{start},#{rows}
+	</select>
 </mapper>
