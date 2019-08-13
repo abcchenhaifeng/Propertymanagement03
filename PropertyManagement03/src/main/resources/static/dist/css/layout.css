@@ -31,6 +31,10 @@ a, a:link, a:visited, a:hover {
 	max-width: 845px;
 }
 
+.ui-jqgrid .ui-jqgrid-htable .ui-th-div {
+	height: auto !important;
+}
+
 /* Header */
 
 header#header {

@@ -36,6 +36,16 @@
 			<if test="userInfo.status != null"> and UserStatus = #{userInfo.status} </if>
 		</if>
 	</sql>
+	
+	<delete id="delete" flushCache="true">delete from UserInfo where USERID = #{id}</delete>
+
+	<insert id="create" flushCache="true">insert into UserInfo(USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible) values(#{id}, #{password}, #{username}, #{status}, #{age}, #{sex}, #{mobible})</insert>
+
+	<update id="update" flushCache="true">update UserInfo set UPASSWORD = #{password}, UNAME = #{username}, UserStatus = #{status}, AGE = #{age}, SEX = #{sex}, Mobible = #{mobible} where USERID = #{id}</update>
+
+	<insert id="addFunction" flushCache="true">insert into SystemFunctionUser(USERID, FUNNO) values(#{id}, #{funNo})</insert>
+
+	<delete id="deleteFunction" flushCache="true">delete from SystemFunctionUser where USERID = #{id} and FUNNO = #{funNo}"</delete>
 
 	<select id="selectUserInfoById"
 		resultMap="UserInfoMapWithFunction">
@@ -66,7 +76,7 @@
 		</where>
 	</select>
 
-	<insert id="addFunctions">
+	<insert id="addFunctions"  flushCache="true">
 		insert into SystemFunctionUser(USERID, FUNNO)
 		values
 		<foreach collection="funNos" item="funNo" separator=",">

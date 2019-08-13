@@ -21,15 +21,12 @@ import cn.yichen.propertymgt.admin.model.SystemModule;
 public interface ISystemModuleMapper {
 
 	// 添加
-	@Insert("insert into SystemModule(MNO, MNAME) values(#{no}, #{name})")
 	public void create(SystemModule systemModule) throws Exception;
 
 	// 删除
-	@Delete("delete from SystemModule where MNO = #{no}")
 	public void delete(int no) throws Exception;
 
 	// 更新
-	@Update("update SystemModule set MNAME = #{name} where MNO = #{no}")
 	public void update(SystemModule systemModule) throws Exception;
 
 	// 根据id查询, 返回功能

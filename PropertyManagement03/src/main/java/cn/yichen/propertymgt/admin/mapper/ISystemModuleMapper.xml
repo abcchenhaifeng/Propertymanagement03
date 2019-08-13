@@ -26,6 +26,12 @@
 		</if>
 	</sql>
 
+	<insert id="create">insert into SystemModule(MNO, MNAME) values(#{no}, #{name})</insert>
+
+	<delete id="delete">delete from SystemModule where MNO = #{no}</delete>
+	
+	<update id="update">update SystemModule set MNAME = #{name} where MNO = #{no}</update>
+
 	<select id="selectModuleByNo" resultMap="SystemModuleMap">
 		select MNO, MNAME
 		from

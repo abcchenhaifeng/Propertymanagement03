@@ -21,15 +21,12 @@ import cn.yichen.propertymgt.admin.model.SystemFunction;
 public interface ISystemFunctionMapper {
 
 	// 添加
-	@Insert("insert into SystemFunction(FUNNO, MNO, FUNNAME, FUNURL, LevelNo) values(#{no}, #{module.no}, #{name}, #{url}, #{levelno})")
 	public void create(SystemFunction systemFunction) throws Exception;
 
 	// 删除
-	@Delete("delete from SystemFunction where FUNNO = #{no}")
 	public void delete(int no) throws Exception;
 
 	// 更新
-	@Update("update SystemFunction set MNO = #{module.no}, FUNNAME = #{name}, FUNURL = #{url}, LevelNo = #{levelno} where FUNNO = #{no}")
 	public void update(SystemFunction systemFunction) throws Exception;
 
 	// 根据id查询, 返回功能

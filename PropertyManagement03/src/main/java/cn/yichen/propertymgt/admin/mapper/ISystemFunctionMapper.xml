@@ -32,6 +32,12 @@
 			<if test="systemFunction.levelno != null"> and LevelNo = #{systemFunction.levelno} </if>
 		</if>
 	</sql>
+	
+	<insert id="create" flushCache="true">insert into SystemFunction(FUNNO, MNO, FUNNAME, FUNURL, LevelNo) values(#{no}, #{module.no}, #{name}, #{url}, #{levelno})</insert>
+
+	<delete id="delete" flushCache="true">delete from SystemFunction where FUNNO = #{no}</delete>
+
+	<update id="update" flushCache="true">update SystemFunction set MNO = #{module.no}, FUNNAME = #{name}, FUNURL = #{url}, LevelNo = #{levelno} where FUNNO = #{no}</update>
 
 	<select id="selectFunctionByNo"
 		resultMap="SystemFunctionMap">

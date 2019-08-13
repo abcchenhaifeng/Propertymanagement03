@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Options.FlushCachePolicy;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.cache.annotation.EnableCaching;
 
 import cn.yichen.propertymgt.admin.model.UserInfo;
 
@@ -20,15 +23,12 @@ import cn.yichen.propertymgt.admin.model.UserInfo;
 public interface IUserInfoMapper {
 
 	// 添加
-	@Insert("insert into UserInfo(USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible) values(#{id}, #{password}, #{username}, #{status}, #{age}, #{sex}, #{mobible})")
 	public void create(UserInfo userInfo) throws Exception;
 
 	// 删除
-	@Delete("delete from UserInfo where USERID = #{id}")
 	public void delete(String id) throws Exception;
 
 	// 更新
-	@Update("update UserInfo set UPASSWORD = #{password}, UNAME = #{username}, UserStatus = #{status}, AGE = #{age}, SEX = #{sex}, Mobible = #{mobible} where USERID = #{id}")
 	public void update(UserInfo userInfo) throws Exception;
 
 	// 根据id查询, 返回用户
@@ -46,13 +46,11 @@ public interface IUserInfoMapper {
 
 	// 为用户增加功能
 	// 每次增加一个功能
-	@Insert("insert into SystemFunctionUser(USERID, FUNNO) values(#{id}, #{funNo})")
 	public void addFunction(@Param("id") String id, @Param("funNo") int funNo) throws Exception;
 
 	// 每次增加多个功能
 	public void addFunctions(@Param("id") String id, @Param("funNos") int[] funNos) throws Exception;
 
 	// 删除功能
-	@Insert("delete from SystemFunctionUser where USERID = #{id} and FUNNO = #{funNo}")
 	public void deleteFunction(@Param("id") String id, @Param("funNo") int funNo) throws Exception;
 }
