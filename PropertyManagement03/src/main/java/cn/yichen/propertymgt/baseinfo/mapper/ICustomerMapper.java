@@ -25,16 +25,16 @@ public interface ICustomerMapper {
 
 	    // 添加
 		//@Insert("insert into Customer(CustomerNo, TypeNo, Cname, Contact, CardCode, Mobile, Tel,Fax,QQ,WeiXin,FeeStartDate,FeeEndDate,Cstatus,Password) values(#{customerNo}, #{typeNo}, #{cname},#{contact}, #{cardcode}, #{mobile}, #{telephone}, #{fax},#{qq},#{wechat},#{feeStartDate},#{feeEndDate},#{cstatus},#{password)")
-		@Insert("insert into Customer(CustomerNo,Cname, Contact, CardCode,Mobile, FeeStartDate,FeeEndDate,Cstatus) values(#{customerNo}, #{cname},#{contact}, #{cardcode}, #{mobile}, #{feeStartDate},#{feeEndDate},#{cstatus})")
+		//@Insert("insert into Customer(CustomerNo,Cname, Contact, CardCode,Mobile, FeeStartDate,FeeEndDate,Cstatus) values(#{customerNo}, #{cname},#{contact}, #{cardcode}, #{mobile}, #{feeStartDate},#{feeEndDate},#{cstatus})")
 		public void create(Customer customer) throws Exception;
 
 		// 删除
-		@Delete("delete from Customer where CustomerNo = #{customerNo}")
+		//@Delete("delete from Customer where CustomerNo = #{customerNo}")
 		public void delete(Customer customer) throws Exception;
 
 		// 更新
 		//@Update("update Customer set TypeNo=#{typeNo}, Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, Tel=#{telephone}, Fax=#{fax}, QQ=#{qq}, WeiXin=#{wechat}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus},Password=#{password}where CustomerNo=#{customerNo}")
-		@Update("update Customer set Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus}where CustomerNo=#{customerNo}")
+		//@Update("update Customer set Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus}where CustomerNo=#{customerNo}")
 		public void update(Customer customer) throws Exception;
 
 		// 根据id查询, 返回客户

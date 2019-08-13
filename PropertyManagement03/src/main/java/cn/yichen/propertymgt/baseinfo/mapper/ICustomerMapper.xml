@@ -18,6 +18,19 @@
 		<result column="CStatus" property="cstatus" />
 	</resultMap>
 
+    <insert id="create"  keyProperty="customerNo"   keyColumn="CustomerNo" useGeneratedKeys="true" flushCache="true" >
+   insert into Customer (CustomerNo,Cname, Contact, CardCode,Mobile, FeeStartDate,FeeEndDate,Cstatus) values(#{customerNo}, #{cname},#{contact}, #{cardcode}, #{mobile}, #{feeStartDate},#{feeEndDate},#{cstatus})
+  
+  </insert>
+  
+  <update id="update" flushCache="true">
+   update Customer set Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus}where CustomerNo=#{customerNo}
+  </update>
+  
+  <delete id="delete" flushCache="true">
+   delete from Customer where CustomerNo = #{customerNo}
+  </delete>
+  
 	<select id="selectCustomerById" resultMap="CustomerMap">
 		select * from Customer
 		where CustomerNo = #{customerNo} 

@@ -26,7 +26,7 @@ public class ICustomerMapperTest {
 	//测试删除操作
 	@Test
 	public void testDelete() throws Exception {
-		Customer customer =  mapper.selectCustomerById(8);
+		Customer customer =  mapper.selectCustomerById(7);
 		mapper.delete(customer);
 	}
 	
@@ -59,7 +59,7 @@ public class ICustomerMapperTest {
 	@Test
 	public void testUpdate() throws Exception {
 		Customer customer =  mapper.selectCustomerById(2);
-		customer.setCname("李元天霸");
+		customer.setCname("李元霸");
 		mapper.update(customer);
 	}
 
