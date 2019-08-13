@@ -50,7 +50,7 @@
 	</select>
 	
 	<select id="selectCustomerByAllAndTypeWithPage" resultMap="CustomerMapByIdWithType">
-	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
+	select CustomerNo, c.TypeNo, Cname, Contact, CardCode, Mobile,FeeStartDate,FeeEndDate,Cstatus,ct.TYPENAME
 	from Customer c, CustomerType ct
 	where c.typeNo = ct.typeNo limit #{start},#{rows}
 	</select>
@@ -78,6 +78,27 @@
 		select IFNULL(count(CustomerNo), 0) from Customer
 	</select>
 	
-	
+	<!-- 根据综合检索条件取得员工个数-->
+  <select id="selectCountByCondition" resultType="int">
+  select IFNULL(count(CustomerNo), 0) from Customer 
+  <where>
+     <if test="customerNo!=0">
+      and CustomerNo=#{customerNo}
+     </if>
+     <if test="cname!=null and cname!=''">
+     and CNAME=#{cname}
+     </if>
+     <if test="contact!=null and contact!=''">
+     and Contact=#{contact}
+     </if>
+     <if test="cardCode!=null and cardCode!=''">
+     and CardCode=#{cardCode}
+     </if>
+     <if test="mobile!=null and mobile!=''">
+     and Mobile=#{mobile}
+     </if>
+  </where>
+   
+  </select>
 	
 </mapper>

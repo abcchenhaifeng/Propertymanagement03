@@ -1,7 +1,7 @@
 
 $(function(){
-	//var remote="http://localhost:8080/";
-	var remote="http://localhost/";
+	var remote="http://localhost:8080/";
+	//var remote="http://localhost/";
 	var rows=2;
 	var page=2;
 	var pageCount=0;
@@ -22,7 +22,7 @@ $(function(){
 			//显示列表
 			$("table#CustomerTable tbody").html("");
 			for(var i=0;i<data.list.length;i++){
-				var tr="<tr id='"+data.list[i].no+"'>" +
+				var tr="<tr id='"+data.list[i].customerNo+"'>" +
 				        "<td>"+data.list[i].customerNo+"</td>" +
 				        "<td>"+data.list[i].ctypeno.typeno+"</td>" +
 						"<td>"+data.list[i].cname+"</td>" +
@@ -37,6 +37,7 @@ $(function(){
 			//定义表格行的点击时间，取得选择的客户编号
 			$("table#CustomerTable tbody tr").on("click",function(){
 				CustomerNo=$(this).attr("id");
+				
 				$("table#CustomerTable tbody tr").css("background-color","#FFFFFF");
 				$(this).css("background-color","#CDCD9A");
 			});
@@ -108,33 +109,37 @@ $(function(){
 		});
 		
 	});
-	/*
+	
 	//点击修改按钮事件处理
-	$("a#DepartmentModifyLink").off().on("click",function(event){
-		if(departmentNo==0){
+	$("a#CustomerModifyLink").off().on("click",function(event){
+		if(CustomerNo==0){
 			BootstrapDialog.show({
 	            title: '部门操作信息',
 	            message:"请选择要修改的部门"
 	        });
 		}
 		else {
-			$("div#DepartmentDialogArea").load("department/modify.html",function(){
+			$("div#CustomerDialogArea").load("customer/modify.html",function(){
 				//取得选择的部门
-				$.getJSON("department/get",{no:departmentNo},function(data){
+				$.getJSON("customer/get",{no:CustomerNo},function(data){
 					if(data.status=="OK"){
-						$("input[name='no']").val(departmentNo);
-						$("input[name='code']").val(data.model.code);
-						$("input[name='name']").val(data.model.name);
-						
+						$("input[name='no']").val(CustomerNo);
+						$("input[name='cname']").val(data.model.cname);
+						$("input[name='contact']").val(data.model.contact);
+						$("input[name='cardcode']").val(data.model.cardcode);
+						$("input[name='mobile']").val(data.model.mobile);
+						$("input[name='feeStartDate']").val(data.model.feeStartDate);
+						$("input[name='feeEndDate']").val(data.model.feeEndDate);
+						$("input[name='cstatus']").val(data.model.cstatus);						
 					}
 				});
 				
-				$("div#DepartmentDialogArea" ).dialog({
+				$("div#CustomerDialogArea" ).dialog({
 					title:"部门修改",
 					width:600
 				});
 				//拦截表单提交
-				$("form#DepartmentModifyForm").ajaxForm(function(result){
+				$("form#CustomerModifyForm").ajaxForm(function(result){
 					if(result.status=="OK"){
 						getListInfo(); 
 					}
@@ -144,18 +149,18 @@ $(function(){
 			            title: '部门操作信息',
 			            message:result.message
 			        });
-					$("div#DepartmentDialogArea" ).dialog( "close" );
-					$("div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$("div#CustomerDialogArea" ).dialog( "close" );
+					$("div#CustomerDialogArea" ).dialog( "destroy" );
+					$("div#CustomerDialogArea").html("");
 					
 				});
 				
 				
 				//点击取消按钮处理
 				$("input[value='取消']").on("click",function(){
-					$( "div#DepartmentDialogArea" ).dialog( "close" );
-					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$( "div#CustomerDialogArea" ).dialog( "close" );
+					$( "div#CustomerDialogArea" ).dialog( "destroy" );
+					$("div#CustomerDialogArea").html("");
 				});
 			});
 			
@@ -165,9 +170,10 @@ $(function(){
 	});
 	
 	//点击删除按钮事件处理
-	$("a#DepartmentDelteLink").off().on("click",function(event){
-		
-		if(departmentNo==0){
+	$("a#CustomerDelteLink").off().on("click",function(event){
+		//alert("OK");
+		alert(CustomerNo);
+		if(CustomerNo==0){
 			BootstrapDialog.show({
 	            title: '部门操作信息',
 	            message:"请选择要删除的部门"
@@ -175,7 +181,7 @@ $(function(){
 		}
 		else {
 			//先检查此部门能否被删除
-			$.getJSON("department/checkDelete",{no:departmentNo},function(data){
+			$.getJSON("customer/checkDelete",{no:CustomerNo},function(data){
 				if(data.status!="OK"){
 					BootstrapDialog.show({
 			            title: '部门操作信息',
@@ -185,7 +191,7 @@ $(function(){
 				else{
 					BootstrapDialog.confirm('确认删除此部门么?', function(result){
 			            if(result) {
-			                $.post("department/delete",{no:departmentNo},function(result){
+			                $.post("customer/delete",{no:CustomerNo},function(result){
 			                	if(result.status=="OK"){
 									getListInfo(); 
 								}
@@ -203,38 +209,42 @@ $(function(){
 		
 	});
 	//点击查看详细按钮事件处理
-	$("a#DepartmentViewLink").off().on("click",function(event){
+	$("a#CustomerViewLink").off().on("click",function(event){
 		
-		if(departmentNo==0){
+		if(CustomerNo==0){
 			BootstrapDialog.show({
 	            title: '部门操作信息',
 	            message:"请选择要查看的部门"
 	        });
 		}
 		else{
-			$("div#DepartmentDialogArea").load("department/view.html",function(){
+			$("div#CustomerDialogArea").load("customer/view.html",function(){
 				//取得选择的部门
-				$.getJSON("department/get",{no:departmentNo},function(data){
+				$.getJSON("customer/get",{no:CustomerNo},function(data){
 					if(data.status=="OK"){
-						$("span#departmentCode").html(data.model.code);
-						$("span#departmentName").html(data.model.name);
-						
+						$("span#CustomerName").html(data.model.cname);
+						$("span#CustomerContact").html(data.model.contact);
+						$("span#CustomerCardcode").html(data.model.cardcode);
+						$("span#CustomerMobile").html(data.model.mobile);
+						$("span#CustomerFeeStartDate").html(data.model.feeStartDate);
+						$("span#CustomerFeeEndDate").html(data.model.feeEndDate);
+						$("span#CustomerCstatus").html(data.model.cstatus);
+
 					}
 				});
 				//弹出Dialog
-				$("div#DepartmentDialogArea" ).dialog({
+				$("div#CustomerDialogArea" ).dialog({
 					title:"部门详细",
 					width:600
 				});
 				//点击取消按钮处理
 				$("input[value='返回']").on("click",function(){
-					$( "div#DepartmentDialogArea" ).dialog( "close" );
-					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$( "div#CustomerDialogArea" ).dialog( "close" );
+					$( "div#CustomerDialogArea" ).dialog( "destroy" );
+					$("div#CustomerDialogArea").html("");
 				});
 			});
 			
 		}
 	});
-	*/
 });

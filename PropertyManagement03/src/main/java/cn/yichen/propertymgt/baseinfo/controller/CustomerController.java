@@ -3,11 +3,13 @@ package cn.yichen.propertymgt.baseinfo.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 import cn.yichen.propertymgt.baseinfo.model.Customer;
@@ -24,6 +26,8 @@ import cn.yichen.propertymgt.vo.ResultMessage;
 
 @RestController
 @RequestMapping("/customer")
+@EnableWebMvc
+@CrossOrigin
 public class CustomerController {
 	@Autowired
 	private CustomerServiceImpl service;
@@ -71,41 +75,56 @@ public class CustomerController {
 		return result;
 	}
 	
-	// 获取用户
-	@GetMapping("/get")
-	public Customer get(String id) throws Exception {
-		return service.getCustomerById(id);
-	}
+	/*
+	 * // 获取用户
+	 * 
+	 * @GetMapping("/get") public Customer get(int id) throws Exception { return
+	 * service.getCustomerById(id); }
+	 */
 	
 	
-	//增加部门
-	@RequestMapping("/add")
+	//增加客户
+	@RequestMapping(value="/add")
 	public ResultMessage<Customer> add(Customer customer) throws Exception {
 		service.add(customer);
-		return new ResultMessage<Customer>("OK","增加部门成功");
+		return new ResultMessage<Customer>("OK","增加客户成功");
 	}
 	
-	/*
-	//修改部门
-	@PostMapping("/modify")
-	public ResultMessage<Customer> modify(Customer customer) throws Exception {
-		service.modify(customer);
-		return new ResultMessage<Customer>("OK","修改部门成功");
-	}
-	//删除部门
-	@PostMapping("/delete")
-	public ResultMessage<Customer> delete(Customer customer) throws Exception {
-		service.delete(customer);
-		return new ResultMessage<Customer>("OK","删除部门成功");
-	}
-	//取得指定的部门
+	//取得指定的客户
 	@GetMapping("/get")
 	public ResultMessage<Customer> getByNo(int no) throws Exception{
 		
-		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得部门成功");
-		result.setModel(service.getByNo(no));
+		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得该客户信息成功");
+		result.setModel(service.getCustomerById(no));
 		return result;
 		
 	}
-	*/
+
+	//修改客户
+	@PostMapping("/modify")
+	public ResultMessage<Customer> modify(Customer customer) throws Exception {
+		service.modify(customer);
+		return new ResultMessage<Customer>("OK","修改客户信息成功");
+	}
+	
+	
+	//删除客户
+	@PostMapping("/delete")
+	public ResultMessage<Customer> delete(Customer customer) throws Exception {
+		service.delete(customer);
+		return new ResultMessage<Customer>("OK","删除客户成功");
+	}
+	
+	//检查此部门能否被删除
+	@GetMapping(value="/checkDelete")
+	public ResultMessage<Customer> checkForDelete(int no) throws Exception{
+		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","此客户信息可以删除");
+		if(!service.checkCanDelete(no)) {
+			result.setStatus("NO");
+			result.setMessage("此客户不能删除");
+		}
+		return result;
+	}
+		
+	
 }

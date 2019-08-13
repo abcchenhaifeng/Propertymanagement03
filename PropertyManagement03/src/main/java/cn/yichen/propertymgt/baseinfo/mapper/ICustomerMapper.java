@@ -1,5 +1,6 @@
 package cn.yichen.propertymgt.baseinfo.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -29,7 +30,7 @@ public interface ICustomerMapper {
 
 		// 删除
 		@Delete("delete from Customer where CustomerNo = #{customerNo}")
-		public void delete(String id) throws Exception;
+		public void delete(Customer customer) throws Exception;
 
 		// 更新
 		//@Update("update Customer set TypeNo=#{typeNo}, Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, Tel=#{telephone}, Fax=#{fax}, QQ=#{qq}, WeiXin=#{wechat}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus},Password=#{password}where CustomerNo=#{customerNo}")
@@ -37,7 +38,7 @@ public interface ICustomerMapper {
 		public void update(Customer customer) throws Exception;
 
 		// 根据id查询, 返回客户
-		public Customer selectCustomerById(String id) throws Exception;
+		public Customer selectCustomerById(int id) throws Exception;
 		
 		// 获取客户列表
 		public List<Customer> selectListByAll() throws Exception;
@@ -46,7 +47,7 @@ public interface ICustomerMapper {
 		public List<Customer> selectListByAllWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 		
 		// 根据id查询, 在返回客户的同时返回客户类型
-		public Customer selectCustomerByIdWithType(String id) throws Exception;
+		public Customer selectCustomerByIdWithType(int id) throws Exception;
 		
 		// 根据id查询, 在返回客户的同时返回客户房间
 		//public Customer selectCustomerByIdWithHome(String id) throws Exception;
@@ -59,6 +60,9 @@ public interface ICustomerMapper {
 		
 		// 获取个数
 		public int selectCountByAll() throws Exception;
+		
+		//根据综合检索条件取得客户个数
+		public int selectCountByCondition(@Param("customerNo") int customerNo,@Param("cname") String cname,@Param("contact") String contact,@Param("cardCode") String cardCode,@Param("mobile") String mobile) throws Exception;
 		
 		// 按条件获取客户列表(分页)
 		//public List<Customer> selectCustomerByAllandHomeWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;

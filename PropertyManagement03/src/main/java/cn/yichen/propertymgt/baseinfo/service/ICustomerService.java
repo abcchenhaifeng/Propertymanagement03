@@ -2,7 +2,6 @@ package cn.yichen.propertymgt.baseinfo.service;
 
 import java.util.List;
 
-
 import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 
@@ -26,7 +25,7 @@ public interface ICustomerService {
 	public int getCountByAll() throws Exception;
 	
 	// 按ID获取用户
-	public Customer getCustomerById(String id) throws Exception;
+	public Customer getCustomerById(int id) throws Exception;
 	
 	//取得部门页数
 	public int getPagaCountByAll(int rows) throws Exception;
@@ -39,6 +38,13 @@ public interface ICustomerService {
 	public List<Customer> getListByAllandTypeWithPage( int page, int rows) throws Exception;
 	
 	//增加
-	public void add(Customer department) throws Exception;
+	public void add(Customer customer) throws Exception;
+	
+	//修改
+	public void modify(Customer customer) throws Exception;
+	//删除
+	public void delete(Customer customer) throws Exception;
+	//检查部门能否被删除
+	public boolean checkCanDelete(int no) throws Exception;
 
 }

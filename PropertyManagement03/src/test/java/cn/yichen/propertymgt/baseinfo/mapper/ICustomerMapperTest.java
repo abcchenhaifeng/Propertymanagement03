@@ -26,14 +26,15 @@ public class ICustomerMapperTest {
 	//测试删除操作
 	@Test
 	public void testDelete() throws Exception {
-		mapper.delete("6");
+		Customer customer =  mapper.selectCustomerById(8);
+		mapper.delete(customer);
 	}
 	
 	//测试按客户编号查询
 	@Test
 	public void testSelectCustomerById() throws Exception {
 
-		Customer customer = mapper.selectCustomerById("1");
+		Customer customer = mapper.selectCustomerById(1);
 		System.out.println(customer);
 		
 	}
@@ -57,7 +58,7 @@ public class ICustomerMapperTest {
 	//测试更新操作
 	@Test
 	public void testUpdate() throws Exception {
-		Customer customer =  mapper.selectCustomerById("2");
+		Customer customer =  mapper.selectCustomerById(2);
 		customer.setCname("李元天霸");
 		mapper.update(customer);
 	}
@@ -76,7 +77,7 @@ public class ICustomerMapperTest {
 	@Test
 	public void testSelectListByAllWithPage() throws Exception{
 		Customer customer = new Customer();
-		List<Customer> list = mapper.selectListByAllWithPage( 2, 2);
+		List<Customer> list = mapper.selectListByAllWithPage(2, 2);
 		System.out.println(list.size());
 		for(Customer ls:list)
 		{
@@ -86,7 +87,7 @@ public class ICustomerMapperTest {
 	
 	@Test
 	public void testSelectCustomerByIdWithType() throws Exception {
-		Customer customer = mapper.selectCustomerByIdWithType("2");
+		Customer customer = mapper.selectCustomerByIdWithType(2);
 		System.out.println(customer);
 	}
 

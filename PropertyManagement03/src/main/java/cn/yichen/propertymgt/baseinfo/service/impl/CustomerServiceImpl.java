@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Customer getCustomerById(String id) throws Exception {
+	public Customer getCustomerById(int id) throws Exception {
 		return mapper.selectCustomerById(id);
 	}
 
@@ -78,6 +78,32 @@ public class CustomerServiceImpl implements ICustomerService {
 		
 	}
 
+	@Override
+	public void modify(Customer customer) throws Exception {
+		mapper.update(customer);
+		
+	}
+
+	@Override
+	public void delete(Customer customer) throws Exception {
+		mapper.delete(customer);
+		
+	}
+
+	@Override
+	public boolean checkCanDelete(int no) throws Exception {
+		boolean result=true;
+		if(mapper.selectCountByCondition(no,"", "", "", "")>0) {
+			result=false;
+		}
+		
+		return result;
+	}
+	}
+
+
+
+	
 //	@Override
 //	@Transactional(readOnly = true)
 //	public List<Customer> getListByAllandHomeWithPage(int page, int rows) throws Exception {
@@ -85,5 +111,3 @@ public class CustomerServiceImpl implements ICustomerService {
 //	}
 
 
-	
-}
