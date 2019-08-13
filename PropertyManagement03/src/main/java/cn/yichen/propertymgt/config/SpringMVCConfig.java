@@ -5,7 +5,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// Spring MVC DispatcherServlet级别的IoC容器配置类
+/**
+ * 
+ * @date: 2019年8月12日 下午5:11:11
+ * @author: YiChen(李冠永)
+ * @Description: Spring MVC DispatcherServlet级别的IoC容器配置类
+ *
+ */
 @Configuration
 // 启用MVC注解类解析
 @EnableWebMvc

@@ -65,7 +65,6 @@ public class UserInfoController {
 	// 修改用户
 	@PostMapping("/modify")
 	public ResultMessage<UserInfo> modify(UserInfo userInfo) throws Exception {
-		System.out.println(userInfo);
 		service.modify(userInfo);
 		return new ResultMessage<UserInfo>("OK", "修改用户成功");
 	}

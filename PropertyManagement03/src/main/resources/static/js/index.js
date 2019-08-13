@@ -18,10 +18,13 @@ var login_user = {
 
 var dialogArea = $("section#main #dialog");
 
+var doSomethingWhenDialogClose = function () {};
+
 $(() => {
 
 	$(".menu_column a.link").on("click", function(e) {
 		url_method = $(this).attr("method");
+		
 		var url = $(this).attr("href");
 		if(/(list)|(main).html$/.test(url)) {
 			$("section#main #container").load(url);
@@ -34,8 +37,10 @@ $(() => {
 					width: "80%",
 					maxWidth: "845px",
 					close: function(event, ui) {
+						doSomethingWhenDialogClose();
 						dialogArea.dialog("destroy");
 						dialogArea.html("");
+						doSomethingWhenDialogClose = function () {};
 					}
 				});
 			});

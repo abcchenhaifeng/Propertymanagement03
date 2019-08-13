@@ -26,8 +26,7 @@ $(function() {
 	
 	$("form#details").ajaxForm((rs) => {
 		if ( rs.status == "OK" ) {
-			// Do Something...
-			
+			if ( typeof reloadList != "undefined" ) reloadList();
 			closeDialog();
 			setMessage(rs.message, 5000);
 		}

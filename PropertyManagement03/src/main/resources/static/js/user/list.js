@@ -4,14 +4,17 @@
  * @Description: 系统操作员前端控制JS
  */
 
+let userid = null;
+let startAge = null;
+let endAge = null;
+let username = null;
+let sex = null;
+let mobible = null;
+let status = null;
+
+let selectRow_id = null;
+
 $(function() {
-	var employeeId = null;
-	var startJoinDate = null;
-	var endJoinDate = null;
-	var departmentNo = 0;
-	var roleNo = 0;
-	var sex = "";
-	
 	setMessage("用户列表", 5000);
 
 	// 显示列表
@@ -41,38 +44,84 @@ $(function() {
 		      repeatitems: true, 
 		      id: "id"
 		},
-		pager: "#userinfoGridPager"
+		pager: "#userinfoGridPager",
+		multiselect:false,
+		onSelectRow:function(id){
+			selectRow_id = id;
+		}
 	});
 	
-	// 更新jQGrid的列表显示
-	function reloadEmployeeList() {
-		$("table#EmployeeGrid").jqGrid('setGridParam', {
-			postData : {
-				departmentNo : departmentNo,
-				roleNo : roleNo,
-				sex : sex,
-				startJoinDate : startJoinDate,
-				endJoinDate : endJoinDate
-			}
-		}).trigger("reloadGrid");
-
-	}
-
 	// 点击检索事件处理
-	$("a#EmployeeSearchButton").on("click", function() {
-		departmentNo = $("select#DepartmentSelection").val();
-		roleNo = $("select#RoleSelection").val();
-		sex = $("input[name='empsex']:checked").val();
+	$("a#SearchButton").on("click", function() {
+		
+		userid = $("input#userid").val();
+		username = $("input#username").val();
+		sex = $("select#sex").val();
+		mobible = $("input#tel").val();
+		status = $("select#status").val();
+		startAge = $("input#startAge").val();
+		endAge = $("input#endAge").val();
+		
+		userid = (userid == "" ? userid : null);
+		username = (username == "" ? username : null);
+		sex = (sex == "" ? sex : null);
+		mobible = (mobible == "" ? mobible : null);
+		status = (status == "" ? status : null);
+		startAge = (startAge == "" ? startAge : null);
+		endAge = (endAge == "" ? endAge : null);
+		
+		reloadList();
+	});
+	
+	// 激活、冻结、详情
+	$(".list-box a.list-link").on("click", function(e) {
+		
+		var url = $(this).attr("href");
+		// 激活、冻结
+		if(/user\/(active)|(frozen)$/.test(url)) {
+			$.post(rootAddress+url,{id:selectRow_id},function(result){
+            	if(result.status=="OK"){
+					reloadList(); 
+				}
+				setMessage(result.message, 5000);
+            });
+            
+        //  详情
+		} else {
+			$("section#main #dialog").load(url, () => {
+				
+				dialogArea = $("section#main #dialog");
+				dialogArea.dialog({
+					title: $(this).attr("title"),
+					width: "80%",
+					maxWidth: "845px",
+					close: function(event, ui) {
+						doSomethingWhenDialogClose();
+						dialogArea.dialog("destroy");
+						dialogArea.html("");
+						doSomethingWhenDialogClose = function () {};
+					}
+				});
+			});
+		}
 
-		startJoinDate = $("input#startJoinDate").val();
-		endJoinDate = $("input#endJoinDate").val();
-		if (startJoinDate == "") {
-			startJoinDate = null;
-		}
-		if (endJoinDate == "") {
-			endJoinDate = null;
-		}
-		reloadEmployeeList();
+		e.preventDefault();
 	});
 
 });
+
+// 更新jQGrid的列表显示
+function reloadList() {
+	$("table#userinfoGrid").jqGrid('setGridParam', {
+		postData : {
+			id : userid,
+			username : username,
+			sex : sex,
+			startAge : startAge,
+			endAge : endAge,
+			status : status,
+			mobible : mobible
+		}
+	}).trigger("reloadGrid");
+
+}
