@@ -82,19 +82,21 @@ $(function(){
 		$("div#CustomerDialogArea").load("customer/add.html",function(){
 			dialogArea = $("div#CustomerDialogArea");
 			dialogArea.dialog({
-				title:"增加部门",
+				title:"增加客户信息",
 				width:600
 			});
 			
 			$("form#CustomerAddForm").ajaxForm(function(result){
 				
 				if(result.status=="OK"){
+					
 					getListInfo(); 
+					alert("1230");
 				}
-				alert(result.message);
+				//alert(result.message);
 				BootstrapDialog.alert(result.message);
 				BootstrapDialog.show({
-		            title: '部门操作信息',
+		            title: '客户操作信息',
 		            message:result.message
 		        });
 				dialogArea.dialog( "close" );
@@ -113,7 +115,6 @@ $(function(){
 	});
 	
 	//点击修改按钮事件处理
-	var dialogArea1 = null;
 	$("a#CustomerModifyLink").off().on("click",function(event){
 		if(CustomerNo==0){
 			BootstrapDialog.show({
@@ -124,7 +125,6 @@ $(function(){
 		else {
 			$("div#CustomerDialogArea").load("customer/modify.html",function(){
 				//取得选择的部门
-				dialogArea1 = $("div#CustomerDialogArea");
 				$.getJSON("customer/get",{no:CustomerNo},function(data){
 					if(data.status=="OK"){
 						$("input[name='no']").val(CustomerNo);
@@ -138,8 +138,8 @@ $(function(){
 					}
 				});
 				
-				dialogArea1.dialog({
-					title:"部门修改",
+				$("div#CustomerDialogArea").dialog({
+					title:"客户修改",
 					width:600
 				});
 				//拦截表单提交
@@ -151,21 +151,21 @@ $(function(){
 					//alert(result.message);
 					//BootstrapDialog.alert(result.message);
 					BootstrapDialog.show({
-			            title: '部门操作信息',
+			            title: '客户操作信息',
 			            message:result.message
 			        });
-					dialogArea1.dialog( "close" );
-					dialogArea1.dialog( "destroy" );
-					dialogArea1.html("");
+					$("div#CustomerDialogArea").dialog( "close" );
+					$("div#CustomerDialogArea").dialog( "destroy" );
+					$("div#CustomerDialogArea").html("");
 					
 				});
 				
 				
 				//点击取消按钮处理
 				$("input[value='取消']").on("click",function(){
-					dialogArea1.dialog( "close" );
-					dialogArea1.dialog( "destroy" );
-					dialogArea1.html("");
+					$("div#CustomerDialogArea").dialog( "close" );
+					$("div#CustomerDialogArea").dialog( "destroy" );
+					$("div#CustomerDialogArea").html("");
 				});
 			});
 			
@@ -180,8 +180,8 @@ $(function(){
 		alert(CustomerNo);
 		if(CustomerNo==0){
 			BootstrapDialog.show({
-	            title: '部门操作信息',
-	            message:"请选择要删除的部门"
+	            title: '客户操作信息',
+	            message:"请选择要删除的客户"
 	        });
 		}
 		else {
@@ -190,19 +190,19 @@ $(function(){
 				if(data.status!="OK"){
 					alert(CustomerNo+"!!!");
 					BootstrapDialog.show({
-			            title: '部门操作信息',
+			            title: '客户操作信息',
 			            message:data.message
 			        });
 				}
 				else{
-					BootstrapDialog.confirm('确认删除此部门么?', function(result){
+					BootstrapDialog.confirm('确认删除此客户么?', function(result){
 			            if(result) {
 			                $.post("customer/delete",{no:CustomerNo},function(result){
 			                	if(result.status=="OK"){
 									getListInfo(); 
 								}
 								BootstrapDialog.show({
-						            title: '部门操作信息',
+						            title: '客户操作信息',
 						            message:result.message
 						        });
 			                });
@@ -219,8 +219,8 @@ $(function(){
 		
 		if(CustomerNo==0){
 			BootstrapDialog.show({
-	            title: '部门操作信息',
-	            message:"请选择要查看的部门"
+	            title: '客户操作信息',
+	            message:"请选择要查看的客户"
 	        });
 		}
 		else{
@@ -240,7 +240,7 @@ $(function(){
 				});
 				//弹出Dialog
 				$("div#CustomerDialogArea" ).dialog({
-					title:"部门详细",
+					title:"客户详细",
 					width:600
 				});
 				//点击取消按钮处理
