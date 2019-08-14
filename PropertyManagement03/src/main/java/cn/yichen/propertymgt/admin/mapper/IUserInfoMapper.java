@@ -31,18 +31,19 @@ public interface IUserInfoMapper {
 	// 更新
 	public void update(UserInfo userInfo) throws Exception;
 
-	// 根据id查询, 返回用户
+	// 根据id查询,返回用户
 	public UserInfo selectUserInfoById(String id) throws Exception;
-
+	public UserInfo selectUserInfoByIdWithoutOther(String id) throws Exception;
+	
 	// 获取用户列表
-	public List<UserInfo> selectListByAll(@Param("userInfo") UserInfo userInfo) throws Exception;
+	public List<UserInfo> selectListByAll(@Param("userInfo") UserInfo userInfo, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
 
 	// 按条件获取用户列表(分页)
 	public List<UserInfo> selectListByAllWithPage(@Param("userInfo") UserInfo userInfo, @Param("start") int start,
-			@Param("rows") int rows) throws Exception;
+			@Param("rows") int rows, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
 
 	// 获取个数
-	public int selectCountByAll(@Param("userInfo") UserInfo userInfo) throws Exception;
+	public int selectCountByAll(@Param("userInfo") UserInfo userInfo, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
 
 	// 为用户增加功能
 	// 每次增加一个功能
@@ -53,4 +54,5 @@ public interface IUserInfoMapper {
 
 	// 删除功能
 	public void deleteFunction(@Param("id") String id, @Param("funNo") int funNo) throws Exception;
+
 }

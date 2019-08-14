@@ -18,7 +18,7 @@ public class ResultMessage<T> implements Serializable {
 	private String message;
 	private int rows = 0; // 每屏显示的行数
 	private int page = 0; // 第几页
-	private int count = 0; // 信息T的个数
+	private int count = 0; // 信息的个数
 	private int pageCount = 0; // 页数
 
 	public ResultMessage() {

@@ -27,22 +27,20 @@ public class UserInfoController {
 	@Autowired
 	private UserInfoServiceImpl service;
 
-	// [按条件]取得用户列表，有分页
+	// [按条件]取得用户列表,有分页
 	@GetMapping("/list")
-	public ResultMessage<UserInfo> list(UserInfo userInfo,
+	public ResultMessage<UserInfo> list(UserInfo userInfo, Integer startAge, Integer endAge,
 			@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 
-		System.out.println(userInfo);
-		
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户列表page: " + page + " -- rows: " + rows);
 		
-		int count = service.getCountByAll(userInfo);
+		int count = service.getCountByAll(userInfo, startAge, endAge);
 		int pageCount = (count%rows==0 && count>rows ? count/rows : count/rows+1);
 		
 		result.setCount(count);
 		result.setPageCount(pageCount);
-		result.setList(service.getListByAllWithPage(userInfo, page, rows));
+		result.setList(service.getListByAllWithPage(userInfo, page, rows, startAge, endAge));
 		result.setPage(page);
 		result.setRows(rows);
 
@@ -53,7 +51,7 @@ public class UserInfoController {
 	@GetMapping("/get")
 	public ResultMessage<UserInfo> get(String id) throws Exception {
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户详情");
-		result.setModel(service.getUserById(id));
+		result.setModel(service.getUserByIdWithoutOther(id));
 		return result;
 	}
 

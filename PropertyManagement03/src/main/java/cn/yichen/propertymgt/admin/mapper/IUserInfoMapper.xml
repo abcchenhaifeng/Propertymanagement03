@@ -31,10 +31,16 @@
 				</if> -->
 			<if test="userInfo.username != null"> and UNAME like '%${userInfo.username}%' </if>
 			<if test="userInfo.mobible != null"> and Mobible like '%${userInfo.mobible}%' </if>
-			<if test="userInfo.age != null"> and age = #{userInfo.age} </if>
+			<if test="userInfo.age != null"> and AGE = #{userInfo.age} </if>
 			<if test="userInfo.sex != null"> and SEX = #{userInfo.sex} </if>
 			<if test="userInfo.status != null"> and UserStatus = #{userInfo.status} </if>
 		</if>
+	</sql>
+	
+	<sql id="userInfoSearchWhen">
+		<include refid="userInfoWhen"></include>
+		<if test="startAge != null">and AGE &gt;= #{startAge}</if>
+		<if test="endAge != null">and AGE &lt;= #{endAge}</if>
 	</sql>
 	
 	<delete id="delete" flushCache="true">delete from UserInfo where USERID = #{id}</delete>
@@ -50,10 +56,17 @@
 	<select id="selectUserInfoById"
 		resultMap="UserInfoMapWithFunction">
 		select u.*, f.*, m.MNAME
-		from UserInfo u, SystemFunctionUser
-		fu, SystemFunction f, SystemModule m
+		from UserInfo u, SystemFunctionUser fu, 
+		SystemFunction f, SystemModule m
 		where u.USERID = #{id} and
 		u.USERID = fu.USERID and fu.FUNNO = f.FUNNO and f.MNO = m.MNO
+	</select>
+
+	<select id="selectUserInfoByIdWithoutOther"
+		resultMap="UserInfoMap">
+		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
+		from UserInfo
+		where USERID = #{id}
 	</select>
 
 	<select id="selectListByAll" resultMap="UserInfoMap">
@@ -61,7 +74,7 @@
 		from
 		UserInfo
 		<where>
-			<include refid="userInfoWhen"></include>
+			<include refid="userInfoSearchWhen"></include>
 		</where>
 	</select>
 
@@ -70,7 +83,7 @@
 		from
 		UserInfo
 		<where>
-			<include refid="userInfoWhen"></include>
+			<include refid="userInfoSearchWhen"></include>
 			and USERID >= (SELECT USERID FROM UserInfo ORDER BY USERID LIMIT
 			#{start}, 1) LIMIT #{rows}
 		</where>
@@ -88,7 +101,7 @@
 	<select id="selectCountByAll" resultType="int">
 		select IFNULL(count(USERID), 0) from UserInfo
 		<where>
-			<include refid="userInfoWhen"></include>
+			<include refid="userInfoSearchWhen"></include>
 		</where>
 	</select>
 </mapper>

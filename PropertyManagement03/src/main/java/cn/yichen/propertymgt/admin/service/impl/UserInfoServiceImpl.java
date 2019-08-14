@@ -44,14 +44,14 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 	@Override
 	public void changePassword(String id, String password) throws Exception {
-		UserInfo userInfo = mapper.selectUserInfoById(id);
+		UserInfo userInfo = mapper.selectUserInfoByIdWithoutOther(id);
 		userInfo.setPassword(password);
 		mapper.update(userInfo);
 	}
 
 	@Override
 	public boolean validate(String id, String password) throws Exception {
-		UserInfo userInfo = mapper.selectUserInfoById(id);
+		UserInfo userInfo = mapper.selectUserInfoByIdWithoutOther(id);
 		if ( userInfo != null && userInfo.getPassword().equals(password) )
 			return true;
 		return false;
@@ -64,7 +64,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 	@Override
 	public void active(String id) throws Exception {
-		UserInfo userInfo = mapper.selectUserInfoById(id);
+		UserInfo userInfo = mapper.selectUserInfoByIdWithoutOther(id);
 		if ( !userInfo.getStatus().equals("Y") ) {
 			userInfo.setStatus("Y");
 			mapper.update(userInfo);
@@ -73,7 +73,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 	@Override
 	public void frozen(String id) throws Exception {
-		UserInfo userInfo = mapper.selectUserInfoById(id);
+		UserInfo userInfo = mapper.selectUserInfoByIdWithoutOther(id);
 		if ( !userInfo.getStatus().equals("N") ) {
 			userInfo.setStatus("N");
 			mapper.update(userInfo);
@@ -82,14 +82,14 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<UserInfo> getListByAll(UserInfo userInfo) throws Exception {
-		return mapper.selectListByAll(userInfo);
+	public List<UserInfo> getListByAll(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception {
+		return mapper.selectListByAll(userInfo, startAge, endAge);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<UserInfo> getListByAllWithPage(UserInfo userInfo, int page, int rows) throws Exception {
-		return mapper.selectListByAllWithPage(userInfo, (page-1)*rows, rows);
+	public List<UserInfo> getListByAllWithPage(UserInfo userInfo, int page, int rows, Integer startAge, Integer endAge) throws Exception {
+		return mapper.selectListByAllWithPage(userInfo, (page-1)*rows, rows, startAge, endAge);
 	}
 
 	@Override
@@ -97,11 +97,16 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	public UserInfo getUserById(String id) throws Exception {
 		return mapper.selectUserInfoById(id);
 	}
+	
+	@Override
+	public UserInfo getUserByIdWithoutOther(String id) throws Exception {
+		return mapper.selectUserInfoByIdWithoutOther(id);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public int getCountByAll(UserInfo userInfo) throws Exception {
-		return mapper.selectCountByAll(userInfo);
+	public int getCountByAll(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception {
+		return mapper.selectCountByAll(userInfo, startAge, endAge);
 	}
 
 	@Override

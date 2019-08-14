@@ -48,12 +48,12 @@ public class IUserInfoMapperTest {
 	 public void testSelectListByAll() throws Exception { 
 		 UserInfo userInfo= new UserInfo(); 
 		 userInfo.setId("y"); 
-		 mapper.selectListByAll(userInfo); 
+		 mapper.selectListByAll(userInfo, null, null); 
       }
 
 	@Test
 	public void testSelectListByAllWithPage() throws Exception {
-		mapper.selectListByAllWithPage(null, 1, 2);
+		mapper.selectListByAllWithPage(null, 1, 2, null, null);
 	}
 
 	
@@ -70,7 +70,7 @@ public class IUserInfoMapperTest {
 	
 	@Test
 	public void testSelectCountByAll() throws Exception {
-		mapper.selectCountByAll(null);
+		mapper.selectCountByAll(null, null, null);
 	}
 	
 	@Test
