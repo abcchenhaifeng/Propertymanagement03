@@ -12,7 +12,10 @@ $(function() {
 		$("form#details button[type='submit']").text("添加");
 	} else {
 		$("form#details").attr("action", rootAddress+$("form#details").attr("action"));
-		$.getJSON(rootAddress+"user/get", {id : login_user.id}, function(data) {
+		
+		var curr_user_id = (typeof selectRow_id == "undefined" || selectRow_id == null ? login_user.id : selectRow_id);
+		
+		$.getJSON(rootAddress+"user/get", {id : curr_user_id}, function(data) {
 			$("form#details input[name='status']").val(data.model.status);
 			$("form#details input[name='id']").val(data.model.id);
 			$("form#details input[name='id']").attr("readonly", "readonly");
@@ -22,6 +25,8 @@ $(function() {
 			$("form#details input[name='age']").val(data.model.age);
 			$("form#details input[name='mobible']").val(data.model.mobible);
 		});
+		
+		selectRow_id = null;
 	}
 	
 	$("form#details").ajaxForm((rs) => {

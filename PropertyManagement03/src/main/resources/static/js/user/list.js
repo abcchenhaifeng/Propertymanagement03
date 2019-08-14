@@ -4,17 +4,20 @@
  * @Description: 系统操作员前端控制JS
  */
 
-let userid = null;
-let startAge = null;
-let endAge = null;
-let username = null;
-let sex = null;
-let mobible = null;
-let status = null;
-
-let selectRow_id = null;
-
+var selectRow_id = null;
 $(function() {
+	var userid = null;
+	var startAge = null;
+	var endAge = null;
+	var username = null;
+	var sex = null;
+	var mobible = null;
+	var status = null;
+	
+	var userinfoGrid = null;
+	
+	var selectRow_id_tmp = null;
+	
 	setMessage("用户列表", 5000);
 
 	// 显示列表
@@ -35,7 +38,7 @@ $(function() {
 		height: 365,
 		rowNum: 10,
 		rowList:[10,20,30],
-		loadonce: true,
+		//loadonce: true,
 		jsonReader : { 
 		      root: "list", 
 		      page: "page", 
@@ -48,12 +51,12 @@ $(function() {
 		multiselect:false,
 		onSelectRow:function(id){
 			selectRow_id = id;
+			selectRow_id_tmp = id;
 		}
 	});
 	
 	// 点击检索事件处理
-	$("a#SearchButton").on("click", function() {
-		
+	$("button#SearchButton").on("click", function() {
 		userid = $("input#userid").val();
 		username = $("input#username").val();
 		sex = $("select#sex").val();
@@ -62,16 +65,33 @@ $(function() {
 		startAge = $("input#startAge").val();
 		endAge = $("input#endAge").val();
 		
-		userid = (userid == "" ? userid : null);
-		username = (username == "" ? username : null);
-		sex = (sex == "" ? sex : null);
-		mobible = (mobible == "" ? mobible : null);
-		status = (status == "" ? status : null);
-		startAge = (startAge == "" ? startAge : null);
-		endAge = (endAge == "" ? endAge : null);
+		userid = (userid != "" ? userid : null);
+		username = (username != "" ? username : null);
+		sex = (sex != "" ? sex : null);
+		mobible = (mobible != "" ? mobible : null);
+		status = (status != "" ? status : null);
+		startAge = (startAge != "" ? startAge : null);
+		endAge = (endAge != "" ? endAge : null);
 		
 		reloadList();
 	});
+	
+	// 更新jQGrid的列表显示
+	function reloadList() {
+		
+		postData = { };
+		if (userid != "") postData.id = userid;
+		if (username != "") postData.username = username;
+		if (sex != "") postData.sex = sex;
+		if (mobible != "") postData.mobible = mobible;
+		if (status != "") postData.status = status;
+		if (startAge != "") postData.startAge = startAge;
+		if (endAge != "") postData.endAge = endAge;
+		
+		$("table#userinfoGrid").jqGrid('setGridParam', {
+			postData : postData
+		}).trigger("reloadGrid");
+	}
 	
 	// 激活、冻结、详情
 	$(".list-box a.list-link").on("click", function(e) {
@@ -89,7 +109,7 @@ $(function() {
         //  详情
 		} else {
 			$("section#main #dialog").load(url, () => {
-				
+				selectRow_id = selectRow_id_tmp;
 				dialogArea = $("section#main #dialog");
 				dialogArea.dialog({
 					title: $(this).attr("title"),
@@ -107,21 +127,4 @@ $(function() {
 
 		e.preventDefault();
 	});
-
 });
-
-// 更新jQGrid的列表显示
-function reloadList() {
-	$("table#userinfoGrid").jqGrid('setGridParam', {
-		postData : {
-			id : userid,
-			username : username,
-			sex : sex,
-			startAge : startAge,
-			endAge : endAge,
-			status : status,
-			mobible : mobible
-		}
-	}).trigger("reloadGrid");
-
-}

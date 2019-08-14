@@ -30,7 +30,7 @@ $(() => {
 			$("section#main #container").load(url);
 		} else {
 			$("section#main #dialog").load(url, () => {
-				
+				selectRow_id = null;
 				dialogArea = $("section#main #dialog");
 				dialogArea.dialog({
 					title: $(this).attr("title"),

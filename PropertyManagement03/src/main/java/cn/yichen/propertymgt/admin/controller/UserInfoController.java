@@ -33,6 +33,8 @@ public class UserInfoController {
 			@RequestParam(required = false, defaultValue = "10") int rows,
 			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 
+		System.out.println(userInfo);
+		
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户列表page: " + page + " -- rows: " + rows);
 		
 		int count = service.getCountByAll(userInfo);
