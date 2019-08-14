@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper">
 
-	<cache />
+<!-- 	<cache /> -->
 
 	<resultMap id="CustomerMap" type="Customer">
 		<id column="CustomerNo" property="customerNo" />
@@ -91,27 +91,44 @@
 		select IFNULL(count(CustomerNo), 0) from Customer
 	</select>
 	
-	<!-- 根据综合检索条件取得员工个数-->
+	
+	 <!-- 根据综合检索条件取得客户列表，取得客户类型，分页模式 -->
+	 <select id="selectListByConditionandTypeWithPage" resultMap="CustomerMapByIdWithType">
+	 select a.*,b.* from Customer a inner join CustomerType b on a.TYPENO=b.TYPENO
+	  <where>
+     <if test="CustomerName!=null and CustomerName!=''">
+      and a.CNAME=#{CustomerName}
+     </if>
+     <if test="typeno!=null and typeno!=''">
+     and b.TYPENAME = (select TYPENAME from CustomerType t where t.TYPENO=#{typeno})
+     </if>
+     <if test="feeStartDate!=null">
+     and a.FeeStartDate  &gt;=#{feeStartDate}
+     </if>
+     <if test="feeEndDate!=null">
+     and a.FeeEndDate &lt;=#{feeEndDate}
+     </if>
+  </where>
+   limit #{start},#{rows}
+  </select>
+  <!-- 根据综合检索条件取得客户个数-->
   <select id="selectCountByCondition" resultType="int">
-  select IFNULL(count(CustomerNo), 0) from Customer 
+  select IFNULL(count(CustomerNo), 0) from Customer a inner join CustomerType b on a.TYPENO=b.TYPENO
   <where>
-     <if test="customerNo!=0">
-      and CustomerNo=#{customerNo}
+     <if test="CustomerName!=null and CustomerName!=''">
+      and CNAME=#{CustomerName}
      </if>
-     <if test="cname!=null and cname!=''">
-     and CNAME=#{cname}
+     <if test="typeno!=null and typeno!=''">
+     and b.TYPENAME in (select TYPENAME from CustomerType where TYPENO=#{typeno})
      </if>
-     <if test="contact!=null and contact!=''">
-     and Contact=#{contact}
+     <if test="feeStartDate!=null">
+     and FeeStartDate  &gt;=#{feeStartDate}
      </if>
-     <if test="cardCode!=null and cardCode!=''">
-     and CardCode=#{cardCode}
-     </if>
-     <if test="mobile!=null and mobile!=''">
-     and Mobile=#{mobile}
+     <if test="feeEndDate!=null">
+     and FeeEndDate &lt;=#{feeEndDate}
      </if>
   </where>
    
   </select>
-	
+  
 </mapper>

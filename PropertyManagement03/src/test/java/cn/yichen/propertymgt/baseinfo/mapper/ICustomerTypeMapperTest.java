@@ -53,7 +53,7 @@ public class ICustomerTypeMapperTest {
 	@Test
 	public void testSelectListByAll() throws Exception {
 		CustomerType ctype = new CustomerType();
-		List<CustomerType> list = mapper.selectListByAll(ctype);
+		List<CustomerType> list = mapper.selectListByAll();
 		for (CustomerType ls : list) {
 			System.out.println(ls);
 		}

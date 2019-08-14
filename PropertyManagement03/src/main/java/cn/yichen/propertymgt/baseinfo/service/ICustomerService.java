@@ -1,6 +1,8 @@
 package cn.yichen.propertymgt.baseinfo.service;
 
+import java.util.Date;
 import java.util.List;
+
 
 import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.model.Customer;
@@ -32,10 +34,25 @@ public interface ICustomerService {
 	
 	// 按条件获取客户列表(分页)
 	//public List<Customer> getListByAllandHomeWithPage( int page, int rows) throws Exception;
-	
+	public List<Customer> getListByAllandType() throws Exception;
 	
 	// 按条件获取客户列表(分页)
 	public List<Customer> getListByAllandTypeWithPage( int page, int rows) throws Exception;
+	
+	
+	//根据综合检索条件取得客户列表，取得关联的客户类型，分页模式
+	public List<Customer> getListByConditionandTypeWithPage(String CustomerName,String typeno,Date feeStartDate,Date feeEndDate,int rows,int page) throws Exception;
+	//根据综合检索条件取得客户个数
+	public int getCountByConditionandTypeWithPage(String CustomerName,String typeno,Date feeStartDate,Date feeEndDate) throws Exception;
+	//根据综合检索条件取得客户显示的页数
+	public int getPageCountByConditionandTypeWithPage(String CustomerName,String typeno,Date feeStartDate,Date feeEndDate,int rows) throws Exception;
+	
+	
+	
+	
+	
+	
+	
 	
 	//增加
 	public void add(Customer customer) throws Exception;

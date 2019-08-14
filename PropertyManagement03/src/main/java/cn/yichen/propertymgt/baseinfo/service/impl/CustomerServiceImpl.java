@@ -1,5 +1,6 @@
 package cn.yichen.propertymgt.baseinfo.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,12 +94,78 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Override
 	public boolean checkCanDelete(int no) throws Exception {
 		boolean result=true;
-		if(mapper.selectCountByCondition(no,"", "", "", "")>0) {
-			result=false;
-		}
+//		if(mapper.selectCountByCondition(no,"", "", "", "")>0) {
+//			result=false;
+//		}
 		
 		return result;
 	}
+
+	@Override
+	public List<Customer> getListByAllandType() throws Exception {
+		return mapper.selectCustomerByAllWithType();
+	}
+
+	
+//	@Override
+//	public List<EmployeeModel> getListByConditionWithDepartmentWithoutRolesWithPage(int departmentNo, int roleNo,
+//			String sex, Date startJoinDate, Date endJoinDate, int rows, int page) throws Exception {
+//		
+//		return employeeMapper.selectListByConditionWithDepartmentNoAndRolesWithPage(departmentNo, roleNo, sex, startJoinDate, endJoinDate, rows*(page-1), rows);
+//	}
+
+	
+	
+	
+	
+	@Override
+	public List<Customer> getListByConditionandTypeWithPage(String CustomerName, String typeno, Date feeStartDate,
+			Date feeEndDate, int rows, int page) throws Exception {
+		return mapper.selectListByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate,rows*(page-1), rows);
+	}
+
+//	@Override
+//	public int getPageCountByConditionWithDepartmentNoAndRolesWithPage(int departmentNo, int roleNo, String sex,
+//			Date startJoinDate, Date endJoinDate, int rows) throws Exception {
+//		int pageCount=0;
+//		int count=this.getCountByConditionWithDepartmentNoAndRolesWithPage(departmentNo, roleNo, sex, startJoinDate, endJoinDate);
+//		if(count%rows==0) {
+//			pageCount=count/rows;
+//		}
+//		else {
+//			pageCount=count/rows+1;
+//		}
+//		return pageCount;
+//	}	
+	
+	
+	@Override
+	public int getPageCountByConditionandTypeWithPage(String CustomerName, String typeno, Date feeStartDate,
+			Date feeEndDate, int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate);
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+	
+//	@Override
+//	public int getCountByConditionWithDepartmentNoAndRolesWithPage(int departmentNo, int roleNo,
+//			String sex, Date startJoinDate, Date endJoinDate) throws Exception {
+//		
+//		return employeeMapper.selectCountByCondition(departmentNo, roleNo, sex, startJoinDate, endJoinDate);
+//	}
+	@Override
+	public int getCountByConditionandTypeWithPage(String CustomerName, String typeno, Date feeStartDate, Date feeEndDate)
+			throws Exception {
+		return mapper.selectCountByCondition(CustomerName, typeno, feeStartDate, feeEndDate);
+	}
+	
+	
 	}
 
 
