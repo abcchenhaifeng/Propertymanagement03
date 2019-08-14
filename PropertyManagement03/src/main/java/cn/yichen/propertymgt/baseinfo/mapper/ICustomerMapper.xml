@@ -99,11 +99,11 @@
      <if test="CustomerName!=null and CustomerName!=''">
       and a.CNAME=#{CustomerName}
      </if>
-     <if test="typeno!=null and typeno!=''">
+     <if test="typeno!=null and typeno!=''  and typeno!='0' and typeno!=0 ">
      and b.TYPENAME = (select TYPENAME from CustomerType t where t.TYPENO=#{typeno})
      </if>
      <if test="feeStartDate!=null">
-     and a.FeeStartDate  &gt;=#{feeStartDate}
+     and a.FeeStartDate &gt;=#{feeStartDate}
      </if>
      <if test="feeEndDate!=null">
      and a.FeeEndDate &lt;=#{feeEndDate}
@@ -118,11 +118,11 @@
      <if test="CustomerName!=null and CustomerName!=''">
       and CNAME=#{CustomerName}
      </if>
-     <if test="typeno!=null and typeno!=''">
+     <if test="typeno!=null and typeno!='' and typeno!='0' and typeno!=0">
      and b.TYPENAME in (select TYPENAME from CustomerType where TYPENO=#{typeno})
      </if>
      <if test="feeStartDate!=null">
-     and FeeStartDate  &gt;=#{feeStartDate}
+     and FeeStartDate &gt;=#{feeStartDate}
      </if>
      <if test="feeEndDate!=null">
      and FeeEndDate &lt;=#{feeEndDate}

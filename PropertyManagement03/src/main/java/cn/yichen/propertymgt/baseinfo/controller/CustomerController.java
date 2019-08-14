@@ -91,7 +91,7 @@ public class CustomerController {
 	
 	//按检索条件取得员工列表
 	@GetMapping(value="/list/condition/page")
-	public ResultMessage<Customer> getListByConditionWitPage(@RequestParam(required = false,defaultValue ="") String CustomerName,@RequestParam(required = false,defaultValue ="0") String typeno,@RequestParam(required = false,defaultValue ="") String sex,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeStartDate,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeEndDate, @RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+	public ResultMessage<Customer> getListByConditionWitPage(@RequestParam(required = false,defaultValue ="") String CustomerName,@RequestParam(required = false,defaultValue ="0") String typeno,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeStartDate,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeEndDate, @RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
 //		ResultMessage<EmployeeModel> result=new ResultMessage<EmployeeModel>("OK","取得员工列表分页成功");
 //		result.setCount(employeeService.getCountByConditionWithDepartmentNoAndRolesWithPage(departmentNo, roleNo, sex, startJoinDate, endJoinDate));
 //		result.setPageCount(employeeService.getPageCountByConditionWithDepartmentNoAndRolesWithPage(departmentNo, roleNo, sex, startJoinDate, endJoinDate, rows));
