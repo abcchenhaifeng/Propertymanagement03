@@ -24,6 +24,30 @@
 		select * from Room
 		where ROOMNO =#{roomno}
 	</select>
+	
+	<select id="selectListByAll" resultMap="RoomMap">
+		select * from Room
+	</select>
+	
+	<select id="selectListByAllWithPage" resultMap="RoomMap">
+		select * from Room limit #{start},#{rows}
+	</select>
+	
+	<select id="selectByNo" RoomMap="RoomMap">
+		select *from Room where ROOMNO=#{roomno}
+	</select>
+	
+	<resultMap id="RomByBuildingNo" type="Building" extends="RoomBuildingMap">
+		<association property="room" 
+		resultMap="cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper.RoomMap">
+		</association>
+	</resultMap>
+	<select id="selectRomByBuildingNo" resultMap="RomByBuildingNo">
+		select ct.*,HouseTypeNo,DepartmentCode,Floor,RoomCode,BuildingArea,FeeArea,RoomStatus,RoomType
+		from Room c,Building ct
+		where ct.BuildingNo = #{buildingno} and ct.buildingno = c.buildingno
+	</select>
+	
 
 
 </mapper>
