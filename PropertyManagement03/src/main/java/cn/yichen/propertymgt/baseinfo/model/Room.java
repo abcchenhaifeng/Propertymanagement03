@@ -25,9 +25,9 @@ public class Room implements Serializable {
 
     private String roomcode;			//房间号
 
-    private Double buildingarea;		//使用面积
+    private String buildingarea;		//使用面积
 
-    private Double feearea;				//缴费面积
+    private String feearea;				//缴费面积
 
     private String roomstatus;			//房间状态(空闲/入住)
 
@@ -81,20 +81,20 @@ public class Room implements Serializable {
         this.roomcode = roomcode == null ? null : roomcode.trim();
     }
 
-    public Double getBuildingarea() {
+    public String getBuildingarea() {
         return buildingarea;
     }
 
-    public void setBuildingarea(Double buildingarea) {
-        this.buildingarea = buildingarea;
+    public void setBuildingarea(String string) {
+        this.buildingarea = string;
     }
 
-    public Double getFeearea() {
+    public String getFeearea() {
         return feearea;
     }
 
-    public void setFeearea(Double feearea) {
-        this.feearea = feearea;
+    public void setFeearea(String string) {
+        this.feearea = string;
     }
 
     public String getRoomstatus() {

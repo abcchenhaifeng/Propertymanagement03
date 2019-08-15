@@ -144,29 +144,31 @@ $(function(){
 	//================================查看员工处理=============================================================
 	$("a#CustomerViewLink").off().on("click",function(){
 		if(CustomerId==null){
-			BootstrapDialog.show({
-	            title: '员工操作信息',
-	            message:"请选择要查看的员工",
-	            buttons: [{
-	                label: '确定',
-	                action: function(dialog) {
-	                    dialog.close();
-	                }
-	            }]
-	        });
+//			BootstrapDialog.show({
+//	            title: '员工操作信息',
+//	            message:"请选择要查看的员工",
+//	            buttons: [{
+//	                label: '确定',
+//	                action: function(dialog) {
+//	                    dialog.close();
+//	                }
+//	            }]
+//	        });
 		}
 		else{
 			$("div#CustomerDialog").load("customer/mainview.html",function(){
 				//取得指定的员工信息
 				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
+					//alert(CustomerId);
 					if(em){
-						$("span#cname").html(em.cname);
-						$("span#contact").html(em.contact);
-						$("span#cardcode").html(em.cardcode);
-						$("span#mobile").html(em.mobile);
-						$("span#feeStartDate").html(em.feeStartDate);
-						$("span#feeEndDate").html(em.feeEndDate);
-						$("span#cstatus").html(em.cstatus);
+						$("input#id").val(em.customerNo);
+						$("input#cname").val(em.cname);
+						$("input#contact").val(em.contact);
+						$("input#cardcode").val(em.cardcode);
+						$("input#mobile").val(em.mobile);
+						$("input#feeStartDate").val(em.feeStartDate);
+						$("input#feeEndDate").val(em.feeEndDate);
+						$("input#cstatus").val(em.cstatus);
 	
 					}
 				});
@@ -182,15 +184,58 @@ $(function(){
 					$("div#CustomerDialog").dialog("destroy")
 					$("div#CustomerDialog").html("");
 				});
+			});
+		}
+	});
+	//===============================修改员工处理===============================================================
+	$("a#CustomerModifyLink").off().on("click",function(){
+		alert(CustomerId);
+		if(CustomerId==null){
+//			BootstrapDialog.show({
+//	            title: '客户信息',
+//	            message:"请选择要修改的客户",
+//	            buttons: [{
+//	                label: '确定',
+//	                action: function(dialog) {
+//	                    dialog.close();
+//	                }
+//	            }]
+//	        });
+		}
+		else{
+			$("div#CustomerDialog").load("customer/mainmodify.html",function(){
+				//取得指定的员工信息
+				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
+					//alert(CustomerId);
+					if(em){
+						$("input#id").val(em.customerNo);
+						$("input#cname").val(em.cname);
+						$("input#contact").val(em.contact);
+						$("input#cardcode").val(em.cardcode);
+						$("input#mobile").val(em.mobile);
+						$("input#feeStartDate").val(em.feeStartDate);
+						$("input#feeEndDate").val(em.feeEndDate);
+						$("input#cstatus").val(em.cstatus);
+	
+					}
+				});
+				alert(CustomerId);
+				$("div#CustomerDialog").dialog({
+					title:"客户修改",
+					width:800
+				});
+				//点击取消按钮，管理弹出窗口
+				$("input[value='取消']").off().on("click",function(){
+					$("div#CustomerDialog").dialog("close");
+					$("div#CustomerDialog").dialog("destroy")
+					$("div#CustomerDialog").html("");
+				});
 				
 				
 			});
 		}
-		
-		
-		
-	});
-	
+	});	
+
 });
 	
 	
