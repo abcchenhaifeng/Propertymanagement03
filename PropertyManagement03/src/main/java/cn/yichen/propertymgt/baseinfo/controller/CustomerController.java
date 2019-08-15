@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 
 import cn.yichen.propertymgt.baseinfo.model.Customer;
 import cn.yichen.propertymgt.baseinfo.service.impl.CustomerServiceImpl;
@@ -128,13 +128,20 @@ public class CustomerController {
 		return new ResultMessage<Customer>("OK","增加客户成功");
 	}
 	
+//	//取得指定的客户
+//	@GetMapping("/get")
+//	public ResultMessage<Customer> getByNo(int no) throws Exception{
+//		
+//		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得该客户信息成功");
+//		result.setModel(service.getCustomerById(no));
+//		return result;
+//		
+//	}
+	
 	//取得指定的客户
 	@GetMapping("/get")
-	public ResultMessage<Customer> getByNo(int no) throws Exception{
-		
-		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得该客户信息成功");
-		result.setModel(service.getCustomerById(no));
-		return result;
+	public Customer getByNo(int no) throws Exception{	
+		return service.getCustomerById(no);
 		
 	}
 
@@ -152,6 +159,37 @@ public class CustomerController {
 		service.delete(customer);
 		return new ResultMessage<Customer>("OK","删除客户成功");
 	}
+	
+	
+	//修改员工
+	//图片选项：KEEP 保持图片不变； CHANGE:修改  ; DELETE: 删除
+//	@PostMapping("/modify")
+//	public ResultMessage<EmployeeModel> modify(EmployeeModel employee,@RequestParam(required = false) int[] employeeRoles,@RequestParam(required = false) MultipartFile employeePhoto,@RequestParam(required=false,defaultValue ="KEEP") String photoOption) throws Exception {
+//		
+//		if(employeePhoto!=null && (!employeePhoto.isEmpty())&&photoOption.equals("CHANGE")) {
+//			employee.setPhotoFileName(employeePhoto.getOriginalFilename());
+//			employee.setPhotoContentType(employee.getPhotoContentType());
+//			employee.setPhoto(employeePhoto.getBytes());
+//			employeeService.modifyWithPhoto(employee);
+//		}
+//		else {
+//			employeeService.modify(employee);
+//		}
+//		if(photoOption.equals("DELETE")) {
+//			employeeService.modifyForDeletePhoto(employee); //只删除员工的图片
+//		}
+//		//为员工授予角色
+//		if(employeeRoles!=null) {
+//			//先删除原有的角色
+//			employeeService.deleteRoles(employee.getId());
+//			//再增加的角色
+//			employeeService.addRoles(employee.getId(), employeeRoles);
+//		}
+//		return new ResultMessage<EmployeeModel>("OK","修改员工成功");
+//	}
+	
+	
+	
 	
 	//检查此部门能否被删除
 	@GetMapping(value="/checkDelete")
