@@ -23,14 +23,18 @@ public interface ISystemModuleService {
 	public void delete(int no) throws Exception;
 
 	// 按条件获取列表
-	public List<SystemModule> getListByAll(SystemModule systemModule) throws Exception;
+	public List<SystemModule> getListByCriteria(SystemModule systemModule) throws Exception;
 
 	// 按条件获取列表(分页)
-	public List<SystemModule> getListByAllWithPage(SystemModule systemModule, int page, int rows) throws Exception;
+	public List<SystemModule> getListByCriteriaWithPage(SystemModule systemModule, int page, int rows) throws Exception;
 
 	// 按no获取
 	public SystemModule getModuleByNo(int no) throws Exception;
+	public SystemModule getModuleByNoWithFunctions(int no) throws Exception;
 
 	// 获取个数
-	public int getCountByAll(SystemModule systemModule) throws Exception;
+	public int getCountByCriteria(SystemModule systemModule) throws Exception;
+	
+	// 获取个数
+	public int getFunctionsCountByNo(int no) throws Exception;
 }

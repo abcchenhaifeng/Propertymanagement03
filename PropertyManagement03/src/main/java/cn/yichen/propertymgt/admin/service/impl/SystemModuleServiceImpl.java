@@ -41,26 +41,37 @@ public class SystemModuleServiceImpl implements ISystemModuleService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<SystemModule> getListByAll(SystemModule systemModule) throws Exception {
-		return mapper.selectListByAll(systemModule);
+	public List<SystemModule> getListByCriteria(SystemModule systemModule) throws Exception {
+		return mapper.selectListByCriteria(systemModule);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<SystemModule> getListByAllWithPage(SystemModule systemModule, int page, int rows) throws Exception {
-		return mapper.selectListByAllWithPage(systemModule, (page-1)*rows, rows);
+	public List<SystemModule> getListByCriteriaWithPage(SystemModule systemModule, int page, int rows) throws Exception {
+		return mapper.selectListByCriteriaWithPage(systemModule, (page-1)*rows, rows);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public SystemModule getModuleByNo(int no) throws Exception {
-		return mapper.selectModuleByNoWithFunctions(no);
+		return mapper.selectModuleByNo(no);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public int getCountByAll(SystemModule systemModule) throws Exception {
-		return mapper.selectCountByAll(systemModule);
+	public int getCountByCriteria(SystemModule systemModule) throws Exception {
+		return mapper.selectCountByCriteria(systemModule);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public int getFunctionsCountByNo(int no) throws Exception {
+		return mapper.selectFunctionsCountByNo(no);
+	}
+
+	@Override
+	public SystemModule getModuleByNoWithFunctions(int no) throws Exception {
+		return mapper.selectModuleByNoWithFunctions(no);
 	}
 
 }

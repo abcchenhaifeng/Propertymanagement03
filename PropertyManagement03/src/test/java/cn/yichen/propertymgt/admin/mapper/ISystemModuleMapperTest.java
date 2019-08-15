@@ -51,12 +51,12 @@ public class ISystemModuleMapperTest {
 
 	@Test
 	public void testSelectListByAll() throws Exception {
-		mapper.selectListByAll(null);
+		mapper.selectListByCriteria(null);
 	}
 
 	@Test
 	public void testSelectListByAllWithPage() throws Exception {
-		mapper.selectListByAllWithPage(null, 1, 2);
+		mapper.selectListByCriteriaWithPage(null, 1, 2);
 	}
 
 }

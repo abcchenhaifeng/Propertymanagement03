@@ -5,12 +5,14 @@
  */
 
 var selectRow_id = null;
+var reloadList = null;
 $(function() {
 	var moduleNo = null;
 	var moduleName = null;
 	
 	var selectRow_id_tmp = null;
-	
+
+	setBreadcrumbs(["系统参数","自定义类别管理"]);
 	setMessage("类别列表", 5000);
 
 	// 显示列表
@@ -53,7 +55,7 @@ $(function() {
 	});
 	
 	// 更新jQGrid的列表显示
-	function reloadList() {
+	reloadList = function () {
 		
 		postData = { };
 		if (moduleNo != "") postData.no = moduleNo;
@@ -68,36 +70,57 @@ $(function() {
 	
 	// 添加、修改、删除
 	$(".list-box a.list-link").on("click", function(e) {
+		e.preventDefault();
+		
 		url_method = $(this).attr("method");
 		var url = $(this).attr("href");
 		// 删除
 		if(/module\/delete$/.test(url)) {
-//			$.post(rootAddress+url,{id:selectRow_id},function(result){
-//          	if(result.status=="OK"){
-//					reloadList(); 
-//				}
-//				setMessage(result.message, 5000);
-//          });
+			if ( selectRow_id == null ) {
+				setMessage("请选择一个类别", 5000);
+				return;
+			}
+			$.get(rootAddress+"module/get/functions/count",{no:selectRow_id},function(result){
+            	if(result > 0){
+					setMessage("不能满足删除条件,若要删除,请清空该类别下的功能", 5000);
+				} else {
+					jqueryEject.Econfirm({
+						title: '删除',
+						message: '确认删除此类别么?',
+						define: function() {
+							$.post(rootAddress+url,{no:selectRow_id},function(result){
+								setMessage(result.message, 5000);
+								if(result.status=="OK") reloadList();
+							});
+						},
+						cancel: function() {}
+					});
+				}
+            });
             
         // 添加、修改
 		} else {
-			$("section#main #dialog").load(url, () => {
-				selectRow_id = selectRow_id_tmp;
-				dialogArea = $("section#main #dialog");
-				dialogArea.dialog({
-					title: $(this).attr("title"),
-					width: "80%",
-					maxWidth: "845px",
-					close: function(event, ui) {
-						doSomethingWhenDialogClose();
-						dialogArea.dialog("destroy");
-						dialogArea.html("");
-						doSomethingWhenDialogClose = function () {};
-					}
+			
+			if ( url_method != "add" && selectRow_id == null ) {
+				setMessage("请选择一个类别", 5000);
+			} else {
+				$("section#main #dialog").load(url, () => {
+					selectRow_id = selectRow_id_tmp;
+					dialogArea = $("section#main #dialog");
+					dialogArea.dialog({
+						title: $(this).attr("title"),
+						width: "80%",
+						maxWidth: "845px",
+						close: function(event, ui) {
+							doSomethingWhenDialogClose();
+							dialogArea.dialog("destroy");
+							dialogArea.html("");
+							doSomethingWhenDialogClose = function () {};
+						}
+					});
 				});
-			});
+			}
 		}
 
-		e.preventDefault();
 	});
 });

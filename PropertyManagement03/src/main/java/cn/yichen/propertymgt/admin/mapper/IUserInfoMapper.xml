@@ -69,7 +69,7 @@
 		where USERID = #{id}
 	</select>
 
-	<select id="selectListByAll" resultMap="UserInfoMap">
+	<select id="selectListByCriteria" resultMap="UserInfoMap">
 		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
 		from
 		UserInfo
@@ -78,7 +78,7 @@
 		</where>
 	</select>
 
-	<select id="selectListByAllWithPage" resultMap="UserInfoMap">
+	<select id="selectListByCriteriaWithPage" resultMap="UserInfoMap">
 		select USERID, UPASSWORD, UNAME, UserStatus, AGE, SEX, Mobible
 		from
 		UserInfo
@@ -98,7 +98,7 @@
 	</insert>
 
 	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
-	<select id="selectCountByAll" resultType="int">
+	<select id="selectCountByCriteria" resultType="int">
 		select IFNULL(count(USERID), 0) from UserInfo
 		<where>
 			<include refid="userInfoSearchWhen"></include>

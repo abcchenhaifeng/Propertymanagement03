@@ -30,8 +30,8 @@ public class SystemModuleController {
 	public ResultMessage<SystemModule> list(SystemModule systemModule) throws Exception {
 
 		ResultMessage<SystemModule> result = new ResultMessage<SystemModule>("OK", "取得系统模块列表");
-		result.setCount(service.getCountByAll(systemModule));
-		result.setList(service.getListByAll(systemModule));
+		result.setCount(service.getCountByCriteria(systemModule));
+		result.setList(service.getListByCriteria(systemModule));
 
 		return result;
 	}
@@ -45,12 +45,12 @@ public class SystemModuleController {
 		ResultMessage<SystemModule> result = new ResultMessage<SystemModule>("OK",
 				"取得系统模块列表page: " + page + " -- rows: " + rows);
 
-		int count = service.getCountByAll(systemModule);
+		int count = service.getCountByCriteria(systemModule);
 		int pageCount = (count % rows == 0 && count > rows ? count / rows : count / rows + 1);
 
 		result.setCount(count);
 		result.setPageCount(pageCount);
-		result.setList(service.getListByAllWithPage(systemModule, page, rows));
+		result.setList(service.getListByCriteriaWithPage(systemModule, page, rows));
 		result.setPage(page);
 		result.setRows(rows);
 
@@ -64,6 +64,12 @@ public class SystemModuleController {
 		result.setModel(service.getModuleByNo(no));
 
 		return result;
+	}
+	
+	// 获取功能个数
+	@GetMapping("/get/functions/count")
+	public int getFunctionsCount(int no) throws Exception {
+		return service.getFunctionsCountByNo(no);
 	}
 
 	// 增加

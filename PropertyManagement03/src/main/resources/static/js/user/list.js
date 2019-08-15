@@ -18,6 +18,7 @@ $(function() {
 	
 	var selectRow_id_tmp = null;
 	
+	setBreadcrumbs(["系统参数","登录账号管理"])
 	setMessage("用户列表", 5000);
 
 	// 显示列表

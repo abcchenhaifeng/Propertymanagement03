@@ -29,19 +29,22 @@ public interface ISystemModuleMapper {
 	// 更新
 	public void update(SystemModule systemModule) throws Exception;
 
-	// 根据id查询, 返回功能
+	// 根据id查询
 	public SystemModule selectModuleByNo(int no) throws Exception;
 
-	// 根据id查询, 返回功能
+	// 根据id查询
 	public SystemModule selectModuleByNoWithFunctions(int no) throws Exception;
 
 	// 获取功能列表
-	public List<SystemModule> selectListByAll(@Param("systemModule") SystemModule systemModule) throws Exception;
+	public List<SystemModule> selectListByCriteria(@Param("systemModule") SystemModule systemModule) throws Exception;
 
+	// 获取功能个数
+	public int selectFunctionsCountByNo(int no) throws Exception;
+	
 	// 按条件获取功能列表(分页)
-	public List<SystemModule> selectListByAllWithPage(@Param("systemModule") SystemModule systemModule,
+	public List<SystemModule> selectListByCriteriaWithPage(@Param("systemModule") SystemModule systemModule,
 			@Param("start") int start, @Param("rows") int rows) throws Exception;
 
 	// 获取个数
-	public int selectCountByAll(@Param("systemModule") SystemModule systemModule) throws Exception;
+	public int selectCountByCriteria(@Param("systemModule") SystemModule systemModule) throws Exception;
 }
