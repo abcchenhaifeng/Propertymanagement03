@@ -40,7 +40,7 @@ public class IRoomMapperTest {
 	
 	@Test
 	public void testUpdate() throws Exception {
-		Room roomno = mapper.selectRoomById("103");
+		Room roomno = mapper.selectRoomByIdWithFunctions("103");
 		roomno.setHousetypeno("3");
 		mapper.update(roomno);	
 	}

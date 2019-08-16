@@ -43,14 +43,7 @@ public class RoomServiceIml implements IRoomService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Room> getListByAllWithPage(int page, int rows) throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.selectListByAllWithPage( rows*(page-1), rows); 
-	}
-
-	@Autowired
-	@Transactional(readOnly = true)
-	public Room getRoomById(String id) throws Exception {
-		return mapper.selectRoomById(id);
 	}
 
 	@Override
@@ -79,5 +72,4 @@ public class RoomServiceIml implements IRoomService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
