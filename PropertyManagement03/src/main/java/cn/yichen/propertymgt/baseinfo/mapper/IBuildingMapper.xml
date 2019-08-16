@@ -15,9 +15,9 @@
 		<result column="TotalHouse" property="totalhouse"/>
 	</resultMap>
 	
-	
+	<!-- 
 	<insert id="insert" property="buildingno" column="BuildingNo" type="building" useGeneratedKeys="true" flushCache="true">
 	insert into Building(AreaNo,BCODE,BAddress,BuildingTypeNo,Direction,TotalHome,TotalHouse) values (#{areano},#{dcode},#{baddress},#{buildingtypeno},#{direction},#{totalhome},#{totalhouse})
 	
-	</insert>
+	</insert> -->
 </mapper>
