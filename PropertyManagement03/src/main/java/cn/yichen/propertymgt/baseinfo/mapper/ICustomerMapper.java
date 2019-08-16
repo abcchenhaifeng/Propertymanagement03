@@ -67,7 +67,8 @@ public interface ICustomerMapper {
 		public List<Customer> selectListByConditionandTypeWithPage(@Param("CustomerName") String CustomerName,@Param("typeno") String typeno,@Param("feeStartDate") Date feeStartDate,@Param("feeEndDate") Date feeEndDate, @Param("start") int start,@Param("rows") int rows) throws Exception;
 		//根据综合检索条件取得客户个数
 		public int selectCountByCondition(@Param("CustomerName") String CustomerName,@Param("typeno") String typeno,@Param("feeStartDate") Date feeStartDate,@Param("feeEndDate") Date feeEndDate) throws Exception;
-		
+		//检查指定的员工姓名，用于验证员工是否存在
+		public int selectCountByName(String cname) throws Exception;
 		
 		// 按条件获取客户列表(分页)
 		//public List<Customer> selectCustomerByAllandHomeWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
