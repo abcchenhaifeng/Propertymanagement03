@@ -202,5 +202,9 @@ public class CustomerController {
 		return result;
 	}
 		
-	
+	//验证员工ID是否存在，如果存在则不合法，不存在则合法，用于增加员工时检查ID是否已经存在
+		@GetMapping(value="/checkidexist")
+		public boolean checkIdExist(String id) throws Exception{
+			return !service.checkIdExist(id);
+		}
 }

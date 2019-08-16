@@ -164,6 +164,15 @@ public class CustomerServiceImpl implements ICustomerService {
 			throws Exception {
 		return mapper.selectCountByCondition(CustomerName, typeno, feeStartDate, feeEndDate);
 	}
+
+	@Override
+	public boolean checkIdExist(String cname) throws Exception {
+		boolean result=false;
+		if(mapper.selectCountByName(cname)>0) {
+			result=true;
+		}
+		return result;
+	}
 	
 	
 	}

@@ -47,12 +47,8 @@ public interface ICustomerService {
 	//根据综合检索条件取得客户显示的页数
 	public int getPageCountByConditionandTypeWithPage(String CustomerName,String typeno,Date feeStartDate,Date feeEndDate,int rows) throws Exception;
 	
-	
-	
-	
-	
-	
-	
+	//验证员工姓名是否存在
+	public  boolean checkIdExist(String cname) throws Exception;	
 	
 	//增加
 	public void add(Customer customer) throws Exception;

@@ -49,6 +49,7 @@
 
 /* Header*/
 .ui-jqgrid .ui-jqgrid-hdiv {
+	text-align: center;
 	position: relative; 
 	margin: 0;
 	padding: 0; 

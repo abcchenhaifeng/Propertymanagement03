@@ -131,4 +131,16 @@
    
   </select>
   
+  <!-- 根据姓名取得员工的人数 -->
+   <select id="selectCountByName" resultType="int">
+    select IFNULL(count(CNAME), 0) from Customer
+    <where>
+    	<if test="cname!=null and cname!=''">
+    	and CNAME=#{cname}
+    	</if>
+    </where>
+   </select>
+  
+  
+  
 </mapper>

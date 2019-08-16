@@ -11,14 +11,13 @@ $(function(){
 	var CustomerId= null;
 	//设置系统页面标题
 	$("span#maintille").html("&emsp;客户信息管理");
-	
+	$.jgrid.defaults.styleUI="Bootstrap";
 	//显示客户列表
 	$("table#CustomerGrid").jqGrid({
 		url: host+'customer/list/condition/page',
 		//url: host+'customer/list/all/page',
 		datatype: "json",
 		colModel: [
-			{ label: '序号', name: 'customerNo', width: 40,align:"center"},
 			{ label: '姓名', name: 'cname', width: 40,align:"center" },
 			{ label: '联系人', name: 'contact', width: 40,align:"center" },
 			{ label: '类别', name: 'ctypeno.typeno', width: 40,align:"center" },
@@ -40,7 +39,7 @@ $(function(){
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "id"},
+		      id: "customerNo"},
 		pager: "#CustomerGridPager",
 		multiselect:false,
 		onSelectRow:function(cid){
@@ -64,20 +63,41 @@ $(function(){
 		$("table#CustomerGrid").jqGrid('setGridParam',{postData:{CustomerName:CustomerName,typeno:typeno,feeStartDate:feeStartDate,feeEndDate:feeEndDate}}).trigger("reloadGrid");
 		
 	}
-//	//定义类型的更新事件的处理
-//	$("select#DepartmentSelection").off().on("change",function(){
-//		CustomerId=$("select#typeno").val();
-//		reloadEmployeeList();
-//	});
-//	
+	
+	//定义类型的更新事件的处理
+	$("select#typeno").off().on("change",function(){
+		typeno=$("select#typeno").val();
+		
+		CustomerName=$("input[name='CustomerName']").val();
+		
+		feeStartDate=$("input#feeStartDate").val();
+
+		feeEndDate=$("input#feeEndDate").val();
+		
+		if(CustomerName==""){
+			CustomerName=null;
+		}
+		
+		if(feeStartDate==""){
+			feeStartDate=null;
+		}
+		if(feeEndDate==""){
+			feeEndDate=null;
+		}
+		reloadCustomerList();
+	});
+	
+	//定义姓名输入更改事件
+	$("input[name='CustomerName']").off().on("change",function(){
+		CustomerName=$("input[name='CustomerName']").val();
+		reloadCustomerList();
+	});
+
 	//点击检索事件处理
 	$("a#CustomerSearchButton").on("click",function(){
 		typeno=$("select#typeno").val();
-		alert(typeno);
 		CustomerName=$("input[name='CustomerName']").val();
-		//alert(CustomerName);
 		feeStartDate=$("input#feeStartDate").val();
-		alert(feeStartDate);
 		feeEndDate=$("input#feeEndDate").val();
 		if(feeStartDate==""){
 			feeStartDate=null;
@@ -89,30 +109,59 @@ $(function(){
 	});
 	//===========================增加员工处理================================================
 	$("a#CustomerAddLink").off().on("click",function(){
-		var dialogArea = null;
 		$("div#CustomerDialog").load("customer/mainadd.html",function(){
-			//取得客户类型列表，生成客户类型选择下拉框
-//			$.getJSON(host+"customertype/list/all",function(typeList){
-//				if(typeList){
-//					$.each(typeList,function(index,ctypeno){
-//						$("div#TypeSelection").append("<input type='checkbox' name='Customertypes' value='"+ctypeno.typeno+"' />"+ctypeno.typename);
-//					});
-//				}
-//			});
-			dialogArea=$("div#CustomerDialog");
-//			//验证员工提交数据
+			//验证员工提交数据
 			$("form#CustomerAddForm").validate({
 				  rules: {
 				  cname:{
-				    	required: true
-				        }
+				    	required: true,
+				    	remote: host+"customer/checkidexist"
+				        },
+				  contact:{
+					  required:true,
+				          },
+				  mobile:{
+				    	required:true,
+				    	mobile:true			    	
+				         },
+				  cardcode:{
+					  required:true,
+					  card:true
+				            },
+				  feeStartDate:{
+					  required:true,
+				                },
+				  feeEndDate:{
+					  required:true, 
+				             },
+				  cstatus:{
+					  required:true,
+				          }       
 				  },
+				  
 				  messages:{
 					cname:{
 					      required: "请输入姓名",
 					      remote:"该客户信息已经存进"
-					    }
+					    },
+					    contact:{
+					       required: "请输入联系人姓名"		   
+					    },	    
+						
+						cardcode:{
+							required: "请输入身份证号码"  
+			            },
+			            feeStartDate:{
+			            	required: "请输入收费开始日期"    
+		                },
+						feeEndDate:{
+							required: "请输入收费截止日期"  	  
+						},
+						cstatus:{
+							required: "请输入当前客户状态"    
+						} 
 				 }
+				  
 			});
 			
 			//拦截增加提交表单
@@ -120,15 +169,9 @@ $(function(){
 				if(result.status=="OK"){
 					reloadCustomerList();//更新员工列表
 				}
-				//alert(result.message);
-				//BootstrapDialog.alert(result.message);
-				BootstrapDialog.show({
-		            title: '客户操作信息',
-		            message:result.message
-		        });
-				dialogArea.dialog( "close" );
-				dialogArea.dialog( "destroy" );
-				dialogArea.html("");
+				$("div#CustomerDialog").dialog( "close" );
+				$("div#CustomerDialog").dialog( "destroy" );
+				$("div#CustomerDialog").html("");
 				
 			});
 			$("div#CustomerDialog").dialog({
@@ -137,9 +180,9 @@ $(function(){
 			});
 			//点击取消按钮，管理弹出窗口
 			$("input[value='取消']").off().on("click",function(){
-				dialogArea.dialog("close");
-				dialogArea.dialog("destroy")
-				dialogArea.html("");
+				$("div#CustomerDialog").dialog("close");
+				$("div#CustomerDialog").dialog("destroy")
+				$("div#CustomerDialog").html("");
 			});
 			
 		});
@@ -149,22 +192,20 @@ $(function(){
 	//================================查看员工处理=============================================================
 	$("a#CustomerViewLink").off().on("click",function(){
 		if(CustomerId==null){
-//			BootstrapDialog.show({
-//	            title: '员工操作信息',
-//	            message:"请选择要查看的员工",
-//	            buttons: [{
-//	                label: '确定',
-//	                action: function(dialog) {
-//	                    dialog.close();
-//	                }
-//	            }]
-//	        });
+			jqueryEject.Econfirm({
+				title: '客户信息',
+				message: '请选择要查看的客户',
+				define: function() {
+					setMessage(message, 5000);
+				},
+				cancel: function() {}
+			});			
 		}
 		else{
 			$("div#CustomerDialog").load("customer/mainview.html",function(){
 				//取得指定的员工信息
 				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
-					//alert(CustomerId);
+					setMessage("查看详细", 5000);
 					if(em){
 						$("input#id").val(em.customerNo);
 						$("input#cname").val(em.cname);
@@ -194,24 +235,20 @@ $(function(){
 	});
 	//===============================修改员工处理===============================================================
 	$("a#CustomerModifyLink").off().on("click",function(){
-		alert(CustomerId);
-		if(CustomerId==null){
-//			BootstrapDialog.show({
-//	            title: '客户信息',
-//	            message:"请选择要修改的客户",
-//	            buttons: [{
-//	                label: '确定',
-//	                action: function(dialog) {
-//	                    dialog.close();
-//	                }
-//	            }]
-//	        });
+		if(CustomerId==null){	
+			jqueryEject.Econfirm({
+				title: '客户信息',
+				message: '请选择要修改的客户',
+				define: function() {
+				setMessage(message, 5000);
+				},
+				cancel: function() {}
+			});
 		}
 		else{
 			$("div#CustomerDialog").load("customer/mainmodify.html",function(){
 				//取得指定的员工信息
 				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
-					//alert(CustomerId);
 					if(em){
 						$("input[name='customerNo']").val(em.customerNo);
 						$("input[name='cname']").val(em.cname);
@@ -224,23 +261,18 @@ $(function(){
 	
 					}
 				});
-				//拦截增加提交表单
+				//拦截修改提交表单
 				$("form#CustomerModifyForm").ajaxForm(function(result){
 					if(result.status=="OK"){
+						setMessage("添加成功", 5000);
 						reloadCustomerList();//更新客户列表
 					}
-					//alert(result.message);
-					//BootstrapDialog.alert(result.message);
-					BootstrapDialog.show({
-			            title: '客户操作信息',
-			            message:result.message
-			        });
-					dialogArea.dialog( "close" );
-					dialogArea.dialog( "destroy" );
-					dialogArea.html("");
+					
+					$("div#CustomerDialog").dialog( "close" );
+					$("div#CustomerDialog").dialog( "destroy" );
+					$("div#CustomerDialog").html("");
 					
 				});
-				alert(CustomerId);
 				$("div#CustomerDialog").dialog({
 					title:"客户修改",
 					width:800
@@ -261,18 +293,20 @@ $(function(){
 	//点击删除按钮事件处理
 	$("a#CustomerDeleteLink").off().on("click",function(event){
 		
-		if(CustomerId==0){
-//			BootstrapDialog.show({
-//	            title: '员工操作信息',
-//	            message:"请选择要删除的员工"
-//	        });
+		if(CustomerId==null){
+			jqueryEject.Econfirm({
+			title: '删除',
+			message: '请选择要删除的客户',
+			define: function() {
+				setMessage(message, 5000);
+			},
+			cancel: function() {}
+		});
 		}
 		else {
-//			alert(CustomerId);
                 $.post(host+"customer/delete",{customerNo:CustomerId},function(result){
-//                	alert(result.status);
                 	if(result.status=="OK"){
-            
+                		setMessage("删除成功", 5000);
                 		reloadCustomerList();//更新客户列表
 					}
 					

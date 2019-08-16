@@ -4,17 +4,12 @@ import java.io.Serializable;
 
 import org.apache.ibatis.type.Alias;
 
-/**
- * 2019年8月7日23:30:06
- * @author YiChen(李冠永)
- * #楼宇(建筑)
- *
- */
+
 @Alias("Building")
 public class Building implements Serializable {
-    private Integer buildingno;
+    private String buildingno;
 
-    private Integer areano;
+    private String areano;
 
     private String bcode;
 
@@ -28,19 +23,19 @@ public class Building implements Serializable {
 
     private Long totalhouse;
 
-    public Integer getBuildingno() {
+    public String getBuildingno() {
         return buildingno;
     }
 
-    public void setBuildingno(Integer buildingno) {
+    public void setBuildingno(String buildingno) {
         this.buildingno = buildingno;
     }
 
-    public Integer getAreano() {
+    public String getAreano() {
         return areano;
     }
 
-    public void setAreano(Integer areano) {
+    public void setAreano(String areano) {
         this.areano = areano;
     }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper">
+	<cache />
+	<resultMap id="BuildingMap" type="building">
+		<id column ="BuildingNo" property="buildingno"/>
+		<result column="AreaNo" property="areano"/>
+		<result column="BCODE" property="dcode"/>
+		<result column="BAddress" property="baddress"/>
+		<result column="BuildingTypeNo" property="buildingtypeno"/>
+		<result column="Direction" property="direction"/>
+		<result column="TotalHome" property="totalhome"/>
+		<result column="TotalHouse" property="totalhouse"/>
+	</resultMap>
+	
+	<!-- 
+	<insert id="insert" property="buildingno" column="BuildingNo" type="building" useGeneratedKeys="true" flushCache="true">
+	insert into Building(AreaNo,BCODE,BAddress,BuildingTypeNo,Direction,TotalHome,TotalHouse) values (#{areano},#{dcode},#{baddress},#{buildingtypeno},#{direction},#{totalhome},#{totalhouse})
+	
+	</insert> -->
+</mapper>

@@ -127,5 +127,10 @@ public class ICustomerMapperTest {
 		}
 	}
 
+	@Test
+	public void testSelectCountByName() throws Exception {
+		int i = mapper.selectCountByName("妲己");
+		System.out.print(i);
+	}
 	
 }
