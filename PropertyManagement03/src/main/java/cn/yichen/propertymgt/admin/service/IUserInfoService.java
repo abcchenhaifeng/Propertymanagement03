@@ -61,4 +61,6 @@ public interface IUserInfoService {
 	// 获取个数
 	public int getCountByCriteria(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception;
 
+	public UserInfo getUserByIdWithFunction(String id) throws Exception;
+
 }

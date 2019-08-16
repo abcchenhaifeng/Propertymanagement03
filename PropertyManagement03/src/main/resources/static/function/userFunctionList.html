@@ -1,0 +1,47 @@
+<script type="text/javascript" src="js/function/userFunctionList.js"></script>
+<style>
+	.box-header input {
+		max-width: 8rem;
+	}
+</style>
+<div class="list-box">
+	<div class="box-header">
+		<div class="row">
+			<div class="col">
+				<form>
+					<div class="form-row align-items-center">
+						<div class="col-auto my-1">
+							<label class="sr-only" for="userid">账号</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">账号</div>
+								</div>
+								<input class="form-control" type="text" id="userid" placeholder="账号">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="username">&emsp;姓名</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">&emsp;姓名</div>
+								</div>
+								<input class="form-control" type="text" id="username" placeholder="姓名">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<button type="button" class="btn btn-outline-secondary" id="SearchButton">检索</button>
+							<button type="reset" class="btn btn-outline-secondary" id="reset">重置</button>
+						</div>
+						<div class="col-auto text-right" style="margin: 0 0 0 auto;">
+							<a href="function/userFunctionDetails.html" class="btn btn-primary list-link" title="查看权限">查看权限</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="box-body">
+		<table id="userfunctionGrid" class="table table-bordered"></table>
+		<div id="userfunctionGridPager"></div>
+	</div>
+</div>

@@ -124,4 +124,9 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		mapper.deleteFunction(id, funNo);
 	}
 
+	@Override
+	public UserInfo getUserByIdWithFunction(String id) throws Exception {
+		return mapper.selectUserInfoById(id);
+	}
+
 }

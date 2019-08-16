@@ -1,11 +1,9 @@
 /**
- * @date: 2019年8月16日10:24:56
+ * @date: 2019年8月16日15:45:13
  * @author: YiChen(李冠永)
  * @Description: 系统功能前端控制JS
  */
 
-var selectRow_id = null;
-var reloadList = null;
 $(function() {
 	var functionNo = null;
 	var functionName = null;
@@ -13,15 +11,17 @@ $(function() {
 	module.no = null;
 	var levelNo = null;
 	
+	var reloadList = null;
 	var selectRow_id_tmp = null;
 
-	setBreadcrumbs(["系统参数","系统权限管理","系统权限列表"]);
-	setMessage("系统权限列表", 5000);
+	setBreadcrumbs(["系统参数","系统权限管理","用户权限管理","查看权限"]);
+	setMessage("查看权限", 5000);
 
 	// 显示列表
 	$.jgrid.defaults.styleUI = 'Bootstrap';
-	$("table#functionGrid").jqGrid({
-		url: rootAddress+'function/list/page',
+	$("table#userFunctionDetailsGrid").jqGrid({
+		url: rootAddress+'user/get/function',
+		postData : {id: selectRow_id},
 		datatype: "json",
 		colModel: [
 			{ label: '权限号', name: 'no' },
@@ -34,16 +34,16 @@ $(function() {
 		height: 365,
 		rowNum: 10,
 		rowList:[10,20,30],
-		loadonce: false,
+		loadonce: true,
 		jsonReader : { 
-		      root: "list", 
+		      root: "model.functions", 
 		      page: "page", 
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "no"
 		},
-		pager: "#functionGridPager",
+		pager: "#userFunctionDetailsGridPager",
 		multiselect:false,
 		onSelectRow:function(id){
 			selectRow_id = id;
@@ -77,7 +77,7 @@ $(function() {
 		if (module.no != "") postData['module.no'] = module.no;
 		if (levelNo != "") postData.levelno = levelNo;
 		
-		$("table#functionGrid").jqGrid('clearGridData').jqGrid('setGridParam', {
+		$("table#userFunctionDetailsGrid").jqGrid('clearGridData').jqGrid('setGridParam', {
 			datatype: "json",
 			page: 1,
 			postData : postData

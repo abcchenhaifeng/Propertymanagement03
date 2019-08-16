@@ -46,12 +46,34 @@ public class UserInfoController {
 
 		return result;
 	}
-
+	
 	// 获取用户
 	@GetMapping("/get")
-	public ResultMessage<UserInfo> get(String id) throws Exception {
+	public ResultMessage<UserInfo> get(String id, 
+			@RequestParam(required = false, defaultValue = "10") int rows) throws Exception {
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户详情");
-		result.setModel(service.getUserByIdWithoutOther(id));
+		
+		UserInfo userInfo = service.getUserByIdWithoutOther(id);
+		int count = 0;
+		int pageCount = 0;
+		if ( userInfo != null ) {
+			count = userInfo.getFunctions() == null ? 0 : userInfo.getFunctions().size();
+			pageCount = (count%rows==0 && count>=rows ? count/rows : count/rows+1);
+		}
+		
+		result.setCount(count);
+		result.setPageCount(pageCount);
+		result.setModel(userInfo);
+		result.setRows(rows);
+		
+		return result;
+	}
+	
+	// 获取用户
+	@GetMapping("/get/function")
+	public ResultMessage<UserInfo> getWithFunction(String id) throws Exception {
+		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户详情");
+		result.setModel(service.getUserByIdWithFunction(id));
 		return result;
 	}
 
