@@ -5,14 +5,15 @@
  */
 
 var selectRow_id = null;
+var reloadList = null;
 $(function() {
-	var userid = null;
-	var startAge = null;
-	var endAge = null;
-	var username = null;
-	var sex = null;
-	var mobible = null;
-	var status = null;
+	var userid = "";
+	var startAge = "";
+	var endAge = "";
+	var username = "";
+	var sex = "";
+	var mobible = "";
+	var status = "";
 	
 	var userinfoGrid = null;
 	
@@ -39,7 +40,8 @@ $(function() {
 		height: 365,
 		rowNum: 10,
 		rowList:[10,20,30],
-		//loadonce: true,
+		loadonce: false,
+		sortable: true,
 		jsonReader : { 
 		      root: "list", 
 		      page: "page", 
@@ -66,21 +68,13 @@ $(function() {
 		startAge = $("input#startAge").val();
 		endAge = $("input#endAge").val();
 		
-		userid = (userid != "" ? userid : null);
-		username = (username != "" ? username : null);
-		sex = (sex != "" ? sex : null);
-		mobible = (mobible != "" ? mobible : null);
-		status = (status != "" ? status : null);
-		startAge = (startAge != "" ? startAge : null);
-		endAge = (endAge != "" ? endAge : null);
-		
 		reloadList();
 	});
 	
 	// 更新jQGrid的列表显示
-	function reloadList() {
+	reloadList = function() {
 		
-		postData = { };
+		var postData = { };
 		if (userid != "") postData.id = userid;
 		if (username != "") postData.username = username;
 		if (sex != "") postData.sex = sex;
@@ -89,23 +83,31 @@ $(function() {
 		if (startAge != "") postData.startAge = startAge;
 		if (endAge != "") postData.endAge = endAge;
 		
-		$("table#userinfoGrid").jqGrid('setGridParam', {
+		$("table#userinfoGrid").jqGrid("clearGridData").jqGrid('setGridParam', {
+			page: 1,
+			search: true,
+			datatype: "json",
 			postData : postData
-		}).trigger("reloadGrid");
+		}, true).trigger("reloadGrid", {fromServer: true});
 	}
-	
+
 	// 激活、冻结、详情
 	$(".list-box a.list-link").on("click", function(e) {
-		
 		var url = $(this).attr("href");
 		// 激活、冻结
 		if(/user\/(active)|(frozen)$/.test(url)) {
-			$.post(rootAddress+url,{id:selectRow_id},function(result){
-            	if(result.status=="OK"){
-					reloadList(); 
-				}
-				setMessage(result.message, 5000);
-            });
+			if ( selectRow_id == null ) {
+				setMessage("请选择一个类别", 5000);
+			} else {
+				$.post(rootAddress+url,{id:selectRow_id},function(result){
+					if(result.status=="OK"){
+						reloadList(); 
+					}
+					setMessage(result.message, 5000);
+					
+					selectRow_id_tmp = selectRow_id =null;
+				});
+			}
             
         //  详情
 		} else {

@@ -82,13 +82,13 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<UserInfo> getListByAll(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception {
+	public List<UserInfo> getListByCriteria(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception {
 		return mapper.selectListByCriteria(userInfo, startAge, endAge);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<UserInfo> getListByAllWithPage(UserInfo userInfo, int page, int rows, Integer startAge, Integer endAge) throws Exception {
+	public List<UserInfo> getListByCriteriaWithPage(UserInfo userInfo, int page, int rows, Integer startAge, Integer endAge) throws Exception {
 		return mapper.selectListByCriteriaWithPage(userInfo, (page-1)*rows, rows, startAge, endAge);
 	}
 
@@ -105,7 +105,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public int getCountByAll(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception {
+	public int getCountByCriteria(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception {
 		return mapper.selectCountByCriteria(userInfo, startAge, endAge);
 	}
 

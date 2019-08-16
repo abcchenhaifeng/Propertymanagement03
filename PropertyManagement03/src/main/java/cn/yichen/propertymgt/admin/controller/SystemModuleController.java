@@ -1,5 +1,7 @@
 package cn.yichen.propertymgt.admin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +32,9 @@ public class SystemModuleController {
 	public ResultMessage<SystemModule> list(SystemModule systemModule) throws Exception {
 
 		ResultMessage<SystemModule> result = new ResultMessage<SystemModule>("OK", "取得系统模块列表");
-		result.setCount(service.getCountByCriteria(systemModule));
-		result.setList(service.getListByCriteria(systemModule));
+		List<SystemModule> list = service.getListByCriteria(systemModule);
+		result.setCount(list.size());
+		result.setList(list);
 
 		return result;
 	}
@@ -46,7 +49,7 @@ public class SystemModuleController {
 				"取得系统模块列表page: " + page + " -- rows: " + rows);
 
 		int count = service.getCountByCriteria(systemModule);
-		int pageCount = (count % rows == 0 && count > rows ? count / rows : count / rows + 1);
+		int pageCount = (count % rows == 0 && count >= rows ? count / rows : count / rows + 1);
 
 		result.setCount(count);
 		result.setPageCount(pageCount);

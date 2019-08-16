@@ -1,5 +1,7 @@
 package cn.yichen.propertymgt.admin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +32,9 @@ public class SystemFunctionController {
 	public ResultMessage<SystemFunction> list(SystemFunction systemFunction) throws Exception {
 
 		ResultMessage<SystemFunction> result = new ResultMessage<SystemFunction>("OK", "取得系统功能列表");
-		result.setCount(service.getCountByAll(systemFunction));
-		result.setList(service.getListByAll(systemFunction));
+		List<SystemFunction> list = service.getListByCriteria(systemFunction);
+		result.setCount(list.size());
+		result.setList(list);
 
 		return result;
 	}
@@ -45,12 +48,12 @@ public class SystemFunctionController {
 		ResultMessage<SystemFunction> result = new ResultMessage<SystemFunction>("OK",
 				"取得系统功能列表page: " + page + " -- rows: " + rows);
 
-		int count = service.getCountByAll(systemFunction);
-		int pageCount = (count % rows == 0 && count > rows ? count / rows : count / rows + 1);
+		int count = service.getCountByCriteria(systemFunction);
+		int pageCount = (count % rows == 0 && count >= rows ? count / rows : count / rows + 1);
 
 		result.setCount(count);
 		result.setPageCount(pageCount);
-		result.setList(service.getListByAllWithPage(systemFunction, page, rows));
+		result.setList(service.getListByCriteriaWithPage(systemFunction, page, rows));
 		result.setPage(page);
 		result.setRows(rows);
 
