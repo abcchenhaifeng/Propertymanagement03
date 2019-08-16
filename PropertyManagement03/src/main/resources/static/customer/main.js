@@ -214,43 +214,43 @@ $(function(){
 		}
 		
 	});
-	//点击查看详细按钮事件处理
-	$("a#CustomerViewLink").off().on("click",function(event){
-		
-		if(CustomerNo==0){
-			BootstrapDialog.show({
-	            title: '客户操作信息',
-	            message:"请选择要查看的客户"
-	        });
-		}
-		else{
-			$("div#CustomerDialogArea").load("customer/view.html",function(){
-				//取得选择的部门
-				$.getJSON("customer/get",{no:CustomerNo},function(data){
-					if(data.status=="OK"){
-						$("span#CustomerName").html(data.model.cname);
-						$("span#CustomerContact").html(data.model.contact);
-						$("span#CustomerCardcode").html(data.model.cardcode);
-						$("span#CustomerMobile").html(data.model.mobile);
-						$("span#CustomerFeeStartDate").html(data.model.feeStartDate);
-						$("span#CustomerFeeEndDate").html(data.model.feeEndDate);
-						$("span#CustomerCstatus").html(data.model.cstatus);
-
-					}
-				});
-				//弹出Dialog
-				$("div#CustomerDialogArea" ).dialog({
-					title:"客户详细",
-					width:600
-				});
-				//点击取消按钮处理
-				$("input[value='返回']").on("click",function(){
-					$( "div#CustomerDialogArea" ).dialog( "close" );
-					$( "div#CustomerDialogArea" ).dialog( "destroy" );
-					$("div#CustomerDialogArea").html("");
-				});
-			});
-			
-		}
-	});
+//	//点击查看详细按钮事件处理
+//	$("a#CustomerViewLink").off().on("click",function(event){
+//		
+//		if(CustomerNo==0){
+//			BootstrapDialog.show({
+//	            title: '客户操作信息',
+//	            message:"请选择要查看的客户"
+//	        });
+//		}
+//		else{
+//			$("div#CustomerDialogArea").load("customer/view.html",function(){
+//				//取得选择的部门
+//				$.getJSON("customer/get",{no:CustomerNo},function(data){
+//					if(data.status=="OK"){
+//						$("span#CustomerName").html(data.model.cname);
+//						$("span#CustomerContact").html(data.model.contact);
+//						$("span#CustomerCardcode").html(data.model.cardcode);
+//						$("span#CustomerMobile").html(data.model.mobile);
+//						$("span#CustomerFeeStartDate").html(data.model.feeStartDate);
+//						$("span#CustomerFeeEndDate").html(data.model.feeEndDate);
+//						$("span#CustomerCstatus").html(data.model.cstatus);
+//
+//					}
+//				});
+//				//弹出Dialog
+//				$("div#CustomerDialogArea" ).dialog({
+//					title:"客户详细",
+//					width:600
+//				});
+//				//点击取消按钮处理
+//				$("input[value='返回']").on("click",function(){
+//					$( "div#CustomerDialogArea" ).dialog( "close" );
+//					$( "div#CustomerDialogArea" ).dialog( "destroy" );
+//					$("div#CustomerDialogArea").html("");
+//				});
+//			});
+//			
+//		}
+//	});
 });

@@ -36,14 +36,14 @@ public interface IUserInfoMapper {
 	public UserInfo selectUserInfoByIdWithoutOther(String id) throws Exception;
 	
 	// 获取用户列表
-	public List<UserInfo> selectListByAll(@Param("userInfo") UserInfo userInfo, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
+	public List<UserInfo> selectListByCriteria(@Param("userInfo") UserInfo userInfo, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
 
 	// 按条件获取用户列表(分页)
-	public List<UserInfo> selectListByAllWithPage(@Param("userInfo") UserInfo userInfo, @Param("start") int start,
+	public List<UserInfo> selectListByCriteriaWithPage(@Param("userInfo") UserInfo userInfo, @Param("start") int start,
 			@Param("rows") int rows, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
 
 	// 获取个数
-	public int selectCountByAll(@Param("userInfo") UserInfo userInfo, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
+	public int selectCountByCriteria(@Param("userInfo") UserInfo userInfo, @Param("startAge")Integer startAge, @Param("endAge")Integer endAge) throws Exception;
 
 	// 为用户增加功能
 	// 每次增加一个功能

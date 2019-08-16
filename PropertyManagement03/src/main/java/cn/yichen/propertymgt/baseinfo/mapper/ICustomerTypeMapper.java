@@ -21,22 +21,22 @@ import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 public interface ICustomerTypeMapper {
 
 	 // 添加
-	@Insert("insert into CustomerType(TYPENO, TYPENAME) values(#{typeno}, #{typename})")
+	//@Insert("insert into CustomerType(TYPENO, TYPENAME) values(#{typeno}, #{typename})")
 	public void create(CustomerType ctype) throws Exception;
 
 	// 删除
-	@Delete("delete from CustomerType where TYPENO = #{typeno}")
+	//@Delete("delete from CustomerType where TYPENO = #{typeno}")
 	public void delete(String id) throws Exception;
 
 	// 更新
-	@Update("update CustomerType set TYPENAME=#{typename} where TYPENO=#{typeno}")
+	//@Update("update CustomerType set TYPENAME=#{typename} where TYPENO=#{typeno}")
 	public void update(CustomerType ctype) throws Exception;
 
 	// 根据id查询, 返回客户类型
 	public CustomerType selectCustomerTypeById(String id) throws Exception;
 	
 	// 获取客户类型列表
-	public List<CustomerType> selectListByAll(CustomerType ctype) throws Exception;
+	public List<CustomerType> selectListByAll() throws Exception;
 
 	// 按条件获取客户类型列表(分页)
 	public List<CustomerType> selectListByAllWithPage(@Param("ctype") CustomerType ctype, @Param("start") int start, @Param("rows") int rows) throws Exception;

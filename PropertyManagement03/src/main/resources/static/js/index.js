@@ -96,26 +96,36 @@ function setMessage(text, timeout, flag) {
 	showMessage($("#alert_info"), text, timeout, flag);
 }
 
+let timeout_id = null;
 function showMessage(e, text, timeout, flag) {
 
 	if(flag || sessionStorage.getItem(e) === '' ||
 		sessionStorage.getItem(e) === null) {
 
-		if(flag)
-			sessionStorage.setItem(e, text);
+		if(flag) sessionStorage.setItem(e, text);
 
 		$(e).stop().fadeTo(200, 0).addClass("red").html(text).fadeTo(200, 1);
-		if(timeout === null)
-			timeout = 5000;
-		defaultMessage(e, timeout);
+		
+		if(timeout === null) timeout = 5000;
+		if(timeout_id != null) clearTimeout(timeout_id);
+		timeout_id = defaultMessage(e, timeout);
 	}
 }
 
 function defaultMessage(e, timeout) {
 	if(timeout === null)
 		timeout = 5000;
-	window.setTimeout(function() {
+	return window.setTimeout(function() {
 		sessionStorage.removeItem(e)
 		$(e).stop().fadeTo(200, 0).removeClass("red").html(default_alert_info).fadeTo(200, 1);
+		timeout_id = null;
 	}, timeout);
+}
+
+function setBreadcrumbs(itemList){
+	var breadcrumbs = $("span#breadcrumbs-items");
+	breadcrumbs.html("");
+	itemList.forEach((itemname)=>{
+		breadcrumbs.append($('<div class="breadcrumb_divider"></div><a>'+itemname+'</a>'));
+	});
 }

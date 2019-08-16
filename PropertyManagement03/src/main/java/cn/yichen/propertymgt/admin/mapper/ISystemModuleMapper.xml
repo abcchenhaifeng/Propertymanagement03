@@ -26,7 +26,7 @@
 		</if>
 	</sql>
 
-	<insert id="create">insert into SystemModule(MNO, MNAME) values(#{no}, #{name})</insert>
+	<insert id="create">insert into SystemModule(MNAME) values(#{name})</insert>
 
 	<delete id="delete">delete from SystemModule where MNO = #{no}</delete>
 	
@@ -46,7 +46,7 @@
 		where m.MNO = #{no} and m.MNO = f.MNO
 	</select>
 
-	<select id="selectListByAll" resultMap="SystemModuleMap">
+	<select id="selectListByCriteria" resultMap="SystemModuleMap">
 		select MNO, MNAME
 		from SystemModule
 		<where>
@@ -54,7 +54,7 @@
 		</where>
 	</select>
 
-	<select id="selectListByAllWithPage" resultMap="SystemModuleMap">
+	<select id="selectListByCriteriaWithPage" resultMap="SystemModuleMap">
 		select MNO, MNAME
 		from SystemModule
 		<where>
@@ -64,10 +64,17 @@
 	</select>
 	
 	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
-	<select id="selectCountByAll" resultType="int">
+	<select id="selectCountByCriteria" resultType="int">
 		select IFNULL(count(MNO), 0) from SystemModule
 		<where>
 			<include refid="systemModuleWhen"></include>
 		</where>
+	</select>
+	
+	<!-- 取得功能个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
+	<select id="selectFunctionsCountByNo" resultType="int">
+		select IFNULL(count(FUNNO), 0)
+		from SystemModule m, SystemFunction f
+		where m.MNO = #{no} and m.MNO = f.MNO
 	</select>
 </mapper>

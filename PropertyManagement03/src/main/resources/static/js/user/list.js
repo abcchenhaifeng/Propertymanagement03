@@ -19,6 +19,7 @@ $(function() {
 	
 	var selectRow_id_tmp = null;
 	
+	setBreadcrumbs(["系统参数","登录账号管理"])
 	setMessage("用户列表", 5000);
 
 	// 显示列表
@@ -32,7 +33,7 @@ $(function() {
 			{ label: '性别', name: 'sex' },
 			{ label: '年龄', name: 'age', sorttype: 'integer'},
 			{ label: '手机号码', name: 'mobible' },
-			{ label: '状态', name: 'status' }
+			{ label: '状态', name: 'status', editoptions:{value:"Y:已激活;N:冻结"} }
 		],
 		viewrecords: true, 
 		autowidth: true,
