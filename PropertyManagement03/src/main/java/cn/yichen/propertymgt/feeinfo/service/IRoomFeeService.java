@@ -2,6 +2,8 @@ package cn.yichen.propertymgt.feeinfo.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import cn.yichen.propertymgt.feeinfo.model.RoomFee;
 
 /**
