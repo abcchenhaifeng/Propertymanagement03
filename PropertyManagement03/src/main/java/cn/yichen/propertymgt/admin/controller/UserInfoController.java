@@ -35,12 +35,12 @@ public class UserInfoController {
 
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户列表page: " + page + " -- rows: " + rows);
 		
-		int count = service.getCountByAll(userInfo, startAge, endAge);
-		int pageCount = (count%rows==0 && count>rows ? count/rows : count/rows+1);
+		int count = service.getCountByCriteria(userInfo, startAge, endAge);
+		int pageCount = (count%rows==0 && count>=rows ? count/rows : count/rows+1);
 		
 		result.setCount(count);
 		result.setPageCount(pageCount);
-		result.setList(service.getListByAllWithPage(userInfo, page, rows, startAge, endAge));
+		result.setList(service.getListByCriteriaWithPage(userInfo, page, rows, startAge, endAge));
 		result.setPage(page);
 		result.setRows(rows);
 

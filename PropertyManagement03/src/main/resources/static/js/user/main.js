@@ -40,7 +40,7 @@ $(function() {
 		height: 365,
 		rowNum: 10,
 		rowList:[10,20,30],
-		loadonce: true,
+		loadonce: false,
 		sortable: true,
 		jsonReader : { 
 		      root: "list", 
@@ -96,14 +96,18 @@ $(function() {
 		var url = $(this).attr("href");
 		// 激活、冻结
 		if(/user\/(active)|(frozen)$/.test(url)) {
-			$.post(rootAddress+url,{id:selectRow_id},function(result){
-            	if(result.status=="OK"){
-					reloadList(); 
-				}
-				setMessage(result.message, 5000);
-				
-				selectRow_id_tmp = selectRow_id =null;
-            });
+			if ( selectRow_id == null ) {
+				setMessage("请选择一个类别", 5000);
+			} else {
+				$.post(rootAddress+url,{id:selectRow_id},function(result){
+					if(result.status=="OK"){
+						reloadList(); 
+					}
+					setMessage(result.message, 5000);
+					
+					selectRow_id_tmp = selectRow_id =null;
+				});
+			}
             
         //  详情
 		} else {

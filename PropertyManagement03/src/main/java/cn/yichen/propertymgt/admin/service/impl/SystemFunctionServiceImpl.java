@@ -48,27 +48,27 @@ public class SystemFunctionServiceImpl implements ISystemFunctionService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<SystemFunction> getListByAll(SystemFunction systemFunction) throws Exception {
-		return mapper.selectListByAll(systemFunction);
+	public List<SystemFunction> getListByCriteria(SystemFunction systemFunction) throws Exception {
+		return mapper.selectListByCriteria(systemFunction);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<SystemFunction> getListByAllWithPage(SystemFunction systemFunction, int page, int rows)
+	public List<SystemFunction> getListByCriteriaWithPage(SystemFunction systemFunction, int page, int rows)
 			throws Exception {
-		return mapper.selectListByAllWithPage(systemFunction, (page-1)*rows, rows);
+		return mapper.selectListByCriteriaWithPage(systemFunction, (page-1)*rows, rows);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public SystemFunction getFunctionByNo(int no) throws Exception {
-		return mapper.selectFunctionByNo(no);
+		return mapper.selectFunctionByNoWithModule(no);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public int getCountByAll(SystemFunction systemFunction) throws Exception {
-		return mapper.selectCountByAll(systemFunction);
+	public int getCountByCriteria(SystemFunction systemFunction) throws Exception {
+		return mapper.selectCountByCriteria(systemFunction);
 	}
 
 }

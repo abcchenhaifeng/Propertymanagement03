@@ -1,0 +1,49 @@
+<script type="text/javascript" src="js/function/details.js"></script>
+<div style="width: 75%; margin: 5% auto;">
+	<form id="details" action="function/modify" method="post">
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;权限号</span>
+			</div>
+			<input type="text" name="no" value="" class="form-control" 
+				aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg" >
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;权限名</span>
+			</div>
+			<input type="text" name="name" value=""
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg">
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">所属类别</span>
+			</div>
+			<select id="module" name="module.no" class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg">
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">权限等级</span>
+			</div>
+			<input type="number" name="levelno" value=""
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg">
+		</div>
+		<br>
+		<div class="input-group">
+			<input type="text" class="form-control" value="" disabled="disabled">
+			<div class="input-group-append" id="button-addon4">
+				<a href="javascript: closeDialog()"
+					class="btn btn-primary">返回</a>&nbsp;
+				<button class="btn btn-primary" type="submit">修改</button>
+			</div>
+		</div>
+	</form>
+</div>

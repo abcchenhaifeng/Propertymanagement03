@@ -36,13 +36,13 @@ public interface ISystemFunctionMapper {
 	public SystemFunction selectFunctionByNoWithModule(int no) throws Exception;
 
 	// 获取功能列表
-	public List<SystemFunction> selectListByAll(@Param("systemFunction") SystemFunction systemFunction)
+	public List<SystemFunction> selectListByCriteria(@Param("systemFunction") SystemFunction systemFunction)
 			throws Exception;
 
 	// 按条件获取功能列表(分页)
-	public List<SystemFunction> selectListByAllWithPage(@Param("systemFunction") SystemFunction systemFunction,
+	public List<SystemFunction> selectListByCriteriaWithPage(@Param("systemFunction") SystemFunction systemFunction,
 			@Param("start") int start, @Param("rows") int rows) throws Exception;
 
 	// 获取个数
-	public int selectCountByAll(@Param("systemFunction") SystemFunction systemFunction) throws Exception;
+	public int selectCountByCriteria(@Param("systemFunction") SystemFunction systemFunction) throws Exception;
 }

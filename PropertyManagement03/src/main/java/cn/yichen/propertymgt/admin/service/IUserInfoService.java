@@ -49,16 +49,16 @@ public interface IUserInfoService {
 	// public void disable(String id) throws Exception;
 
 	// 按条件获取用户列表
-	public List<UserInfo> getListByAll(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception;
+	public List<UserInfo> getListByCriteria(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception;
 
 	// 按条件获取用户列表(分页)
-	public List<UserInfo> getListByAllWithPage(UserInfo userInfo, int page, int rows, Integer startAge, Integer endAge) throws Exception;
+	public List<UserInfo> getListByCriteriaWithPage(UserInfo userInfo, int page, int rows, Integer startAge, Integer endAge) throws Exception;
 
 	// 按ID获取用户
 	public UserInfo getUserById(String id) throws Exception;
 	public UserInfo getUserByIdWithoutOther(String id)  throws Exception;
 
 	// 获取个数
-	public int getCountByAll(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception;
+	public int getCountByCriteria(UserInfo userInfo, Integer startAge, Integer endAge) throws Exception;
 
 }
