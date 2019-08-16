@@ -13,7 +13,12 @@ import org.apache.ibatis.type.Alias;
  */
 @Alias("Room")
 public class Room implements Serializable {
-    private String roomno;				//房间编号
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String roomno;				//房间编号
 
     private String housetypeno;			//房屋户型编号
 

@@ -33,9 +33,6 @@ public interface IRoomService {
 	//获取房间个数
 	public int getCountByAll() throws Exception;
 	
-	// 按id获取
-	public Room getRoomById(String id) throws Exception;
-	
 	//取房间的页数
 	public int getpageCountByAll(int rows) throws Exception;
 	

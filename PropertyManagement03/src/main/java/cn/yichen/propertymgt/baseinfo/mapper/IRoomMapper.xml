@@ -20,11 +20,6 @@
 	</resultMap>
 	
 	
-	<select id="selectRoomById" resultMap="RoomMap">
-		select * from Room
-		where ROOMNO =#{roomno}
-	</select>
-	
 	<select id="selectListByAll" resultMap="RoomMap">
 		select * from Room
 	</select>
@@ -33,7 +28,7 @@
 		select * from Room limit #{start},#{rows}
 	</select>
 	
-	<select id="selectByNo" RoomMap="RoomMap">
+	<select id="selectByNo" resultMap="RoomMap">
 		select *from Room where ROOMNO=#{roomno}
 	</select>
 	

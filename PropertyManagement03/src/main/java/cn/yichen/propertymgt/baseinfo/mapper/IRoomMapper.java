@@ -30,9 +30,6 @@ public interface IRoomMapper {
 	@Update("update Room set HouseTypeNo=#{housetypeno},BuildingNo=#{buildingno},DepartmentCode=#{departmentcode},Floor=#{floor},RoomCode=#{roomcode},BuildingArea=#{buildingarea},FeeArea=#{feearea},RoomStatus=#{roomstatus},RoomType=#{roomtype} where ROOMNO=#{roomno}")
 	public void update (Room room) throws Exception;
 	
-	// 根据id查询, 返回房间
-	public Room selectRoomById(String id) throws Exception;
-	
 	// 根据id查询, 返回房间功能
 	public Room selectRoomByIdWithFunctions(String id);
 	
