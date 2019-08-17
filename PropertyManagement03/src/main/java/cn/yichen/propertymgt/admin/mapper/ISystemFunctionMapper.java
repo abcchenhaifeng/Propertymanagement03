@@ -42,7 +42,12 @@ public interface ISystemFunctionMapper {
 	// 按条件获取功能列表(分页)
 	public List<SystemFunction> selectListByCriteriaWithPage(@Param("systemFunction") SystemFunction systemFunction,
 			@Param("start") int start, @Param("rows") int rows) throws Exception;
+	
+	public List<SystemFunction> selectListByCriteriaAndUseridWithPage(@Param("systemFunction") SystemFunction systemFunction,
+			@Param("userid") String userid, @Param("start") int start, @Param("rows") int rows) throws Exception;
 
 	// 获取个数
 	public int selectCountByCriteria(@Param("systemFunction") SystemFunction systemFunction) throws Exception;
+
+	public int selectCountByCriteriaAndUserid(@Param("systemFunction") SystemFunction systemFunction, @Param("userid") String userid) throws Exception;
 }

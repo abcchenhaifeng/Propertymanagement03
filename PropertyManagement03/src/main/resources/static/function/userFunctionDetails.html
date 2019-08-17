@@ -4,7 +4,7 @@
 		max-width: 8rem;
 	}
 </style>
-<div class="list-box">
+<div class="function-list-box">
 	<div class="box-header">
 		<div class="row">
 			<div class="col">
@@ -49,11 +49,11 @@
 							</div>
 						</div>
 						<div class="col-auto my-1">
-							<button type="button" class="btn btn-outline-secondary" id="SearchButton">检索</button>
+							<button type="button" class="btn btn-outline-secondary" id="DetailsSearchButton">检索</button>
 							<button type="reset" class="btn btn-outline-secondary" id="reset">重置</button>
 						</div>
 						<div class="col-auto text-right" style="margin: 0 0 0 auto;">
-							<a href="user/add/function" class="btn btn-primary list-link" title="添加">添加</a>
+							<a href="function/userAddFunction.html" class="btn btn-primary list-link" title="添加">添加</a>
 							<a href="user/delete/function" class="btn btn-primary list-link" title="删除">删除</a>
 						</div>
 					</div>
@@ -64,5 +64,8 @@
 	<div class="box-body">
 		<table id="userFunctionDetailsGrid" class="table table-bordered"></table>
 		<div id="userFunctionDetailsGridPager"></div>
+	</div>
+	<div id="user-add-dialog">
+		<!-- alert dialog -->
 	</div>
 </div>

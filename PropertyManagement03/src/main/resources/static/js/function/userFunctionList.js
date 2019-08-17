@@ -85,6 +85,7 @@ $(function() {
 					title: $(this).attr("title"),
 					width: "80%",
 					maxWidth: "845px",
+					position: { my: "center", at: "top+20%", of: window  },
 					close: function(event, ui) {
 						doSomethingWhenDialogClose();
 						dialogArea.dialog("destroy");

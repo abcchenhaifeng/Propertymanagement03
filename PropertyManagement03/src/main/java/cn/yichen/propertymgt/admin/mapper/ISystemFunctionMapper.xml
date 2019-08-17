@@ -23,7 +23,7 @@
 
 	<sql id="systemFunctionWhen">
 		<if test="systemFunction != null">
-			<if test="systemFunction.no != null"> and FUNNO = #{systemFunction.no} </if>
+			<if test="systemFunction.no != null"> and f.FUNNO = #{systemFunction.no} </if>
 			<if test="systemFunction.module != null">
 				<if test="systemFunction.module.no != null"> and f.MNO = #{systemFunction.module.no} </if>
 			</if>
@@ -41,7 +41,7 @@
 
 	<select id="selectFunctionByNo"
 		resultMap="SystemFunctionMap">
-		select FUNNO, FUNNAME, FUNURL, LevelNo, MNO
+		select f.FUNNO, FUNNAME, FUNURL, LevelNo, MNO
 		from
 		SystemFunction f
 		where FUNNO = #{no}
@@ -49,13 +49,13 @@
 
 	<select id="selectFunctionByNoWithModule"
 		resultMap="SystemFunctionMapWithModule">
-		select FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
+		select f.FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
 		from SystemFunction f, SystemModule m
-		where FUNNO = #{no} and f.MNO = m.MNO
+		where f.FUNNO = #{no} and f.MNO = m.MNO
 	</select>
 
 	<select id="selectListByCriteria" resultMap="SystemFunctionMapWithModule">
-		select FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
+		select f.FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
 		from SystemFunction f, SystemModule m
 		<where>
 			f.MNO = m.MNO
@@ -65,20 +65,40 @@
 
 	<select id="selectListByCriteriaWithPage"
 		resultMap="SystemFunctionMapWithModule">
-		select FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
+		select f.FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
 		from SystemFunction f, SystemModule m
 		<where>
 			f.MNO = m.MNO
 			<include refid="systemFunctionWhen"></include>
-			and FUNNO >= (SELECT FUNNO FROM SystemFunction ORDER BY FUNNO LIMIT
+			and f.FUNNO >= (SELECT f.FUNNO FROM SystemFunction ORDER BY f.FUNNO LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+
+	<select id="selectListByCriteriaAndUseridWithPage"
+		resultMap="SystemFunctionMapWithModule">
+		select f.FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
+		from SystemFunction f, SystemFunctionUser fu, SystemModule m
+		<where>
+			fu.USERID = #{userid} and fu.FUNNO = f.FUNNO and f.MNO = m.MNO
+			<include refid="systemFunctionWhen"></include>
+			and f.FUNNO >= (SELECT f.FUNNO FROM SystemFunction ORDER BY FUNNO LIMIT
 			#{start}, 1) LIMIT #{rows}
 		</where>
 	</select>
 
 	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
 	<select id="selectCountByCriteria" resultType="int">
-		select IFNULL(count(FUNNO), 0) from SystemFunction f
+		select IFNULL(count(f.FUNNO), 0) from SystemFunction f
 		<where>
+			<include refid="systemFunctionWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteriaAndUserid" resultType="int">
+		select IFNULL(count(f.FUNNO), 0) from SystemFunction f, SystemFunctionUser fu
+		<where>
+			fu.USERID = #{userid} and fu.FUNNO = f.FUNNO
 			<include refid="systemFunctionWhen"></include>
 		</where>
 	</select>

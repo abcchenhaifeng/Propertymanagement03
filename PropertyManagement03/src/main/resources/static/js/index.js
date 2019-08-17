@@ -87,9 +87,10 @@ $(function() {
 
 });
 
-function closeDialog() {
-	dialogArea.dialog("destroy");
-	dialogArea.html("");
+function closeDialog(e) {
+	if ( typeof e == "undefined" ) e = dialogArea;
+	e.dialog("destroy");
+	e.html("");
 }
 
 function setMessage(text, timeout, flag) {

@@ -30,10 +30,13 @@ public interface ISystemFunctionService {
 		
 		// 按条件获取列表(分页)
 		public List<SystemFunction> getListByCriteriaWithPage(SystemFunction systemFunction, int page, int rows) throws Exception;
+		public List<SystemFunction> getListByCriteriaAndUseridWithPage(SystemFunction systemFunction, String userid, int page, int rows) throws Exception;
 		
 		// 按no获取
 		public SystemFunction getFunctionByNo(int no) throws Exception;
 		
 		// 获取个数
 		public int getCountByCriteria(SystemFunction systemFunction) throws Exception;
+
+		public int getCountByCriteriaAndUserid(SystemFunction systemFunction, String userid) throws Exception;
 }

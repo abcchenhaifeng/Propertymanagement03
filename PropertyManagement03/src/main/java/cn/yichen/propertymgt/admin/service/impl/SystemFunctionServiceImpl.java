@@ -60,6 +60,12 @@ public class SystemFunctionServiceImpl implements ISystemFunctionService {
 	}
 
 	@Override
+	public List<SystemFunction> getListByCriteriaAndUseridWithPage(SystemFunction systemFunction, String userid,
+			int page, int rows) throws Exception {
+		return mapper.selectListByCriteriaAndUseridWithPage(systemFunction, userid, (page-1)*rows, rows);
+	}
+	
+	@Override
 	@Transactional(readOnly = true)
 	public SystemFunction getFunctionByNo(int no) throws Exception {
 		return mapper.selectFunctionByNoWithModule(no);
@@ -69,6 +75,11 @@ public class SystemFunctionServiceImpl implements ISystemFunctionService {
 	@Transactional(readOnly = true)
 	public int getCountByCriteria(SystemFunction systemFunction) throws Exception {
 		return mapper.selectCountByCriteria(systemFunction);
+	}
+
+	@Override
+	public int getCountByCriteriaAndUserid(SystemFunction systemFunction, String userid) throws Exception {
+		return mapper.selectCountByCriteriaAndUserid(systemFunction, userid);
 	}
 
 }

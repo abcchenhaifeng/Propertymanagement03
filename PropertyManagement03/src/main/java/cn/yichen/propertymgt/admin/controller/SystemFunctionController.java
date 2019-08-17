@@ -59,6 +59,28 @@ public class SystemFunctionController {
 
 		return result;
 	}
+	
+	// [按条件]取得列表,有分页
+	@GetMapping("/user/list/page")
+	public ResultMessage<SystemFunction> listByUseridAndPage(SystemFunction systemFunction,
+			@RequestParam(required = true)String userid,
+			@RequestParam(required = false, defaultValue = "10") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
+		
+		ResultMessage<SystemFunction> result = new ResultMessage<SystemFunction>("OK",
+				"取得系统功能列表page: " + page + " -- rows: " + rows);
+		
+		int count = service.getCountByCriteriaAndUserid(systemFunction, userid);
+		int pageCount = (count % rows == 0 && count >= rows ? count / rows : count / rows + 1);
+		
+		result.setCount(count);
+		result.setPageCount(pageCount);
+		result.setList(service.getListByCriteriaAndUseridWithPage(systemFunction, userid, page, rows));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
+	}
 
 	// 获取
 	@GetMapping("/get")

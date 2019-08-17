@@ -4,6 +4,9 @@
  * @Description: 系统功能前端控制JS
  */
 
+var addDialogArea = null;
+var selectRow_funno = null;
+var curr_id = selectRow_id;
 $(function() {
 	var functionNo = null;
 	var functionName = null;
@@ -11,17 +14,14 @@ $(function() {
 	module.no = null;
 	var levelNo = null;
 	
-	var reloadList = null;
-	var selectRow_id_tmp = null;
-
 	setBreadcrumbs(["系统参数","系统权限管理","用户权限管理","查看权限"]);
 	setMessage("查看权限", 5000);
 
 	// 显示列表
 	$.jgrid.defaults.styleUI = 'Bootstrap';
 	$("table#userFunctionDetailsGrid").jqGrid({
-		url: rootAddress+'user/get/function',
-		postData : {id: selectRow_id},
+		url: rootAddress+'function/user/list/page',
+		postData : {userid: curr_id},
 		datatype: "json",
 		colModel: [
 			{ label: '权限号', name: 'no' },
@@ -36,7 +36,7 @@ $(function() {
 		rowList:[10,20,30],
 		loadonce: true,
 		jsonReader : { 
-		      root: "model.functions", 
+		      root: "list", 
 		      page: "page", 
 		      total: "pageCount", 
 		      records: "count", 
@@ -46,8 +46,7 @@ $(function() {
 		pager: "#userFunctionDetailsGridPager",
 		multiselect:false,
 		onSelectRow:function(id){
-			selectRow_id = id;
-			selectRow_id_tmp = id;
+			selectRow_funno = id;
 		}
 	});
 	
@@ -59,19 +58,19 @@ $(function() {
 	});
 	
 	// 点击检索事件处理
-	$("button#SearchButton").on("click", function() {
+	$("button#DetailsSearchButton").on("click", function() {
 		functionNo = $("input#functionNo").val();
 		functionName = $("input#functionName").val();
 		module.no = $("select#module").val();
 		levelNo = $("input#levelNo").val();
 		
-		reloadList();
+		reloadFunctionList();
 	});
 	
 	// 更新jQGrid的列表显示
-	reloadList = function () {
+	function reloadFunctionList () {
 		
-		postData = { };
+		postData = { userid: curr_id };
 		if (functionNo != "") postData.no = functionNo;
 		if (functionName != "") postData.name = functionName;
 		if (module.no != "") postData['module.no'] = module.no;
@@ -84,28 +83,35 @@ $(function() {
 		}, true).trigger("reloadGrid");
 	}
 	
-	// 修改
-	$(".list-box a.list-link").on("click", function(e) {
+	// 添加、删除
+	$(".function-list-box a.list-link").on("click", function(e) {
 		e.preventDefault();
 		var url = $(this).attr("href");
-		if ( selectRow_id == null ) {
-			setMessage("请选择一个类别", 5000);
-		} else {
-			$("section#main #dialog").load(url, () => {
-				selectRow_id = selectRow_id_tmp;
-				dialogArea = $("section#main #dialog");
-				dialogArea.dialog({
+
+		if ( /function\/userAddFunction.html/.test(url) ) {
+			
+			$(".function-list-box #user-add-dialog").load(url, () => {
+
+				addDialogArea = $(".function-list-box #user-add-dialog");
+				addDialogArea.dialog({
 					title: $(this).attr("title"),
+					modal: true,
 					width: "80%",
 					maxWidth: "845px",
 					close: function(event, ui) {
 						doSomethingWhenDialogClose();
-						dialogArea.dialog("destroy");
-						dialogArea.html("");
+						addDialogArea.dialog("destroy");
+						addDialogArea.html("");
 						doSomethingWhenDialogClose = function () {};
 					}
 				});
 			});
+		} else {
+			if ( selectRow_funno == null ) {
+				jqueryEject.Etoast('请选择一个功能',1);
+			} else {
+				
+			}
 		}
 	});
 });
