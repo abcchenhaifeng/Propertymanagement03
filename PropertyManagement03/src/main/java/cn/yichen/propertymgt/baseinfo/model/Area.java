@@ -5,9 +5,10 @@ import java.io.Serializable;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:29:53
- * @author YiChen(李冠永)
- * #小区
+ * 
+ * @date:2019年8月16日下午11:59:47
+ * @author LiYi(李海宏)
+ * @Description：描述小区表的属性
  *
  */
 @Alias("Area")

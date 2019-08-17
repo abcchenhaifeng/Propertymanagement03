@@ -24,7 +24,7 @@
   </insert>
   
   <update id="update" flushCache="true">
-   update Customer set Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus}where CustomerNo=#{customerNo}
+   update Customer set Cname=#{cname}, Contact=#{contact}, CardCode=#{cardcode}, Mobile=#{mobile}, FeeStartDate=#{feeStartDate},FeeEndDate=#{feeEndDate},Cstatus=#{cstatus} where CustomerNo=#{customerNo}
   </update>
   
   <delete id="delete" flushCache="true">

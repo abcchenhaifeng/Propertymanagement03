@@ -7,14 +7,27 @@
 	<cache />
 	<resultMap id="BuildingTypeMap" type="BuildingType">
 	<id column="TYPENO" property="typeno" />
-	<id column="TYPENAME" property="typename" />
+	<result column="TYPENAME" property="typename" />
 	</resultMap>
+	
+	<insert id="create" keyProperty="typeno" keyColumn="TYPENO" useGeneratedKeys="true" flushCache="true" >
+	insert into BuildingType (TYPENAME) values(#{typename}) 
+	</insert>
+	
+	<update  id="update" flushCache="true">
+	 update BuildingType set TYPENAME=#{typename} where TYPENO=#{typeno}
+	</update>
+	
+	
+	<delete  id="delete" flushCache="true">
+	delete from BuildingType where TYPENO=#{typeno}
+	</delete>
 	
 	<select id="selectBuildingTypeById" resultMap="BuildingTypeMap">
 		select * from BuildingType where TYPENO = #{typeno}
 	</select>
 	
-	<select id="selectListByAll()" resultMap="BuildingTypeMap">
+	<select id="selectListByAll" resultMap="BuildingTypeMap">
 		select * from BuildingType 
 	</select>
 	

@@ -1,5 +1,7 @@
 package cn.yichen.propertymgt.baseinfo.mapper;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,6 @@ public class IBuildingTypeMapperTest {
 	@Test
 	public void testCreate() throws Exception {
 		BuildingType BuildingType = new BuildingType();
-		BuildingType.setTypeno(5);
 		BuildingType.setTypename("威武型");
         mapper.create(BuildingType);
 	}
@@ -39,12 +40,15 @@ public class IBuildingTypeMapperTest {
 	//测试删除
 	@Test
 	public void testDelete() throws Exception {
-		mapper.delete("8");
+		mapper.delete("9");
 	}
 
 	@Test
-	public void testSelectListByAll() {
-	
+	public void testSelectListByAll() throws Exception {
+	List<BuildingType> list = mapper.selectListByAll();
+	for (BuildingType buildingType : list) {
+		System.out.println(buildingType);
+	}
 	}
 
 }

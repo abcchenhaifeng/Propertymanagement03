@@ -5,27 +5,20 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-
-
-/**
- * 2019年8月7日23:30:19
- * @author YiChen(李冠永)
- * #建筑类型
- *
- */
 /**
  * 
- * @data:2019年8月8日下午9:49:42
- * @author： 陈海锋
- * @Description:
+ * @date:2019年8月16日下午11:41:06
+ * @author LiYi(李海宏)
+ * @Description：描述建筑楼房的关系
  *
  */
 @Alias("BuildingType")
 public class BuildingType implements Serializable {
 	
-	
+	//建筑物类型
     private Integer typeno;
 
+    //建筑物名称
     private String typename;
 
     public Integer getTypeno() {

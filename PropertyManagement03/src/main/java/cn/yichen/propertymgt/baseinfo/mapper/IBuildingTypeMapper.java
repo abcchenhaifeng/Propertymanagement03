@@ -19,19 +19,19 @@ import cn.yichen.propertymgt.baseinfo.model.BuildingType;
 @Mapper
 public interface IBuildingTypeMapper {
 	//添加
-	@Insert("insert into BuildingType(TYPENO,TYPENAME) values(#{typeno},#{typename})")
+	//@Insert("insert into BuildingType(TYPENO,TYPENAME) values(#{typeno},#{typename})")
 	public void create(BuildingType typeno) throws Exception;
 	//更新
-	@Update("updata BuildingType set TYPENAME=#{typename} where TYPENO=#{typeno}")
+	//@Update("updata BuildingType set TYPENAME=#{typename} where TYPENO=#{typeno}")
 	public void update(BuildingType typeno) throws Exception;
 	//删除
-	@Delete("delete from BuildingType where TYPENO = #{typeno}")
+	//@Delete("delete from BuildingType where TYPENO = #{typeno}")
 	public void delete(String id) throws Exception;
 	
 	public BuildingType selectBuildingTypeById(String id) throws Exception;
 	
 	//只取得模块列表，不取得关联的功能列表。
-	public List<BuildingType> selectListByAll(BuildingType typeno) throws Exception;
+	public List<BuildingType> selectListByAll() throws Exception;
 	
 	
 	
