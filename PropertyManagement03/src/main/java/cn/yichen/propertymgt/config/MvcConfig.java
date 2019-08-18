@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 // 启用MVC注解类解析
 @EnableWebMvc
-public class SpringMVCConfig implements WebMvcConfigurer {
+public class MvcConfig implements WebMvcConfigurer {
 
 	// 配置全局CORS
 	@Override

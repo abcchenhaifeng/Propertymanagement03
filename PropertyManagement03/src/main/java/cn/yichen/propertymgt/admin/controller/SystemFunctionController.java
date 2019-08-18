@@ -99,7 +99,6 @@ public class SystemFunctionController {
 	public ResultMessage<SystemFunction> get(int no) throws Exception {
 		ResultMessage<SystemFunction> result = new ResultMessage<SystemFunction>("OK", "获取系统功能详情");
 		result.setModel(service.getFunctionByNo(no));
-
 		return result;
 	}
 
