@@ -140,4 +140,11 @@ public class UserInfoController {
 		service.addFunctions(id, funNos);
 		return new ResultMessage<UserInfo>("OK",  "批量添加功能成功");
 	}
+	
+	// 删除功能
+	@PostMapping("/delete/function")
+	public ResultMessage<UserInfo> deleteFunction(String id, int funNo) throws Exception {
+		service.deleteFunction(id, funNo);
+		return new ResultMessage<UserInfo>("OK",  "删除功能成功");
+	}
 }

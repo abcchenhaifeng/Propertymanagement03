@@ -51,7 +51,7 @@
 
 	<insert id="addFunction" flushCache="true">insert into SystemFunctionUser(USERID, FUNNO) values(#{id}, #{funNo})</insert>
 
-	<delete id="deleteFunction" flushCache="true">delete from SystemFunctionUser where USERID = #{id} and FUNNO = #{funNo}"</delete>
+	<delete id="deleteFunction" flushCache="true">delete from SystemFunctionUser where USERID = #{id} and FUNNO = #{funNo}</delete>
 
 	<select id="selectUserInfoById"
 		resultMap="UserInfoMapWithFunction">

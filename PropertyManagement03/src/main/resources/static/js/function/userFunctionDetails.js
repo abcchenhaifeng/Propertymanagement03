@@ -6,6 +6,7 @@
 
 var addDialogArea = null;
 var selectRow_funno = null;
+var reloadFunctionList = null;
 var curr_id = selectRow_id;
 $(function() {
 	var functionNo = null;
@@ -68,7 +69,7 @@ $(function() {
 	});
 	
 	// 更新jQGrid的列表显示
-	function reloadFunctionList () {
+	reloadFunctionList = function () {
 		
 		postData = { userid: curr_id };
 		if (functionNo != "") postData.no = functionNo;
@@ -110,7 +111,13 @@ $(function() {
 			if ( selectRow_funno == null ) {
 				jqueryEject.Etoast('请选择一个功能',1);
 			} else {
-				
+				$.post(rootAddress+"user/delete/function", {id: curr_id, funNo: selectRow_funno}, (rs)=>{
+					$("table#userFunctionDetailsGrid").jqGrid("delRowData", selectRow_funno);
+					jqueryEject.Etoast(rs.message,1);
+					selectRow_funno = null
+				}).fail(function() {
+				    jqueryEject.Etoast("删除失败",1);
+				});
 			}
 		}
 	});

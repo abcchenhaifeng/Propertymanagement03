@@ -6,22 +6,31 @@
 
 $(function() {
 	
+	var funcList = null;
+	var addSelect = null;
+	
 	$("form#userAddFunction").attr("action", rootAddress+$("form#userAddFunction").attr("action"));
 	$("form#userAddFunction input[name='id']").val(curr_id);
-	$.getJSON(rootAddress+"function/list", function(data) {
+	$.getJSON(rootAddress+"function/list/not/user", {userid: curr_id}, function(data) {
+		funcList = data.list;
 		
-		var addSelect = $("form#userAddFunction select[name='funNo']");
+		addSelect = $("form#userAddFunction select[name='funNo']");
 		$.each(data.list, function(index, func) {
 			addSelect.append('<option value="'+func.no+'">'+func.name+'</option>');
 		});
 	});
 	
-	$("form#userAddFunction").ajaxForm((rs) => {
-		alert("afaf");
-		if ( rs.status == "OK" ) {
-			if ( typeof reloadFunctionList != "undefined" ) reloadFunctionList();
-			closeDialog(addDialogArea);
+	$("form#userAddFunction").ajaxForm({
+		success: (rs) => {
+			if ( rs.status == "OK" ) {
+				var funcObj = funcList[addSelect.prop("selectedIndex")];
+				$("table#userFunctionDetailsGrid").jqGrid("addRowData", funcObj.no, funcObj);
+				closeDialog(addDialogArea);
+			}
+			jqueryEject.Etoast(rs.message,1);
+		},
+		error: (rs) => {
+			jqueryEject.Etoast("添加失败,已拥有该权限",1);
 		}
-		jqueryEject.Etoast(rs.message,1);
 	});
 });

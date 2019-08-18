@@ -82,4 +82,9 @@ public class SystemFunctionServiceImpl implements ISystemFunctionService {
 		return mapper.selectCountByCriteriaAndUserid(systemFunction, userid);
 	}
 
+	@Override
+	public List<SystemFunction> getListByCriteriaAndNotUser(SystemFunction systemFunction, String userid) throws Exception {
+		return mapper.selectListByCriteriaAndNotUser(systemFunction, userid);
+	}
+
 }

@@ -50,4 +50,6 @@ public interface ISystemFunctionMapper {
 	public int selectCountByCriteria(@Param("systemFunction") SystemFunction systemFunction) throws Exception;
 
 	public int selectCountByCriteriaAndUserid(@Param("systemFunction") SystemFunction systemFunction, @Param("userid") String userid) throws Exception;
+
+	public List<SystemFunction> selectListByCriteriaAndNotUser(@Param("systemFunction") SystemFunction systemFunction, @Param("userid") String userid) throws Exception;
 }

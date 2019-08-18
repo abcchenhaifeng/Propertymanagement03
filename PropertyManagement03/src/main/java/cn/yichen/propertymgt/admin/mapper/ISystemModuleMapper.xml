@@ -26,11 +26,11 @@
 		</if>
 	</sql>
 
-	<insert id="create">insert into SystemModule(MNAME) values(#{name})</insert>
+	<insert id="create" flushCache="true">insert into SystemModule(MNAME) values(#{name})</insert>
 
-	<delete id="delete">delete from SystemModule where MNO = #{no}</delete>
+	<delete id="delete" flushCache="true">delete from SystemModule where MNO = #{no}</delete>
 	
-	<update id="update">update SystemModule set MNAME = #{name} where MNO = #{no}</update>
+	<update id="update" flushCache="true">update SystemModule set MNAME = #{name} where MNO = #{no}</update>
 
 	<select id="selectModuleByNo" resultMap="SystemModuleMap">
 		select MNO, MNAME

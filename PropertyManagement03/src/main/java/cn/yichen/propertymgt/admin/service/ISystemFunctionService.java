@@ -39,4 +39,6 @@ public interface ISystemFunctionService {
 		public int getCountByCriteria(SystemFunction systemFunction) throws Exception;
 
 		public int getCountByCriteriaAndUserid(SystemFunction systemFunction, String userid) throws Exception;
+
+		public List<SystemFunction> getListByCriteriaAndNotUser(SystemFunction systemFunction, String userid) throws Exception;
 }

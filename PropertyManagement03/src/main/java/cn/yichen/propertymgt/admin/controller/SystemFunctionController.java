@@ -38,6 +38,18 @@ public class SystemFunctionController {
 
 		return result;
 	}
+	
+	@GetMapping("/list/not/user")
+	public ResultMessage<SystemFunction> listNotUserid(SystemFunction systemFunction, 
+			@RequestParam(required = true) String userid) throws Exception {
+		
+		ResultMessage<SystemFunction> result = new ResultMessage<SystemFunction>("OK", "取得系统功能列表");
+		List<SystemFunction> list = service.getListByCriteriaAndNotUser(systemFunction, userid);
+		result.setCount(list.size());
+		result.setList(list);
+		
+		return result;
+	}
 
 	// [按条件]取得列表,有分页
 	@GetMapping("/list/page")

@@ -63,6 +63,18 @@
 		</where>
 	</select>
 
+	<select id="selectListByCriteriaAndNotUser" flushCache="true" resultMap="SystemFunctionMapWithModule">
+		select f.FUNNO, f.FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
+		from SystemFunction f, SystemModule m
+		<where>
+			f.FUNNO not in (select FUNNO
+							from SystemFunctionUser
+							WHERE Userid = #{userid})
+			and f.MNO = m.MNO
+			<include refid="systemFunctionWhen"></include>
+		</where>
+	</select>
+
 	<select id="selectListByCriteriaWithPage"
 		resultMap="SystemFunctionMapWithModule">
 		select f.FUNNO, FUNNAME, FUNURL, LevelNo, f.MNO, m.MNAME
