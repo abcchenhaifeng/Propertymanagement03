@@ -3,9 +3,11 @@ package cn.yichen.propertymgt.baseinfo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import cn.yichen.propertymgt.baseinfo.model.Room;
 import cn.yichen.propertymgt.baseinfo.service.IRoomService;
@@ -20,6 +22,8 @@ import cn.yichen.propertymgt.vo.ResultMessage;
  */
 @RestController
 @RequestMapping("/room")
+@EnableWebMvc
+@CrossOrigin
 public class RoomController {
 	@Autowired
 	private IRoomService roomService=null;
@@ -53,7 +57,7 @@ public class RoomController {
 	}
 	
 	//取得所有房间列表，有分页
-	@RequestMapping("/list/all/page")
+	@RequestMapping(value="/list/all/page")
 	public ResultMessage<Room> getListByAllWithPage(@RequestParam(required = false,defaultValue = "10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
 		ResultMessage<Room> result=new ResultMessage<Room>("OK","取得房间分页模式成功");
 		result.setCount(roomService.getCountByAll(2));
@@ -65,7 +69,7 @@ public class RoomController {
 		return result;
 	}
 	//取得所有房间列表，无分页
-	@RequestMapping("/list/all")
+	@RequestMapping(value="/list/all")
 	public List<Room> getListByAll() throws Exception {
 		return roomService.getListByAll();
 	}
