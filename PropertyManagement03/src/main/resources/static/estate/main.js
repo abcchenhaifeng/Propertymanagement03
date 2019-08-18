@@ -14,7 +14,7 @@ $(function(){
 		//取得客户列表，分页模式
 		
 		//调用后台取得客户列表REST API
-		$.getJSON(remote+"customer/list/all/page",{rows:rows,page:page},function(data){
+		$.getJSON(remote+"room/list/all/page",{rows:rows,page:page},function(data){
 			//显示个数和页数
 			$("span#count").html(data.count);
 			$("span#pagecount").html(data.page+"/"+data.pageCount);
