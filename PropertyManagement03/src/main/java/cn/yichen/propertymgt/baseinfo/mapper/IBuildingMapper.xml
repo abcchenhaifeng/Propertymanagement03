@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper">
 	<cache />
-	<resultMap id="BuildingMap" type="building">
+	<resultMap id="BuildingResultMap" type="building">
 		<id column ="BuildingNo" property="buildingno"/>
 		<result column="AreaNo" property="areano"/>
 		<result column="BCODE" property="dcode"/>
@@ -15,9 +15,26 @@
 		<result column="TotalHouse" property="totalhouse"/>
 	</resultMap>
 	
-	<!-- 
-	<insert id="insert" property="buildingno" column="BuildingNo" type="building" useGeneratedKeys="true" flushCache="true">
+	
+	<insert id="insert" keyProperty="buildingno" keyColumn="BuildingNo"  useGeneratedKeys="true" flushCache="true">
 	insert into Building(AreaNo,BCODE,BAddress,BuildingTypeNo,Direction,TotalHome,TotalHouse) values (#{areano},#{dcode},#{baddress},#{buildingtypeno},#{direction},#{totalhome},#{totalhouse})
 	
-	</insert> -->
+	</insert>
+	
+	<update id="update" flushCache="true">
+		update Building set AreaNo=#{areano},BCODE=#{dcode},BAddress=#{baddress},BuildingTypeNo=#{buildingtypeno},Direction=#{direction},TotalHome=#{totalhome},TotalHouse={totalhouse}
+	</update>
+	
+	<delete id="delete" flushCache="true">
+		delete from Building where BuildingNo=#{buildingno}
+	</delete>
+	
+	<select id="selectCountByAll">
+		select * from Building
+	</select>
+	<select id="selectByNo" resultMap="BuildingResultMap">
+		select * from Building where BuildingNo=#{buildingno}
+	</select>
+	
+	
 </mapper>

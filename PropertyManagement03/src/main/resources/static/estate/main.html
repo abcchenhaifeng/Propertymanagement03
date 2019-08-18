@@ -4,31 +4,32 @@
       <div class="box">
         <div class="box-header">
           <div class="row">
-             <div class="col-md-6"> <h4 class="box-title">客户列表</h4></div>
+             <div class="col-md-6"> <h4 class="box-title">房间档案</h4></div>
              <div class="col-md-6 text-right">
-             	<a href="#" id="CustomerModifyLink" class="btn btn-info">修改</a> 
-            	<a href="#" id="CustomerDelteLink" class="btn btn-info">删除</a>
-             	<a href="#" id="CustomerViewLink" class="btn btn-info">详细</a>
-             	 <a href="#" id="CustomerAddLink" class="btn btn-info">增加</a>
+             	<a href="#" id="RoomModifyLink " class="btn btn-info">修改</a> 
+            	<a href="#" id="RoomDeleteLink" class="btn btn-info">删除</a>
+             	<a href="#" id="RoomiAddLink" class="btn btn-info">增加</a>
               </div>
           </div>
          
         </div>
         <!-- /.box-header -->
       <div class="box-body" id="maincontent">
-        <table id="CustomerTable" class="table table-bordered table-hover">
+        <table id="RoomTable" class="table table-bordered table-hover">
           <thead>
           <!--使得表格中的字体居中显示-->
           <!--style="text-align:center; vertical-align: middle;"  -->
           <tr>
-            <th>客户序号</th>
-            <th>客户类型编号</th>
-            <th>客户名称</th>
-            <th>联系人姓名</th>
-            <th>联系号码</th>
-            <th>收费开始日期</th>
-            <th>收费截至日期</th>
-            <th>客户状态</th>
+            <th>房间编号</th>
+            <th>房屋户型编号</th>
+            <th>楼宇</th>
+            <th>单元</th>
+            <th>楼层</th>
+            <th>房间号</th>
+            <th>使用面积</th>
+            <th>缴费面积</th>
+			<th>房间状态</th>
+			<th>房间类型</th>
           </tr>
           </thead>
           <tbody>
@@ -37,7 +38,7 @@
 		</table>
 		<div class="row"  style="margin-top:10px">
 		   <div class="col-md-6 text-left">
-		    部门个数:<span id="count" ></span>  页数:<span id="pagecount"></span>
+		    房间个数:<span id="count" ></span>  页数:<span id="pagecount"></span>
 		   </div>
 		   <div class="col-md-6 text-right" id="page_nav">
 		   <a href="top" class="btn btn-info">首页</a> 
