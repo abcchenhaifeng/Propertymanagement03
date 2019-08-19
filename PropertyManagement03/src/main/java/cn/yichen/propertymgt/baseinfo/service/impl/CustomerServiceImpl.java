@@ -186,17 +186,17 @@ public class CustomerServiceImpl implements ICustomerService {
 		}
 		return result;
 	}
+
+	@Override
+	public List<Customer> getListByAllandFk() throws Exception {
+		return mapper.selectCustomerByAllAndFk();
+	}
 	
 	
 	}
 
 
 
-	
-//	@Override
-//	@Transactional(readOnly = true)
-//	public List<Customer> getListByAllandHomeWithPage(int page, int rows) throws Exception {
-//		return mapper.selectCustomerByAllandHomeWithPage(rows*(page-1), rows);
-//	}
+
 
 

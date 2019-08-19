@@ -21,7 +21,7 @@ public class CustomerHome implements Serializable {
 
     private String customerno;   //客户号
 
-    private String roomno;       //房间号
+    private Room roomno;       //房间号
 
     private String livingtypeno;   //居住类型号
     
@@ -77,11 +77,11 @@ public class CustomerHome implements Serializable {
         this.customerno = customerno;
     }
 
-    public String getRoomno() {
+    public Room getRoomno() {
         return roomno;
     }
 
-    public void setRoomno(String roomno) {
+    public void setRoomno(Room roomno) {
         this.roomno = roomno;
     }
 
@@ -144,7 +144,7 @@ public class CustomerHome implements Serializable {
 	@Override
 	public String toString() {
 		return "CustomerHome [chno=" + chno + ", customerno=" + customerno + ", roomno=" + roomno + ", livingtypeno="
-				+ livingtypeno + ", customer=" + customer + ", roomfee=" + roomfee + ", receivedate=" + receivedate
+				+ livingtypeno + ", customer=" + customer + ", receivedate=" + receivedate
 				+ ", livedate=" + livedate + ", feestartdate=" + feestartdate + ", feeenddate=" + feeenddate
 				+ ", humancount=" + humancount + ", chstatus=" + chstatus + "]";
 	}

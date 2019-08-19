@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
 import cn.yichen.propertymgt.baseinfo.model.CustomerType;
+import cn.yichen.propertymgt.baseinfo.model.Room;
 
 /**
  * 
@@ -21,33 +22,41 @@ import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 @Mapper
 public interface ICustomerHomeMapper {
 
-	 // 添加
-	@Insert("insert into CustomerHome(CHNO, CustomerNo, RoomNo, LivingTypeNo, ReceiveDate, LiveDate, FeeStartDate,FeeEndDate,HumanCount,CHStatus) values(#{chno}, #{customerno}, #{roomno},#{livingtypeno}, #{receivedate}, #{livedate}, #{feestartdate}, #{feeenddate},#{humancount},#{chstatus})")
+	// 添加
 	public void create(CustomerHome chome) throws Exception;
 
 	// 删除
-	@Delete("delete from CustomerHome where CHNO = #{chno}")
-	public void delete(String id) throws Exception;
+	public void delete(CustomerHome chome) throws Exception;
 
 	// 更新
-	@Update("update CustomerHome set CustomerNo=#{customerno}, RoomNo=#{roomno}, LivingTypeNo=#{livingtypeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}")
 	public void update(CustomerHome chome) throws Exception;
 
 	// 根据id查询, 返回客户房间类型
 	public CustomerHome selectCustomerHomeById(String id) throws Exception;
 	
 	// 获取客户房间列表
-	public List<CustomerHome> selectListByAll(CustomerHome chome) throws Exception;
+	public List<CustomerHome> selectListByAll() throws Exception;
 
 	// 按条件获取客户房间列表(分页)
-	public List<CustomerHome> selectListByAllWithPage(@Param("chome") CustomerHome chome, @Param("start") int start, @Param("rows") int rows) throws Exception;
+	public List<CustomerHome> selectListByAllWithPage(@Param("start") int start,@Param("rows") int rows) throws Exception;
 
 	// 按客户号查询房间信息
-	public CustomerHome selectCustomerHomeByCustomerNo(String id) throws Exception;
+	public CustomerHome selectCustomerHomeByCustomerNo(int id) throws Exception;
 	
 	
 	// 根据id查询, 在返回客户类型的同时返回缴费信息
-	public CustomerHome selectCustomerHomeByIdWithRoomFee(String id) throws Exception;
+	public CustomerHome selectCustomerHomeByIdWithRoomFee(int id) throws Exception;
+	
+	// 根据id查询, 在返回客户类型的同时返回房间信息
+	public List<CustomerHome> selectListByAllWithRoom(int id) throws Exception;
+	
+	//取得所有房间列表,关联BuildingNo
+	public List<CustomerHome> selectListByAllwithFK() throws Exception;
+	
+	//取得房间的个数
+	public int selectCountByAll() throws Exception;
+	//取得房间页数
+	public int selectPageCountByAll(int rows) throws Exception;
 
 	
 }

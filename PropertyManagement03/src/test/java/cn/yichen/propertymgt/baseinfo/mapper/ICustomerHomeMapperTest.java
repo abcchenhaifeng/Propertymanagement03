@@ -27,7 +27,8 @@ public class ICustomerHomeMapperTest {
 
 	@Test
 	public void testDelete() throws Exception {
-		mapper.delete("8");
+		CustomerHome chome = mapper.selectCustomerHomeById("5");
+		mapper.delete(chome);
 		
 	}
 
@@ -44,39 +45,5 @@ public class ICustomerHomeMapperTest {
 		System.out.println(chome);
 	}
 
-	@Test
-	public void testSelectListByAll() throws Exception {
-		List<CustomerHome> list = mapper.selectListByAll(new CustomerHome());
-		System.out.println(list.size());
-		for (CustomerHome customerHome : list) {
-			System.out.println(customerHome);
-		}
-	}
 
-	@Test
-	public void testSelectListByAllWithPage() throws Exception {
-		CustomerHome chome = new CustomerHome();
-		List<CustomerHome> list = mapper.selectListByAllWithPage(chome, 2, 2);
-		System.out.println(list.size());
-		for (CustomerHome customerHome : list) {
-			System.out.println(customerHome);
-		}
-	}
-
-	@Test
-	public void testSelectCustomerHomeByCustomerNo() throws Exception {
-		CustomerHome chome = mapper.selectCustomerHomeByCustomerNo("1");
-		System.out.println(chome);
-		/*
-		 * List<Customer> list = chome.getCustomer(); for (Customer customer : list) {
-		 * System.out.println(customer); }
-		 */
-		
-	}
-	
-	@Test
-	public void testSelectCustomerHomeByIdWithRoomFee() throws Exception {
-		CustomerHome chome = mapper.selectCustomerHomeByIdWithRoomFee("688");
-		System.out.println(chome);
-	}
 }

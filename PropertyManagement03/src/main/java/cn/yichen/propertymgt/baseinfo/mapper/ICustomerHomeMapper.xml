@@ -9,7 +9,6 @@
 	<resultMap id="CustomerHomeMap" type="CustomerHome">
 		<id column="CHNO" property="chno" />
 		<result column="CustomerNo" property="customerno" />
-		<result column="RoomNo" property="roomno" />
 		<result column="LivingTypeNo" property="livingtypeno" />
 		<result column="ReceiveDate" property="receivedate" />
 		<result column="LiveDate" property="livedate" />
@@ -19,6 +18,30 @@
 		<result column="CHStatus" property="chstatus" />
 	</resultMap>
 
+	<resultMap id="CustomerHomeMapByRoomNo" type="CustomerHome" extends="CustomerHomeMap">
+		<association property="roomno"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper.RoomWithFKResultMap">
+		</association>
+	</resultMap>
+	
+	<insert id="create"   keyProperty="customerNo"   keyColumn="CHNO" useGeneratedKeys="true" flushCache="true" >
+	insert into CustomerHome(CHNO, CustomerNo, RoomNo, LivingTypeNo, ReceiveDate, LiveDate, FeeStartDate,FeeEndDate,HumanCount,CHStatus) values(#{chno}, #{customerno}, #{roomno.roomno},#{livingtypeno}, #{receivedate}, #{livedate}, #{feestartdate}, #{feeenddate},#{humancount},#{chstatus})
+	</insert>
+	
+	<update id="update" flushCache="true">
+    update CustomerHome set CustomerNo=#{customerno}, RoomNo=#{roomno.roomno}, LivingTypeNo=#{livingtypeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}"
+    </update>
+	
+	
+	<delete id="delete" flushCache="true">
+    delete from CustomerHome where CHNO = #{chno}
+    </delete>
+	
+	<select id="selectCustomerHomeByIdWithRoom" resultMap="CustomerHomeMapByRoomNo">
+		select a.*,b.*from Room a inner join CustomerHome b on a.RoomNo=b.RoomNo
+	</select>
+	
+	
 	<select id="selectCustomerHomeById" resultMap="CustomerHomeMap">
 		select * from CustomerHome
 		where CHNO = #{chno} 
@@ -40,9 +63,10 @@
 	</resultMap>
 	
 	<select id="selectCustomerHomeByCustomerNo" resultMap="CustomerHomeMapByCustomerNo">
-	select ct.*,CHNO, RoomNo, LivingTypeNo, ReceiveDate, LiveDate,HumanCount,CHStatus,password
+	select ct.*,c.*
 	from Customer c, CustomerHome ct
-	where ct.CustomerNo = #{customerno}  and ct.customerno = c.customerno
+	where ct.CustomerNo = #{customerno}  and ct.CustomerNo = c.CustomerNo
+	
 	</select>
 	
 	
@@ -55,7 +79,24 @@
 	<select id="selectCustomerHomeByIdWithRoomFee" resultMap="CustomerHomeMapByRoomFeeNo">
 	select ct.*,RoomFeeNo, FeeYEAR, FeeMonth,FeeItemNo, SPay, Apay, Derate,FeeStatus
 	from CustomerHome ct,RoomFee r
-	where ct.RoomNo = #{roomno}  and ct.RoomNo = r.RoomNo
+	where ct.RoomNo = #{roomno.roomno}  and ct.RoomNo = r.RoomNo
 	</select>
+	
+	  <!-- 取得房间的个数 -->
+	<select id="selectCountByAll" resultType="int">
+	 select IFNULL(count(CHNO), 0) from CustomerHome
+	</select>
+	
+	<select id="selectListByAllWithRoom" resultMap="CustomerHomeMapByRoomFeeNo">
+	select ct.*,r.*
+	from CustomerHome ct,Room r
+	where ct.RoomNo = #{roomno.roomno}  and ct.RoomNo = r.RoomNo
+	</select>
+	
+
+	 <select id="selectListByAllwithFK" resultMap="CustomerHomeMapByRoomNo" >
+	    select a.*,b.*,c.*,d.*,e.*,f.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo inner join Area d on c.AreaNo=d.AREANO inner join BuildingType e on c.BuildingTypeNo=e.TYPENO inner join CustomerHome f on a.RoomNo=f.RoomNo
+	 </select>
+	
 	
 </mapper>

@@ -1,6 +1,17 @@
 package cn.yichen.propertymgt.baseinfo.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
+import cn.yichen.propertymgt.baseinfo.service.ICustomerHomeService;
+import cn.yichen.propertymgt.baseinfo.service.ICustomerHomeService;
+import cn.yichen.propertymgt.vo.ResultMessage;
 
 /**
  * 
@@ -10,6 +21,59 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@RequestMapping("/customerhome")
 public class CustomerHomeController {
 
+	@Autowired
+	private ICustomerHomeService Service=null;
+	
+	//增加房间
+	@GetMapping("/add")
+	public ResultMessage<CustomerHome> add(CustomerHome ch) throws Exception {
+		Service.add(ch);
+		return new ResultMessage<CustomerHome>("OK","增加房间成功");
+	}
+	//修改房间
+	@GetMapping("/modify")
+	public ResultMessage<CustomerHome> modify(CustomerHome ch) throws Exception {
+		Service.modify(ch);
+		return new ResultMessage<CustomerHome>("OK","修改房间成功");
+	}
+	//删除房间
+	@GetMapping("/delete")
+	public ResultMessage<CustomerHome> delete(CustomerHome ch) throws Exception {
+		Service.delete(ch);
+		return new ResultMessage<CustomerHome>("OK","删除房间成功");
+	}
+	//取得指定的房间
+	@GetMapping("/get")
+	public CustomerHome getByCustomerNo(int CustomerHomeno) throws Exception{
+		return Service.getCustomerHomeByNo(CustomerHomeno);
+	}
+	//取得所有房间列表，有分页
+	@GetMapping(value="/list/all/page")
+	public ResultMessage<CustomerHome> getListByAllWitPage(@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+		ResultMessage<CustomerHome> result=new ResultMessage<CustomerHome>("OK","取得房间列表分页模式成功");
+		result.setCount(Service.getCountByAll());
+		result.setPageCount(Service.getPageCountByAll(rows));
+		result.setList(Service.getListByAllWithPage(rows, page));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
+	}
+	
+	//取得所有房间列表，无分页
+	@GetMapping(value="/list/all")
+	public List<CustomerHome> getListByAll() throws Exception{
+		return Service.getListByAll();
+	}
+	
+	//取得所有房间列表,有外键，无分页
+	@GetMapping(value="/list/allfk")
+	public List<CustomerHome> getListByAllWithFK() throws Exception{
+		return Service.getListByAllWithFK();
+	}
+	
+	
 }

@@ -59,5 +59,8 @@ public interface ICustomerService {
 	public void delete(Customer customer) throws Exception;
 	//检查部门能否被删除
 	public boolean checkCanDelete(int no) throws Exception;
+	
+	//查看关联客户的小区、楼宇等信息
+	public List<Customer> getListByAllandFk() throws Exception;
 
 }

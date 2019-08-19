@@ -70,6 +70,8 @@ public interface ICustomerMapper {
 		//检查指定的员工姓名，用于验证员工是否存在
 		public int selectCountByName(String cname) throws Exception;
 		
+		
+		public List<Customer> selectCustomerByAllAndFk() throws Exception;
 		// 按条件获取客户列表(分页)
 		//public List<Customer> selectCustomerByAllandHomeWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 }
