@@ -6,48 +6,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.yichen.propertymgt.baseinfo.mapper.IBuildingTypeMapper;
-import cn.yichen.propertymgt.baseinfo.model.BuildingType;
-import cn.yichen.propertymgt.baseinfo.service.IBuildingTypeService;
+import cn.yichen.propertymgt.baseinfo.mapper.IHouseTypeMapper;
+import cn.yichen.propertymgt.baseinfo.model.HouseType;
+import cn.yichen.propertymgt.baseinfo.service.IHouseTypeService;
 
 @Service
 @Transactional(rollbackFor = {Exception.class})
-public class BuildingTypeImpl implements IBuildingTypeService {
+public class HouseTypeServiceImpl implements IHouseTypeService {
 
 	@Autowired
-	private IBuildingTypeMapper mapper;
+	private IHouseTypeMapper mapper;
 	
 	@Override
-	public void add(BuildingType typeno) throws Exception {
-		mapper.create(typeno);
+	public void add(HouseType h) throws Exception {
+		mapper.create(h);
 	}
 
 	@Override
-	public void modify(BuildingType typeno) throws Exception {
-		mapper.update(typeno);
+	public void modify(HouseType h) throws Exception {
+		mapper.update(h);
 	}
 
 	@Override
-	public void delete(BuildingType typeno) throws Exception {
-		mapper.delete(typeno);
-	}
-
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<BuildingType> getBuildTypeListByAll() throws Exception {
-		return mapper.selectListByAll();
+	public void delete(HouseType h) throws Exception {
+		mapper.delete(h);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public BuildingType getBuildTypeByNo(int typeno) throws Exception {
-		return mapper.selectBuildingTypeByNo(typeno);
+	public List<HouseType> getHouseTypeListByAll() throws Exception {
+		return mapper.selectHouseTypeListByAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<BuildingType> getListByAllWithPage(int rows, int page) throws Exception {
+	public HouseType getHouseTypeByNo(int no) throws Exception {
+		return mapper.selectHouseTypeByNo(no);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<HouseType> getListByAllWithPage(int rows, int page) throws Exception {
 		return mapper.selectListByAllWithPage(rows*(page-1), rows);
 	}
 
@@ -57,10 +56,9 @@ public class BuildingTypeImpl implements IBuildingTypeService {
 		return mapper.selectCountByAll();
 	}
 
-
 	@Override
 	@Transactional(readOnly = true)
-	public int getPageCountByAll(int rows) throws Exception {
+	public int getPagaCountByAll(int rows) throws Exception {
 		int pageCount=0;
 		int count=this.getCountByAll();
 		if(count%rows==0) {

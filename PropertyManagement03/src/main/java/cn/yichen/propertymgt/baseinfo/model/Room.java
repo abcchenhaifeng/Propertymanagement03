@@ -1,14 +1,15 @@
 package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
 /**
  * 
- * @data:2019年8月12日下午9:17:22
- * @author： 陈海锋
- * @Description:房间
+ * @date:2019年8月19日上午12:08:21
+ * @author LiYi(李海宏)
+ * @Description：完善房间表的Model属性
  *
  */
 @Alias("Room")
@@ -17,9 +18,9 @@ public class Room implements Serializable {
 
 	private String roomno;				//房间编号
 
-    private String housetypeno;			//房屋户型编号
+    private HouseType housetype;			//房屋户型编号
 
-    private String buildingno;			//楼宇编号
+    private Building building;			//楼宇编号
 
     private String departmentcode;		//单元
 
@@ -35,91 +36,92 @@ public class Room implements Serializable {
 
     private String roomtype;			//房间类型(room 住宅House公建)
 
-    public String getRoomno() {
-        return roomno;
-    }
+	public String getRoomno() {
+		return roomno;
+	}
 
-    public void setRoomno(String roomno) {
-        this.roomno = roomno;
-    }
+	public void setRoomno(String roomno) {
+		this.roomno = roomno;
+	}
 
-    public String getHousetypeno() {
-        return housetypeno;
-    }
+	public HouseType getHousetype() {
+		return housetype;
+	}
 
-    public void setHousetypeno(String housetypeno) {
-        this.housetypeno = housetypeno;
-    }
+	public void setHousetype(HouseType housetype) {
+		this.housetype = housetype;
+	}
 
-    public String getBuildingno() {
-        return buildingno;
-    }
+	public Building getBuilding() {
+		return building;
+	}
 
-    public void setBuildingno(String buildingno) {
-        this.buildingno = buildingno;
-    }
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
 
-    public String getDepartmentcode() {
-        return departmentcode;
-    }
+	public String getDepartmentcode() {
+		return departmentcode;
+	}
 
-    public void setDepartmentcode(String departmentcode) {
-        this.departmentcode = departmentcode == null ? null : departmentcode.trim();
-    }
+	public void setDepartmentcode(String departmentcode) {
+		this.departmentcode = departmentcode;
+	}
 
-    public String getFloor() {
-        return floor;
-    }
+	public String getFloor() {
+		return floor;
+	}
 
-    public void setFloor(String floor) {
-        this.floor = floor == null ? null : floor.trim();
-    }
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
 
-    public String getRoomcode() {
-        return roomcode;
-    }
+	public String getRoomcode() {
+		return roomcode;
+	}
 
-    public void setRoomcode(String roomcode) {
-        this.roomcode = roomcode == null ? null : roomcode.trim();
-    }
+	public void setRoomcode(String roomcode) {
+		this.roomcode = roomcode;
+	}
 
-    public String getBuildingarea() {
-        return buildingarea;
-    }
+	public String getBuildingarea() {
+		return buildingarea;
+	}
 
-    public void setBuildingarea(String string) {
-        this.buildingarea = string;
-    }
+	public void setBuildingarea(String buildingarea) {
+		this.buildingarea = buildingarea;
+	}
 
-    public String getFeearea() {
-        return feearea;
-    }
+	public String getFeearea() {
+		return feearea;
+	}
 
-    public void setFeearea(String string) {
-        this.feearea = string;
-    }
+	public void setFeearea(String feearea) {
+		this.feearea = feearea;
+	}
 
-    public String getRoomstatus() {
-        return roomstatus;
-    }
+	public String getRoomstatus() {
+		return roomstatus;
+	}
 
-    public void setRoomstatus(String roomstatus) {
-        this.roomstatus = roomstatus == null ? null : roomstatus.trim();
-    }
+	public void setRoomstatus(String roomstatus) {
+		this.roomstatus = roomstatus;
+	}
 
-    public String getRoomtype() {
-        return roomtype;
-    }
+	public String getRoomtype() {
+		return roomtype;
+	}
 
-    public void setRoomtype(String roomtype) {
-        this.roomtype = roomtype == null ? null : roomtype.trim();
-    }
+	public void setRoomtype(String roomtype) {
+		this.roomtype = roomtype;
+	}
 
 	@Override
 	public String toString() {
-		return "Room [roomno=" + roomno + ", housetypeno=" + housetypeno + ", buildingno=" + buildingno
-				+ ", departmentcode=" + departmentcode + ", floor=" + floor + ", roomcode=" + roomcode
-				+ ", buildingarea=" + buildingarea + ", feearea=" + feearea + ", roomstatus=" + roomstatus
-				+ ", roomtype=" + roomtype + "]";
+		return "Room [roomno=" + roomno + ", housetype=" + housetype + ", building=" + building + ", departmentcode="
+				+ departmentcode + ", floor=" + floor + ", roomcode=" + roomcode + ", buildingarea=" + buildingarea
+				+ ", feearea=" + feearea + ", roomstatus=" + roomstatus + ", roomtype=" + roomtype + "]";
 	}
+
+   
 }

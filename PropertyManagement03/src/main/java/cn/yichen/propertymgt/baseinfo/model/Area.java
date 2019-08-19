@@ -13,111 +13,112 @@ import org.apache.ibatis.type.Alias;
  */
 @Alias("Area")
 public class Area implements Serializable {
-    private Integer areano;
+    private Integer no;      //小区编号
 
-    private String areaname;
+    private String name;     //小区名称
 
-    private String aaddress;
+    private String address;     //小区地址
 
-    private String developer;
+    private String developer;    //开发商
 
-    private Double totalbuidingarea;
+    private Double buildingarea;    //总建筑面积
 
-    private Double totalusearea;
+    private Double usearea;        //总使用面积
 
-    private Double totalpackarea;
+    private Double parkarea;       //车位面积
 
-    private Long totalhome;
+    private Long home;             //总居民数
 
-    private Long totalhouse;
+    private Long house;            //总公建数
 
-    private Long totalpack;
+    private Long park;             //车位数
 
-    public Integer getAreano() {
-        return areano;
-    }
+	public Integer getNo() {
+		return no;
+	}
 
-    public void setAreano(Integer areano) {
-        this.areano = areano;
-    }
+	public void setNo(Integer no) {
+		this.no = no;
+	}
 
-    public String getAreaname() {
-        return areaname;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setAreaname(String areaname) {
-        this.areaname = areaname == null ? null : areaname.trim();
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getAaddress() {
-        return aaddress;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setAaddress(String aaddress) {
-        this.aaddress = aaddress == null ? null : aaddress.trim();
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public String getDeveloper() {
-        return developer;
-    }
+	public String getDeveloper() {
+		return developer;
+	}
 
-    public void setDeveloper(String developer) {
-        this.developer = developer == null ? null : developer.trim();
-    }
+	public void setDeveloper(String developer) {
+		this.developer = developer;
+	}
 
-    public Double getTotalbuidingarea() {
-        return totalbuidingarea;
-    }
+	public Double getBuildingarea() {
+		return buildingarea;
+	}
 
-    public void setTotalbuidingarea(Double totalbuidingarea) {
-        this.totalbuidingarea = totalbuidingarea;
-    }
+	public void setBuildingarea(Double buildingarea) {
+		this.buildingarea = buildingarea;
+	}
 
-    public Double getTotalusearea() {
-        return totalusearea;
-    }
+	public Double getUsearea() {
+		return usearea;
+	}
 
-    public void setTotalusearea(Double totalusearea) {
-        this.totalusearea = totalusearea;
-    }
+	public void setUsearea(Double usearea) {
+		this.usearea = usearea;
+	}
 
-    public Double getTotalpackarea() {
-        return totalpackarea;
-    }
+	public Double getParkarea() {
+		return parkarea;
+	}
 
-    public void setTotalpackarea(Double totalpackarea) {
-        this.totalpackarea = totalpackarea;
-    }
+	public void setParkarea(Double parkarea) {
+		this.parkarea = parkarea;
+	}
 
-    public Long getTotalhome() {
-        return totalhome;
-    }
+	public Long getHome() {
+		return home;
+	}
 
-    public void setTotalhome(Long totalhome) {
-        this.totalhome = totalhome;
-    }
+	public void setHome(Long home) {
+		this.home = home;
+	}
 
-    public Long getTotalhouse() {
-        return totalhouse;
-    }
+	public Long getHouse() {
+		return house;
+	}
 
-    public void setTotalhouse(Long totalhouse) {
-        this.totalhouse = totalhouse;
-    }
+	public void setHouse(Long house) {
+		this.house = house;
+	}
 
-    public Long getTotalpack() {
-        return totalpack;
-    }
+	public Long getPark() {
+		return park;
+	}
 
-    public void setTotalpack(Long totalpack) {
-        this.totalpack = totalpack;
-    }
+	public void setPark(Long park) {
+		this.park = park;
+	}
 
 	@Override
 	public String toString() {
-		return "Area [areano=" + areano + ", areaname=" + areaname + ", aaddress=" + aaddress + ", developer="
-				+ developer + ", totalbuidingarea=" + totalbuidingarea + ", totalusearea=" + totalusearea
-				+ ", totalpackarea=" + totalpackarea + ", totalhome=" + totalhome + ", totalhouse=" + totalhouse
-				+ ", totalpack=" + totalpack + "]";
+		return "Area [no=" + no + ", name=" + name + ", address=" + address + ", developer=" + developer
+				+ ", buildingarea=" + buildingarea + ", usearea=" + usearea + ", parkarea=" + parkarea + ", home="
+				+ home + ", house=" + house + ", park=" + park + "]";
 	}
+
+   
 }

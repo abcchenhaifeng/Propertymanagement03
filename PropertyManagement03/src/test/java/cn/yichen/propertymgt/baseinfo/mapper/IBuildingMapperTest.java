@@ -14,20 +14,7 @@ public class IBuildingMapperTest {
 	@Autowired
 	private IBuildingMapper mapper;
 	
-	@Test
-	public void testInsert() throws Exception{
-		Building building =new Building();
-		building.setBuildingno("3");
-		mapper.insert(building);
-		
-	}
-	@Test
-	public void testUpdate() throws Exception{
-		Building building =mapper.selectByNo(2);
-		building.setAreano("3");
-		mapper.update(building);
-		
-	}
+
 	@Test
 	public void testDelete() throws  Exception{
 		

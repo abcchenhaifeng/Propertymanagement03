@@ -30,19 +30,7 @@ public class IBuildingTypeMapperTest {
         mapper.create(BuildingType);
 	}
 
-	@Test
-	public void testUpdate() throws Exception {
-		BuildingType BuildingType = mapper.selectBuildingTypeById("5");
-		BuildingType.setTypename("简易型");
-		mapper.update(BuildingType);
-	}
 	
-	//测试删除
-	@Test
-	public void testDelete() throws Exception {
-		mapper.delete("9");
-	}
-
 	@Test
 	public void testSelectListByAll() throws Exception {
 	List<BuildingType> list = mapper.selectListByAll();

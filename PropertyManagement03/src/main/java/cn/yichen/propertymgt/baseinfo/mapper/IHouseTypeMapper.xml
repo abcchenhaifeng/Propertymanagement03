@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.IHouseTypeMapper">
+
+<!-- 	<cache /> -->
+
+	<resultMap id="HouseTypeMap" type="HouseType">
+		<id property="typeno" column="TypeNo"/>
+    	<result property="typename" column="TypeName"/>
+	</resultMap>
+
+  <insert id="create"  keyProperty="typeno"   keyColumn="TypeNo" useGeneratedKeys="true"  flushCache="true">
+   insert into HouseType (TypeNo,TypeName) values (#{typeno},#{typename})
+  </insert>
+  
+  <update id="update" flushCache="true">
+   update HouseType set TypeName=#{typename} where TypeNo=#{typeno}
+  </update>
+  
+  <delete id="delete" flushCache="true">
+   delete from HouseType where TypeNo=#{typeno}
+  </delete>
+  
+  <select id="selectHouseTypeListByAll" resultMap="HouseTypeMap">
+   select * from HouseType
+  </select>
+  
+  <select id="selectListByAllWithPage" resultMap="HouseTypeMap">
+   select * from HouseType limit #{start},#{rows}
+  </select>
+  
+  <select id="selectHouseTypeByNo" resultMap="HouseTypeMap" >
+  select * from HouseType  where TypeNo=#{typeno}
+  </select>
+  
+  <select id="selectCountByAll" resultType="int">
+   select IFNULL(count(TypeNo), 0) from HouseType
+  </select>
+  
+  
+</mapper>

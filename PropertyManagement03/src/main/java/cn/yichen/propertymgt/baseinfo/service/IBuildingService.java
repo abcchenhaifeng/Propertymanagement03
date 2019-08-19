@@ -1,14 +1,9 @@
 package cn.yichen.propertymgt.baseinfo.service;
 
+import java.util.List;
+
 import cn.yichen.propertymgt.baseinfo.model.Building;
 
-/**
- * 
- * @data:2019年8月16日下午2:44:41
- * @author： 陈海锋
- * @Description:
- *
- */
 public interface IBuildingService {
 	//增加
 	public void add(Building building) throws Exception;
@@ -16,7 +11,28 @@ public interface IBuildingService {
 	public void modify(Building building) throws Exception;
 	//删除
 	public void delete(Building building) throws Exception;
-	//取得房间序号
-	public int selectCountByAll() throws Exception;
-	
+	//查询楼宇的信息
+	public List<Building> getListByAll() throws Exception;
+	//查询楼宇的信息,关联Area
+	public List<Building> getListByAllWithArea() throws Exception;
+	//查询楼宇的信息,关联BuildingType
+	public List<Building> getListByAllWithBuildType() throws Exception;
+	//查询楼宇的信息,关联Area和BuildingType
+	public List<Building> getListByAllWithAreaAndBuildType() throws Exception;
+
+	//取得所有楼宇列表,关联Area和BuildingType.分页模式
+	public List<Building> getListByAllWithAreaAndBuildTypeWithPage(int rows,int page) throws Exception;
+	//取得指定小区的楼宇列表,参数:areaNo 
+	public List<Building> getListByArea(int areaNo) throws Exception;
+	//取得指定建筑类型的楼宇列表,参数:buildTypeNo 
+	public List<Building> getListByBuildType(int buildTypeNo) throws Exception;
+	//取得指定楼宇的信息
+	public Building getByNo(int no) throws Exception;
+	//取得所有楼宇列表,分页模式
+	public List<Building> getListByAllWithPage(int rows,int page) throws Exception;
+	//取得楼宇的个数
+	public int getCountByAll() throws Exception;
+	//取得楼宇页数
+	public int getPageCountByAll(int rows) throws Exception;
 }
+

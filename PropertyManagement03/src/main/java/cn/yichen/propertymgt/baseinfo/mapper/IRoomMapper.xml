@@ -3,56 +3,94 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper">
-	
-	<cache />
-	
-	<resultMap id="RoomResultMap" type="Room">
-		<id column ="ROOMNO" property="roomno"/>
-		<result column="HouseTypeNo" property="housetypeno" />	
-		<result column="BuildingNo" property="buildingno" />
-		<result column="DepartmentCode" property="departmentcode" />
-		<result column="Floor" property="floor" />
-		<result column="RoomCode" property="roomcode" />
-		<result column="BuildingArea" property="buildingarea" />
-		<result column="FeeArea" property="feearea" />
-		<result column="RoomStatus" property="roomstatus" />
-		<result column="RoomType" property="roomtype" />
-	</resultMap>
-	
-	<resultMap id="RomByBuildingNo" type="Building" extends="RoomResultMap">
-		<association property="room" 
-		resultMap="cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper.RoomMap">
-		</association>
-	</resultMap>
-	
-	
-	<select id="selectRoomById" resultMap="RoomResultMap">
-		select * from Room
-		where ROOMNO =#{roomno}
-	</select>
-	
-	<select id="selectListByAll" resultMap="RoomResultMap">
-		select * from Room
-	</select>
-	
-	<select id="selectListByAllWithPage" resultMap="RoomResultMap">
-		select * from Room limit #{start},#{rows}
-	</select>
-	
-	<select id="selectByNo" resultMap="RoomResultMap">
-		select *from Room where ROOMNO=#{roomno}
-	</select>
-	
-	<select id="selectRomByBuildingNo" resultMap="RoomResultMap">
-		select ct.*,HouseTypeNo,DepartmentCode,Floor,RoomCode,BuildingArea,FeeArea,RoomStatus,RoomType
-		from Room c,Building ct
-		where ct.BuildingNo = #{buildingno} and ct.buildingno = c.buildingno
-	</select>
-	
-	<select id="selectCountByAll" resultType="int">
-   		select IFNULL(count(ROOMNO), 0) from Room
- 	 </select>
 
-</mapper>
+  <cache/>
+  
+  <resultMap id="RoomResultMap" type="Room">
+    <id property="roomno" column="RoomNo"/>
+    <result property="departmentcode" column="DepartmentCode"/>
+    <result property="floor" column="Floor"/>
+    <result property="roomcode" column="RoomCode"/>
+    <result property="buildingarea" column="BuildingArea"/>
+    <result property="feearea" column="FeeArea"/>
+    <result property="roomstatus" column="RoomStatus"/>
+    <result property="roomtype" column="RoomType"/>
+  </resultMap>
 
+  <!-- 关联的建筑的ResultMap -->
+  <resultMap  id="RoomWithBuildingResultMap" type="Room" extends="RoomResultMap">
+  	<association property="building" resultMap="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper.BuildingMapWithAreaAndBuildingType"></association>
+  </resultMap>
 
+  <!-- 关联的户型的ResultMap -->
+  <resultMap  id="RoomWithHouseTypeResultMap" type="Room" extends="RoomResultMap">
+  	<association property="housetype" resultMap="cn.yichen.propertymgt.baseinfo.mapper.IHouseTypeMapper.HouseTypeMap"></association>
+  </resultMap>
+  
+   <!-- 关联的外键的ResultMap -->
+  <resultMap  id="RoomWithFKResultMap" type="Room" extends="RoomResultMap">
+	<association property="building" resultMap="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper.BuildingMapWithAreaAndBuildingType"></association>
+  	<association property="housetype" resultMap="cn.yichen.propertymgt.baseinfo.mapper.IHouseTypeMapper.HouseTypeMap"></association>
+  </resultMap>
+
+  <insert id="create"  keyProperty="roomno"   keyColumn="RoomNo" useGeneratedKeys="true" flushCache="true">
+   insert into Room (DepartmentCode,Floor,RoomCode,BuildingArea,FeeArea,RoomStatus,RoomType)
+   values (#{departmentcode},#{floor},#{roomcode},#{buildingarea},#{feearea},#{roomstatus},#{roomtype})
+  </insert>
+  
+  <update id="update" flushCache="true">
+   update Room set DepartmentCode=#{departmentcode},Floor=#{floor},RoomCode=#{roomcode},
+   BuildingArea=#{buildingarea},FeeArea=#{feearea},RoomStatus=#{roomstatus},RoomType=#{roomtype}
+   where RoomNo=#{roomno}
+  </update>
+  
+  <delete id="delete" flushCache="true">
+   delete from Room where RoomNo=#{roomno}
+  </delete>
+  
+  <select id="selectRoomListByAll" resultMap="RoomResultMap">
+   select * from Room
+  </select>
+  
+  <!-- 取得指定房间的信息,包含外表所有-->
+  <select id="selectByRoomNo" resultMap="RoomWithFKResultMap" >
+	select a.*,b.*,c.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo where RoomNo=#{roomno}
+  </select>
+
+   
+  <!--取得所有房间列表,关联HouseTypeNo,BuildingNo-->
+  <select id="selectListByAllwithFK" resultMap="RoomWithFKResultMap">
+  <!-- select a.*,b.*,c.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo-->
+   select a.*,b.*,c.*,d.*,e.*from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo inner join Area d on c.AreaNo=d.AREANO inner join BuildingType e on c.BuildingTypeNo=e.TYPENO
+   </select> 
+  
+  <!-- 取得房间的个数 -->
+  <select id="selectCountByAll" resultType="int">
+   select IFNULL(count(RoomNo), 0) from Room
+  </select>
+ 
+  <!-- 取得所有房间列表,关联BuildingNo-->
+  <select id="selectListByAllWithBuildingNo" resultMap="RoomWithBuildingResultMap" >
+  	select a.*,c.* from Room a inner join Building c on a.BuildingNo=c.BuildingNo
+  </select>
+  
+  <!-- 取得所有房间列表,关联HouseTypeNo -->
+  <select id="selectListByAllWithHouseTypeNo" resultMap="RoomWithHouseTypeResultMap" >
+  	select a.*,b.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo
+  </select>
+  
+  <!-- 根据类型编号取得此户型的房间 -->
+  <select id="selectListByHouseTypeNo" resultMap="RoomWithHouseTypeResultMap">
+   select * from Room a, HouseType b where a.HouseTypeNo=#{housetypeno} and a.HouseTypeNo=b.TypeNo
+  </select> 
+  
+  <!-- 根据楼宇序号取得此序号的房间 -->
+  <select id="selectListByBuildingNo" resultMap="RoomWithBuildingResultMap">
+   select * from Room a,Building b where a.BuildingNo=#{buildingno} and a.BuildingNo=b.BuildingTypeNo
+  </select>
+  
+  
+  <select id="selectListByAllWithPage" resultMap="RoomResultMap">
+   select * from Room limit #{start},#{rows}
+  </select>
+  </mapper>

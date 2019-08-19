@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.web.client.RestTemplate;
 
 import cn.yichen.propertymgt.admin.model.UserInfo;
 import cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper;
@@ -27,17 +28,29 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Autowired
 	private ICustomerMapper mapper;
 
+	@Autowired
+	private RestTemplate rest = null;
+	
+//	@Value("${demourl.url}")
+//	private String url = null;
+	
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Customer> getListByAll() throws Exception {
 		return mapper.selectListByAll();
+		
+//		System.out.println(url);
+//		
+//		List<Customer> list = rest.getForObject(url+"customer/list/all",List.class);
+//		
+//		return list;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Customer> getListByAllWithPage(int page, int rows) throws Exception {
-		return mapper.selectListByAllWithPage( rows*(page-1), rows);
+		return mapper.selectListByAllWithPage(rows*(page-1), rows);
 	}
 
 	@Override

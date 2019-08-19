@@ -3,38 +3,102 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper">
+	
 	<cache />
-	<resultMap id="BuildingResultMap" type="building">
-		<id column ="BuildingNo" property="buildingno"/>
-		<result column="AreaNo" property="areano"/>
-		<result column="BCODE" property="dcode"/>
-		<result column="BAddress" property="baddress"/>
-		<result column="BuildingTypeNo" property="buildingtypeno"/>
-		<result column="Direction" property="direction"/>
-		<result column="TotalHome" property="totalhome"/>
-		<result column="TotalHouse" property="totalhouse"/>
+	
+	<resultMap id="BuildingMap" type="building">
+		<id property="no" column="BuildingNo" />
+	  	<result property="code" column="BCODE" />
+	  	<result property="address" column="BAddress" />
+	  	<result property="direction" column="Direction" />
+	  	<result property="home" column="TotalHome" />
+	  	<result property="house" column="TotalHouse" />
 	</resultMap>
 	
-	
-	<insert id="insert" keyProperty="buildingno" keyColumn="BuildingNo"  useGeneratedKeys="true" flushCache="true">
-	insert into Building(AreaNo,BCODE,BAddress,BuildingTypeNo,Direction,TotalHome,TotalHouse) values (#{areano},#{dcode},#{baddress},#{buildingtypeno},#{direction},#{totalhome},#{totalhouse})
-	
-	</insert>
-	
-	<update id="update" flushCache="true">
-		update Building set AreaNo=#{areano},BCODE=#{dcode},BAddress=#{baddress},BuildingTypeNo=#{buildingtypeno},Direction=#{direction},TotalHome=#{totalhome},TotalHouse={totalhouse}
-	</update>
-	
-	<delete id="delete" flushCache="true">
-		delete from Building where BuildingNo=#{buildingno}
-	</delete>
-	
-	<select id="selectCountByAll">
-		select * from Building
-	</select>
-	<select id="selectByNo" resultMap="BuildingResultMap">
-		select * from Building where BuildingNo=#{buildingno}
-	</select>
-	
-	
+	 <!-- 增加楼宇 -->
+  <insert id="create" keyProperty="no" keyColumn="BuildingNo" useGeneratedKeys="true" flushCache="true">
+  	insert into Building (AreaNo,BCODE,BAddress,BuildingTypeNo,Direction,TotalHome,TotalHouse) 
+  	values (#{area.no},#{code},#{address},#{buildingtype.no},#{direction},#{home},#{house})
+  </insert>
+  
+  <!-- 修改楼宇 -->
+  <update id="update" flushCache="true">
+  	update Building set AreaNo=#{area.no},BCODE=#{code},BAddress=#{address},BuildingTypeNo=#{buildingtype.no},
+  	Direction=#{direction},TotalHome=#{home},TotalHouse=#{house} where BuildingNo=#{no} 
+  </update>
+  
+  <!-- 删除楼宇 -->
+  <delete id="delete" flushCache="true">
+  	delete from Building where BuildingNo=#{no} 
+  </delete>
+  
+    
+  <!-- association 对一关系 -->
+  <!-- 使用内嵌式ResultMap的关联小区的结果映射 -->
+  <resultMap id="BuildingMapWithArea" type="Building" extends="BuildingMap" >
+  	<association property="area"  resultMap="cn.yichen.propertymgt.baseinfo.mapper.IAreaMapper.AreaResultMap" />
+  </resultMap>
+  
+  <!-- 使用内嵌式ResultMap的关联建筑类型的结果映射 -->
+  <resultMap id="BuildingMapWithBuildingType" type="Building" extends="BuildingMap" >
+  	<association property="buildingtype"  resultMap="cn.yichen.propertymgt.baseinfo.mapper.IBuildingTypeMapper.BuildingTypeMap" />
+  </resultMap>
+  
+  <!-- 使用内嵌式ResultMap的关联小区和建筑类型的结果映射 -->
+  <resultMap id="BuildingMapWithAreaAndBuildingType" type="Building" extends="BuildingMap" >
+  	<association property="area"  resultMap="cn.yichen.propertymgt.baseinfo.mapper.IAreaMapper.AreaResultMap" />
+  	<association property="buildingtype"  resultMap="cn.yichen.propertymgt.baseinfo.mapper.IBuildingTypeMapper.BuildingTypeMap" />
+  </resultMap>
+  
+  <!-- 取得所有楼宇列表 -->
+  <select id="selectListByAll" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select * from Building 	
+  </select>
+  
+   <!-- 取得所有楼宇列表,分页模式 -->
+  <select id="selectListByAllWithPage" resultMap="BuildingMapWithAreaAndBuildingType">
+   select a.*,b.*,c.* from Building a inner join Area b on a.AreaNo=b.AREANO inner join BuildingType c on a.BuildingTypeNo=c.TYPENO limit #{start},#{rows} 
+  </select>
+  
+  <!-- 取得所有楼宇列表,关联Area-->
+  <select id="selectListByAllWithArea" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select a.*,b.* from Building a inner join Area b on a.AreaNo=b.AREANO
+  </select>
+  
+  <!-- 取得所有楼宇列表,关联BuildingType -->
+  <select id="selectListByAllWithBuildType" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select a.*,b.* from Building a inner join BuildingType b on a.BuildingTypeNo=b.TYPENO	
+  </select>
+  
+  <!-- 取得所有楼宇列表,关联Area和BuildingType -->
+  <select id="selectListByAllWithAreaAndBuildType" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select a.*,b.*,c.* from Building a inner join Area b on a.AreaNo=b.AREANO inner join BuildingType c on a.BuildingTypeNo=c.TYPENO 
+  </select>
+  
+  <!-- 取得所有楼宇列表,关联Area和BuildingType.分页模式 -->
+  <select id="selectListByAllWithAreaAndBuildTypeWithPage" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select a.*,b.*,c.* from Building a inner join Area b on a.AreaNo=b.AREANO 
+  	inner join BuildingType c on a.BuildingTypeNo=c.TYPENO limit #{start},#{rows}
+  </select>
+  <!-- 取得指定小区的楼宇列表,参数:areaNo -->
+  <select id="selectListByBuildingType" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select * from Building where AreaNo=#{areaNo} 	
+  </select>
+  
+  <!-- 取得指定建筑类型的楼宇列表,参数:buildTypeNo -->
+  <select id="selectListByBuilding" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select * from Building where BuildingNo=#{buildingNo}
+  </select>
+  
+   <!-- 取得指定楼宇的信息 -->
+  <select id="selectByNo" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select a.*,b.*,c.* from Building a inner join Area b on a.AreaNo=b.AREANO 
+  	inner join BuildingType c on a.BuildingTypeNo=c.TYPENO where BuildingNo=#{no} 	
+  </select>
+  
+  <!-- 取得楼宇的个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
+  <select id="selectCountByAll" resultType="int">
+   select IFNULL(count(BuildingNo), 0) from Building
+  </select>
+  
 </mapper>

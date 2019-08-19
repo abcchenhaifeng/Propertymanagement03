@@ -1,0 +1,103 @@
+package cn.yichen.propertymgt.baseinfo.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper;
+import cn.yichen.propertymgt.baseinfo.model.Room;
+import cn.yichen.propertymgt.baseinfo.service.IRoomService;
+
+@Service
+@Transactional(rollbackFor ={Exception.class})
+public class RoomServiceImpl implements IRoomService {
+
+	@Autowired
+	private IRoomMapper mapper;
+	
+	@Override
+	public void add(Room room) throws Exception {
+		mapper.create(room);
+	}
+
+	@Override
+	public void modify(Room room) throws Exception {
+		mapper.update(room);
+	}
+
+	@Override
+	public void delete(Room room) throws Exception {
+		mapper.delete(room);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByAll() throws Exception {
+		return mapper.selectRoomListByAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByAllWithFK() throws Exception {
+		return mapper.selectListByAllwithFK();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Room getByRoomNo(int roomno) throws Exception {
+		return mapper.selectRoomByNo(roomno);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByAllWithPage(int rows, int page) throws Exception {
+		return mapper.selectListByAllWithPage(rows*(page-1), rows);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public int getCountByAll() throws Exception {
+		return mapper.selectCountByAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public int getPageCountByAll(int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountByAll();
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByAllWithHouseTypeNo() throws Exception {
+		return mapper.selectListByAllWithHouseTypeNo();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByAllWithBuildingNo() throws Exception {
+		return mapper.selectListByAllWithBuildingNo();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByHouseTypeNo(int housetypeno) throws Exception {
+		return mapper.selectListByHouseTypeNo(housetypeno);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> getListByBuildingNo(int buildingno) throws Exception {
+		return mapper.selectListByBuildingNo(buildingno);
+	}
+
+}

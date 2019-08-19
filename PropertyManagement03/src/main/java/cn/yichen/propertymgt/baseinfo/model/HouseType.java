@@ -5,9 +5,10 @@ import java.io.Serializable;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:31:18
- * @author YiChen(李冠永)
- * #户型
+ * 
+ * @date:2019年8月18日下午11:32:07
+ * @author LiYi(李海宏)
+ * @Description：完善户型表的属性
  *
  */
 @Alias("HouseType")

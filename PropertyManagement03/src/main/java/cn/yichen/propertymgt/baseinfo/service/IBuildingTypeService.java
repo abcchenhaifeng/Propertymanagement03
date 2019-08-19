@@ -6,37 +6,27 @@ import cn.yichen.propertymgt.baseinfo.model.BuildingType;
 
 /**
  * 
- * @data:2019年8月8日下午10:00:12
- * @author： 陈海锋
- * @Description:
+ * @date:2019年8月18日下午9:11:06
+ * @author LiYi(李海宏)
+ * @Description：完善楼宇类型代码
  *
  */
 public interface IBuildingTypeService {
+	//增加
 	public void add(BuildingType typeno) throws Exception;
+	//修改
 	public void modify(BuildingType typeno) throws Exception;
+	//删除
 	public void delete(BuildingType typeno) throws Exception;
-	//只取得模块列表，不取得关联的功能列表。
-	public List<BuildingType> getListByAll() throws Exception;
-	
-	//取得模块列表，并取得关联的功能属性列表，使用内嵌式select方式
-	public List<BuildingType> getselectListByAllWithFunctionsByNestedSelect() throws Exception;
-	//取得模块列表，并取得关联的功能属性列表，使用内嵌式ResultMap方式
-	public List<BuildingType> getselectListByAllWithFunctionsByNestedResultMap() throws Exception;
-	//取得模块列表，并取得关联的角色属性列表，使用内嵌式select方式
-	public List<BuildingType> getListByAllWithRolesByNestedSelect() throws Exception;
-	//取得模块列表，并取得关联的角色属性列表，使用内嵌式ResultMap方式
-	public List<BuildingType> getListByAllWithRolesByNestedResultMap() throws Exception;
-	
-	//取得模块列表，并取得关联的功能和角色属性列表，使用内嵌式select方式
-	public List<BuildingType> getListByAllWithFunctionsAndRolesFunctionByNestedSelect() throws Exception;
-	//取得模块列表，并取得关联的功能和角色属性列表，使用内嵌式ResultMap方式
-	public List<BuildingType> getListByAllWithFunctionsAndRolesFunctionsByNestedResultMap() throws Exception;
-	
-	public BuildingType getByNo(int no) throws Exception;
-	//取得所有模块的个数
+	//查询建筑类型的信息
+	public List<BuildingType> getBuildTypeListByAll() throws Exception;
+	//取得指定建筑类型的信息
+	public BuildingType getBuildTypeByNo(int no) throws Exception;
+	//取得所有建筑类型列表,分页模式
+	public List<BuildingType> getListByAllWithPage(int rows,int page) throws Exception;
+	//取得建筑类型的个数
 	public int getCountByAll() throws Exception;
-	//取得指定角色的模块列表
-	public List<BuildingType> getListByRole(int roleNo) throws Exception;
-	//验证指定角色是否有此模块权限: 参数：模块编号，角色编号
-	public boolean checkAccessForRole(int buildingtypeno,int typeno) throws Exception;
+	//取得建筑类型页数
+	public int getPageCountByAll(int rows) throws Exception;
+	
 }
