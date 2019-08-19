@@ -54,7 +54,7 @@
 			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerTypeMapper.CustomerTypeMap">
 		</association>
 		<association property="customerhome"
-			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper.CustomerHomeMap">
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper.CustomerHomeMapByRoomNo">
 		</association>
 	</resultMap>
 	
@@ -79,11 +79,14 @@
 
 	<!-- 客户取得客户类型、房间等信息 -->
 	<select id="selectCustomerByAllAndFk" resultMap="CustomerMapByIdWithTypeandHome">
-	 <!-- select a.*,b.*,c.*,d.*,e.*,f.*,g.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo inner join Area d on c.AreaNo=d.AREANO inner join BuildingType e on c.BuildingTypeNo=e.TYPENO inner join CustomerHome f on f.RoomNo = a.RoomCode inner join Customer g on f.CustomerNo = g.CustomerNo	
-	 -->
-	 select a.*,b.*,c.*from Customer a inner join CustomerHome b on a.CustomerNo = b.CustomerNo inner join CustomerType c on a.TYPENO = c.TYPENO	
-	 </select>
+	 select a.*,b.*,c.*,d.*,e.*,f.*,g.*,h.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo inner join Area d on c.AreaNo=d.AREANO inner join BuildingType e on c.BuildingTypeNo=e.TYPENO inner join CustomerHome f on f.RoomNo = a.RoomNo inner join Customer g on f.CustomerNo = g.CustomerNo inner join CustomerType h on h.typeNo = g.typeNo		
+	</select>
 	
+	<!-- 客户取得客户类型、房间等信息 -->
+	<select id="selectCustomerByAllAndFkWithPage" resultMap="CustomerMapByIdWithTypeandHome">
+	 select a.*,b.*,c.*,d.*,e.*,f.*,g.*,h.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo inner join Area d on c.AreaNo=d.AREANO inner join BuildingType e on c.BuildingTypeNo=e.TYPENO inner join CustomerHome f on f.RoomNo = a.RoomNo inner join Customer g on f.CustomerNo = g.CustomerNo inner join CustomerType h on h.typeNo = g.typeNo limit #{start},#{rows}		
+	</select>
+
 
 	<!-- 取得个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->
 	<select id="selectCountByAll" resultType="int">

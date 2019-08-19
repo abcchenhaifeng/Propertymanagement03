@@ -62,5 +62,8 @@ public interface ICustomerService {
 	
 	//查看关联客户的小区、楼宇等信息
 	public List<Customer> getListByAllandFk() throws Exception;
+	
+	// 按条件获取客户列表(分页)
+		public List<Customer> getListByAllandFKWithPage( int page, int rows) throws Exception;
 
 }

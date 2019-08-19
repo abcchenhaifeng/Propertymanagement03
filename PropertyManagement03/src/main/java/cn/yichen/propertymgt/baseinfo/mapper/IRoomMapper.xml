@@ -52,6 +52,14 @@
    select * from Room
   </select>
   
+  <select id="selectbuildingtype" resultMap="RoomResultMap">
+   select distinct(departmentcode) from Room
+  </select>
+  
+  <select id="selectlivingStatus" resultMap="RoomResultMap">
+   select distinct(roomstatus) from Room
+  </select>
+  
   <!-- 取得指定房间的信息,包含外表所有-->
   <select id="selectByRoomNo" resultMap="RoomWithFKResultMap" >
 	select a.*,b.*,c.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo where RoomNo=#{roomno}

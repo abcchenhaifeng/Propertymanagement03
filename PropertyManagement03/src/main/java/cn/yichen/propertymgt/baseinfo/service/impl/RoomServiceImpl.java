@@ -100,4 +100,14 @@ public class RoomServiceImpl implements IRoomService {
 		return mapper.selectListByBuildingNo(buildingno);
 	}
 
+	@Override
+	public List<Room> getBuildingNo() throws Exception {
+		return mapper.selectbuildingtype();
+	}
+
+	@Override
+	public List<Room> getlivingStatus() throws Exception {
+		return mapper.selectlivingStatus();
+	}
+
 }

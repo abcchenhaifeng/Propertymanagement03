@@ -18,14 +18,6 @@ public class ICustomerHomeMapperTest {
 	private ICustomerHomeMapper mapper;
 	
 	@Test
-	public void testCreate() throws Exception {
-		CustomerHome chome = new CustomerHome();
-		chome.setChno("8");
-		chome.setCustomerno("3");
-		mapper.create(chome);
-	}
-
-	@Test
 	public void testDelete() throws Exception {
 		CustomerHome chome = mapper.selectCustomerHomeById("5");
 		mapper.delete(chome);

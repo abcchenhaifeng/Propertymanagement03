@@ -51,6 +51,20 @@ public class CustomerController {
 		return result;
 	}
 	
+	
+	//取得所有部门列表，有分页
+	@GetMapping(value="/list/allwithFK/page")
+	public ResultMessage<Customer> getListByAllandFKWithPage(@RequestParam(required = false,defaultValue ="0") Integer rows,@RequestParam(required = false,defaultValue = "0") Integer page) throws Exception{
+		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得客户迁入迁出列表分页模式成功");
+		result.setCount(service.getCountByAll());
+		result.setPageCount(service.getPagaCountByAll(rows));
+		result.setList(service.getListByAllandFKWithPage(rows,page));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
+	}
+	
 	@GetMapping(value="/list/all")
 	public List<Customer> getListByAllandType() throws Exception{
 		
@@ -76,7 +90,18 @@ public class CustomerController {
 		return result;
 		}
 
-	
+//	//按检索条件取得员工列表
+//	@GetMapping(value="/list/conditionwithFk/page")
+//	public ResultMessage<Customer> getListByConditionAndFKkWithPage(@RequestParam(required = false,defaultValue ="") String CustomerName,@RequestParam(required = false,defaultValue ="0") String typeno,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeStartDate,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeEndDate, @RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+//		
+//		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得客户列表分页成功");
+//		result.setCount(service.getCountByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate));
+//		result.setPageCount(service.getPageCountByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate, rows));
+//		result.setList(service.getListByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate, rows, page));
+//		result.setPage(page);	
+//		result.setRows(rows);	
+//		return result;
+//		}
 	
 	//增加客户
 	@RequestMapping(value="/add")
@@ -120,9 +145,9 @@ public class CustomerController {
 		return result;
 	}
 		
-	//验证员工ID是否存在，如果存在则不合法，不存在则合法，用于增加员工时检查ID是否已经存在
+	//验证员工姓名是否存在，如果存在则不合法，不存在则合法，用于增加员工时检查员工是否已经存在
 		@GetMapping(value="/checkidexist")
-		public boolean checkIdExist(String id) throws Exception{
-			return !service.checkIdExist(id);
+		public boolean checkIdExist(String cname) throws Exception{
+			return !service.checkIdExist(cname);
 		}
 }

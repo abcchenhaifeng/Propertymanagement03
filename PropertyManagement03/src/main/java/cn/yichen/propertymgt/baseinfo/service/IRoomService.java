@@ -34,4 +34,8 @@ public interface IRoomService {
 	public List<Room> getListByHouseTypeNo(int housetypeno) throws Exception;
 	//根据楼宇序号取得此序号的房间
 	public List<Room> getListByBuildingNo(int buildingno) throws Exception;
+	//获取当前房间的楼栋号
+	public List<Room> getBuildingNo() throws Exception;
+	//获得当前房间的入住情况
+	public List<Room> getlivingStatus() throws Exception;
 }

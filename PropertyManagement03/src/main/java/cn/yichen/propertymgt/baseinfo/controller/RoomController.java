@@ -64,6 +64,18 @@ public class RoomController {
 		return Service.getListByAll();
 	}
 	
+	//取得所有房间所属楼栋，无分页
+	@GetMapping(value="/type/all")
+	public List<Room> getBuildingtype() throws Exception{
+		return Service.getBuildingNo();
+	}
+	
+	//取得所有房间所属楼栋，无分页
+	@GetMapping(value="/status/all")
+	public List<Room> getLivingStatus() throws Exception{
+		return Service.getlivingStatus();
+	}
+	
 	//取得所有房间列表,有外键，无分页
 	@GetMapping(value="/list/allfk")
 	public List<Room> getListByAllWithFK() throws Exception{

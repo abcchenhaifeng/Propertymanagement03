@@ -40,6 +40,9 @@ public interface IRoomMapper {
 	//根据楼宇序号取得此序号的房间
 	public List<Room> selectListByBuildingNo(int buildingno) throws Exception;
 	//取得所有房间列表,关联BuildingNo
-	public List<Room> selectListByAllwithFK() throws Exception;
-
+	public List<Room> selectListByAllwithFK() throws Exception;	
+	//取得楼栋类型
+	public List<Room> selectbuildingtype() throws Exception;
+	//取得入住情况
+	public List<Room> selectlivingStatus() throws Exception;
 }

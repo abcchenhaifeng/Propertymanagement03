@@ -19,7 +19,7 @@ import cn.yichen.propertymgt.feeinfo.model.RoomFee;
 public class CustomerHome implements Serializable {
     private String chno;      //客户房间号                 
 
-    private String customerno;   //客户号
+    private int customerno;   //客户号
 
     private Room roomno;       //房间号
 
@@ -69,11 +69,11 @@ public class CustomerHome implements Serializable {
         this.chno = chno;
     }
 
-    public String getCustomerno() {
+    public int getCustomerno() {
         return customerno;
     }
 
-    public void setCustomerno(String customerno) {
+    public void setCustomerno(int customerno) {
         this.customerno = customerno;
     }
 

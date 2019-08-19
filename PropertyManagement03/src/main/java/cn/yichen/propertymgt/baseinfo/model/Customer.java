@@ -19,8 +19,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Customer implements Serializable {
 	private int customerNo; // 客户序号
 
-	//private String typeNo; // 客户类型序号
-
 	private String cname; // 客户名称
 
 	private String contact; // 联系人姓名
@@ -35,7 +33,7 @@ public class Customer implements Serializable {
 	
 	private CustomerHome customerhome; //一对一，一个客户只能对应一个客户房间
 
-	public CustomerHome getCustomerhone() {
+	public CustomerHome getCustomerhome() {
 		return customerhome;
 	}
 
@@ -66,12 +64,6 @@ public class Customer implements Serializable {
 	public void setCustomerNo(int customerNo) {
 		this.customerNo = customerNo;
 	}
-
-	/*
-	 * public String getTypeNo() { return typeNo; }
-	 * 
-	 * public void setTypeNo(String typeNo) { this.typeNo = typeNo; }
-	 */
 
 	public String getCname() {
 		return cname;

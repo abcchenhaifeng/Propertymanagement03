@@ -191,6 +191,11 @@ public class CustomerServiceImpl implements ICustomerService {
 	public List<Customer> getListByAllandFk() throws Exception {
 		return mapper.selectCustomerByAllAndFk();
 	}
+
+	@Override
+	public List<Customer> getListByAllandFKWithPage(int rows, int page) throws Exception {
+		return mapper.selectCustomerByAllAndFkWithPage(rows*(page-1), rows);
+	}
 	
 	
 	}
