@@ -144,5 +144,73 @@
    </select>
   
   
+  <!-- 根据综合检索条件取得客户列表，取得客户类型，分页模式 -->
+  <!--areanname, departmentcode, roomno, livedate,roomstatus,chstatus  -->
+  <select id="selectListByConditionandFKWithPage" resultMap="CustomerMapByIdWithTypeandHome">
+      select a.*,b.*,c.*,d.*,e.*,f.*,g.*,h.* 
+      from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo 
+	      inner join Building c on a.BuildingNo=c.BuildingNo 
+	      inner join Area d on c.AreaNo=d.AREANO 
+	      inner join BuildingType e on c.BuildingTypeNo=e.TYPENO 
+	      inner join CustomerHome f on f.RoomNo = a.RoomNo 
+	      inner join Customer g on f.CustomerNo = g.CustomerNo 
+	      inner join CustomerType h on h.typeNo = g.typeNo
+	   <where>
+	     <if test="areanname!=null and areanname!=''">
+	      and d.AREANAME=#{areanname}
+	     </if>
+	     <if test="departmentcode!=null and departmentcode!=''">
+	     and a.DepartmentCode = (select Distinct(DepartmentCode) from Room where DepartmentCode=#{departmentcode})
+	     </if>
+	     <if test="roomno!=null and roomno!=''">
+	      and a.RoomNo=#{roomno}
+	     </if>
+	     <if test="livedate!=null">
+	     and f.LiveDate &gt;=#{livedate}
+	     </if>
+	     <if test="roomstatus!=null and roomstatus!=''">
+	      and a.RoomStatus=#{roomstatus}
+	     </if>
+	      <if test="chstatus!=null and chstatus!=''">
+	      and f.CHStatus=#{chstatus}
+	     </if>
+	  </where>
+   limit #{start},#{rows}
+  </select>
+  
+  
+    <!-- 根据综合检索条件取得客户个数-->
+  <select id="selectCountByConditionWithFK" resultType="int">
+  select IFNULL(count(g.CustomerNo), 0) 
+  from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo 
+  inner join Building c on a.BuildingNo=c.BuildingNo 
+  inner join Area d on c.AreaNo=d.AREANO 
+  inner join BuildingType e on c.BuildingTypeNo=e.TYPENO 
+  inner join CustomerHome f on f.RoomNo = a.RoomNo 
+  inner join Customer g on f.CustomerNo = g.CustomerNo 
+  inner join CustomerType h on h.typeNo = g.typeNo
+  <where>
+     <if test="areanname!=null and areanname!=''">
+	      and d.AREANAME=#{areanname}
+	     </if>
+	     <if test="departmentcode!=null and departmentcode!=''">
+	     and a.DepartmentCode = (select Distinct(DepartmentCode) from Room where DepartmentCode=#{departmentcode})
+	     </if>
+	     <if test="roomno!=null and roomno!=''">
+	      and a.RoomNo=#{roomno}
+	     </if>
+	     <if test="livedate!=null">
+	     and f.LiveDate &gt;=#{livedate}
+	     </if>
+	     <if test="roomstatus!=null and roomstatus!=''">
+	      and a.RoomStatus=#{roomstatus}
+	     </if>
+	      <if test="chstatus!=null and chstatus!=''">
+	      and f.CHStatus=#{chstatus}
+	     </if>
+  </where>
+   
+  </select> 
+  
   
 </mapper>

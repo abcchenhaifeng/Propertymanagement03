@@ -90,18 +90,25 @@ public class CustomerController {
 		return result;
 		}
 
-//	//按检索条件取得员工列表
-//	@GetMapping(value="/list/conditionwithFk/page")
-//	public ResultMessage<Customer> getListByConditionAndFKkWithPage(@RequestParam(required = false,defaultValue ="") String CustomerName,@RequestParam(required = false,defaultValue ="0") String typeno,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeStartDate,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date feeEndDate, @RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
-//		
-//		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得客户列表分页成功");
-//		result.setCount(service.getCountByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate));
-//		result.setPageCount(service.getPageCountByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate, rows));
-//		result.setList(service.getListByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate, rows, page));
-//		result.setPage(page);	
-//		result.setRows(rows);	
-//		return result;
-//		}
+	
+//	var areanname=null;
+//	var departmentcode=null;
+//	var roomno=null;
+//	var livedate=null;
+//	var roomstatus=null;
+//	var chstatus=null;
+	//按检索条件取得员工列表，有外键
+	@GetMapping(value="/list/conditionwithFk/page")
+	public ResultMessage<Customer> getListByConditionAndFKWithPage(@RequestParam(required = false,defaultValue ="") String areanname,@RequestParam(required = false,defaultValue ="") String departmentcode,@RequestParam(required = false,defaultValue ="") String roomno,@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(required = false) Date livedate,@RequestParam(required = false,defaultValue ="") String roomstatus,@RequestParam(required = false,defaultValue ="") String chstatus,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+		
+		ResultMessage<Customer> result=new ResultMessage<Customer>("OK","取得客户列表分页成功");
+		result.setCount(service.getCountByConditionandFKWithPage(areanname, departmentcode, roomno, livedate,roomstatus,chstatus));
+		result.setPageCount(service.getPageCountByConditionandFKWithPage(areanname, departmentcode, roomno, livedate,roomstatus,chstatus, rows));
+		result.setList(service.getListByConditionandFKWithPage(areanname, departmentcode, roomno, livedate,roomstatus,chstatus, rows, page));
+		result.setPage(page);	
+		result.setRows(rows);	
+		return result;
+		}
 	
 	//增加客户
 	@RequestMapping(value="/add")
@@ -125,6 +132,7 @@ public class CustomerController {
 		return new ResultMessage<Customer>("OK","修改客户信息成功");
 	}
 	
+
 	
 	//删除客户
 	@PostMapping("/delete")

@@ -47,6 +47,14 @@ public interface ICustomerService {
 	//根据综合检索条件取得客户显示的页数
 	public int getPageCountByConditionandTypeWithPage(String CustomerName,String typeno,Date feeStartDate,Date feeEndDate,int rows) throws Exception;
 	
+	//根据综合检索条件取得客户列表，取得关联的客户类型，分页模式
+	//areanname, departmentcode, roomno, livedate,roomstatus,chstatus
+	public List<Customer> getListByConditionandFKWithPage(String areanname,String departmentcode,String roomno,Date livedate,String roomstatus,String chstatus,int rows,int page) throws Exception;
+	//根据综合检索条件取得客户个数
+	public int getCountByConditionandFKWithPage(String areanname,String departmentcode,String roomno,Date livedate,String roomstatus,String chstatus) throws Exception;
+	//根据综合检索条件取得客户显示的页数
+	public int getPageCountByConditionandFKWithPage(String areanname,String departmentcode,String roomno,Date livedate,String roomstatus,String chstatus,int rows) throws Exception;
+	
 	//验证员工姓名是否存在
 	public  boolean checkIdExist(String cname) throws Exception;	
 	
@@ -64,6 +72,6 @@ public interface ICustomerService {
 	public List<Customer> getListByAllandFk() throws Exception;
 	
 	// 按条件获取客户列表(分页)
-		public List<Customer> getListByAllandFKWithPage( int page, int rows) throws Exception;
+	public List<Customer> getListByAllandFKWithPage( int page, int rows) throws Exception;
 
 }

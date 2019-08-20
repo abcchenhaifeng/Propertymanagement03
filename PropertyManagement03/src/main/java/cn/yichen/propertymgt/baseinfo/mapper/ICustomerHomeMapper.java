@@ -57,6 +57,14 @@ public interface ICustomerHomeMapper {
 	public int selectCountByAll() throws Exception;
 	//取得房间页数
 	public int selectPageCountByAll(int rows) throws Exception;
-
+	
+	//取得迁居类型
+	public List<CustomerHome> selectlivingStatus() throws Exception;
+	
+	//修改迁居类型
+	public void modifyStatus(CustomerHome chome) throws Exception;
+	
+	//检查指定序号，用于验证是否迁出
+	public CustomerHome selectStatusByNO(CustomerHome chome) throws Exception;
 	
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import cn.yichen.propertymgt.feeinfo.model.RoomFee;
 
 /**
@@ -46,15 +48,19 @@ public class CustomerHome implements Serializable {
 	}
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")     //入房日期
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date receivedate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")     //收房日期  
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date livedate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")    //缴费开始日期
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date feestartdate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")    //缴费结束日期
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date feeenddate;
 
     private Integer humancount;               //居住人数

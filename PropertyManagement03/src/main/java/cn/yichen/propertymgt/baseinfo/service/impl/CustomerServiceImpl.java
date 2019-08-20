@@ -120,37 +120,12 @@ public class CustomerServiceImpl implements ICustomerService {
 	}
 
 	
-//	@Override
-//	public List<EmployeeModel> getListByConditionWithDepartmentWithoutRolesWithPage(int departmentNo, int roleNo,
-//			String sex, Date startJoinDate, Date endJoinDate, int rows, int page) throws Exception {
-//		
-//		return employeeMapper.selectListByConditionWithDepartmentNoAndRolesWithPage(departmentNo, roleNo, sex, startJoinDate, endJoinDate, rows*(page-1), rows);
-//	}
-
-	
-	
-	
-	
 	@Override
 	public List<Customer> getListByConditionandTypeWithPage(String CustomerName, String typeno, Date feeStartDate,
 			Date feeEndDate, int rows, int page) throws Exception {
 		return mapper.selectListByConditionandTypeWithPage(CustomerName, typeno, feeStartDate, feeEndDate,rows*(page-1), rows);
 	}
 
-//	@Override
-//	public int getPageCountByConditionWithDepartmentNoAndRolesWithPage(int departmentNo, int roleNo, String sex,
-//			Date startJoinDate, Date endJoinDate, int rows) throws Exception {
-//		int pageCount=0;
-//		int count=this.getCountByConditionWithDepartmentNoAndRolesWithPage(departmentNo, roleNo, sex, startJoinDate, endJoinDate);
-//		if(count%rows==0) {
-//			pageCount=count/rows;
-//		}
-//		else {
-//			pageCount=count/rows+1;
-//		}
-//		return pageCount;
-//	}	
-	
 	
 	@Override
 	public int getPageCountByConditionandTypeWithPage(String CustomerName, String typeno, Date feeStartDate,
@@ -166,12 +141,6 @@ public class CustomerServiceImpl implements ICustomerService {
 		return pageCount;
 	}
 	
-//	@Override
-//	public int getCountByConditionWithDepartmentNoAndRolesWithPage(int departmentNo, int roleNo,
-//			String sex, Date startJoinDate, Date endJoinDate) throws Exception {
-//		
-//		return employeeMapper.selectCountByCondition(departmentNo, roleNo, sex, startJoinDate, endJoinDate);
-//	}
 	@Override
 	public int getCountByConditionandTypeWithPage(String CustomerName, String typeno, Date feeStartDate, Date feeEndDate)
 			throws Exception {
@@ -195,6 +164,32 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Override
 	public List<Customer> getListByAllandFKWithPage(int rows, int page) throws Exception {
 		return mapper.selectCustomerByAllAndFkWithPage(rows*(page-1), rows);
+	}
+
+	@Override
+	public List<Customer> getListByConditionandFKWithPage(String areanname, String departmentcode, String roomno,
+			Date livedate, String roomstatus, String chstatus, int rows, int page) throws Exception {
+		return mapper.selectListByConditionandFKWithPage(areanname, departmentcode, roomno, livedate, roomstatus, chstatus,rows*(page-1), rows);
+	}
+
+	@Override
+	public int getCountByConditionandFKWithPage(String areanname, String departmentcode, String roomno, Date livedate,
+			String roomstatus, String chstatus) throws Exception {
+		return mapper.selectCountByConditionWithFK(areanname, departmentcode, roomno, livedate, roomstatus, chstatus);
+	}
+
+	@Override
+	public int getPageCountByConditionandFKWithPage(String areanname, String departmentcode, String roomno,
+			Date livedate, String roomstatus, String chstatus, int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountByConditionandFKWithPage(areanname, departmentcode, roomno, livedate, roomstatus, chstatus);
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
 	}
 	
 	

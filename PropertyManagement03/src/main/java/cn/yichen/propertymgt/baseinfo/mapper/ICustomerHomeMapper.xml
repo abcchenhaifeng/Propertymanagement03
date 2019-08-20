@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.yichen.propertymgt.baseinfo.mapper.ICustomerHomeMapper">
 
-	<cache />
+<!-- 	<cache /> -->
 
 	<resultMap id="CustomerHomeMap" type="CustomerHome">
 		<id column="CHNO" property="chno" />
@@ -32,7 +32,11 @@
     update CustomerHome set CustomerNo=#{customerno}, RoomNo=#{roomno.roomno}, LivingTypeNo=#{livingtypeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}"
     </update>
 	
-	
+	<update id="modifyStatus" flushCache="true">
+    update CustomerHome set CHStatus='迁出' where CustomerNo=#{customerno}
+    </update>
+    
+    
 	<delete id="delete" flushCache="true">
     delete from CustomerHome where CHNO = #{chno}
     </delete>
@@ -93,10 +97,18 @@
 	where ct.RoomNo = #{roomno.roomno}  and ct.RoomNo = r.RoomNo
 	</select>
 	
+	 <select id="selectlivingStatus" resultMap="CustomerHomeMap" >
+	    select distinct(CHStatus) from CustomerHome
+	 </select>
+	
 
 	 <select id="selectListByAllwithFK" resultMap="CustomerHomeMapByRoomNo" >
 	    select a.*,b.*,c.*,d.*,e.*,f.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo inner join Building c on a.BuildingNo=c.BuildingNo inner join Area d on c.AreaNo=d.AREANO inner join BuildingType e on c.BuildingTypeNo=e.TYPENO inner join CustomerHome f on a.RoomNo=f.RoomNo
 	 </select>
 	
+    <!-- 根据序号取得迁居状态 -->
+   <select id="selectStatusByNO" resultMap="CustomerHomeMap">
+    select CHStatus from CustomerHome where CustomerNo=#{customerno}
+   </select>
 	
 </mapper>

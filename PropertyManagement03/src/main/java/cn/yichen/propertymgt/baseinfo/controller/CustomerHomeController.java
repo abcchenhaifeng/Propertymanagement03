@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.yichen.propertymgt.baseinfo.model.Customer;
 import cn.yichen.propertymgt.baseinfo.model.CustomerHome;
 import cn.yichen.propertymgt.baseinfo.service.ICustomerHomeService;
 import cn.yichen.propertymgt.baseinfo.service.ICustomerHomeService;
@@ -39,6 +41,31 @@ public class CustomerHomeController {
 		Service.modify(ch);
 		return new ResultMessage<CustomerHome>("OK","修改房间成功");
 	}
+	
+	//修改房间
+	@PostMapping("/moveout")
+	public ResultMessage<CustomerHome> modifystatus(CustomerHome ch) throws Exception {
+		Service.modifyStatus(ch);
+		return new ResultMessage<CustomerHome>("OK","修改迁居状态成功");
+	}
+		
+	//检查此客户能否迁出
+	@GetMapping(value="/check")
+	public ResultMessage<CustomerHome> check(CustomerHome ch) throws Exception{
+		ResultMessage<CustomerHome> result=new ResultMessage<CustomerHome>("OK","此客户当前状态可以迁出");
+//		if(!service.checkCanDelete(no)) {
+//			result.setStatus("NO");
+//			result.setMessage("此客户不能删除");
+//		}
+		if(!Service.checkCanModify(ch))
+		{
+			result.setStatus("NO");
+			result.setMessage("此客户不能迁出");
+		}
+		return result;
+	}
+	
+	
 	//删除房间
 	@GetMapping("/delete")
 	public ResultMessage<CustomerHome> delete(CustomerHome ch) throws Exception {
@@ -75,5 +102,10 @@ public class CustomerHomeController {
 		return Service.getListByAllWithFK();
 	}
 	
+	//取得所有房间列表,有外键，无分页
+	@GetMapping(value="/livingstatus")
+	public List<CustomerHome> getlivingstatus() throws Exception{
+		return Service.getLivingStatus();
+	}
 	
 }

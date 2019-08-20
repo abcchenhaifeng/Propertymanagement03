@@ -72,6 +72,13 @@ public interface ICustomerMapper {
 		public List<Customer> selectCustomerByAllAndFkWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 		// 按条件获取客户列表(分页)
 		//public List<Customer> selectCustomerByAllandHomeWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
+		
+		//根据综合检索条件取得客户列表，取得关联的客户类型
+		//areanname, departmentcode, roomno, livedate,roomstatus,chstatus
+		public List<Customer> selectListByConditionandFKWithPage(@Param("areanname") String areanname,@Param("departmentcode") String departmentcode,@Param("roomno") String roomno,@Param("livedate") Date livedate,@Param("roomstatus") String roomstatus,@Param("chstatus") String chstatus,@Param("start") int start,@Param("rows") int rows) throws Exception;
+		//根据综合检索条件取得客户个数
+		public int selectCountByConditionWithFK(@Param("areanname") String areanname,@Param("departmentcode") String departmentcode,@Param("roomno") String roomno,@Param("livedate") Date livedate,@Param("roomstatus") String roomstatus,@Param("chstatus") String chstatus) throws Exception;
 }
+
 
 
