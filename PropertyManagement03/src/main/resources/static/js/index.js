@@ -26,7 +26,8 @@ $(() => {
 		url_method = $(this).attr("method");
 		
 		var url = $(this).attr("href");
-		if(/([lL]ist)|([mM]ain).html$/.test(url)) {
+		
+		if(/([lL]ist)|([mM]ain)\w*.html$/.test(url)) {
 			$("section#main #container").load(url);
 		} else {
 			$("section#main #dialog").load(url, () => {

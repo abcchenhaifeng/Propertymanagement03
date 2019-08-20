@@ -77,7 +77,7 @@ $(function(){
 	
 	//初始调用取得分页列表数据
 	getListInfo();
-	var dialogArea = null;
+	//var dialogArea = null;
 	//点击增加链接处理，嵌入add.html
 	$("a#RoomAddLink").off().on("click",function(event){
 				

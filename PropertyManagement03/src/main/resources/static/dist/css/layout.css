@@ -40,6 +40,15 @@ a, a:link, a:visited, a:hover {
 	color: wheat !important;
 }
 
+/* jqgrid - table */
+.ui-jqgrid .ui-jqgrid-hdiv {
+	text-align: center !important;
+}
+
+.ui-jqgrid .ui-jqgrid-bdiv {
+	text-align: center !important;
+}
+
 /* Header */
 
 header#header {
