@@ -8,7 +8,7 @@
 var url_method = null;
 
 // ajax请求的根地址
-var rootAddress = "http://localhost/";
+var rootAddress = "http://localhost:8080/";
 
 // 登录的用户
 var login_user = {
