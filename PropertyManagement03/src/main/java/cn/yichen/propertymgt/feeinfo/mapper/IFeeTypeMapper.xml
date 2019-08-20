@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.feeinfo.mapper.IFeeTypeMapper">
+
+	<cache/>
+	
+	<resultMap type="FeeType" id="FeeTypeMap">
+		<id column="TYPENO" property="typeno"/>
+		<result column="TYPENAME" property="typename"/>
+	</resultMap>
+	
+	<resultMap type="FeeType" id="FeeTypeMapWithItem" extends="FeeTypeMap">
+		<collection property="feeItems" resultMap="cn.yichen.propertymgt.feeinfo.mapper.IFeeItemMapper.FeeItemMap"></collection>
+	</resultMap>
+	
+	<sql id="FeeTypeWhen">
+		<if test="feeType != null">
+			<if test="feeType.typeno != null">and ft.TYPENO = #{feeType.typeno}</if>
+			<if test="feeType.typename != null">and ft.TYPENAME like '%${feeType.typename}%'</if>
+		</if>
+	</sql>
+	
+	<insert id="create" flushCache="true">
+		insert into FeeType(TYPENAME) values(#{typename})
+	</insert>
+	
+	<delete id="delete" flushCache="true">
+		delete from FeeType where TYPENO = #{no}
+	</delete>
+	
+	<update id="update" flushCache="true">
+		update FeeType set TYPENAME = #{typename} where TYPENO = #{typeno}
+	</update>
+	
+	<select id="selectFeeTypeByNo" resultMap="FeeTypeMap">
+		select ft.TYPENO, ft.TYPENAME from FeeType ft where ft.TYPENO = #{no}
+	</select>
+	
+	<select id="selectFeeTypeByNoWithItem" resultMap="FeeTypeMapWithItem">
+		select ft.TYPENO, ft.TYPENAME, 
+				fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
+		from FeeType ft, FeeItem fi 
+		where ft.TYPENO = #{no} and ft.TYPENO = fi.FeeTypeNo
+	</select>
+	
+	<select id="selectListByCriteria" resultMap="FeeTypeMap">
+		select ft.TYPENO, ft.TYPENAME from FeeType ft 
+		<where>
+			<include refid="FeeTypeWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectListByCriteriaWithPage" resultMap="FeeTypeMap">
+		select ft.TYPENO, ft.TYPENAME from FeeType ft 
+		<where>
+			<include refid="FeeTypeWhen"></include>
+			and ft.TYPENO >= (select TYPENO from FeeType ORDER BY TYPENO LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteria" resultType="int">
+		select IFNULL(count(ft.TYPENO), 0) from FeeType ft
+		<where>
+			<include refid="FeeTypeWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteriaAndPage" resultType="int">
+		select IFNULL(count(ft.TYPENO), 0) from FeeType ft
+		<where>
+			<include refid="FeeTypeWhen"></include>
+			and ft.TYPENO >= (select TYPENO from FeeType ORDER BY TYPENO LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+
+</mapper>

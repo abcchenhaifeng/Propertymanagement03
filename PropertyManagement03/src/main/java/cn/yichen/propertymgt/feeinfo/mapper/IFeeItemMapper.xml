@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.feeinfo.mapper.IFeeItemMapper">
+
+	<cache/>
+	
+	<resultMap type="FeeItem" id="FeeItemMap">
+		<id column="ItemNo" property="itemno"/>
+		<result column="ItemCode" property="itemcode"/>
+		<result column="ItemName" property="itemname"/>
+		<result column="ItemUnit" property="itemunit"/>
+		<result column="FeePayMethod" property="feepaymethod"/>
+		<result column="FeeCycle" property="feecycle"/>
+		<result column="ItemStatus" property="itemstatus"/>
+		<result column="ItemDesc" property="itemdesc"/>
+	</resultMap>
+	
+	<resultMap type="FeeItem" id="FeeItemMapWithType" extends="FeeItemMap">
+		<association property="feetype" resultMap="cn.yichen.propertymgt.feeinfo.mapper.IFeeTypeMapper.FeeTypeMap"></association>
+	</resultMap>
+	
+	<sql id="FeeItemWhen">
+		<if test="feeItem != null">
+			<if test="feeItem.itemNo != null">and fi.ItemNo = #{feeItem.itemno}</if>
+			<if test="feeItem.itemcode != null">and fi.ItemCode like '%${feeItem.itemcode}%'</if>
+			<if test="feeItem.itemName != null">and fi.ItemName = #{feeItem.itemname}</if>
+			<if test="feeItem.itemUnit != null">and fi.ItemUnit like '%${feeItem.itemunit}%'</if>
+			<if test="feeItem.feetype != null">
+				<if test="feeItem.feetype.typeno != null">and fi.FeeTypeNo = #{feeItem.feetype.typeno}</if>
+			</if>
+			<if test="feeItem.feepaymethod != null">and fi.FeePayMethod like '%${feeItem.feepaymethod}%'</if>
+			<if test="feeItem.feecycle != null">and fi.FeeCycle = #{feeItem.feeCycle}</if>
+			<if test="feeItem.itemstatus != null">and fi.ItemStatus like '%${feeItem.itemstatus}%'</if>
+			<if test="feeItem.itemdesc != null">and fi.ItemDesc = #{feeItem.itemdesc}</if>
+		</if>
+	</sql>
+	
+	<insert id="create" flushCache="true">
+		insert into FeeItem(ItemCode, ItemName, ItemUnit, FeeTypeNo, FeePayMethod, FeeCycle, ItemStatus, ItemDesc) 
+		values(#{itemcode}, #{itemname}, #{itemunit}, #{feetype.typeno}, #{feepaymethod}, #{feecycle}, #{itemstatus}, #{itemdesc})
+	</insert>
+	
+	<delete id="delete" flushCache="true">
+		delete from FeeItem where ItemNo = #{no}
+	</delete>
+	
+	<update id="update" flushCache="true">
+		update FeeItem set ItemCode = #{itemcode},  ItemName =  #{itemname},  ItemUnit = #{itemunit},  
+							FeeTypeNo = #{feetype.typeno},  FeePayMethod = #{feepaymethod},  FeeCycle = #{feecycle},  
+							ItemStatus = #{itemstatus},  ItemDesc = #{itemdesc} where ItemNo = #{itemno}
+	</update>
+	
+	<select id="selectByNo" resultMap="FeeItemMap">
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
+		from FeeItem fi where fi.ItemNo = #{no}
+	</select>
+	
+	<select id="selectByNoWithType" resultMap="FeeItemMapWithType">
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc, 
+				ft.TYPENAME
+		from FeeItem fi, FeeType ft
+		where fi.ItemNo = #{no} and fi.FeeTypeNo = ft.TYPENO
+	</select>
+	
+	<select id="selectListByCriteria" resultMap="FeeItemMap">
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
+		from FeeItem fi
+		<where>
+			<include refid="FeeItemWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectListByCriteriaWithPage" resultMap="FeeItemMap">
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
+		from FeeItem fi
+		<where>
+			<include refid="FeeItemWhen"></include>
+			and fi.ItemNo >= (select ItemNo from FeeItem ORDER BY ItemNo LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteria" resultType="int">
+		select IFNULL(count(fi.ItemNo), 0) from FeeItem fi
+		<where>
+			<include refid="FeeItemWhen"></include>
+		</where>
+	</select>
+
+</mapper>

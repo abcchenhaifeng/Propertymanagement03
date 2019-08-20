@@ -5,107 +5,109 @@ import java.io.Serializable;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:33:13
- * @author YiChen(李冠永)
- * #收费项目
+ * 
+ * @date: 2019年8月19日 上午12:02:54
+ * @author: YiChen(李冠永)
+ * @Description: 收费项目
  *
  */
 @Alias("FeeItem")
 public class FeeItem implements Serializable {
-    private Integer itemno;
+	private Integer itemno;
 
-    private String itemcode;
+	private String itemcode;
 
-    private String itemname;
+	private String itemname;
 
-    private String itemunit;
+	private String itemunit;
 
-    private Integer feetypeno;
+	private FeeType feetype;
 
-    private String feepaymethod;
+	private String feepaymethod;
 
-    private String feecycle;
+	private String feecycle;
 
-    private String itemstatus;
+	private String itemstatus;
 
-    private String itemdesc;
+	private String itemdesc;
 
-    public Integer getItemno() {
-        return itemno;
-    }
+	public Integer getItemno() {
+		return itemno;
+	}
 
-    public void setItemno(Integer itemno) {
-        this.itemno = itemno;
-    }
+	public void setItemno(Integer itemno) {
+		this.itemno = itemno;
+	}
 
-    public String getItemcode() {
-        return itemcode;
-    }
+	public String getItemcode() {
+		return itemcode;
+	}
 
-    public void setItemcode(String itemcode) {
-        this.itemcode = itemcode == null ? null : itemcode.trim();
-    }
+	public void setItemcode(String itemcode) {
+		this.itemcode = itemcode;
+	}
 
-    public String getItemname() {
-        return itemname;
-    }
+	public String getItemname() {
+		return itemname;
+	}
 
-    public void setItemname(String itemname) {
-        this.itemname = itemname == null ? null : itemname.trim();
-    }
+	public void setItemname(String itemname) {
+		this.itemname = itemname;
+	}
 
-    public String getItemunit() {
-        return itemunit;
-    }
+	public String getItemunit() {
+		return itemunit;
+	}
 
-    public void setItemunit(String itemunit) {
-        this.itemunit = itemunit == null ? null : itemunit.trim();
-    }
+	public void setItemunit(String itemunit) {
+		this.itemunit = itemunit;
+	}
 
-    public Integer getFeetypeno() {
-        return feetypeno;
-    }
+	public FeeType getFeetype() {
+		return feetype;
+	}
 
-    public void setFeetypeno(Integer feetypeno) {
-        this.feetypeno = feetypeno;
-    }
+	public void setFeetype(FeeType feetype) {
+		this.feetype = feetype;
+	}
 
-    public String getFeepaymethod() {
-        return feepaymethod;
-    }
+	public String getFeepaymethod() {
+		return feepaymethod;
+	}
 
-    public void setFeepaymethod(String feepaymethod) {
-        this.feepaymethod = feepaymethod == null ? null : feepaymethod.trim();
-    }
+	public void setFeepaymethod(String feepaymethod) {
+		this.feepaymethod = feepaymethod;
+	}
 
-    public String getFeecycle() {
-        return feecycle;
-    }
+	public String getFeecycle() {
+		return feecycle;
+	}
 
-    public void setFeecycle(String feecycle) {
-        this.feecycle = feecycle == null ? null : feecycle.trim();
-    }
+	public void setFeecycle(String feecycle) {
+		this.feecycle = feecycle;
+	}
 
-    public String getItemstatus() {
-        return itemstatus;
-    }
+	public String getItemstatus() {
+		return itemstatus;
+	}
 
-    public void setItemstatus(String itemstatus) {
-        this.itemstatus = itemstatus == null ? null : itemstatus.trim();
-    }
+	public void setItemstatus(String itemstatus) {
+		this.itemstatus = itemstatus;
+	}
 
-    public String getItemdesc() {
-        return itemdesc;
-    }
+	public String getItemdesc() {
+		return itemdesc;
+	}
 
-    public void setItemdesc(String itemdesc) {
-        this.itemdesc = itemdesc == null ? null : itemdesc.trim();
-    }
+	public void setItemdesc(String itemdesc) {
+		this.itemdesc = itemdesc;
+	}
 
 	@Override
 	public String toString() {
-		return "Feeitem [itemno=" + itemno + ", itemcode=" + itemcode + ", itemname=" + itemname + ", itemunit="
-				+ itemunit + ", feetypeno=" + feetypeno + ", feepaymethod=" + feepaymethod + ", feecycle=" + feecycle
+		return "FeeItem [itemno=" + itemno + ", itemcode=" + itemcode + ", itemname=" + itemname + ", itemunit="
+				+ itemunit + ", feetype=" + feetype + ", feepaymethod=" + feepaymethod + ", feecycle=" + feecycle
 				+ ", itemstatus=" + itemstatus + ", itemdesc=" + itemdesc + "]";
 	}
+
 }
