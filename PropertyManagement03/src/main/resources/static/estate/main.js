@@ -2,8 +2,8 @@
 $(function(){
 	var remote="http://localhost:8080/";
 	//var remote="http://localhost/";
-	var rows=2;
-	var page=2;
+	var rows=10;
+	var page=1;
 	var pageCount=0;
 	var RoomNo=0; //选择的客户编号
 	
@@ -25,7 +25,7 @@ $(function(){
 				var tr="<tr id='"+data.list[i].roomno+"'>" +
 				        "<td>"+data.list[i].roomno+"</td>" +
 				        "<td>"+data.list[i].housetypeno+"</td>" +
-						"<td>"+data.list[i].ctbuildingno.buildingno+"</td>" +
+						"<td>"+data.list[i].buildingno+"</td>" +
 						"<td>"+data.list[i].departmentcode+"</td>" +
 						"<td>"+data.list[i].floor+"</td>" +
 						"<td>"+data.list[i].roomcode+"</td>" +

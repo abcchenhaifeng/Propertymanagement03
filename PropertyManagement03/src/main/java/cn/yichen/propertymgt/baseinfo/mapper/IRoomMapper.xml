@@ -8,6 +8,8 @@
   
   <resultMap id="RoomResultMap" type="Room">
     <id property="roomno" column="RoomNo"/>
+    <result property="housetypeno" column="HouseTypeNo"/>
+    <result property="buildingno" column="BuildingNo"/>
     <result property="departmentcode" column="DepartmentCode"/>
     <result property="floor" column="Floor"/>
     <result property="roomcode" column="RoomCode"/>

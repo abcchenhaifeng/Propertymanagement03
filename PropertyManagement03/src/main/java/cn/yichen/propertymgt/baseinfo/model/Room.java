@@ -1,8 +1,6 @@
 package cn.yichen.propertymgt.baseinfo.model;
 
 import java.io.Serializable;
-import java.util.List;
-
 import org.apache.ibatis.type.Alias;
 
 /**
@@ -17,11 +15,15 @@ public class Room implements Serializable {
     
 
 	private String roomno;				//房间编号
-
+	
     private HouseType housetype;			//房屋户型编号
 
     private Building building;			//楼宇编号
+   
+    private String housetypeno;			//房屋户型编号
 
+    private String buildingno;			//楼宇编号
+    
     private String departmentcode;		//单元
 
     private String floor;				//楼层
@@ -59,6 +61,22 @@ public class Room implements Serializable {
 	public void setBuilding(Building building) {
 		this.building = building;
 	}
+	
+	public String getHousetypeno() {
+        return housetypeno;
+    }
+
+    public void setHousetypeno(String housetypeno) {
+        this.housetypeno = housetypeno;
+    }
+
+    public String getBuildingno() {
+        return buildingno;
+    }
+
+    public void setBuildingno(String buildingno) {
+        this.buildingno = buildingno;
+    }
 
 	public String getDepartmentcode() {
 		return departmentcode;
