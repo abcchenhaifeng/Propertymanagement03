@@ -33,9 +33,12 @@
     </update>
 	
 	<update id="modifyStatus" flushCache="true">
-    update CustomerHome set CHStatus='迁出' where CustomerNo=#{customerno}
+    update CustomerHome set CHStatus='迁出'  where CustomerNo=#{customerno}
     </update>
     
+    <update id="updateStatus" flushCache="true">
+    update CustomerHome set CHStatus='迁入'  where CustomerNo=#{customerno}
+    </update>
     
 	<delete id="delete" flushCache="true">
     delete from CustomerHome where CHNO = #{chno}

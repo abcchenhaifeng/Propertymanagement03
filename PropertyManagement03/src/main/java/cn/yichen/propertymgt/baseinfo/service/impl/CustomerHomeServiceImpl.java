@@ -96,6 +96,11 @@ public class CustomerHomeServiceImpl implements ICustomerHomeService {
 		return result;
 	}
 
+	@Override
+	public void updateStatus(CustomerHome ch) throws Exception {
+		mapper.updateStatus(ch);
+	}
+
 	
 
 }

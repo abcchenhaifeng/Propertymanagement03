@@ -46,7 +46,13 @@ public class CustomerHomeController {
 	@PostMapping("/moveout")
 	public ResultMessage<CustomerHome> modifystatus(CustomerHome ch) throws Exception {
 		Service.modifyStatus(ch);
-		return new ResultMessage<CustomerHome>("OK","修改迁居状态成功");
+		return new ResultMessage<CustomerHome>("OK","修改迁居状态为迁出成功");
+	}
+	
+	@PostMapping("/movein")
+	public ResultMessage<CustomerHome> updatestatus(CustomerHome ch) throws Exception {
+		Service.updateStatus(ch);
+		return new ResultMessage<CustomerHome>("OK","修改迁居状态为迁入成功");
 	}
 		
 	//检查此客户能否迁出

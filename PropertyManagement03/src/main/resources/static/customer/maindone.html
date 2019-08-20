@@ -18,22 +18,32 @@
 	             <form class="form-inline" role="form">
 				  <div class="form-group">
 				    <label  for="cname">&emsp;小区名称:</label>
-				    <input name="CustomerName" class="form-control" size="8">
+				    <input name="areanname" class="form-control" size="8">
 				  </div>
 				  <div class="form-group">
 				    <label  for="name">&emsp;楼栋号 </label>
-				     <select id="typeno" class="form-control">
-				       <option value="0">所有</option>
+				     <select id="departmentcode" class="form-control">
+				       <option value="">所有</option>
 				    </select>
 				  </div>			  
 				  <div class="form-group">
 				    <label  for="name">&emsp;房间号:</label>
-				    <input name="CustomerName" class="form-control" size="4">
+				    <input name="roomno" class="form-control" size="4">
+				  </div>
+				  <div class="form-group">
+				    <label  for="cname">&emsp;入住时间:</label>
+				    <input type="date" id="livedate" class="form-control" size="8">
 				  </div>
 				  <div class="form-group">
 				    <label  for="name">&emsp;入住状态 </label>
-				     <select id="status" class="form-control">
-				       <option value="0">所有</option>
+				     <select id="roomstatus" class="form-control">
+				       <option value="">所有</option>
+				    </select>
+				  </div>	
+				  <div class="form-group">
+				    <label  for="name">&emsp;迁居状态 </label>
+				     <select id="chstatus" class="form-control">
+				       <option value="">所有</option>
 				    </select>
 				  </div>	
 				  <div class="form-group">
@@ -44,6 +54,7 @@
              <div class="col-md-3 text-right">
             	<a href="#" id="CustomerMoveIn" class="btn btn-info">迁入</a>
              	<a href="#" id="CustomerMoveOut" class="btn btn-info">迁出</a>
+             	<a href="#" id="CustomerModify" class="btn btn-info">修改</a>
               </div>
           </div>
           

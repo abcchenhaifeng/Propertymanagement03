@@ -109,7 +109,7 @@ $(function(){
 	});
 	//===========================增加员工处理================================================
 	$("a#CustomerAddLink").off().on("click",function(){
-		$("div#CustomerDialog").load("customer/mainadd.html",function(){
+		$("div#CustomerDialog").load("customer/add.html",function(){
 			//验证员工提交数据
 			$("form#CustomerAddForm").validate({
 				  rules: {

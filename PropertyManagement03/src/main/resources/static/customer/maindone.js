@@ -94,12 +94,14 @@ $(function(){
 	//定义楼宇类型的更新事件的处理
 	$("select#departmentcode").off().on("change",function(){
 		departmentcode=$("select#departmentcode").val();
+		alert(departmentcode);
 		reloadCustomerList();
 	});
 	
 	//定义入住类型的更新事件的处理
 	$("select#roomstatus").off().on("change",function(){
 		roomstatus=$("select#roomstatus").val();
+		alert(roomstatus);
 		reloadCustomerList();
 	});
 	
@@ -107,6 +109,7 @@ $(function(){
 	//定义迁居类型的更新事件的处理
 	$("select#chstatus").off().on("change",function(){
 		chstatus=$("select#chstatus").val();
+		alert(chstatus);
 		reloadCustomerList();
 	});
 	
@@ -145,9 +148,9 @@ $(function(){
 		}
 		reloadCustomerList();
 	});
-//	//===========================迁入处理================================================
-//	$("a#CustomerAddLink").off().on("click",function(){
-//		$("div#CustomerDialog").load("customer/mainadd.html",function(){
+	//===========================迁入处理================================================
+	$("a#CustomerMoveIn").off().on("click",function(){
+		$("div#CustomerDialog").load("customer/mainadd.html",function(){
 //			//验证员工提交数据
 //			$("form#CustomerAddForm").validate({
 //				  rules: {
@@ -202,44 +205,49 @@ $(function(){
 //				  
 //			});
 //			
-//			//拦截增加提交表单
-//			$("form#CustomerAddForm").ajaxForm(function(result){
-//				if(result.status=="OK"){
-//					reloadCustomerList();//更新员工列表
-//				}
-//				$("div#CustomerDialog").dialog( "close" );
-//				$("div#CustomerDialog").dialog( "destroy" );
-//				$("div#CustomerDialog").html("");
-//				
-//			});
-//			$("div#CustomerDialog").dialog({
-//				title:"客户增加",
-//				width:950
-//			});
-//			//点击取消按钮，管理弹出窗口
-//			$("input[value='取消']").off().on("click",function(){
-//				$("div#CustomerDialog").dialog("close");
-//				$("div#CustomerDialog").dialog("destroy")
-//				$("div#CustomerDialog").html("");
-//			});
-//			
-//		});
-//	});
-//	
-//	
+			//拦截提交表单
+			$("form#CustomerAddForm").ajaxForm(function(result){
+				if(result.status=="OK"){
+					reloadCustomerList();//更新客户列表
+				}
+				$("div#CustomerDialog").dialog( "close" );
+				$("div#CustomerDialog").dialog( "destroy" );
+				$("div#CustomerDialog").html("");
+				
+			});
+			$("div#CustomerDialog").dialog({
+				title:"迁入客户信息成功",
+				width:950
+			});
+			//点击取消按钮，管理弹出窗口
+			$("input[value='取消']").off().on("click",function(){
+				$("div#CustomerDialog").dialog("close");
+				$("div#CustomerDialog").dialog("destroy")
+				$("div#CustomerDialog").html("");
+			});
+			
+		});
+	});
+	
+	
 
 	
+	
+	
+	
+	
+	
 
 	
 	
-	//===============================迁出处理==============================================================
-	//点击迁出按钮事件处理
-	$("a#CustomerMoveOut").off().on("click",function(event){
+	//===============================修改处理==============================================================
+	//点击修改按钮事件处理
+	$("a#CustomerModify").off().on("click",function(event){
 		
 		if(CustomerId==null){
 			jqueryEject.Econfirm({
-			title: '迁出操作',
-			message: '请选择要迁出的客户',
+			title: '修改操作',
+			message: '请选择要修改的客户',
 			define: function() {
 				setMessage(message, 5000);
 			},
@@ -247,17 +255,14 @@ $(function(){
 		});
 		}
 		else {
-			alert(CustomerId);
 			$.getJSON(host+"customerhome/check",{customerno:CustomerId},function(data){
 				if(data.status!="OK"){
-					jqueryEject.Econfirm({
-						title: '迁出操作',
-						message: '该客户已迁出',
-						define: function() {
-							setMessage(message, 5000);
-						},
-						cancel: function() {}
-					});
+					$.post(host+"customerhome/movein",{customerno:CustomerId},function(result){
+	                	if(result.status=="OK"){
+	                		setMessage("迁入成功", 5000);
+	                		reloadCustomerList();//更新客户列表
+						}	
+	                });
 				}
 				else{
 	            	$.post(host+"customerhome/moveout",{customerno:CustomerId},function(result){

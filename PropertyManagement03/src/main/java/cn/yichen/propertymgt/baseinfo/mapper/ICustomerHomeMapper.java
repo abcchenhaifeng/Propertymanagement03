@@ -61,8 +61,11 @@ public interface ICustomerHomeMapper {
 	//取得迁居类型
 	public List<CustomerHome> selectlivingStatus() throws Exception;
 	
-	//修改迁居类型
+	//修改迁居类型为迁出
 	public void modifyStatus(CustomerHome chome) throws Exception;
+	
+	//修改迁居类型为迁入
+	public void updateStatus(CustomerHome chome) throws Exception;
 	
 	//检查指定序号，用于验证是否迁出
 	public CustomerHome selectStatusByNO(CustomerHome chome) throws Exception;
