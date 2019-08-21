@@ -13,6 +13,8 @@ var doSomethingWhenDialogClose = function () {};
 
 $(() => {
 
+	checkLogin();
+
 	$(".menu_column a.link").on("click", function(e) {
 		url_method = $(this).attr("method");
 		
@@ -40,6 +42,16 @@ $(() => {
 
 		e.preventDefault();
 	});
+	
+	// 检查是否登录
+	function checkLogin () {
+		var ukey = sessionStorage.getItem("u-key");
+		if ( ukey != null ) {
+			$.ajaxSetup({headers:{"u-key":ukey}});
+		} else {
+			location.href = "login.html";
+		}
+	}
 });
 
 let default_alert_info;
@@ -74,9 +86,6 @@ $(function() {
 		return false;
 	});
 	
-	
-	
-
 });
 
 function closeDialog(e) {

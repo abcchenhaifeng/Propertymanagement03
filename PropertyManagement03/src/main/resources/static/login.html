@@ -8,6 +8,8 @@
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Jquery-3.4.1 -->
 <script src="dist/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<!-- JQuery Form Plugin -->
+<script src="dist/jqueryform/jquery.form.min.js" type="text/javascript"></script>
 <!-- Bootstrap 4.3.1 -->
 <link rel="stylesheet" href="dist/bootstrap/bootstrap-4.3.1/dist/css/bootstrap.min.css">
 <!-- Theme style -->
@@ -24,7 +26,7 @@
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<p id="box-header" class="login-box-msg">登录</p>
-			<div style="display: none;"><a href="javascript: " id="box-msg" class="btn btn-primary btn-block btn-flat" style="background-color: red;">账号或密码错误</a><br></div>
+			<div id="box-msg" style="display: none;"><a href="javascript: " class="btn btn-primary btn-block btn-flat" style="background-color: red;"></a><br></div>
 			<form id="box-form" action="user/login" method="post">
 				<div class="form-group has-feedback">
 					<input type="text" name="id" value="yichen" class="form-control" placeholder="账号">
