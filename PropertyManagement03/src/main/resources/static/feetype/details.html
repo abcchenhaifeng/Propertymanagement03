@@ -1,0 +1,32 @@
+<script type="text/javascript" src="js/feetype/details.js"></script>
+<div style="width: 75%; margin: 5% auto;">
+	<form id="details" action="user/modify" method="post">
+		<div id="no-box" class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">类型编号</span>
+			</div>
+			<input id="no" type="text" name="typeno" value="" class="form-control" 
+				aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg" >
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">类型名称</span>
+			</div>
+			<input type="text" name="typename" value=""
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg">
+		</div>
+		<br>
+		<div class="input-group">
+			<input type="text" class="form-control" value=""
+				disabled="disabled">
+			<div class="input-group-append" id="button-addon4">
+				<a href="javascript: closeDialog()"
+					class="btn btn-primary">返回</a>&nbsp;
+				<button class="btn btn-primary" type="submit">修改</button>
+			</div>
+		</div>
+	</form>
+</div>

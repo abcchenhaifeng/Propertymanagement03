@@ -1,10 +1,11 @@
 package cn.yichen.propertymgt.admin.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
+import java.util.Base64.Encoder;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,6 @@ public class UserInfoController {
 	@Autowired
 	private UserInfoServiceImpl service;
 	
-	@Autowired
-	@Qualifier("u-key")
-	private ThreadLocal<String> threadlocal_ukey;
-
 	// [按条件]取得用户列表,有分页
 	@GetMapping("/list")
 	public ResultMessage<UserInfo> list(UserInfo userInfo, Integer startAge, Integer endAge,
@@ -42,7 +39,7 @@ public class UserInfoController {
 		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", "取得用户列表page: " + page + " -- rows: " + rows);
 			
 		int count = service.getCountByCriteria(userInfo, startAge, endAge);
-		int pageCount = (count%rows==0 && count>=rows ? count/rows : count/rows+1);
+		int pageCount = (count%rows==0 ? count/rows : count/rows+1);
 		
 		result.setCount(count);
 		result.setPageCount(pageCount);
@@ -113,10 +110,10 @@ public class UserInfoController {
 	
 	// 用户登录
 	@PostMapping("/login")
-	public ResultMessage<UserInfo> login(String id, String password) throws Exception {
+	public ResultMessage<UserInfo> login(String id, String password, HttpSession httpSession) throws Exception {
 		
 		System.out.println("login");
-		System.out.println(threadlocal_ukey);
+		System.out.println(httpSession);
 		
 		boolean validate = false;
 		UserInfo userInfo = service.getUserById(id);
@@ -125,10 +122,21 @@ public class UserInfoController {
 		
 		if ( !validate ) throw new Exception("登录失败"); 
 		
-		String ukey = "k-uuu5556yyyc";
-		threadlocal_ukey.set(ukey);
+		Encoder encoder = Base64.getEncoder();
+//		Decoder decoder = Base64.getDecoder();
+//		String string = new String(decoder.decode("yichen"), "UTF-8");
+//		
+//		System.out.println(string);
 		
-		return new ResultMessage<UserInfo>("OK", ukey);
+		String ukey = id+"-"+encoder.encodeToString(password.getBytes("UTF-8"));
+		
+//		System.out.println(ukey);
+		
+		String encode_ukey = encoder.encodeToString(ukey.getBytes("UTF-8"));
+		
+//		System.out.println(encode_ukey);
+		
+		return new ResultMessage<UserInfo>("OK", encode_ukey);
 	}
 	
 	// 用户退出

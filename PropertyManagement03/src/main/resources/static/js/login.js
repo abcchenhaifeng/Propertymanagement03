@@ -38,13 +38,17 @@ $(() => {
 	
 	var method = null;
 	$("button[type='submit']").on("click", function(e){
+		$(".login-box-body #box-msg a").text("处理中...");
+					$(".login-box-body #box-msg").css("display", "block");
 		method = $(this).text();
+		$(this).attr("disabled", "disabled");
 	});
 	
 	// 登录、忘记密码
 	$("form#box-form").ajaxForm({
 		success: (rs) => {
 			if ( rs.status == "OK" ) {
+				$("button[type='submit']").removeAttr("disabled");
 				if (method == "登录") {
 					sessionStorage.setItem('u-key', rs.message);
 					location.href = "index.html";
@@ -56,6 +60,7 @@ $(() => {
 			}
 		},
 		error: (rs) => {
+			$("button[type='submit']").removeAttr("disabled");
 			if (method == "登录") {
 				$(".login-box-body #box-msg a").text("账号或密码错误");
 			} else {

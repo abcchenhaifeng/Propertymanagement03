@@ -1,0 +1,69 @@
+<script type="text/javascript" src="js/feetype/main.js"></script>
+<style>
+	.box-header input {
+		max-width: 8rem;
+	}
+</style>
+<div class="list-box">
+	<div class="box-header">
+		<div class="row">
+			<div class="col">
+				<form>
+					<div class="form-row align-items-center">
+						<div class="col-auto my-1">
+							<label class="sr-only" for="functionNo">权限号</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">权限号</div>
+								</div>
+								<input class="form-control" type="text" id="functionNo" placeholder="权限号">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="functionName">&emsp;权限名</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">&emsp;权限名</div>
+								</div>
+								<input class="form-control" type="text" id="functionName" placeholder="权限名">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="module">所属类别</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">所属类别</div>
+								</div>
+								<select id="module" class="form-control">
+									<option value="">所有</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="levelNo">权限等级</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">权限等级</div>
+								</div>
+								<input type="number" class="form-control" id="levelNo" size="2" placeholder="权限等级" />
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<button type="button" class="btn btn-outline-secondary" id="SearchButton">检索</button>
+							<button type="reset" class="btn btn-outline-secondary" id="reset">重置</button>
+						</div>
+						<div class="col-auto text-right" style="margin: 0 0 0 auto;">
+							<a href="feetype/details.html" method="add" class="btn btn-primary list-link" title="添加">添加</a>
+							<a href="feetype/details.html" class="btn btn-primary list-link" title="修改">修改</a>
+							<a href="feetype/delete" class="btn btn-primary list-link" title="删除">删除</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="box-body">
+		<table id="feetypeGrid" class="table table-bordered"></table>
+		<div id="feetypeGridPager"></div>
+	</div>
+</div>

@@ -58,8 +58,8 @@
 	</select>
 	
 	<select id="selectByNoWithType" resultMap="FeeItemMapWithType">
-		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc, 
-				ft.TYPENAME
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc, 
+				ft.TYPENO, ft.TYPENAME
 		from FeeItem fi, FeeType ft
 		where fi.ItemNo = #{no} and fi.FeeTypeNo = ft.TYPENO
 	</select>

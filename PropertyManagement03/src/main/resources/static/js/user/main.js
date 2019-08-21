@@ -33,7 +33,7 @@ $(function() {
 			{ label: '性别', name: 'sex' },
 			{ label: '年龄', name: 'age', sorttype: 'integer'},
 			{ label: '手机号码', name: 'mobible' },
-			{ label: '状态', name: 'status', editoptions:{value:"Y:已激活;N:冻结"} }
+			{ label: '状态', name: 'status', edittype:'select', formatter:'select', editoptions:{value:"Y:已激活;N:冻结"} }
 		],
 		viewrecords: true, 
 		autowidth: true,

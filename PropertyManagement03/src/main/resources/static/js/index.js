@@ -49,9 +49,9 @@ $(() => {
 		if ( ukey != null ) {
 			$.ajaxSetup({
 				headers:{"u-key":ukey},
-				xhrFields:{
-				    withCredentials:true
-				}
+//				xhrFields:{
+//				    withCredentials:true
+//				}
 			});
 		} else {
 			location.href = "login.html";

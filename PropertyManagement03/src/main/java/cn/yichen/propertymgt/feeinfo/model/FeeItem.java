@@ -30,6 +30,16 @@ public class FeeItem implements Serializable {
 	private String itemstatus;
 
 	private String itemdesc;
+	
+	private FeeItemYearPrice yearprice;
+
+	public FeeItemYearPrice getYearprice() {
+		return yearprice;
+	}
+
+	public void setYearprice(FeeItemYearPrice yearprice) {
+		this.yearprice = yearprice;
+	}
 
 	public Integer getItemno() {
 		return itemno;
@@ -107,7 +117,7 @@ public class FeeItem implements Serializable {
 	public String toString() {
 		return "FeeItem [itemno=" + itemno + ", itemcode=" + itemcode + ", itemname=" + itemname + ", itemunit="
 				+ itemunit + ", feetype=" + feetype + ", feepaymethod=" + feepaymethod + ", feecycle=" + feecycle
-				+ ", itemstatus=" + itemstatus + ", itemdesc=" + itemdesc + "]";
+				+ ", itemstatus=" + itemstatus + ", itemdesc=" + itemdesc + ", yearprice=" + yearprice + "]";
 	}
 
 }

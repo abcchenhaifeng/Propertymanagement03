@@ -23,15 +23,19 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private LoginHandlerInterceptor loginHandlerInterceptor;
+
+	// 配置全局CORS
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("*")
+//				.allowCredentials(true)
+				.allowedMethods("GET", "POST", "OPTIONS", "DELETE", "DELETE");
+	}
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		registry.addInterceptor(loginHandlerInterceptor).addPathPatterns("/**").excludePathPatterns("/user/login", "/user/forget");
 	}
 
-	// 配置全局CORS
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","OPTIONS", "DELETE", "DELETE").allowCredentials(true);
-	}
 }

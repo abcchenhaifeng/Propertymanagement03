@@ -32,10 +32,10 @@ public interface IFeeItemMapper {
 	// 根据no查询
 	public FeeItem selectByNoWithType(int no) throws Exception;
 
-	// 获取功能列表
+	// 获取列表
 	public List<FeeItem> selectListByCriteria(@Param("feeItem") FeeItem feeItem) throws Exception;
 
-	// 按条件获取功能列表(分页)
+	// 按条件获取列表(分页)
 	public List<FeeItem> selectListByCriteriaWithPage(@Param("feeItem") FeeItem feeItem, @Param("start") int start,
 			@Param("rows") int rows) throws Exception;
 

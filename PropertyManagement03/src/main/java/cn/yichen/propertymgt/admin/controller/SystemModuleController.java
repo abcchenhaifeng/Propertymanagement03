@@ -49,7 +49,7 @@ public class SystemModuleController {
 				"取得系统模块列表page: " + page + " -- rows: " + rows);
 
 		int count = service.getCountByCriteria(systemModule);
-		int pageCount = (count % rows == 0 && count >= rows ? count / rows : count / rows + 1);
+		int pageCount = (count % rows == 0 ? count / rows : count / rows + 1);
 
 		result.setCount(count);
 		result.setPageCount(pageCount);

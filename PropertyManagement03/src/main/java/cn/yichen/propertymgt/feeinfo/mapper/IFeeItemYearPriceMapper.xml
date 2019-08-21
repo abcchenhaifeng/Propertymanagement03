@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.feeinfo.mapper.IFeeItemYearPriceMapper">
+
+	<cache/>
+	
+	<resultMap type="FeeItemYearPrice" id="YearPriceMap">
+		<id column="FeeYear" property="feeyear"/>
+		<result column="Unitprice" property="unitprice"/>
+		<result column="StartDate" property="startdate"/>
+		<result column="EndDtae" property="enddtae"/>
+		<result column="PriceDesc" property="pricedesc"/>
+		<association property="feeItem">
+			<id column="ItemNo" property="itemno"/>
+		</association>
+	</resultMap>
+	
+		<sql id="YearPriceWhen">
+		<if test="feeItemYearPrice != null">
+			<if test="feeItemYearPrice.feeyear != null">and yp.FeeYear = #{feeItemYearPrice.feeyear}</if>
+			<if test="feeItemYearPrice.unitprice != null">and yp.Unitprice = #{feeItemYearPrice.unitprice}</if>
+			<if test="feeItemYearPrice.startdate != null">and yp.StartDate = #{feeItemYearPrice.startdate}</if>
+			<if test="feeItemYearPrice.enddtae != null">and yp.EndDtae = #{feeItemYearPrice.enddtae}</if>
+			<if test="feeItemYearPrice.pricedesc != null">and yp.PriceDesc like '%${feeItemYearPrice.pricedesc}%'</if>
+			<if test="feeItemYearPrice.feeItem != null">
+				<if test="feeItemYearPrice.feeItem.itemno != null">and yp.ItemNo = #{feeItemYearPrice.feeItem.itemno}</if>
+			</if>
+		</if>
+	</sql>
+	
+	<insert id="create" flushCache="true">
+		insert into FeeItemYearPrice(FeeYear, ItemNo, Unitprice, StartDate, EndDtae, PriceDesc)
+		values(#{feeyear}, #{feeItem.itemno}, #{unitprice}, #{startdate}, #{enddtae}, #{pricedesc})
+	</insert>
+	
+	<delete id="delete" flushCache="true">
+		delete from FeeItemYearPrice where FeeYear = #{feeyear} and ItemNo = #{itemno}
+	</delete>
+	
+	<update id="update" flushCache="true">
+		update FeeItemYearPrice 
+		set FeeYear = #{feeyear},  ItemNo = #{feeItem.itemno},  Unitprice = #{unitprice},  StartDate = #{startdate},  EndDtae = #{enddtae},  PriceDesc = #{pricedesc} 
+	</update>
+
+	<select id="selectByNo" resultMap="YearPriceMap">
+		select FeeYear, ItemNo, Unitprice, StartDate, EndDtae, PriceDesc
+		from FeeItemYearPrice 
+		where FeeYear = #{feeyear} and ItemNo = #{itemno}
+	</select>
+
+	<select id="selectListByCriteria" resultMap="YearPriceMap">
+		select FeeYear, ItemNo, Unitprice, StartDate, EndDtae, PriceDesc
+		from FeeItemYearPrice 
+		<where>
+			<include refid="YearPriceWhen"></include>
+		</where>
+	</select>
+
+	<select id="selectListByCriteriaWithPage" resultMap="YearPriceMap">
+		select FeeYear, ItemNo, Unitprice, StartDate, EndDtae, PriceDesc
+		from FeeItemYearPrice yp
+		<where>
+			<include refid="YearPriceWhen"></include>
+			and yp.FeeYear >= (select FeeYear from FeeItemYearPrice ORDER BY ItemNo, FeeYear LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteria" resultType="int">
+		select IFNULL(count(1), 0) from FeeItemYearPrice yp
+		<where>
+			<include refid="YearPriceWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteriaAndPage" resultType="int">
+		select IFNULL(count(1), 0) from FeeItemYearPrice yp
+		<where>
+			<include refid="YearPriceWhen"></include>
+			and yp.FeeYear >= (select FeeYear from FeeItemYearPrice ORDER BY ItemNo, FeeYear LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+
+</mapper>

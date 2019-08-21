@@ -61,7 +61,7 @@ public class SystemFunctionController {
 				"取得系统功能列表page: " + page + " -- rows: " + rows);
 
 		int count = service.getCountByCriteria(systemFunction);
-		int pageCount = (count % rows == 0 && count >= rows ? count / rows : count / rows + 1);
+		int pageCount = (count % rows == 0 ? count / rows : count / rows + 1);
 
 		result.setCount(count);
 		result.setPageCount(pageCount);
