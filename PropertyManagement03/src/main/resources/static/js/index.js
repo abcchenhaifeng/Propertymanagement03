@@ -7,15 +7,6 @@
 // .menu_column a.link中的method属性
 var url_method = null;
 
-// ajax请求的根地址
-var rootAddress = "http://localhost:8080/";
-
-// 登录的用户
-var login_user = {
-	id : "yichen",
-	name : ""
-};
-
 var dialogArea = $("section#main #dialog");
 
 var doSomethingWhenDialogClose = function () {};
