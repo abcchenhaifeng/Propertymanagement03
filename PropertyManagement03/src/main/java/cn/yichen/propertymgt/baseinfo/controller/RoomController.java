@@ -4,16 +4,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import cn.yichen.propertymgt.baseinfo.model.Room;
 import cn.yichen.propertymgt.baseinfo.service.IRoomService;
 import cn.yichen.propertymgt.vo.ResultMessage;
-
-
+/**
+ * 
+ * @data:2019年8月20日上午9:50:31
+ * @author： 陈海锋
+ * @Description:房间档案控制层代码
+ *
+ */
 
 @RestController
 @RequestMapping("/room")
@@ -104,5 +109,17 @@ public class RoomController {
 	@GetMapping("/get/bybuildingno")
 	public List<Room> getListByBuildingNo(int buildingno) throws Exception{
 		return Service.getListByBuildingNo(buildingno);
+	}
+	
+	//根据检索条件取得需要的房间列表，无关联
+	@GetMapping(value="/list/condition/page")
+	public ResultMessage<Room> getListByConditionWithPag(@RequestParam(required = false,defaultValue ="0") String RoomNo,@RequestParam(required = false,defaultValue ="0") String HouseTypeNo,@RequestParam(required = false,defaultValue ="0") String DepartmentCode,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+		ResultMessage<Room> result = new ResultMessage<Room>("OK","取得房间列表分页成功");
+		result.setCount(Service.getCountByConditionandTypeWithPage(RoomNo, HouseTypeNo, DepartmentCode));
+		result.setPage(Service.getpageConditionWithPage(RoomNo, HouseTypeNo, DepartmentCode, rows));
+		result.setList(Service.getListByConditionWithPage(RoomNo, HouseTypeNo, DepartmentCode, rows, page));
+		result.setPage(page);
+		result.setRows(rows);
+		return result;
 	}
 }

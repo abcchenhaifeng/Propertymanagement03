@@ -5,9 +5,9 @@ import org.apache.ibatis.type.Alias;
 
 /**
  * 
- * @date:2019年8月19日上午12:08:21
- * @author LiYi(李海宏)
- * @Description：完善房间表的Model属性
+ * @data:2019年8月20日上午10:56:07
+ * @author： 陈海锋
+ * @Description:dao接口
  *
  */
 @Alias("Room")

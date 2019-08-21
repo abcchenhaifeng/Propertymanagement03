@@ -21,7 +21,7 @@
 
   <!-- 关联的建筑的ResultMap -->
   <resultMap  id="RoomWithBuildingResultMap" type="Room" extends="RoomResultMap">
-  	<association property="building" resultMap="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper.BuildingMapWithAreaAndBuildingType"></association>
+  	<association property="building" resultMap="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper.BuildingMap"></association>
   </resultMap>
 
   <!-- 关联的户型的ResultMap -->
@@ -98,9 +98,39 @@
   <select id="selectListByBuildingNo" resultMap="RoomWithBuildingResultMap">
    select * from Room a,Building b where a.BuildingNo=#{buildingno} and a.BuildingNo=b.BuildingTypeNo
   </select>
-  
-  
   <select id="selectListByAllWithPage" resultMap="RoomResultMap">
    select * from Room limit #{start},#{rows}
+  </select>
+  
+  <!-- 根据检索条件取得客户列表，无关联 -->
+  <select id="selectListByConditionWithPage" resultMap="RoomWithHouseTypeResultMap">
+   select a.*,b.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo
+   <where>
+   <if test="RoomNo!=0">
+   	and a.RoomCode=#{RoomNo}
+   </if>
+   	<if test="HouseTypeNo!=0">
+   		and b.TypeNo=#{HouseTypeNo})
+   	</if>
+   	<if test="DepartmentCode!=0">
+   		and a.RoomCode=#{DepartmentCode}
+   	</if>
+   </where>
+   	limit #{start},#{rows}
+  </select>
+  <!-- 根据检索的条件取得房间 -->
+  <select id="selectListByCondition" resultType="int">
+  select IFNULL(count(RoomNo),0) from Room
+  <where>
+   <if test="RoomNo!=0">
+   	and a.RoomCode=#{RoomNo}
+   </if>
+   	<if test="HouseTypeNo!=0">
+   		and b.TypeNo=#{HouseTypeNo})
+   	</if>
+   	<if test="DepartmentCode!=0">
+   		and a.RoomCode=#{DepartmentCode}
+   	</if>
+   </where>
   </select>
   </mapper>

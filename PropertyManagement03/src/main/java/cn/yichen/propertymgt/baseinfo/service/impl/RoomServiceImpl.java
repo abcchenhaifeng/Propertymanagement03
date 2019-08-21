@@ -109,5 +109,27 @@ public class RoomServiceImpl implements IRoomService {
 	public List<Room> getlivingStatus() throws Exception {
 		return mapper.selectlivingStatus();
 	}
-
+	
+	@Override
+	public List<Room> getListByConditionWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode,int rows,int page) throws Exception{
+		return mapper.selectListByConditionWithPage(RoomNo, HouseTypeNo, DepartmentCode, rows*(page-1), rows);
+	}
+	
+	@Override
+	public int getCountByConditionandTypeWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode) throws Exception{
+		return mapper.selectListByCondition(RoomNo, HouseTypeNo, DepartmentCode);
+	}
+	
+	@Override
+	public int getpageConditionWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode,int rows) throws Exception{
+		int pageCount=0;
+		int count=this.getCountByConditionandTypeWithPage(RoomNo, HouseTypeNo, DepartmentCode);
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount ;
+	}
 }

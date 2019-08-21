@@ -38,4 +38,11 @@ public interface IRoomService {
 	public List<Room> getBuildingNo() throws Exception;
 	//获得当前房间的入住情况
 	public List<Room> getlivingStatus() throws Exception;
+	
+	//根据检索条件取得房间列表，无关联
+	public List<Room> getListByConditionWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode,int rows,int page) throws Exception;
+	////根据综合检索条件取得房间个数
+	public int getCountByConditionandTypeWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode) throws Exception;
+	//根据检索的条件取得房间个数
+	public int getpageConditionWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode,int rows) throws Exception; 
 }

@@ -45,4 +45,10 @@ public interface IRoomMapper {
 	public List<Room> selectbuildingtype() throws Exception;
 	//取得入住情况
 	public List<Room> selectlivingStatus() throws Exception;
+	
+	//根据检索条件取得房间列表，无关联
+	public List<Room> selectListByConditionWithPage(@Param("RoomNo") String RoomNo,@Param("HouseTypeNo") String HouseTypeNo,@Param("DepartmentCode") String DepartmentCode,@Param("start") int start,@Param("rows") int rows) throws Exception;
+	//根据检索条件取得房间的个数
+	public int selectListByCondition(@Param("RoomNo") String RoomNo,@Param("HouseTypeNo") String HouseTypeNo,@Param("DepartmentCode") String DepartmentCode) throws Exception;
+	
 }
