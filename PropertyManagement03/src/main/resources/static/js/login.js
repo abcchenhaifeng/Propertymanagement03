@@ -6,11 +6,13 @@
 
 $(() => {
 	
+	$("form#box-form").attr("action", rootAddress+"user/login");
+	
 	// 忘记密码页面
 	$(".login-box-body #forget a").on("click", function(e){
 		e.preventDefault();
 		
-		$("form#box-form").attr("action", "user/forget");
+		$("form#box-form").attr("action", rootAddress+"user/forget");
 		$(".login-box-body #email").css("display", "block");
 		$(".login-box-body #password").css("display", "none");
 		$(".login-box-body p#box-header").text("忘记密码");
@@ -24,7 +26,7 @@ $(() => {
 	$(".login-box-body #login a").on("click", function(e){
 		e.preventDefault();
 		
-		$("form#box-form").attr("action", "user/login");
+		$("form#box-form").attr("action", rootAddress+"user/login");
 		$(".login-box-body #email").css("display", "none");
 		$(".login-box-body #password").css("display", "block");
 		$(".login-box-body p#box-header").text("登录");

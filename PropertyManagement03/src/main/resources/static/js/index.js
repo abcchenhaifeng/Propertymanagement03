@@ -47,7 +47,12 @@ $(() => {
 	function checkLogin () {
 		var ukey = sessionStorage.getItem("u-key");
 		if ( ukey != null ) {
-			$.ajaxSetup({headers:{"u-key":ukey}});
+			$.ajaxSetup({
+				headers:{"u-key":ukey},
+				xhrFields:{
+				    withCredentials:true
+				}
+			});
 		} else {
 			location.href = "login.html";
 		}
