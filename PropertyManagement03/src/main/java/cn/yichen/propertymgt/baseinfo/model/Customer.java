@@ -49,12 +49,16 @@ public class Customer implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date feeEndDate; // 收费截止日期
 
-	public CustomerType getCtypeno() {
+	public CustomerType getCustomertype() {
 		return customertype;
 	}
 
-	public void setCtypeno(CustomerType customertype) {
+	public void setCustomertype(CustomerType customertype) {
 		this.customertype = customertype;
+	}
+
+	public void setCustomerhome(CustomerHome customerhome) {
+		this.customerhome = customerhome;
 	}
 
 	public int getCustomerNo() {

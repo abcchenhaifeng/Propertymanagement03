@@ -48,6 +48,7 @@ $(() => {
 	$("form#box-form").ajaxForm({
 		success: (rs) => {
 			if ( rs.status == "OK" ) {
+				alert("nima");
 				$("button[type='submit']").removeAttr("disabled");
 				if (method == "登录") {
 					sessionStorage.setItem('u-key', rs.message);
@@ -60,6 +61,7 @@ $(() => {
 			}
 		},
 		error: (rs) => {
+			alert("mimabi");
 			$("button[type='submit']").removeAttr("disabled");
 			if (method == "登录") {
 				$(".login-box-body #box-msg a").text("账号或密码错误");

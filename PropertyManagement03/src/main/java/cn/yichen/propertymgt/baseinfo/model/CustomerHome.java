@@ -21,11 +21,9 @@ import cn.yichen.propertymgt.feeinfo.model.RoomFee;
 public class CustomerHome implements Serializable {
     private String chno;      //客户房间号                 
 
-    private int customerno;   //客户号
-
     private Room roomno;       //房间号
 
-    private String livingtypeno;   //居住类型号
+    private List<LivingType> livingtype;   //居住类型号
     
     private List<Customer> customer;   //客户信息
     
@@ -75,13 +73,6 @@ public class CustomerHome implements Serializable {
         this.chno = chno;
     }
 
-    public int getCustomerno() {
-        return customerno;
-    }
-
-    public void setCustomerno(int customerno) {
-        this.customerno = customerno;
-    }
 
     public Room getRoomno() {
         return roomno;
@@ -91,19 +82,22 @@ public class CustomerHome implements Serializable {
         this.roomno = roomno;
     }
 
-    public String getLivingtypeno() {
-        return livingtypeno;
-    }
-
-    public void setLivingtypeno(String livingtypeno) {
-        this.livingtypeno = livingtypeno;
-    }
-
+    
+    
     public Date getReceivedate() {
         return receivedate;
     }
 
-    public void setReceivedate(Date receivedate) {
+    public List<LivingType> getLivingtype() {
+		return livingtype;
+		
+	}
+
+	public void setLivingtype(List<LivingType> livingtype) {
+		this.livingtype = livingtype;
+	}
+
+	public void setReceivedate(Date receivedate) {
         this.receivedate = receivedate;
     }
 
@@ -149,13 +143,9 @@ public class CustomerHome implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CustomerHome [chno=" + chno + ", customerno=" + customerno + ", roomno=" + roomno + ", livingtypeno="
-				+ livingtypeno + ", customer=" + customer + ", receivedate=" + receivedate
-				+ ", livedate=" + livedate + ", feestartdate=" + feestartdate + ", feeenddate=" + feeenddate
-				+ ", humancount=" + humancount + ", chstatus=" + chstatus + "]";
+		return "CustomerHome [chno=" + chno + ", roomno=" + roomno + ", livingtype=" + livingtype + ", customer="
+				+ customer + ", roomfee=" + roomfee + ", receivedate=" + receivedate + ", livedate=" + livedate
+				+ ", feestartdate=" + feestartdate + ", feeenddate=" + feeenddate + ", humancount=" + humancount
+				+ ", chstatus=" + chstatus + "]";
 	}
-
-	
-
-	
 }

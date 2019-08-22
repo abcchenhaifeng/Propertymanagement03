@@ -20,8 +20,8 @@ $(function(){
 		colModel: [
 			{ label: '姓名', name: 'cname', width: 40,align:"center" },
 			{ label: '联系人', name: 'contact', width: 40,align:"center" },
-			{ label: '类别', name: 'ctypeno.typeno', width: 40,align:"center" },
-			{ label: '类型', name: 'ctypeno.typename', width: 40,align:"center" },
+			{ label: '类别', name: 'customertype.typeno', width: 40,align:"center" },
+			{ label: '类型', name: 'customertype.typename', width: 40,align:"center" },
 			{ label: '电话', name: 'mobile', width: 100,align:"center" },
 			{ label: '开始日期', name: 'feeStartDate', width: 100,align:"center"},
 			{ label: '截至日期', name: 'feeEndDate', width: 100,align:"center" },
@@ -250,20 +250,23 @@ $(function(){
 				//取得指定的员工信息
 				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
 					if(em){
-						$("input[name='customerNo']").val(em.customerNo);
+						
+						$("input[name='customertype.typeno']").val(em.customertype.typeno);
 						$("input[name='cname']").val(em.cname);
 						$("input[name='contact']").val(em.contact);
 						$("input[name='cardcode']").val(em.cardcode);
 						$("input[name='mobile']").val(em.mobile);
 						$("input[name='feeStartDate']").val(em.feeStartDate);
 						$("input[name='feeEndDate']").val(em.feeEndDate);
-						$("input[name='cstatus']").val(em.cstatus);
+						$("select[name='cstatus']").val(em.cstatus);
+						$("input[name='customerNo']").val(CustomerId);
 	
 					}
 				});
 				//拦截修改提交表单
 				$("form#CustomerModifyForm").ajaxForm(function(result){
 					if(result.status=="OK"){
+						alert("OK");
 						setMessage("添加成功", 5000);
 						reloadCustomerList();//更新客户列表
 					}

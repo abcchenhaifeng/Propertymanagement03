@@ -17,15 +17,6 @@ public class CustomerType implements Serializable {
 
     private String typename;    //客户类型名称
     
-    private List<Customer> customer;   //一对多，一种客户类型可能被多个用户拥有
-
-    public List<Customer> getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(List<Customer> customer) {
-		this.customer = customer;
-	}
 
 	public Integer getTypeno() {
         return typeno;
@@ -45,7 +36,7 @@ public class CustomerType implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CustomerType [typeno=" + typeno + ", typename=" + typename + ", customer=" + customer + "]";
+		return "CustomerType [typeno=" + typeno + ", typename=" + typename + "]";
 	}
 
 	

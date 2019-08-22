@@ -6,8 +6,12 @@
        	    <form id="CustomerModifyForm" role="form" action="http://localhost:8080/customer/modify" method="post">
        	    <div class="col-md-6">
               	<div class="form-group">
-                  <label for="exampleInputEmail1">序号</label>
-                  <input id="id" type="text" class="form-control" name="customerNo"  placeholder="名称" readonly="readonly">
+                  <label for="exampleInputEmail1">类别</label>
+                  <select name="customertype.typeno" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-lg">
+						<option value="1">业主</option>
+						<option value="2">租客</option>
+						<option value="3">管理员</option>
+					</select>
                 </div>	
                 <div class="form-group">
                   <label for="exampleInputPassword1">名称</label>
@@ -36,9 +40,12 @@
 	                  <input type="date" class="form-control" id="feeEndDate" name="feeEndDate"  placeholder="截至日期">
 	                </div>
 	                <div class="form-group">
-	                  <label for="exampleInputEmail1">状态</label>
-	                  <input type="text" class="form-control" id="cstatus" name="cstatus"  placeholder="状态">
-	                </div>
+	                 <label for="exampleInputEmail1">缴费状态</label>
+	                <select name="cstatus" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-lg">
+						<option value="未缴">未缴</option>
+						<option value="已缴">已缴</option>
+					</select>
+					 </div>
                </div>
                <div class="form-group">
                  <input type="submit" class="btn btn-primary" style="margin-left: 40%;" value="提交" />

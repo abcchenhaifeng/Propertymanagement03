@@ -8,8 +8,6 @@
 
 	<resultMap id="CustomerHomeMap" type="CustomerHome">
 		<id column="CHNO" property="chno" />
-		<result column="CustomerNo" property="customerno" />
-		<result column="LivingTypeNo" property="livingtypeno" />
 		<result column="ReceiveDate" property="receivedate" />
 		<result column="LiveDate" property="livedate" />
 		<result column="FeeStartDate" property="feestartdate" />
@@ -24,20 +22,20 @@
 		</association>
 	</resultMap>
 	
-	<insert id="create"   keyProperty="customerNo"   keyColumn="CHNO" useGeneratedKeys="true" flushCache="true" >
-	insert into CustomerHome(CHNO, CustomerNo, RoomNo, LivingTypeNo, ReceiveDate, LiveDate, FeeStartDate,FeeEndDate,HumanCount,CHStatus) values(#{chno}, #{customerno}, #{roomno.roomno},#{livingtypeno}, #{receivedate}, #{livedate}, #{feestartdate}, #{feeenddate},#{humancount},#{chstatus})
+	<insert id="create"   keyProperty="CHNO"   keyColumn="CHNO" useGeneratedKeys="true" flushCache="true" >
+	insert into CustomerHome(CHNO, CustomerNo, RoomNo, LivingTypeNo, ReceiveDate, LiveDate, FeeStartDate,FeeEndDate,HumanCount,CHStatus) values(#{chno}, #{customer.customerno}, #{roomno.roomno},#{livingtype.typeno}, #{receivedate}, #{livedate}, #{feestartdate}, #{feeenddate},#{humancount},#{chstatus})
 	</insert>
 	
 	<update id="update" flushCache="true">
-    update CustomerHome set CustomerNo=#{customerno}, RoomNo=#{roomno.roomno}, LivingTypeNo=#{livingtypeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}"
+    update CustomerHome set CustomerNo=#{customer.customerno}, RoomNo=#{roomno.roomno}, LivingTypeNo=#{livingtype.typeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}"
     </update>
 	
 	<update id="modifyStatus" flushCache="true">
-    update CustomerHome set CHStatus='迁出'  where CustomerNo=#{customerno}
+    update CustomerHome set CHStatus='迁出'  where CustomerNo=#{customer.customerno}
     </update>
     
     <update id="updateStatus" flushCache="true">
-    update CustomerHome set CHStatus='迁入'  where CustomerNo=#{customerno}
+    update CustomerHome set CHStatus='迁入'  where CustomerNo=#{customer.customerno}
     </update>
     
 	<delete id="delete" flushCache="true">
@@ -72,7 +70,7 @@
 	<select id="selectCustomerHomeByCustomerNo" resultMap="CustomerHomeMapByCustomerNo">
 	select ct.*,c.*
 	from Customer c, CustomerHome ct
-	where ct.CustomerNo = #{customerno}  and ct.CustomerNo = c.CustomerNo
+	where ct.CustomerNo = #{customer.customerno}  and ct.CustomerNo = c.CustomerNo
 	
 	</select>
 	
@@ -111,7 +109,7 @@
 	
     <!-- 根据序号取得迁居状态 -->
    <select id="selectStatusByNO" resultMap="CustomerHomeMap">
-    select CHStatus from CustomerHome where CustomerNo=#{customerno}
+    select CHStatus from CustomerHome where CustomerNo=#{customer.customerno}
    </select>
 	
 </mapper>

@@ -128,6 +128,7 @@ public class CustomerController {
 	//修改客户
 	@PostMapping("/modify")
 	public ResultMessage<Customer> modify(Customer customer) throws Exception {
+		System.out.println(customer.getCustomertype().getTypename());
 		service.modify(customer);
 		return new ResultMessage<Customer>("OK","修改客户信息成功");
 	}

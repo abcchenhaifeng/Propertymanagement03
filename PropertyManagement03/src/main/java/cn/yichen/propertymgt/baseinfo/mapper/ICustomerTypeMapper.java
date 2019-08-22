@@ -21,15 +21,12 @@ import cn.yichen.propertymgt.baseinfo.model.CustomerType;
 public interface ICustomerTypeMapper {
 
 	 // 添加
-	//@Insert("insert into CustomerType(TYPENO, TYPENAME) values(#{typeno}, #{typename})")
 	public void create(CustomerType ctype) throws Exception;
 
 	// 删除
-	//@Delete("delete from CustomerType where TYPENO = #{typeno}")
 	public void delete(String id) throws Exception;
 
 	// 更新
-	//@Update("update CustomerType set TYPENAME=#{typename} where TYPENO=#{typeno}")
 	public void update(CustomerType ctype) throws Exception;
 
 	// 根据id查询, 返回客户类型

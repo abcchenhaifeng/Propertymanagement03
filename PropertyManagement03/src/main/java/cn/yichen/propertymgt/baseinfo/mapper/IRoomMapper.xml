@@ -8,8 +8,6 @@
   
   <resultMap id="RoomResultMap" type="Room">
     <id property="roomno" column="RoomNo"/>
-    <result property="housetypeno" column="HouseTypeNo"/>
-    <result property="buildingno" column="BuildingNo"/>
     <result property="departmentcode" column="DepartmentCode"/>
     <result property="floor" column="Floor"/>
     <result property="roomcode" column="RoomCode"/>
@@ -36,12 +34,12 @@
   </resultMap>
 
   <insert id="create"  keyProperty="roomno"   keyColumn="RoomNo" useGeneratedKeys="true" flushCache="true">
-   insert into Room (DepartmentCode,Floor,RoomCode,BuildingArea,FeeArea,RoomStatus,RoomType)
-   values (#{departmentcode},#{floor},#{roomcode},#{buildingarea},#{feearea},#{roomstatus},#{roomtype})
+   insert into Room (HouseTypeNo,BuildingNo,DepartmentCode,Floor,RoomCode,BuildingArea,FeeArea,RoomStatus,RoomType)
+   values (#{housetype.typeno},#{building.no},#{departmentcode},#{floor},#{roomcode},#{buildingarea},#{feearea},#{roomstatus},#{roomtype})
   </insert>
   
   <update id="update" flushCache="true">
-   update Room set DepartmentCode=#{departmentcode},Floor=#{floor},RoomCode=#{roomcode},
+   update Room set HouseTypeNo=#{housetype.typeno},BuildingNo=#{building.no}, DepartmentCode=#{departmentcode},Floor=#{floor},RoomCode=#{roomcode},
    BuildingArea=#{buildingarea},FeeArea=#{feearea},RoomStatus=#{roomstatus},RoomType=#{roomtype}
    where RoomNo=#{roomno}
   </update>
@@ -98,8 +96,8 @@
   <select id="selectListByBuildingNo" resultMap="RoomWithBuildingResultMap">
    select * from Room a,Building b where a.BuildingNo=#{buildingno} and a.BuildingNo=b.BuildingTypeNo
   </select>
-  <select id="selectListByAllWithPage" resultMap="RoomResultMap">
-   select * from Room limit #{start},#{rows}
+  <select id="selectListByAllWithPage" resultMap="RoomWithFKResultMap">
+   select a.*,b.*,c.* from Room a,Building b, HouseType c where a.BuildingNo= b.BuildingNo and a.HouseTypeNo=c.TypeNo limit #{start},#{rows}
   </select>
   
   <!-- 根据检索条件取得客户列表，无关联 -->
@@ -132,14 +130,5 @@
    		and a.RoomCode=#{DepartmentCode}
    	</if>
    </where>
-  </select>
-  <!-- 根据指定的房间编号取得房间 -->
-  <select id="selectCountByRoom" resultType="int">
-  	select IFNULL(count(RoomNo), 0) from Room
-  	<where>
-  		<if test="roomno!=null and roomno!=' '">
-  		and RoomNo=#{roomno}
-  		</if>
-  	</where>
   </select>
   </mapper>

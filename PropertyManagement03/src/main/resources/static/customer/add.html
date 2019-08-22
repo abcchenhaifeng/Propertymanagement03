@@ -30,7 +30,15 @@
 		 				
                 	</div>
                 	<div class="col-md-6">
-                	<div class="form-group">
+                		<div class="form-group">
+		                  <label for="exampleInputEmail1">客户类型</label>
+		                  <select name="customertype.typeno" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-lg">
+							<option value="1">业主</option>
+							<option value="2">租客</option>
+							<option value="3">管理员</option>
+						</select>
+		                </div>
+                		<div class="form-group">
 		                  <label for="exampleInputEmail1">收费开始日期</label>
 		                  <input type="date" class="form-control" name="feeStartDate" placeholder="开始日期">
 		                </div>
@@ -39,8 +47,11 @@
 		                  <input type="date" class="form-control" name="feeEndDate" placeholder="截至日期">
 		                </div>
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">状态</label>
-		                  <input type="text" class="form-control" name="cstatus" placeholder="状态">
+		                  <label for="exampleInputEmail1">缴费状态</label>
+		                  <select name="cstatus" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-lg">
+							<option value="未缴">未缴</option>
+							<option value="已缴">已缴</option>
+						</select>
 		                </div>
                 	</div>
                 	

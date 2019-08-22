@@ -12,18 +12,18 @@
 	</resultMap>
 
 
-     <insert id="create"  keyProperty="customerNo"   keyColumn="CustomerNo" useGeneratedKeys="true" flushCache="true" >
-   insert into CustomerType (TYPENO, TYPENAME) values(#{typeno}, #{typename})
-  </insert>
+     <insert id="create"  keyProperty="typeno"   keyColumn="TYPENO" useGeneratedKeys="true" flushCache="true" >
+	   insert into CustomerType (TYPENO, TYPENAME) values(#{typeno}, #{typename})
+	  </insert>
   
   
-  <update id="update" flushCache="true">
-   update CustomerType set TYPENAME=#{typename}where TYPENO=#{typeno}
-  </update>
+	  <update id="update" flushCache="true">
+	   update CustomerType set TYPENAME=#{typename} where TYPENO=#{typeno}
+	  </update>
   
-  <delete id="delete" flushCache="true">
-   delete from CustomerType where TYPENO = #{typeno}
-  </delete>
+	  <delete id="delete" flushCache="true">
+	   delete from CustomerType where TYPENO = #{typeno}
+	  </delete>
 
 	<select id="selectCustomerTypeById" resultMap="CustomerTypeMap">
 		select * from CustomerType
