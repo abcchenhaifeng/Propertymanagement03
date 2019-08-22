@@ -68,6 +68,6 @@ public interface ICustomerHomeMapper {
 	public void updateStatus(CustomerHome chome) throws Exception;
 	
 	//检查指定序号，用于验证是否迁出
-	public CustomerHome selectStatusByNO(CustomerHome chome) throws Exception;
+	public CustomerHome selectStatusByNO(int no) throws Exception;
 	
 }

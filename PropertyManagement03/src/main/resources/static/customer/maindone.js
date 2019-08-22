@@ -242,39 +242,39 @@ $(function(){
 	
 	//===============================修改处理==============================================================
 	//点击修改按钮事件处理
-	$("a#CustomerModify").off().on("click",function(event){
-		
-		if(CustomerId==null){
-			jqueryEject.Econfirm({
-			title: '修改操作',
-			message: '请选择要修改的客户',
-			define: function() {
-				setMessage(message, 5000);
-			},
-			cancel: function() {}
-		});
-		}
-		else {
-			$.getJSON(host+"customerhome/check",{customerno:CustomerId},function(data){
-				if(data.status!="OK"){
-					$.post(host+"customerhome/movein",{customerno:CustomerId},function(result){
-	                	if(result.status=="OK"){
-	                		setMessage("迁入成功", 5000);
-	                		reloadCustomerList();//更新客户列表
-						}	
-	                });
-				}
-				else{
-	            	$.post(host+"customerhome/moveout",{customerno:CustomerId},function(result){
-	                	if(result.status=="OK"){
-	                		setMessage("迁出成功", 5000);
-	                		reloadCustomerList();//更新客户列表
-						}	
-	                });
-			    }
-			});		
-		}         		
-	});
+//	$("a#CustomerModify").off().on("click",function(event){
+//		
+//		if(CustomerId==null){
+//			jqueryEject.Econfirm({
+//			title: '修改操作',
+//			message: '请选择要修改的客户',
+//			define: function() {
+//				setMessage(message, 5000);
+//			},
+//			cancel: function() {}
+//		});
+//		}
+//		else {
+//			$.getJSON(host+"customerhome/check",{customerno:CustomerId},function(data){
+//				if(data.status!="OK"){
+//					$.post(host+"customerhome/movein",{customerno:CustomerId},function(result){
+//	                	if(result.status=="OK"){
+//	                		setMessage("迁入成功", 5000);
+//	                		reloadCustomerList();//更新客户列表
+//						}	
+//	                });
+//				}
+//				else{
+//	            	$.post(host+"customerhome/moveout",{customerno:CustomerId},function(result){
+//	                	if(result.status=="OK"){
+//	                		setMessage("迁出成功", 5000);
+//	                		reloadCustomerList();//更新客户列表
+//						}	
+//	                });
+//			    }
+//			});		
+//		}         		
+//	});
 });
 	
 	

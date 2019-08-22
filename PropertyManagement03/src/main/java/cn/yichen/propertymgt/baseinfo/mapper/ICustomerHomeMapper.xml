@@ -22,20 +22,28 @@
 		</association>
 	</resultMap>
 	
+	
+	<resultMap id="CustomerHomeMapByCustomerNo" type="CustomerHome" extends="CustomerHomeMap">
+		<association property="customer"
+			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper.CustomerMap">
+		</association>
+	</resultMap>
+	
+	
 	<insert id="create"   keyProperty="CHNO"   keyColumn="CHNO" useGeneratedKeys="true" flushCache="true" >
-	insert into CustomerHome(CHNO, CustomerNo, RoomNo, LivingTypeNo, ReceiveDate, LiveDate, FeeStartDate,FeeEndDate,HumanCount,CHStatus) values(#{chno}, #{customer.customerno}, #{roomno.roomno},#{livingtype.typeno}, #{receivedate}, #{livedate}, #{feestartdate}, #{feeenddate},#{humancount},#{chstatus})
+	insert into CustomerHome(CHNO, CustomerNo, RoomNo, LivingTypeNo, ReceiveDate, LiveDate, FeeStartDate,FeeEndDate,HumanCount,CHStatus) values(#{chno}, #{customer.customerNo}, #{roomno.roomno},#{livingtype.typeno}, #{receivedate}, #{livedate}, #{feestartdate}, #{feeenddate},#{humancount},#{chstatus})
 	</insert>
 	
 	<update id="update" flushCache="true">
-    update CustomerHome set CustomerNo=#{customer.customerno}, RoomNo=#{roomno.roomno}, LivingTypeNo=#{livingtype.typeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}"
+    update CustomerHome set CustomerNo=#{customer.customerNo}, RoomNo=#{roomno.roomno}, LivingTypeNo=#{livingtype.typeno}, ReceiveDate=#{receivedate}, LiveDate=#{livedate},FeeStartDate=#{feestartdate},FeeEndDate=#{feeenddate},HumanCount=#{humancount},CHStatus=#{chstatus} where CHNO=#{chno}"
     </update>
 	
 	<update id="modifyStatus" flushCache="true">
-    update CustomerHome set CHStatus='迁出'  where CustomerNo=#{customer.customerno}
+    update CustomerHome a,Customer b set CHStatus='迁出'  where a.CustomerNo=#{customer.customerNo} and a.CustomerNo=b.CustomerNo
     </update>
     
     <update id="updateStatus" flushCache="true">
-    update CustomerHome set CHStatus='迁入'  where CustomerNo=#{customer.customerno}
+    update CustomerHome a,Customer b  set CHStatus='迁入'  where a.CustomerNo=#{customer.customerNo} and a.CustomerNo=b.CustomerNo
     </update>
     
 	<delete id="delete" flushCache="true">
@@ -59,18 +67,12 @@
      <select id="selectListByAllWithPage" resultMap="CustomerHomeMap">
 		select * from CustomerHome limit #{start},#{rows}
 	</select>
-	
-	
-	<resultMap id="CustomerHomeMapByCustomerNo" type="CustomerHome" extends="CustomerHomeMap">
-		<association property="customer"
-			resultMap="cn.yichen.propertymgt.baseinfo.mapper.ICustomerMapper.CustomerMap">
-		</association>
-	</resultMap>
+
 	
 	<select id="selectCustomerHomeByCustomerNo" resultMap="CustomerHomeMapByCustomerNo">
 	select ct.*,c.*
 	from Customer c, CustomerHome ct
-	where ct.CustomerNo = #{customer.customerno}  and ct.CustomerNo = c.CustomerNo
+	where ct.CustomerNo = #{customer.customerNo}  and ct.CustomerNo = c.CustomerNo
 	
 	</select>
 	
@@ -108,8 +110,8 @@
 	 </select>
 	
     <!-- 根据序号取得迁居状态 -->
-   <select id="selectStatusByNO" resultMap="CustomerHomeMap">
-    select CHStatus from CustomerHome where CustomerNo=#{customer.customerno}
+   <select id="selectStatusByNO" resultMap="CustomerHomeMapByCustomerNo">
+    select CHStatus from CustomerHome where CustomerNo=#{customer.customerNo}
    </select>
 	
 </mapper>

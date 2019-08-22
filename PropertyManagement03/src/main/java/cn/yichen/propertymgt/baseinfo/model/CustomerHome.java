@@ -23,27 +23,13 @@ public class CustomerHome implements Serializable {
 
     private Room roomno;       //房间号
 
-    private List<LivingType> livingtype;   //居住类型号
+    private LivingType livingtype;   //居住类型号
     
-    private List<Customer> customer;   //客户信息
+    private Customer customer;   //客户信息
     
-    private List<RoomFee> roomfee;    //缴费信息
+    private RoomFee roomfee;    //缴费信
 
-    public List<RoomFee> getRoomfee() {
-		return roomfee;
-	}
-
-	public void setRoomfee(List<RoomFee> roomfee) {
-		this.roomfee = roomfee;
-	}
-
-	public List<Customer> getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(List<Customer> customer) {
-		this.customer = customer;
-	}
+    
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")     //入房日期
 	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
@@ -73,8 +59,33 @@ public class CustomerHome implements Serializable {
         this.chno = chno;
     }
 
+    
 
-    public Room getRoomno() {
+    public LivingType getLivingtype() {
+		return livingtype;	
+	}
+
+	public void setLivingtype(LivingType livingtype) {
+		this.livingtype = livingtype;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public RoomFee getRoomfee() {
+		return roomfee;	
+	}
+
+	public void setRoomfee(RoomFee roomfee) {
+		this.roomfee = roomfee;
+	}
+
+	public Room getRoomno() {
         return roomno;
     }
 
@@ -88,14 +99,7 @@ public class CustomerHome implements Serializable {
         return receivedate;
     }
 
-    public List<LivingType> getLivingtype() {
-		return livingtype;
-		
-	}
-
-	public void setLivingtype(List<LivingType> livingtype) {
-		this.livingtype = livingtype;
-	}
+    
 
 	public void setReceivedate(Date receivedate) {
         this.receivedate = receivedate;

@@ -34,12 +34,12 @@ public interface ICustomerHomeService {
 	public int getCountByAll() throws Exception;
 	//取得客户房间页数
 	public int getPageCountByAll(int rows) throws Exception;
-	//取得迁居类型
-	public List<CustomerHome> getLivingStatus() throws Exception;
-	//修改迁居类型为迁出
-	public void modifyStatus(CustomerHome ch) throws Exception;
-	//修改迁居类型为迁入
-	public void updateStatus(CustomerHome ch) throws Exception;
-	//验证迁居类型
-	public boolean checkCanModify(CustomerHome ch) throws Exception;
+//	//取得迁居类型
+//	public List<CustomerHome> getLivingStatus(int no) throws Exception;
+//	//修改迁居类型为迁出
+//	public void modifyStatus(CustomerHome ch) throws Exception;
+//	//修改迁居类型为迁入
+//	public void updateStatus(CustomerHome ch) throws Exception;
+//	//验证迁居类型
+//	public boolean checkCanModify(int no) throws Exception;
 }
