@@ -8,6 +8,7 @@
   
   <resultMap id="RoomResultMap" type="Room">
     <id property="roomno" column="RoomNo"/>
+    <result property="buildingno" column="BuildingNo"/>
     <result property="departmentcode" column="DepartmentCode"/>
     <result property="floor" column="Floor"/>
     <result property="roomcode" column="RoomCode"/>
@@ -100,7 +101,7 @@
    select a.*,b.*,c.* from Room a,Building b, HouseType c where a.BuildingNo= b.BuildingNo and a.HouseTypeNo=c.TypeNo limit #{start},#{rows}
   </select>
   
-  <!-- 根据检索条件取得客户列表，无关联 -->
+<!-- 根据检索条件取得客户列表，无关联 -->
   <select id="selectListByConditionWithPage" resultMap="RoomWithHouseTypeResultMap">
    select a.*,b.* from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo
    <where>
@@ -108,27 +109,36 @@
    	and a.RoomCode=#{RoomNo}
    </if>
    	<if test="HouseTypeNo!=0">
-   		and b.TypeNo=#{HouseTypeNo})
+   		and b.TypeNo=#{HouseTypeNo}
    	</if>
-   	<if test="DepartmentCode!=0">
-   		and a.RoomCode=#{DepartmentCode}
+   	<if test="DepartmentCode!=null">
+   		and a.departmentcode=#{DepartmentCode}
    	</if>
    </where>
    	limit #{start},#{rows}
   </select>
   <!-- 根据检索的条件取得房间 -->
   <select id="selectListByCondition" resultType="int">
-  select IFNULL(count(RoomNo),0) from Room
+  select IFNULL(count(RoomNo),0) from Room a inner join HouseType b on a.HouseTypeNo=b.TypeNo
   <where>
    <if test="RoomNo!=0">
    	and a.RoomCode=#{RoomNo}
    </if>
    	<if test="HouseTypeNo!=0">
-   		and b.TypeNo=#{HouseTypeNo})
+   		and b.TypeNo=#{HouseTypeNo}
    	</if>
-   	<if test="DepartmentCode!=0">
-   		and a.RoomCode=#{DepartmentCode}
+   	<if test="DepartmentCode!=null">
+   		and a.departmentcode=#{DepartmentCode}
    	</if>
    </where>
+  </select>
+  <!-- 根据指定的房间编号取得房间 -->
+  <select id="selectCountByRoom" resultType="int">
+  	select IFNULL(count(RoomNo), 0) from Room
+  	<where>
+  		<if test="roomno!=null and roomno!=' '">
+  		and RoomNo=#{roomno}
+  		</if>
+  	</where>
   </select>
   </mapper>

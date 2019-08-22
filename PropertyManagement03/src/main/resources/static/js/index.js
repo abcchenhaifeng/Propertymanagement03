@@ -13,8 +13,12 @@ var doSomethingWhenDialogClose = function () {};
 
 $(() => {
 
+<<<<<<< HEAD
 	checkLogin();
 	login_user = JSON.parse(sessionStorage.getItem("user"));
+=======
+	//checkLogin();
+>>>>>>> branch 'master' of https://github.com/abcchenhaifeng/Propertymanagement03.git
 
 	$(".menu_column a.link").on("click", function(e) {
 		url_method = $(this).attr("method");

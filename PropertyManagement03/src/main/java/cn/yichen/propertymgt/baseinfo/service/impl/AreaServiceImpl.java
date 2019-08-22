@@ -1,5 +1,6 @@
 package cn.yichen.propertymgt.baseinfo.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +78,44 @@ public class AreaServiceImpl implements IAreaService {
 	}
 
 	@Override
-	public List<Area> getListByDeveloper() throws Exception {
-		return mapper.selectListByDeveloper();
+	public List<Area> getListByConditionWithPage(String name, String developer, Double minbuildingarea,
+			Double maxbuildingarea, Long minhome, Long maxhome, Long minhouse, Long maxhouse, int rows, int page)
+			throws Exception {
+//		if(name!=null&&name.trim().length()>0) {
+//			name="%"+name+"%";
+//		}
+//		if(developer!=null&&developer.trim().length()>0) {
+//			developer="%"+developer+"%";
+//		}
+		return mapper.selectListByConditionWithPage(name, developer, minbuildingarea, maxbuildingarea, minhome, maxhome, minhouse, maxhouse, rows*(page-1), rows);
 	}
+
+	@Override
+	public int getCountByCondition(String name, String developer, Double minbuildingarea, Double maxbuildingarea,
+			Long minhome, Long maxhome, Long minhouse, Long maxhouse) throws Exception {
+		return mapper.selectCountByCondition(name, developer, minbuildingarea, maxbuildingarea, minhome, maxhome, minhouse, maxhouse);
+	}
+
+	@Override
+	public int getPageCountByConditionWithPage(String name, String developer, Double minbuildingarea,
+			Double maxbuildingarea, Long minhome, Long maxhome, Long minhouse, Long maxhouse, int rows)
+			throws Exception {
+		int pageCount=0;
+		int count=this.getCountByCondition(name, developer, minbuildingarea, maxbuildingarea, minhome, maxhome, minhouse, maxhouse);
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+
+
+//	@Override
+//	public List<Area> getListByDeveloper() throws Exception {
+//		return mapper.selectListByDeveloper();
+//	}
+
 
 }

@@ -5,7 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.yichen.propertymgt.baseinfo.model.Room;
-
+/**
+ * 
+ * @data:2019年8月22日下午8:25:50
+ * @author： 陈海锋
+ * @Description:
+ *
+ */
 public interface IRoomService {
 	//增加
 	public void add(Room room) throws Exception;

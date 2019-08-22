@@ -20,6 +20,8 @@ public class Room implements Serializable {
 
     private Building building;			//楼宇编号
     
+    private String buildingno;
+    
     private String departmentcode;		//单元
 
     private String floor;				//楼层
@@ -58,7 +60,14 @@ public class Room implements Serializable {
 		this.building = building;
 	}
 	
+	public String setBuildingno() {
+		return buildingno;
+	}
 
+	public void setBuildingno(String buildingno) {
+		this.buildingno = buildingno;
+	}
+	
 	public String getDepartmentcode() {
 		return departmentcode;
 	}

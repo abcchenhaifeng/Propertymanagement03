@@ -25,7 +25,7 @@ $(function(){
 				var tr="<tr id='"+data.list[i].roomno+"'>" +
 				        "<td>"+data.list[i].roomno+"</td>" +
 				        "<td>"+data.list[i].housetype.typeno+"</td>" +
-						"<td>"+data.list[i].building.no+"</td>" +
+						"<td>"+data.list[i].buildingno+"</td>" +
 						"<td>"+data.list[i].departmentcode+"</td>" +
 						"<td>"+data.list[i].floor+"</td>" +
 						"<td>"+data.list[i].roomcode+"</td>" +
