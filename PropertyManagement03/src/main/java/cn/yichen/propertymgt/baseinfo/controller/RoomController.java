@@ -122,4 +122,10 @@ public class RoomController {
 		result.setRows(rows);
 		return result;
 	}
+	
+	//验证房间是否存在，如果存在则不合法，不存在则合法，用于增加员工时检查房间是否已经存在
+	@GetMapping(value="/checkidexist")
+	public boolean checkRoomNoExist(String roomno) throws Exception{
+		return !Service.checkRoomNoExist(roomno);
+	}
 }

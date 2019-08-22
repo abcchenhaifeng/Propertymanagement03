@@ -50,5 +50,7 @@ public interface IRoomMapper {
 	public List<Room> selectListByConditionWithPage(@Param("RoomNo") String RoomNo,@Param("HouseTypeNo") String HouseTypeNo,@Param("DepartmentCode") String DepartmentCode,@Param("start") int start,@Param("rows") int rows) throws Exception;
 	//根据检索条件取得房间的个数
 	public int selectListByCondition(@Param("RoomNo") String RoomNo,@Param("HouseTypeNo") String HouseTypeNo,@Param("DepartmentCode") String DepartmentCode) throws Exception;
+	//检查指定房间编号，用于验证房间是否存在
+	public int selectCountByRoom(String roomno) throws Exception;
 	
 }

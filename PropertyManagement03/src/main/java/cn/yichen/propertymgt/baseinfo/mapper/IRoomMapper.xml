@@ -133,4 +133,13 @@
    	</if>
    </where>
   </select>
+  <!-- 根据指定的房间编号取得房间 -->
+  <select id="selectCountByRoom" resultType="int">
+  	select IFNULL(count(RoomNo), 0) from Room
+  	<where>
+  		<if test="roomno!=null and roomno!=' '">
+  		and RoomNo=#{roomno}
+  		</if>
+  	</where>
+  </select>
   </mapper>

@@ -45,4 +45,7 @@ public interface IRoomService {
 	public int getCountByConditionandTypeWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode) throws Exception;
 	//根据检索的条件取得房间个数
 	public int getpageConditionWithPage(String RoomNo,String HouseTypeNo,String DepartmentCode,int rows) throws Exception; 
+	
+	//验证房间是否存在
+	public boolean checkRoomNoExist(String roomno) throws Exception;
 }

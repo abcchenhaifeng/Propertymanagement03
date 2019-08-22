@@ -10,6 +10,13 @@ import cn.yichen.propertymgt.baseinfo.mapper.IRoomMapper;
 import cn.yichen.propertymgt.baseinfo.model.Room;
 import cn.yichen.propertymgt.baseinfo.service.IRoomService;
 
+/**
+ * 
+ * @data:2019年8月21日下午3:31:28
+ * @author： 陈海锋
+ * @Description:房间业务层实现类
+ *
+ */
 @Service
 @Transactional(rollbackFor ={Exception.class})
 public class RoomServiceImpl implements IRoomService {
@@ -131,5 +138,14 @@ public class RoomServiceImpl implements IRoomService {
 			pageCount=count/rows+1;
 		}
 		return pageCount ;
+	}
+
+	@Override
+	public boolean checkRoomNoExist(String roomno) throws Exception {
+		boolean result=false;
+		if(mapper.selectCountByRoom(roomno)>0) {
+			result=true;
+		}
+		return result;
 	}
 }
