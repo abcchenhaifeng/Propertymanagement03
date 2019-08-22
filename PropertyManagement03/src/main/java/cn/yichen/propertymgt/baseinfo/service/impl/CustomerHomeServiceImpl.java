@@ -76,30 +76,30 @@ public class CustomerHomeServiceImpl implements ICustomerHomeService {
 		return pageCount;
 	}
 
-	@Override
-	public List<CustomerHome> getLivingStatus() throws Exception {
-		return mapper.selectlivingStatus();
-	}
-
-	@Override
-	public void modifyStatus(CustomerHome ch) throws Exception {
-		mapper.modifyStatus(ch);
-	}
-
-	@Override
-	public boolean checkCanModify(CustomerHome ch) throws Exception {
-		boolean result=false;
-		if(!(mapper.selectStatusByNO(ch).getChstatus()).equals("迁出")) {
-			result=true;
-			System.out.println("迁入！");
-		}
-		return result;
-	}
-
-	@Override
-	public void updateStatus(CustomerHome ch) throws Exception {
-		mapper.updateStatus(ch);
-	}
+//	@Override
+//	public List<CustomerHome> getLivingStatus() throws Exception {
+//		return mapper.selectlivingStatus();
+//	}
+//
+//	@Override
+//	public void modifyStatus(CustomerHome ch) throws Exception {
+//		mapper.modifyStatus(ch);
+//	}
+//
+//	@Override
+//	public boolean checkCanModify(int no) throws Exception {
+//		boolean result=false;
+//		if(!(mapper.selectStatusByNO(no).getChstatus()).equals("迁出")) {
+//			result=true;
+//			System.out.println("迁入！");
+//		}
+//		return result;
+//	}
+//
+//	@Override
+//	public void updateStatus(CustomerHome ch) throws Exception {
+//		mapper.updateStatus(ch);
+//	}
 
 	
 

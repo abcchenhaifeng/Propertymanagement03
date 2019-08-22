@@ -42,34 +42,34 @@ public class CustomerHomeController {
 		return new ResultMessage<CustomerHome>("OK","修改房间成功");
 	}
 	
-	//修改房间
-	@PostMapping("/moveout")
-	public ResultMessage<CustomerHome> modifystatus(CustomerHome ch) throws Exception {
-		Service.modifyStatus(ch);
-		return new ResultMessage<CustomerHome>("OK","修改迁居状态为迁出成功");
-	}
-	
-	@PostMapping("/movein")
-	public ResultMessage<CustomerHome> updatestatus(CustomerHome ch) throws Exception {
-		Service.updateStatus(ch);
-		return new ResultMessage<CustomerHome>("OK","修改迁居状态为迁入成功");
-	}
+//	//修改房间
+//	@PostMapping("/moveout")
+//	public ResultMessage<CustomerHome> modifystatus(CustomerHome ch) throws Exception {
+//		Service.modifyStatus(ch);
+//		return new ResultMessage<CustomerHome>("OK","修改迁居状态为迁出成功");
+//	}
+//	
+//	@PostMapping("/movein")
+//	public ResultMessage<CustomerHome> updatestatus(CustomerHome ch) throws Exception {
+//		Service.updateStatus(ch);
+//		return new ResultMessage<CustomerHome>("OK","修改迁居状态为迁入成功");
+//	}
 		
-	//检查此客户能否迁出
-	@GetMapping(value="/check")
-	public ResultMessage<CustomerHome> check(CustomerHome ch) throws Exception{
-		ResultMessage<CustomerHome> result=new ResultMessage<CustomerHome>("OK","此客户当前状态可以迁出");
-//		if(!service.checkCanDelete(no)) {
+//	//检查此客户能否迁出
+//	@GetMapping(value="/check")
+//	public ResultMessage<CustomerHome> check(int no) throws Exception{
+//		ResultMessage<CustomerHome> result=new ResultMessage<CustomerHome>("OK","此客户当前状态可以迁出");
+////		if(!service.checkCanDelete(no)) {
+////			result.setStatus("NO");
+////			result.setMessage("此客户不能删除");
+////		}
+//		if(!Service.checkCanModify(no))
+//		{
 //			result.setStatus("NO");
-//			result.setMessage("此客户不能删除");
+//			result.setMessage("此客户不能迁出");
 //		}
-		if(!Service.checkCanModify(ch))
-		{
-			result.setStatus("NO");
-			result.setMessage("此客户不能迁出");
-		}
-		return result;
-	}
+//		return result;
+//	}
 	
 	
 	//删除房间
@@ -108,10 +108,12 @@ public class CustomerHomeController {
 		return Service.getListByAllWithFK();
 	}
 	
-	//取得所有房间列表,有外键，无分页
-	@GetMapping(value="/livingstatus")
-	public List<CustomerHome> getlivingstatus() throws Exception{
-		return Service.getLivingStatus();
-	}
+//	//取得所有房间列表,有外键，无分页
+//	@GetMapping(value="/livingstatus")
+//	public List<CustomerHome> getlivingstatus() throws Exception{
+//		return Service.getLivingStatus();
+//	}
+	
+	
 	
 }
