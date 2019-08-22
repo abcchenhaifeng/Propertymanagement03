@@ -30,6 +30,17 @@ public interface IAreaMapper {
 	public List<Area> selectListByAllWithPage(@Param("start") int start,@Param("rows") int rows) throws Exception;
 	//取得小区的个数
 	public int selectCountByAll() throws Exception;
-	//取得开发商列表
-	public List<Area> selectListByDeveloper() throws Exception;
+	//根据综合检索条件取得小区列表
+	public List<Area> selectListByConditionWithPage(
+			@Param("name") String name,@Param("developer") String developer,
+			@Param("minbuildingarea") Double minbuildingarea,@Param("maxbuildingarea") Double maxbuildingarea,
+			@Param("minhome") Long minhome,@Param("maxhome") Long maxhome,
+			@Param("minhouse") Long minhouse,@Param("maxhouse") Long maxhouse, 
+			@Param("start") int start,@Param("rows") int rows) throws Exception;
+	//根据综合检索条件取得小区个数
+	public int selectCountByCondition(
+			@Param("name") String name,@Param("developer") String developer,
+			@Param("minbuildingarea") Double minbuildingarea,@Param("maxbuildingarea") Double maxbuildingarea,
+			@Param("minhome") Long minhome,@Param("maxhome") Long maxhome,
+			@Param("minhouse") Long minhouse,@Param("maxhouse") Long maxhouse) throws Exception;
 }

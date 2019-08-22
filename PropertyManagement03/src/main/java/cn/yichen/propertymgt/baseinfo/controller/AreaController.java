@@ -1,5 +1,6 @@
 package cn.yichen.propertymgt.baseinfo.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import cn.yichen.propertymgt.baseinfo.mapper.IAreaMapper;
 import cn.yichen.propertymgt.baseinfo.model.Area;
 import cn.yichen.propertymgt.baseinfo.service.IAreaService;
@@ -34,19 +34,19 @@ public class AreaController {
 	private IAreaService service;
 	
 	//增加小区
-	@GetMapping(value="/add")
+	@PostMapping(value="/add")
 	public ResultMessage<Area> add(Area area) throws Exception {
 		service.add(area);
 		return new ResultMessage<Area>("OK","增加小区成功");
 	}
 	//修改小区
-	@GetMapping(value="/modify")
+	@PostMapping(value="/modify")
 	public ResultMessage<Area> update(Area Area) throws Exception {
 		service.modify(Area);
 		return new ResultMessage<Area>("OK","修改小区成功");
 	}
 	//删除小区
-	@GetMapping(value="/delete")
+	@PostMapping(value="/delete")
 	public ResultMessage<Area> delete(Area Area) throws Exception {
 		service.delete(Area);
 		return new ResultMessage<Area>("OK","删除小区成功");
@@ -59,11 +59,11 @@ public class AreaController {
 		result.setModel(service.getAreaByNo(no));
 		return result;
 	}
-	//取得开发商列表
-	@GetMapping("/list/developer")
-	public List<Area> getListByDeveloper() throws Exception {
-		return service.getListByDeveloper();
-	}
+//	//取得开发商列表
+//	@GetMapping("/list/developer")
+//	public List<Area> getListByDeveloper() throws Exception {
+//		return service.getListByDeveloper();
+//	}
 	
 	//取得所有小区列表，有分页
 	@GetMapping(value="/list/all/page")
@@ -86,4 +86,23 @@ public class AreaController {
 		return service.getAreaListByAll();
 	}
 	
+	//按检索条件取得小区列表
+	@GetMapping(value="/list/condition/page")
+	public ResultMessage<Area> getListByConditionWithPage(
+			@RequestParam(required = false,defaultValue ="") String name,@RequestParam(required = false,defaultValue ="") String developer,
+			@RequestParam(required = false,defaultValue ="") Double minbuildingarea,@RequestParam(required = false,defaultValue ="") Double maxbuildingarea,
+			@RequestParam(required = false,defaultValue ="0") Long minhome,@RequestParam(required = false,defaultValue ="0") Long maxhome,
+			@RequestParam(required = false,defaultValue ="0") Long minhouse,@RequestParam(required = false,defaultValue ="0") Long maxhouse, 
+			@RequestParam(required = false,defaultValue ="5") int rows,@RequestParam(required = false,defaultValue ="1") int page) throws Exception {
+	
+		ResultMessage<Area> result=new ResultMessage<Area>("OK","取得小区列表分页成功");
+		result.setCount(service.getCountByCondition(name, developer, minbuildingarea, maxbuildingarea, minhome, maxhome, minhouse, maxhouse));
+		result.setPageCount(service.getPageCountByConditionWithPage(name, developer, minbuildingarea, maxbuildingarea, minhome, maxhome, minhouse, maxhouse, rows));
+		result.setList(service.getListByConditionWithPage(name, developer, minbuildingarea, maxbuildingarea, minhome, maxhome, minhouse, maxhouse, rows, page));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
+	}
+
 }
