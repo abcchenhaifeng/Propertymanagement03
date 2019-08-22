@@ -12,10 +12,15 @@ $(function() {
 		$("form#details #no-box").css("display", "none");
 		$("form#details #no").removeAttr("name");
 		$("form#details button[type='submit']").text("添加");
+		
+		// 加载收费类型
+		$.getJSON(rootAddress+"feetype/list", function(rs){
+			$.each(rs.list, (index, module)=>{
+				$("select[name='feetype.typeno']").append('<option value="'+module.typeno+'">'+module.typename+'</option>');
+			});
+		});
 	} else {
 		$("form#details").attr("action", rootAddress+$("form#details").attr("action"));
-		$("form#details #no").prop("name", "typeno");
-		$("form#details #no-box").css("display", "");
 		$.getJSON(rootAddress+"feeitem/get", {no : selectRow_id}, function(data) {
 			$("form#details #no").val(data.model.itemno);
 			$("form#details #no").attr("readonly", "readonly");
@@ -29,12 +34,11 @@ $(function() {
 			
 			// 加载收费类型
 			$.getJSON(rootAddress+"feetype/list", function(rs){
-				var selected = null;
 				$.each(rs.list, (index, module)=>{
 					$("select[name='feetype.typeno']").append('<option value="'+module.typeno+'">'+module.typename+'</option>');
 				});
 				
-				$("form#details select[name='feetype.typeno']").val(data.model.typename);
+				$("form#details select[name='feetype.typeno']").val(data.model.feetype.typeno);
 			});
 		});
 	}

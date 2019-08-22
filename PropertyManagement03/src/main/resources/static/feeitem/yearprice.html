@@ -1,0 +1,73 @@
+<script type="text/javascript" src="js/feeitem/yearprice.js"></script>
+<style>
+	.box-header input {
+		max-width: 8rem;
+	}
+	.btn-primary {
+		color: #fff !important;
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+</style>
+<div class="function-list-box">
+	<div class="box-header">
+		<div class="row">
+			<div class="col">
+				<form>
+					<div class="form-row align-items-center">
+						<div class="col-auto my-1">
+							<label class="sr-only" for="functionNo">收费年度</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">收费年度</div>
+								</div>
+								<input class="form-control" min="1900" type="number" step="1" maxlength="4" id="functionNo" placeholder="收费年度">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="functionName">单价</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">单价</div>
+								</div>
+								<input class="form-control" type="number" min="0.00" step=".10" id="functionName" placeholder="单价">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="module">日期</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">日期</div>
+								</div>
+								<div class="input-group-prepend">
+									<div class="input-group-text">从</div>
+								</div>
+								<input class="form-control" style="width: auto;max-width: 10rem;" type="date" id="functionName" placeholder="开始日期">
+								<div class="input-group-prepend">
+									<div class="input-group-text">至</div>
+								</div>
+								<input class="form-control" style="width: auto;max-width: 10rem;" type="date" id="functionName" placeholder="结束日期">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<button type="button" class="btn btn-outline-secondary" id="DetailsSearchButton">检索</button>
+							<button type="reset" class="btn btn-outline-secondary" id="reset">重置</button>
+						</div>
+						<div class="col-auto text-right" style="margin: 0 0 0 auto;">
+							<a href="feeitem/yearpriceDetails.html" class="btn btn-primary list-link" title="添加">添加</a>
+							<a href="feeitem/yearpriceDetails.html" class="btn btn-primary list-link" title="详情">详情</a>
+							<a href="feeitem/year/price/delete" class="btn btn-primary list-link" title="删除">删除</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="box-body">
+		<table id="feeyearGrid" class="table table-bordered"></table>
+		<div id="feeyearGridPager"></div>
+	</div>
+	<div id="user-add-dialog">
+		<!-- alert dialog -->
+	</div>
+</div>

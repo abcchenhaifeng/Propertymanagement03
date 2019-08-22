@@ -11,9 +11,4 @@ public class AppConfig {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-	
-	@Bean("u-key")
-	public ThreadLocal<String> threadLocal() {
-		return new ThreadLocal<>();
-	}
 }

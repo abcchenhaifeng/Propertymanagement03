@@ -31,7 +31,7 @@
 				<if test="feeItem.feetype.typeno != null">and fi.FeeTypeNo = #{feeItem.feetype.typeno}</if>
 			</if>
 			<if test="feeItem.feepaymethod != null">and fi.FeePayMethod like '%${feeItem.feepaymethod}%'</if>
-			<if test="feeItem.feecycle != null">and fi.FeeCycle = #{feeItem.feeCycle}</if>
+			<if test="feeItem.feecycle != null">and fi.FeeCycle = #{feeItem.feecycle}</if>
 			<if test="feeItem.itemstatus != null">and fi.ItemStatus like '%${feeItem.itemstatus}%'</if>
 			<if test="feeItem.itemdesc != null">and fi.ItemDesc = #{feeItem.itemdesc}</if>
 		</if>

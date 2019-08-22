@@ -7,8 +7,8 @@
 var selectRow_id = null;
 var reloadList = null;
 $(function() {
-	var typeno = null;
-	var typename = null;
+	var typeno = "";
+	var typename = "";
 	
 	setBreadcrumbs(["收费管理","基本收费项目设置","收费类型列表"]);
 	setMessage("收费类型列表", 5000);

@@ -14,8 +14,8 @@ $(function() {
 		$("form#details button[type='submit']").text("添加");
 	} else {
 		$("form#details").attr("action", rootAddress+$("form#details").attr("action"));
-		$("form#details #no").prop("name", "typeno");
-		$("form#details #no-box").css("display", "");
+		// $("form#details #no").prop("name", "typeno");
+		// $("form#details #no-box").css("display", "");
 		$.getJSON(rootAddress+"feetype/get", {no : selectRow_id}, function(data) {
 			$("form#details #no").val(data.model.typeno);
 			$("form#details #no").attr("readonly", "readonly");

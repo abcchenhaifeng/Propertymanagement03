@@ -7,13 +7,13 @@
 var selectRow_id = null;
 var reloadList = null;
 $(function() {
-	var itemcode = null;
-	var itemname = null;
-	var feetype = {typeno: null};
-	var feepaymethod = null;
-	var feecycle = null;
-	var itemstatus = null;
-	var itemunit = null;
+	var itemcode = "";
+	var itemname = "";
+	var feetype = {typeno: ""};
+	var feepaymethod = "";
+	var feecycle = "";
+	var itemstatus = "";
+	var itemunit = "";
 	
 	setBreadcrumbs(["收费管理","基本收费项目设置","收费项目列表"]);
 	setMessage("收费项目列表", 5000);
@@ -94,7 +94,7 @@ $(function() {
 		}, true).trigger("reloadGrid");
 	}
 	
-	// 添加、修改、删除
+	// 添加、查看、删除、年度价格
 	$(".list-box a.list-link").on("click", function(e) {
 		e.preventDefault();
 		var url = $(this).attr("href");
@@ -102,7 +102,7 @@ $(function() {
 		
 		// 删除
 		if ( /delete/.test(url) ) {
-			if ( selectRow_id == null ) {
+			if ( $("table#feeitemGrid").jqGrid("getGridParam","selrow") == null ) {
 				setMessage("请选择一个项目", 5000);
 			} else {
 				jqueryEject.Econfirm({
@@ -120,6 +120,28 @@ $(function() {
 				});
 			}
 			
+		// 年度价格
+		} else if (/yearprice/.test(url)) {
+			if ( $("table#feeitemGrid").jqGrid("getGridParam","selrow") == null ) {
+				setMessage("请选择一个项目", 5000);
+			} else {
+				$("section#main #dialog").load(url, () => {
+					dialogArea = $("section#main #dialog");
+					dialogArea.dialog({
+						title: $(this).attr("title"),
+						width: "80%",
+						maxWidth: "845px",
+						position: { my: "center", at: "top+20%", of: window  },
+						close: function(event, ui) {
+							doSomethingWhenDialogClose();
+							dialogArea.dialog("destroy");
+							dialogArea.html("");
+							doSomethingWhenDialogClose = function () {};
+						}
+					});
+				});
+			}
+		
 		// 添加
 		} else if (method == "add") {
 			url_method = "add";
@@ -138,10 +160,10 @@ $(function() {
 				});
 			});
 		
-		// 修改
+		// 查看
 		} else {
-			if ( selectRow_id == null ) {
-				setMessage("请选择一个类型", 5000);
+			if ( $("table#feeitemGrid").jqGrid("getGridParam","selrow") == null ) {
+				setMessage("请选择一个项目", 5000);
 			} else {
 				url_method = "modify";
 				$("section#main #dialog").load(url, () => {

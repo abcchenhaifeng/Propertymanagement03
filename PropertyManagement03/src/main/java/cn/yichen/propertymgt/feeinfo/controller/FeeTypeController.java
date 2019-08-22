@@ -28,7 +28,7 @@ public class FeeTypeController {
 	@RequestMapping("/get")
 	public ResultMessage<FeeType> get(int no) throws Exception {
 		ResultMessage<FeeType> rs = new ResultMessage<>("OK", "取得收费类型");
-		rs.setModel(service.getFeeTypeByNoWithItem(no));
+		rs.setModel(service.getFeeTypeByNo(no));
 		return rs;
 	}
 	
