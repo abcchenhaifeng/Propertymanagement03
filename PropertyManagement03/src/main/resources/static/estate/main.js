@@ -79,9 +79,9 @@ $(function(){
 	getListInfo();
 	//var dialogArea = null;
 	//点击增加链接处理，嵌入add.html
-	$("a#RoomAddLink").off().on("click",function(event){
+	$("a#RoomiAddLink").off().on("click",function(event){
 				
-		$("div#RoomDialogArea").load("room/add.html",function(){
+		$("div#RoomDialogArea").load("estate/add.html",function(){
 			dialogArea = $("div#RoomDialogArea");
 			dialogArea.dialog({
 				title:"增加房间信息",
