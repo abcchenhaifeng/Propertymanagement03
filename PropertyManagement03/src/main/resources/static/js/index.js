@@ -13,7 +13,7 @@ var doSomethingWhenDialogClose = function () {};
 
 $(() => {
 
-	checkLogin();
+	//checkLogin();
 
 	$(".menu_column a.link").on("click", function(e) {
 		url_method = $(this).attr("method");

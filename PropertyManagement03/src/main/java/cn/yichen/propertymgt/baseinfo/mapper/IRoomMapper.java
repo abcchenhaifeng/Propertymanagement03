@@ -8,9 +8,9 @@ import cn.yichen.propertymgt.baseinfo.model.Room;
 
 /**
  * 
- * @date:2019年8月18日下午7:57:53
- * @author LiYi(李海宏)
- * @Description：房间表dao接口
+ * @data:2019年8月22日下午8:24:50
+ * @author： 陈海锋
+ * @Description:房间档案dao接口
  *
  */
 @Mapper

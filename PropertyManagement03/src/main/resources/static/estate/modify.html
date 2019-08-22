@@ -1,0 +1,41 @@
+<!-- Main row -->
+<div class="row">
+    <div class="col-xs-12">
+      <div class="box-body">
+        <!-- 修改客户 -->
+       	    <form id="RoomModifyForm" role="form" action="http://localhost:8080/eatate/modify" method="post">
+              
+                <div class="form-group">
+                  <label for="exampleInputPassword1">房间编号</label>
+                  <input type="number" class="form-control" name="rooomno"  placeholder="房间编号">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">房间户型编号</label>
+                  <input type="number" class="form-control" name="housetypeno"  placeholder="房间户型编号">
+                </div>
+                <div class="form-group">
+                   <label for="exampleInputEmail1">楼宇编号</label>
+                   <input type="text" class="form-control" name="buildingno"  placeholder="楼宇编号">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">单元</label>
+                  <input type="text" class="form-control" name="departmentcode" placeholder="单元">
+                </div>
+                
+                <div class="form-group">
+                   <label for="exampleInputEmail1">楼层</label>
+                   <input type="number" class="form-control" name="floor"  placeholder="楼层">
+                </div>
+
+               <div class="form-group">
+                 <input type="submit" class="btn btn-primary" value="提交" />
+                 <input type="button" class="btn btn-primary" value="取消">
+                 <input type="hidden" name="no" readonly  />
+               </div>
+            </form>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    
+    
+ </div>

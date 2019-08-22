@@ -3,11 +3,12 @@ package cn.yichen.propertymgt.baseinfo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import cn.yichen.propertymgt.baseinfo.model.Room;
 import cn.yichen.propertymgt.baseinfo.service.IRoomService;
@@ -22,6 +23,8 @@ import cn.yichen.propertymgt.vo.ResultMessage;
 
 @RestController
 @RequestMapping("/room")
+@EnableWebMvc
+@CrossOrigin
 public class RoomController {
 
 	@Autowired
@@ -113,7 +116,7 @@ public class RoomController {
 	
 	//根据检索条件取得需要的房间列表，无关联
 	@GetMapping(value="/list/condition/page")
-	public ResultMessage<Room> getListByConditionWithPag(@RequestParam(required = false,defaultValue ="0") String RoomNo,@RequestParam(required = false,defaultValue ="0") String HouseTypeNo,@RequestParam(required = false,defaultValue ="0") String DepartmentCode,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+	public ResultMessage<Room> getListByConditionWithPag(@RequestParam(required = false,defaultValue ="0") String RoomNo,@RequestParam(required = false,defaultValue ="0") String HouseTypeNo,@RequestParam(required = false) String DepartmentCode,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
 		ResultMessage<Room> result = new ResultMessage<Room>("OK","取得房间列表分页成功");
 		result.setCount(Service.getCountByConditionandTypeWithPage(RoomNo, HouseTypeNo, DepartmentCode));
 		result.setPage(Service.getpageConditionWithPage(RoomNo, HouseTypeNo, DepartmentCode, rows));
