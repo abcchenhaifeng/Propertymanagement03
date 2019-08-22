@@ -17,8 +17,6 @@ $(function() {
 	
 	var userinfoGrid = null;
 	
-	var selectRow_id_tmp = null;
-	
 	setBreadcrumbs(["系统参数","登录账号管理"])
 	setMessage("用户列表", 5000);
 
@@ -54,7 +52,6 @@ $(function() {
 		multiselect:false,
 		onSelectRow:function(id){
 			selectRow_id = id;
-			selectRow_id_tmp = id;
 		}
 	});
 	
@@ -105,27 +102,30 @@ $(function() {
 					}
 					setMessage(result.message, 5000);
 					
-					selectRow_id_tmp = selectRow_id =null;
+					selectRow_id = null;
 				});
 			}
             
         //  详情
 		} else {
-			$("section#main #dialog").load(url, () => {
-				selectRow_id = selectRow_id_tmp;
-				dialogArea = $("section#main #dialog");
-				dialogArea.dialog({
-					title: $(this).attr("title"),
-					width: "80%",
-					maxWidth: "845px",
-					close: function(event, ui) {
-						doSomethingWhenDialogClose();
-						dialogArea.dialog("destroy");
-						dialogArea.html("");
-						doSomethingWhenDialogClose = function () {};
-					}
+			if ( selectRow_id == null ) {
+				setMessage("请选择一个类别", 5000);
+			} else {
+				$("section#main #dialog").load(url, () => {
+					dialogArea = $("section#main #dialog");
+					dialogArea.dialog({
+						title: $(this).attr("title"),
+						width: "80%",
+						maxWidth: "845px",
+						close: function(event, ui) {
+							doSomethingWhenDialogClose();
+							dialogArea.dialog("destroy");
+							dialogArea.html("");
+							doSomethingWhenDialogClose = function () {};
+						}
+					});
 				});
-			});
+			}
 		}
 
 		e.preventDefault();

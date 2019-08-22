@@ -110,13 +110,10 @@ public class UserInfoController {
 	
 	// 用户登录
 	@PostMapping("/login")
-	public ResultMessage<UserInfo> login(String id, String password, HttpSession httpSession) throws Exception {
-		
-		System.out.println("login");
-		System.out.println(httpSession);
+	public ResultMessage<UserInfo> login(String id, String password) throws Exception {
 		
 		boolean validate = false;
-		UserInfo userInfo = service.getUserById(id);
+		UserInfo userInfo = service.getUserByIdWithoutOther(id);
 		if ( userInfo != null && userInfo.getPassword().equals(password) )
 			validate =  true;
 		
@@ -125,18 +122,15 @@ public class UserInfoController {
 		Encoder encoder = Base64.getEncoder();
 //		Decoder decoder = Base64.getDecoder();
 //		String string = new String(decoder.decode("yichen"), "UTF-8");
-//		
-//		System.out.println(string);
 		
 		String ukey = id+"-"+encoder.encodeToString(password.getBytes("UTF-8"));
-		
-//		System.out.println(ukey);
-		
 		String encode_ukey = encoder.encodeToString(ukey.getBytes("UTF-8"));
 		
-//		System.out.println(encode_ukey);
+		ResultMessage<UserInfo> result = new ResultMessage<UserInfo>("OK", encode_ukey);
+		userInfo.setPassword(null);
+		result.setModel(userInfo);
 		
-		return new ResultMessage<UserInfo>("OK", encode_ukey);
+		return result;
 	}
 	
 	// 用户退出

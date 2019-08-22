@@ -1,54 +1,48 @@
-<!-- <script type="text/javascript" src="js/function/userAddFunction.js"></script> -->
+ <script type="text/javascript" src="js/feeitem/yearpriceDetails.js"></script> 
 <div style="width: 75%; margin: 5% auto;">
-	<form id="userAddFunction" action="user/add/function" method="post">
+	<form id="yearpriceDetails" action="feeitem/year/price/modify" method="post">
+		<input type="hidden" name="feeItem.itemno" />
 		<div class="input-group input-group-lg">
-			<input type="hidden" name="id" value="" />
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="inputGroup-sizing-lg">收费年度</span>
 			</div>
-			<input type="number" min="1900" step="1" maxlength="4" name="itemcode" value="1900" class="form-control"
+			<input id="no" type="number" min="1900" step="1" maxlength="4" name="feeyear" value="1900" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg" >
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
-			<input type="hidden" name="id" value="" />
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="inputGroup-sizing-lg">单&emsp;&emsp;价</span>
 			</div>
-			<input type="text" name="itemcode" value="0.00" class="form-control"
+			<input type="text" name="unitprice" value="0.00" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg" >
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
-			<input type="hidden" name="id" value="" />
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="inputGroup-sizing-lg">开始日期</span>
 			</div>
-			<input type="text" name="itemcode" value="" class="form-control"
+			<input type="date" name="startdate" value="" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg" >
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
-			<input type="hidden" name="id" value="" />
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="inputGroup-sizing-lg">结束日期</span>
 			</div>
-			<input type="text" name="itemcode" value="" class="form-control"
+			<input type="date" name="enddtae" value="" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-lg" >
 		</div>
 		<br>
 		<div class="input-group input-group-lg">
-			<input type="hidden" name="id" value="" />
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="inputGroup-sizing-lg">价格描述</span>
 			</div>
-			<input type="text" name="itemcode" value="" class="form-control"
-				aria-label="Sizing example input"
-				aria-describedby="inputGroup-sizing-lg" >
+			<textarea name="pricedesc" value="" class="form-control" placeholder="价格描述"></textarea>
 		</div>
 		<br>
 		<div class="input-group">
@@ -56,7 +50,7 @@
 			<div class="input-group-append" id="button-addon4">
 				<a href="javascript: closeDialog(addDialogArea)"
 					class="btn btn-primary">返回</a>&nbsp;
-				<button class="btn btn-primary" type="submit">添加</button>
+				<button class="btn btn-primary" type="submit">修改</button>
 			</div>
 		</div>
 	</form>

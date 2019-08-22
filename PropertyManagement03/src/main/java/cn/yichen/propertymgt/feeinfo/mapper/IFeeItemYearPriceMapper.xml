@@ -21,9 +21,8 @@
 		<if test="feeItemYearPrice != null">
 			<if test="feeItemYearPrice.feeyear != null">and yp.FeeYear = #{feeItemYearPrice.feeyear}</if>
 			<if test="feeItemYearPrice.unitprice != null">and yp.Unitprice = #{feeItemYearPrice.unitprice}</if>
-			<if test="feeItemYearPrice.startdate != null">and yp.StartDate = #{feeItemYearPrice.startdate}</if>
-			<if test="feeItemYearPrice.enddtae != null">and yp.EndDtae = #{feeItemYearPrice.enddtae}</if>
-			<if test="feeItemYearPrice.pricedesc != null">and yp.PriceDesc like '%${feeItemYearPrice.pricedesc}%'</if>
+			<if test="feeItemYearPrice.startdate != null">and yp.StartDate &gt;= #{feeItemYearPrice.startdate}</if>
+			<if test="feeItemYearPrice.enddtae != null">and yp.EndDtae &lt;= #{feeItemYearPrice.enddtae}</if>
 			<if test="feeItemYearPrice.feeItem != null">
 				<if test="feeItemYearPrice.feeItem.itemno != null">and yp.ItemNo = #{feeItemYearPrice.feeItem.itemno}</if>
 			</if>
@@ -41,7 +40,7 @@
 	
 	<update id="update" flushCache="true">
 		update FeeItemYearPrice 
-		set FeeYear = #{feeyear},  ItemNo = #{feeItem.itemno},  Unitprice = #{unitprice},  StartDate = #{startdate},  EndDtae = #{enddtae},  PriceDesc = #{pricedesc} 
+		set Unitprice = #{unitprice},  StartDate = #{startdate},  EndDtae = #{enddtae},  PriceDesc = #{pricedesc} where FeeYear = #{feeyear} and ItemNo = #{feeItem.itemno}
 	</update>
 
 	<select id="selectByNo" resultMap="YearPriceMap">

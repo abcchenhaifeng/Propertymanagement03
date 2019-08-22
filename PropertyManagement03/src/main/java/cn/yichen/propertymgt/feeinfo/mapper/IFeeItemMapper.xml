@@ -25,15 +25,14 @@
 		<if test="feeItem != null">
 			<if test="feeItem.itemNo != null">and fi.ItemNo = #{feeItem.itemno}</if>
 			<if test="feeItem.itemcode != null">and fi.ItemCode like '%${feeItem.itemcode}%'</if>
-			<if test="feeItem.itemName != null">and fi.ItemName = #{feeItem.itemname}</if>
-			<if test="feeItem.itemUnit != null">and fi.ItemUnit like '%${feeItem.itemunit}%'</if>
+			<if test="feeItem.itemName != null">and fi.ItemName like '%${feeItem.itemname}%'</if>
+			<if test="feeItem.itemUnit != null">and fi.ItemUnit = #{{feeItem.itemunit}</if>
 			<if test="feeItem.feetype != null">
 				<if test="feeItem.feetype.typeno != null">and fi.FeeTypeNo = #{feeItem.feetype.typeno}</if>
 			</if>
 			<if test="feeItem.feepaymethod != null">and fi.FeePayMethod like '%${feeItem.feepaymethod}%'</if>
 			<if test="feeItem.feecycle != null">and fi.FeeCycle = #{feeItem.feecycle}</if>
-			<if test="feeItem.itemstatus != null">and fi.ItemStatus like '%${feeItem.itemstatus}%'</if>
-			<if test="feeItem.itemdesc != null">and fi.ItemDesc = #{feeItem.itemdesc}</if>
+			<if test="feeItem.itemstatus != null">and fi.ItemStatus = #{feeItem.itemstatus}</if>
 		</if>
 	</sql>
 	

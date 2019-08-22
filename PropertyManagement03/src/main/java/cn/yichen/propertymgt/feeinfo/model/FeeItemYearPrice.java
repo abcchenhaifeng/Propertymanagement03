@@ -6,6 +6,8 @@ import java.util.Date;
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * @date: 2019年8月19日 上午12:02:42
@@ -23,9 +25,11 @@ public class FeeItemYearPrice implements Serializable {
 	private Double unitprice;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date startdate;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date enddtae;
 
 	private String pricedesc;

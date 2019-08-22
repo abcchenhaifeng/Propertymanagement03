@@ -13,7 +13,7 @@ $(function() {
 	} else {
 		$("form#details").attr("action", rootAddress+$("form#details").attr("action"));
 		
-		var curr_user_id = (typeof selectRow_id == "undefined" || selectRow_id == null ? login_user.id : selectRow_id);
+		var curr_user_id = (url_method == "my_details" ? login_user.id : selectRow_id);
 		
 		$.getJSON(rootAddress+"user/get", {id : curr_user_id}, function(data) {
 			$("form#details input[name='status']").val(data.model.status);
@@ -25,8 +25,6 @@ $(function() {
 			$("form#details input[name='age']").val(data.model.age);
 			$("form#details input[name='mobible']").val(data.model.mobible);
 		});
-		
-		selectRow_id = null;
 	}
 	
 	$("form#details").ajaxForm((rs) => {

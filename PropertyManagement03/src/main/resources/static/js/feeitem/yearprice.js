@@ -6,14 +6,13 @@
 
 var addDialogArea = null;
 var selectRow_feeyear = null;
-var reloadFunctionList = null;
+var reloadYearPriceList = null;
 var curr_id = selectRow_id;
 $(function() {
-	var functionNo = "";
-	var functionName = "";
-	var module = { };
-	module.no = "";
-	var levelNo = "";
+	var feeyear = "";
+	var unitprice = "";
+	var startdate = "";
+	var enddtae = "";
 	
 	setBreadcrumbs(["收费管理","基本收费项目设置","收费项目列表","年度价格"]);
 	setMessage("年度价格", 5000);
@@ -64,23 +63,23 @@ $(function() {
 	
 	// 点击检索事件处理
 	$("button#DetailsSearchButton").on("click", function() {
-		functionNo = $("input#functionNo").val();
-		functionName = $("input#functionName").val();
-		module.no = $("select#module").val();
-		levelNo = $("input#levelNo").val();
+		feeyear = $("input#feeyear").val();
+		unitprice = $("input#unitprice").val();
+		startdate = $("input#startdate").val();
+		enddtae = $("input#enddtae").val();
 		
-		reloadFunctionList();
+		reloadYearPriceList();
 	});
 	
 	// 更新jQGrid的列表显示
-	reloadFunctionList = function () {
+	reloadYearPriceList = function () {
 		
 		postData = { };
 		postData["feeItem.itemno"] = curr_id;
-		if (functionNo != "") postData.no = functionNo;
-		if (functionName != "") postData.name = functionName;
-		if (module.no != "") postData['module.no'] = module.no;
-		if (levelNo != "") postData.levelno = levelNo;
+		if (feeyear != "") postData.feeyear = feeyear;
+		if (unitprice != "") postData.unitprice = unitprice;
+		if (startdate != "") postData.startdate = startdate;
+		if (enddtae != "") postData.enddtae = enddtae;
 		
 		$("table#feeyearGrid").jqGrid('clearGridData').jqGrid('setGridParam', {
 			datatype: "json",
@@ -89,17 +88,18 @@ $(function() {
 		}, true).trigger("reloadGrid");
 	}
 	
-	// 添加、删除
-	$(".function-list-box a.list-link").on("click", function(e) {
+	// 添加、详情、删除
+	$(".yearprice-list-box a.list-link").on("click", function(e) {
 		e.preventDefault();
 		var url = $(this).attr("href");
+		url_method = $(this).attr("method");
 		
 		// 添加
 		if ( /yearpriceDetails.html/.test(url) ) {
 			
-			$(".function-list-box #user-add-dialog").load(url, () => {
+			$(".yearprice-list-box #feeyear-add-dialog").load(url, () => {
 
-				addDialogArea = $(".function-list-box #user-add-dialog");
+				addDialogArea = $(".yearprice-list-box #feeyear-add-dialog");
 				addDialogArea.dialog({
 					title: $(this).attr("title"),
 					modal: true,
@@ -123,7 +123,7 @@ $(function() {
 					title: '删除',
 					message: '确认删除此项目么?',
 					define: function() {
-						$.post(rootAddress+"user/delete/function", {id: curr_id, funNo: selectRow_feeyear}, (rs)=>{
+						$.post(rootAddress+"feeitem/year/price/delete", {itemno: curr_id, feeyear: selectRow_feeyear}, (rs)=>{
 							$("table#feeyearGrid").jqGrid("delRowData", selectRow_feeyear);
 							jqueryEject.Etoast(rs.message,1);
 							selectRow_feeyear = null

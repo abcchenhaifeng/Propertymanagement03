@@ -14,6 +14,7 @@ var doSomethingWhenDialogClose = function () {};
 $(() => {
 
 	checkLogin();
+	login_user = JSON.parse(sessionStorage.getItem("user"));
 
 	$(".menu_column a.link").on("click", function(e) {
 		url_method = $(this).attr("method");

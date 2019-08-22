@@ -122,13 +122,15 @@ $(function() {
 			
 		// 年度价格
 		} else if (/yearprice/.test(url)) {
-			if ( $("table#feeitemGrid").jqGrid("getGridParam","selrow") == null ) {
+			var rowid = $("table#feeitemGrid").jqGrid("getGridParam","selrow");
+			if ( rowid == null ) {
 				setMessage("请选择一个项目", 5000);
 			} else {
+				var rowData = $("table#feeitemGrid").jqGrid('getRowData',rowid);
 				$("section#main #dialog").load(url, () => {
 					dialogArea = $("section#main #dialog");
 					dialogArea.dialog({
-						title: $(this).attr("title"),
+						title: $(this).attr("title")+"-"+rowData.itemname,
 						width: "80%",
 						maxWidth: "845px",
 						position: { my: "center", at: "top+20%", of: window  },

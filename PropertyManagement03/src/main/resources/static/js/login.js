@@ -39,7 +39,6 @@ $(() => {
 	var method = null;
 	var url = "";
 	$("input[type='submit']").on("click", function(e){
-		console.log(new Date().getMilliseconds());
 		$(".login-box-body #box-msg a").text("处理中...");
 					$(".login-box-body #box-msg").css("display", "block");
 		method = $(this).val();
@@ -60,6 +59,7 @@ $(() => {
 					});
 					if (method == "登录") {
 						sessionStorage.setItem('u-key', rs.message);
+						sessionStorage.setItem('user', JSON.stringify(rs.model));
 						location.href = "index.html";
 					} else {
 						$(".login-box-body #login a").click();
