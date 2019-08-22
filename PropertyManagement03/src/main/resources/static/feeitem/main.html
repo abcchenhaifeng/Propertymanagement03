@@ -1,0 +1,104 @@
+<script type="text/javascript" src="js/feeitem/main.js"></script>
+<style>
+	.box-header input {
+		max-width: 8rem;
+	}
+</style>
+<div class="list-box">
+	<div class="box-header">
+		<div class="row">
+			<div class="col">
+				<form>
+					<div class="form-row align-items-center">
+						<div class="col-auto my-1">
+							<label class="sr-only" for="itemcode">项目代码</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">项目代码</div>
+								</div>
+								<input class="form-control" type="text" id="itemcode" placeholder="项目代码">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="itemname">&emsp;项目名称</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">&emsp;项目名称</div>
+								</div>
+								<input class="form-control" type="text" id="itemname" placeholder="项目名称">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="feetype">收费类型</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">收费类型</div>
+								</div>
+								<select id="feetype" class="form-control">
+									<option value=""> </option>
+								</select>
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="feepaymethod">计费方式</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">计费方式</div>
+								</div>
+								<input class="form-control" type="text" id="feepaymethod" placeholder="计费方式">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="feecycle">周期性</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">周期性</div>
+								</div>
+								<select id="feecycle" class="form-control">
+									<option value=""> </option>
+									<option value="Y">是</option>
+									<option value="N">否</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="itemstatus">是否收费</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">是否收费</div>
+								</div>
+								<select id="itemstatus" class="form-control">
+									<option value=""> </option>
+									<option value="Y">是</option>
+									<option value="N">否</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<label class="sr-only" for="itemunit">收费单位</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">收费单位</div>
+								</div>
+								<input class="form-control" type="text" id="itemunit" placeholder="收费单位">
+							</div>
+						</div>
+						<div class="col-auto my-1">
+							<button type="button" class="btn btn-outline-secondary" id="SearchButton">检索</button>
+							<button type="reset" class="btn btn-outline-secondary" id="reset">重置</button>
+						</div>
+						<div class="col-auto text-right" style="margin: 0 0 0 auto;">
+							<a href="feeitem/details.html" method="add" class="btn btn-primary list-link" title="添加">添加</a>
+							<a href="feeitem/details.html" class="btn btn-primary list-link" title="修改">修改</a>
+							<a href="feeitem/delete" class="btn btn-primary list-link" title="删除">删除</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="box-body">
+		<table id="feeitemGrid" class="table table-bordered"></table>
+		<div id="feeitemGridPager"></div>
+	</div>
+</div>

@@ -64,18 +64,22 @@
 		where fi.ItemNo = #{no} and fi.FeeTypeNo = ft.TYPENO
 	</select>
 	
-	<select id="selectListByCriteria" resultMap="FeeItemMap">
-		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
-		from FeeItem fi
+	<select id="selectListByCriteria" resultMap="FeeItemMapWithType">
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
+			,ft.TYPENO, ft.TYPENAME
+		from FeeItem fi, FeeType ft
 		<where>
+			fi.FeeTypeNo = ft.TYPENO
 			<include refid="FeeItemWhen"></include>
 		</where>
 	</select>
 	
-	<select id="selectListByCriteriaWithPage" resultMap="FeeItemMap">
-		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeeTypeNo, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
-		from FeeItem fi
+	<select id="selectListByCriteriaWithPage" resultMap="FeeItemMapWithType">
+		select fi.ItemNo, fi.ItemCode, fi.ItemName, fi.ItemUnit, fi.FeePayMethod, fi.FeeCycle, fi.ItemStatus, fi.ItemDesc
+			,ft.TYPENO, ft.TYPENAME
+		from FeeItem fi, FeeType ft
 		<where>
+			fi.FeeTypeNo = ft.TYPENO
 			<include refid="FeeItemWhen"></include>
 			and fi.ItemNo >= (select ItemNo from FeeItem ORDER BY ItemNo LIMIT
 			#{start}, 1) LIMIT #{rows}

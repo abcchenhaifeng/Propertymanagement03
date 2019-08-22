@@ -7,20 +7,30 @@
 var selectRow_id = null;
 var reloadList = null;
 $(function() {
-	var typeno = null;
-	var typename = null;
+	var itemcode = null;
+	var itemname = null;
+	var feetype = {typeno: null};
+	var feepaymethod = null;
+	var feecycle = null;
+	var itemstatus = null;
+	var itemunit = null;
 	
-	setBreadcrumbs(["收费管理","基本收费项目设置","收费类型列表"]);
-	setMessage("收费类型列表", 5000);
+	setBreadcrumbs(["收费管理","基本收费项目设置","收费项目列表"]);
+	setMessage("收费项目列表", 5000);
 
 	// 显示列表
 	$.jgrid.defaults.styleUI = 'Bootstrap';
-	$("table#feetypeGrid").jqGrid({
-		url: rootAddress+'feetype/list/page',
+	$("table#feeitemGrid").jqGrid({
+		url: rootAddress+'feeitem/list/page',
 		datatype: "json",
 		colModel: [
-			{ label: '类型编号', name: 'typeno' },
-			{ label: '类型名称', name: 'typename' }
+			{ label: '项目代码', name: 'itemcode' },
+			{ label: '项目名称', name: 'itemname' },
+			{ label: '收费类型', name: 'feetype.typename' },
+			{ label: '计费方式', name: 'feepaymethod' },
+			{ label: '周期性', name: 'feecycle', edittype:'select', formatter:'select', editoptions:{value:"Y:是;N:否"} },
+			{ label: '是否收费', name: 'itemstatus', edittype:'select', formatter:'select', editoptions:{value:"Y:是;N:否"} },
+			{ label: '收费单位', name: 'itemunit' }
 		],
 		viewrecords: true, 
 		autowidth: true,
@@ -34,19 +44,33 @@ $(function() {
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "typeno"
+		      id: "itemno"
 		},
-		pager: "#feetypeGridPager",
+		pager: "#feeitemGridPager",
 		multiselect:false,
 		onSelectRow:function(id){
 			selectRow_id = id;
 		}
 	});
 	
+	// 加载收费类型
+	$.getJSON(rootAddress+"feetype/list", (rs)=>{
+		$.each(rs.list, (index, module)=>{
+			$('select#feetype').append('<option value="'+module.typeno+'">'+module.typename+'</option>');
+		});
+	});
+	
 	// 点击检索事件处理
 	$("button#SearchButton").on("click", function() {
-		typeno = $("input#typeno").val();
-		typename = $("input#typename").val();
+		console.log(1);
+		
+		itemcode = $("input#itemcode").val();
+		itemname = $("input#itemname").val();
+		feetype.typeno = $("select#feetype").val();
+		feepaymethod = $("input#feepaymethod").val();
+		feecycle = $("select#feecycle").val();
+		itemstatus = $("select#itemstatus").val();
+		itemunit = $("input#itemunit").val();
 		
 		reloadList();
 	});
@@ -55,10 +79,15 @@ $(function() {
 	reloadList = function () {
 		
 		postData = { };
-		if (typeno != "") postData.typeno = typeno;
-		if (typename != "") postData.typename = typename;
+		if (itemcode != "") postData.itemcode = itemcode;
+		if (itemname != "") postData.itemname = itemname;
+		if (feetype.typeno != "") postData['feetype.typeno'] = feetype.typeno;
+		if (feepaymethod != "") postData.feepaymethod = feepaymethod;
+		if (feecycle != "") postData.feecycle = feecycle;
+		if (itemstatus != "") postData.itemstatus = itemstatus;
+		if (itemunit != "") postData.itemunit = itemunit;
 		
-		$("table#feetypeGrid").jqGrid('clearGridData').jqGrid('setGridParam', {
+		$("table#feeitemGrid").jqGrid('clearGridData').jqGrid('setGridParam', {
 			datatype: "json",
 			page: 1,
 			postData : postData
@@ -74,11 +103,11 @@ $(function() {
 		// 删除
 		if ( /delete/.test(url) ) {
 			if ( selectRow_id == null ) {
-				setMessage("请选择一个类型", 5000);
+				setMessage("请选择一个项目", 5000);
 			} else {
 				jqueryEject.Econfirm({
 					title: '删除',
-					message: '确认删除此类型么?',
+					message: '确认删除此项目么?',
 					define: function() {
 						$.post(rootAddress+url, {no: selectRow_id}, (rs)=>{
 							setMessage(rs.message, 5000);

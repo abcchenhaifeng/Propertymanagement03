@@ -1,0 +1,100 @@
+<script type="text/javascript" src="js/feeitem/details.js"></script>
+<div style="width: 75%; margin: 5% auto;">
+	<form id="details" action="deeitem/modify" method="post">
+		<div id="no-box" class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">项目编号</span>
+			</div>
+			<input id="no" type="text" name="itemno" value="" class="form-control" 
+				aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg" >
+		</div>
+		<br> 
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">项目代码</span>
+			</div>
+			<input type="text" name="itemcode" value="" class="form-control" 
+				aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg" >
+		</div>
+		<br> 
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">项目名称</span>
+			</div>
+			<input type="text" name="itemname" value=""
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-lg">
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">收费类型</span>
+			</div>
+			<select name="feetype.typeno" class="form-control">
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">计费方式</span>
+			</div>
+			<select name="feepaymethod" class="form-control">
+					<option value="月">月</option>
+					<option value="年">年</option>
+					<option value="日">日</option>
+					<option value="次">次</option>
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">&emsp;周期性</span>
+			</div>
+			<select name="feecycle" class="form-control">
+					<option value="Y">是</option>
+					<option value="N">否</option>
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">是否收费</span>
+			</div>
+			<select name="itemstatus" class="form-control">
+					<option value="Y">是</option>
+					<option value="N">否</option>
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">收费单位</span>
+			</div>
+			<select name="itemunit" class="form-control">
+					<option value="人">人</option>
+					<option value="户">户</option>
+					<option value="车">车</option>
+					<option value="平方米">平方米</option>
+			</select>
+		</div>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-lg">项目描述</span>
+			</div>
+			<textarea class="form-control" name="itemdesc" value=""></textarea>
+		</div>
+		<br>
+		<div class="input-group">
+			<input type="text" class="form-control" value=""
+				disabled="disabled">
+			<div class="input-group-append" id="button-addon4">
+				<a href="javascript: closeDialog()"
+					class="btn btn-primary">返回</a>&nbsp;
+				<button class="btn btn-primary" type="submit">修改</button>
+			</div>
+		</div>
+	</form>
+</div>
