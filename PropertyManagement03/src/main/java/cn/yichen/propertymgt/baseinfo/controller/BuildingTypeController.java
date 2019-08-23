@@ -27,19 +27,19 @@ public class BuildingTypeController {
 	private IBuildingTypeService service;
 	
 	//增加建筑类型
-	@GetMapping(value="/add")
+	@PostMapping(value="/add")
 	public ResultMessage<BuildingType> add(BuildingType buildType) throws Exception {
 		service.add(buildType);
 		return new ResultMessage<BuildingType>("OK","增加建筑类型成功");
 	}
 	//修改建筑类型
-	@GetMapping(value="/modify")
+	@PostMapping(value="/modify")
 	public ResultMessage<BuildingType> update(BuildingType buildType) throws Exception {
 		service.modify(buildType);
 		return new ResultMessage<BuildingType>("OK","修改建筑类型成功");
 	}
 	//删除建筑类型
-	@GetMapping(value="/delete")
+	@PostMapping(value="/delete")
 	public  ResultMessage<BuildingType> delete(BuildingType buildType) throws Exception {
 		service.delete(buildType);
 		return new ResultMessage<BuildingType>("OK","删除建筑类型成功");

@@ -107,6 +107,23 @@ $(function(){
 		}
 		reloadCustomerList();
 	});
+	
+	
+	//点击修改事件处理
+	$("a#CustomerRestsetButton").on("click",function(){
+		$("select#typeno").val("0");
+		$("input[name='CustomerName']").val();
+		$("input#feeStartDate").val();
+		$("input#feeEndDate").val();
+		
+		CustomerName=null;
+		feeStartDate=null;
+		feeEndDate=null;
+		typeno=0;
+		
+		reloadCustomerList();
+	});
+	
 	//===========================增加员工处理================================================
 	$("a#CustomerAddLink").off().on("click",function(){
 		$("div#CustomerDialog").load("customer/add.html",function(){
@@ -202,7 +219,7 @@ $(function(){
 			});			
 		}
 		else{
-			$("div#CustomerDialog").load("customer/mainview.html",function(){
+			$("div#CustomerDialog").load("customer/view.html",function(){
 				//取得指定的员工信息
 				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
 					setMessage("查看详细", 5000);
@@ -246,7 +263,7 @@ $(function(){
 			});
 		}
 		else{
-			$("div#CustomerDialog").load("customer/mainmodify.html",function(){
+			$("div#CustomerDialog").load("customer/modify.html",function(){
 				//取得指定的员工信息
 				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
 					if(em){
@@ -266,7 +283,6 @@ $(function(){
 				//拦截修改提交表单
 				$("form#CustomerModifyForm").ajaxForm(function(result){
 					if(result.status=="OK"){
-						alert("OK");
 						setMessage("添加成功", 5000);
 						reloadCustomerList();//更新客户列表
 					}

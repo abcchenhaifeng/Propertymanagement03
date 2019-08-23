@@ -111,7 +111,7 @@ public class CustomerController {
 		}
 	
 	//增加客户
-	@RequestMapping(value="/add")
+	@PostMapping(value="/add")
 	public ResultMessage<Customer> add(Customer customer) throws Exception {
 		service.add(customer);
 		return new ResultMessage<Customer>("OK","增加客户成功");

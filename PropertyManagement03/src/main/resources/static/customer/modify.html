@@ -4,49 +4,58 @@
       <div class="box-body">
         <!-- 修改客户 -->
        	    <form id="CustomerModifyForm" role="form" action="http://localhost:8080/customer/modify" method="post">
-              
+       	    <div class="col-md-6">
+              	<div class="form-group">
+                  <label for="exampleInputEmail1">类别</label>
+                  <select name="customertype.typeno" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-lg">
+						<option value="1">业主</option>
+						<option value="2">租客</option>
+						<option value="3">管理员</option>
+					</select>
+                </div>	
                 <div class="form-group">
                   <label for="exampleInputPassword1">名称</label>
-                  <input type="text" class="form-control" name="cname"  placeholder="名称">
+                  <input type="text" class="form-control" id="cname"  name="cname"  placeholder="名称">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">联系人姓名</label>
-                  <input type="text" class="form-control" name="contact"  placeholder="联系人">
+                  <input type="text" class="form-control" id="contact"  name="contact"  placeholder="联系人">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">身份证号码</label>
-                  <!-- <c:forEach var="rm" items="${roleList}">
-                	  <input class="form-check-input" type="checkbox" name="roles" id="inlineRadio1" value="${rm.no}">
-					  <label class="form-check-label" for="inlineRadio1">${rm.name}</label>
-				  </c:forEach> -->
-				      <input type="text" class="form-control" name="cardcode"  placeholder="身份证">
+                  <label for="exampleInputEmail1">身份证号码</label>  
+				  <input type="text" class="form-control" id="cardcode"  name="cardcode"  placeholder="身份证">
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">手机号</label>
-                  <input type="number" class="form-control" name="mobile" placeholder="手机号">
-                </div>
- 				<div class="form-group">
-                  <label for="exampleInputEmail1">收费开始日期</label>
-                  <input type="date" class="form-control" name="feeStartDate" placeholder="开始日期">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">收费截至日期</label>
-                  <input type="date" class="form-control" name="feeEndDate" placeholder="截至日期">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">状态</label>
-                  <input type="text" class="form-control" name="cstatus" placeholder="状态">
-                </div>
-
-               <div class="form-group">
-                 <input type="submit" class="btn btn-primary" value="提交" />
-                 <input type="button" class="btn btn-primary" value="取消">
-                 <input type="hidden" name="no" readonly  />
+              </div>  
+                <div class="col-md-6"> 
+	                <div class="form-group">
+	                  <label for="exampleInputEmail1">手机号</label>
+	                  <input type="number" class="form-control" id="mobile" name="mobile"  placeholder="手机号">
+	                </div>
+	 				<div class="form-group">
+	                  <label for="exampleInputEmail1">收费开始日期</label>
+	                  <input type="date" class="form-control" id="feeStartDate" name="feeStartDate"  placeholder="开始日期">
+	                </div>
+	                <div class="form-group">
+	                  <label for="exampleInputEmail1">收费截至日期</label>
+	                  <input type="date" class="form-control" id="feeEndDate" name="feeEndDate"  placeholder="截至日期">
+	                </div>
+	                <div class="form-group">
+	                 <label for="exampleInputEmail1">缴费状态</label>
+	                <select name="cstatus" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-lg">
+						<option value="未缴">未缴</option>
+						<option value="已缴">已缴</option>
+					</select>
+					 </div>
                </div>
+               <div class="form-group">
+                 <input type="submit" class="btn btn-primary" style="margin-left: 40%;" value="提交" />
+                 <input type="button" class="btn btn-primary" style="margin-left: 5%;" value="取消">
+                 <input type="hidden" name="customerNo" readonly  />
+               </div>
+              
             </form>
       </div>
       <!-- /.box-body -->
     </div>
-    
     
  </div>

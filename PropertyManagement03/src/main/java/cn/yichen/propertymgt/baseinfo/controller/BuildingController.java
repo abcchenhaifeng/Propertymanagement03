@@ -2,6 +2,7 @@ package cn.yichen.propertymgt.baseinfo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.yichen.propertymgt.baseinfo.model.Area;
 import cn.yichen.propertymgt.baseinfo.model.Building;
 import cn.yichen.propertymgt.baseinfo.service.IBuildingService;
 import cn.yichen.propertymgt.vo.ResultMessage;
@@ -29,19 +31,19 @@ public class BuildingController {
 	private IBuildingService service;
 	
 	//增加楼宇
-	@GetMapping(value="/add")
+	@PostMapping(value="/add")
 	public ResultMessage<Building> add(Building building) throws Exception {
 		service.add(building);
 		return new ResultMessage<Building>("OK","增加楼宇成功");
 	}
 	//修改楼宇
-	@GetMapping(value="/modify")
+	@PostMapping(value="/modify")
 	public ResultMessage<Building> update(Building building) throws Exception {
 		service.modify(building);
 		return new ResultMessage<Building>("OK","修改楼宇成功");
 	}
 	//删除楼宇
-	@GetMapping(value="/delete")
+	@PostMapping(value="/delete")
 	public ResultMessage<Building> delete(Building building) throws Exception {
 		service.delete(building);
 		return new ResultMessage<Building>("OK","删除楼宇成功");
@@ -110,5 +112,25 @@ public class BuildingController {
 	@GetMapping("/get")
 	public Building getByNo(int no) throws Exception{
 		return service.getByNo(no);
+	}
+//	
+//	@Param("areano") int areano,@Param("baddress") String baddress,
+//	@Param("buildingtypeno") int buildingtypeno,@Param("minhouse") int minhouse,@Param("maxhouse") int maxhouse, 
+//	@Param("start") int start,@Param("rows") int rows
+	//按检索条件取得小区列表
+	@GetMapping(value="/list/condition/page")
+	public ResultMessage<Building> getListByConditionWithPage(
+			@RequestParam(required = false,defaultValue ="0") int areano,@RequestParam(required = false,defaultValue ="") String baddress,
+			@RequestParam(required = false,defaultValue ="0") int buildingtypeno,@RequestParam(required = false,defaultValue ="0") int minhouse,@RequestParam(required = false,defaultValue ="0") int maxhouse, 
+			@RequestParam(required = false,defaultValue ="0") int rows,@RequestParam(required = false,defaultValue ="0") int page) throws Exception {
+	
+		ResultMessage<Building> result=new ResultMessage<Building>("OK","取得楼宇列表分页成功");
+		result.setCount(service.getCountByCondition(areano, baddress, buildingtypeno, minhouse, maxhouse));
+		result.setPageCount(service.getPageCountByConditionWithPage(areano, baddress, buildingtypeno, minhouse, maxhouse, rows));
+		result.setList(service.getListByConditionWithPage(areano, baddress, buildingtypeno, minhouse, maxhouse, rows, page));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
 	}
 }

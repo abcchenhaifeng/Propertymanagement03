@@ -95,6 +95,29 @@ $(function(){
 		reloadAreaList();
 	});
 	
+	//点击重置事件处理
+	$("a#AreaResetButton").on("click",function(){
+		$("select#AreaSelection").val("");
+		$("select#DeveloperSelection").val("");
+		$("input#minbuildingarea").val("");
+		$("input#maxbuildingarea").val("");
+		$("input#minhome").val("");
+		$("input#maxhome").val("");
+		$("input#minhouse").val("");
+		$("input#maxhouse").val("");
+		areano=0;
+		name=null;
+		developer=null;
+		minbuildingarea=null;
+		maxbuildingarea=null;
+		minhome=0;
+		maxhome=0;
+		minhouse=0;
+		maxhouse=0;
+		
+		reloadAreaList();
+	});
+	
 	//定义小区下拉框的更新事件的处理
 	$("select#AreaSelection").off().on("change",function(){
 		name=$("select#AreaSelection").val();

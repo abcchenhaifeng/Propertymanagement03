@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import cn.yichen.propertymgt.baseinfo.model.Area;
 import cn.yichen.propertymgt.baseinfo.model.Building;
 
 
@@ -44,4 +45,14 @@ public interface IBuildingMapper {
 	public List<Building> selectListByAllWithPage(@Param("start") int start,@Param("rows") int rows) throws Exception;
 	//取得楼宇的个数
 	public int selectCountByAll() throws Exception;
+	//根据综合检索条件取得楼宇列表
+	public List<Building> selectListByConditionWithPage(
+			@Param("areano") int areano,@Param("baddress") String baddress,
+			@Param("buildingtypeno") int buildingtypeno,@Param("minhouse") int minhouse,@Param("maxhouse") int maxhouse, 
+			@Param("start") int start,@Param("rows") int rows) throws Exception;
+	//根据综合检索条件取得不同楼宇个数
+	public int selectCountByCondition(
+			@Param("areano") int areano,@Param("baddress") String baddress,
+			@Param("buildingtypeno") int buildingtypeno,@Param("minhouse") int minhouse,@Param("maxhouse") int maxhouse
+			) throws Exception;
 }

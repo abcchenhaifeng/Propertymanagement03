@@ -30,13 +30,13 @@ public class CustomerHomeController {
 	private ICustomerHomeService Service=null;
 	
 	//增加房间
-	@GetMapping("/add")
+	@PostMapping("/add")
 	public ResultMessage<CustomerHome> add(CustomerHome ch) throws Exception {
 		Service.add(ch);
 		return new ResultMessage<CustomerHome>("OK","增加房间成功");
 	}
 	//修改房间
-	@GetMapping("/modify")
+	@PostMapping("/modify")
 	public ResultMessage<CustomerHome> modify(CustomerHome ch) throws Exception {
 		Service.modify(ch);
 		return new ResultMessage<CustomerHome>("OK","修改房间成功");
@@ -73,7 +73,7 @@ public class CustomerHomeController {
 	
 	
 	//删除房间
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	public ResultMessage<CustomerHome> delete(CustomerHome ch) throws Exception {
 		Service.delete(ch);
 		return new ResultMessage<CustomerHome>("OK","删除房间成功");
@@ -108,11 +108,11 @@ public class CustomerHomeController {
 		return Service.getListByAllWithFK();
 	}
 	
-//	//取得所有房间列表,有外键，无分页
-//	@GetMapping(value="/livingstatus")
-//	public List<CustomerHome> getlivingstatus() throws Exception{
-//		return Service.getLivingStatus();
-//	}
+	//取得所有房间列表,有外键，无分页
+	@GetMapping(value="/livingstatus")
+	public List<CustomerHome> getlivingstatus() throws Exception{
+		return Service.getLivingStatus();
+	}
 	
 	
 	

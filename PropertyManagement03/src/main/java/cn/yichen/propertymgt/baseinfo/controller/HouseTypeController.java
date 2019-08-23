@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,19 +33,19 @@ public class HouseTypeController {
 	private IHouseTypeService service;
 	
 	//增加户型
-	@GetMapping(value="/add")
+	@PostMapping(value="/add")
 	public ResultMessage<HouseType> add(HouseType h) throws Exception {
 		service.add(h);
 		return new ResultMessage<HouseType>("OK","增加户型成功");
 	}
 	//修改户型
-	@GetMapping(value="/modify")
+	@PostMapping(value="/modify")
 	public ResultMessage<HouseType> update(HouseType h) throws Exception {
 		service.modify(h);
 		return new ResultMessage<HouseType>("OK","修改户型成功");
 	}
 	//删除户型
-	@GetMapping(value="/delete")
+	@PostMapping(value="/delete")
 	public ResultMessage<HouseType> delete(HouseType h) throws Exception {
 		service.delete(h);
 		return new ResultMessage<HouseType>("OK","删除户型成功");

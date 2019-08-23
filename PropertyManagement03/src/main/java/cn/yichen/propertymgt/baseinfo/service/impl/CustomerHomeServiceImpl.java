@@ -76,11 +76,11 @@ public class CustomerHomeServiceImpl implements ICustomerHomeService {
 		return pageCount;
 	}
 
-//	@Override
-//	public List<CustomerHome> getLivingStatus() throws Exception {
-//		return mapper.selectlivingStatus();
-//	}
-//
+	@Override
+	public List<CustomerHome> getLivingStatus() throws Exception {
+		return mapper.selectlivingStatus();
+	}
+
 //	@Override
 //	public void modifyStatus(CustomerHome ch) throws Exception {
 //		mapper.modifyStatus(ch);
