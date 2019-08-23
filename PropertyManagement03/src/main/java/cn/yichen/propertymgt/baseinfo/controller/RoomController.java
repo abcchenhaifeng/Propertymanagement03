@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,25 +32,25 @@ public class RoomController {
 	private IRoomService Service=null;
 	
 	//增加房间
-	@GetMapping("/add")
+	@PostMapping("/add")
 	public ResultMessage<Room> add(Room room) throws Exception {
 		Service.add(room);
 		return new ResultMessage<Room>("OK","增加房间成功");
 	}
 	//修改房间
-	@GetMapping("/modify")
+	@PostMapping("/modify")
 	public ResultMessage<Room> modify(Room room) throws Exception {
 		Service.modify(room);
 		return new ResultMessage<Room>("OK","修改房间成功");
 	}
 	//删除房间
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	public ResultMessage<Room> delete(Room room) throws Exception {
 		Service.delete(room);
 		return new ResultMessage<Room>("OK","删除房间成功");
 	}
 	//取得指定的房间
-	@GetMapping("/get")
+	@PostMapping("/get")
 	public Room getByCustomerNo(int roomno) throws Exception{
 		return Service.getByRoomNo(roomno);
 	}
