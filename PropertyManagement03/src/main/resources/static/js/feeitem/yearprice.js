@@ -117,7 +117,7 @@ $(function() {
 		// 删除
 		} else {
 			if ( selectRow_feeyear == null ) {
-				jqueryEject.Etoast('请选择一个功能',1);
+				jqueryEject.Etoast('请选择一个年度项目',1);
 			} else {
 				jqueryEject.Econfirm({
 					title: '删除',

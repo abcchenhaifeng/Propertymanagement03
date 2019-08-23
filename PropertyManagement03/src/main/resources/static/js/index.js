@@ -15,10 +15,11 @@ $(() => {
 
 	checkLogin();
 	login_user = JSON.parse(sessionStorage.getItem("user"));
+	
+	$("#login_username").text(login_user.username);
 
 	$(".menu_column a.link").on("click", function(e) {
 		url_method = $(this).attr("method");
-		
 		var url = $(this).attr("href");
 		
 		if(/([lL]ist)|([mM]ain)\w*.html$/.test(url)) {
@@ -43,6 +44,37 @@ $(() => {
 
 		e.preventDefault();
 	});
+	
+	// 我的详情
+	$(".dropdown-menu a#icn_user_profile").on("click", function(e) {
+		var url = $(this).attr("href");
+		url_method = "my_details";
+		e.preventDefault();
+		
+		$("section#main #dialog").load(url, () => {
+			selectRow_id = null;
+			dialogArea = $("section#main #dialog");
+			dialogArea.dialog({
+				title: $(this).attr("title"),
+				width: "80%",
+				maxWidth: "845px",
+				close: function(event, ui) {
+					doSomethingWhenDialogClose();
+					dialogArea.dialog("destroy");
+					dialogArea.html("");
+					doSomethingWhenDialogClose = function () {};
+				}
+			});
+		});
+	});
+	
+	// 退出
+	$(".dropdown-menu a#user_logout").on("click", function(e) {
+		sessionStorage.removeItem("u-key")
+		sessionStorage.removeItem("user");
+		location.href = "login.html";
+	});
+	
 	
 	// 检查是否登录
 	function checkLogin () {
