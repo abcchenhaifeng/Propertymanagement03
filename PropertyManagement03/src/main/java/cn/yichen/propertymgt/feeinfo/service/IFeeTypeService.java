@@ -3,6 +3,7 @@ package cn.yichen.propertymgt.feeinfo.service;
 import java.util.List;
 
 import cn.yichen.propertymgt.feeinfo.model.FeeType;
+import cn.yichen.propertymgt.vo.ResultMessage;
 
 /**
  * 
@@ -36,4 +37,8 @@ public interface IFeeTypeService {
 	// 获取个数
 	public int getCountByCriteria(FeeType feeType) throws Exception;
 	public int getCountByCriteriaWithPage(FeeType feeType, int page, int rows) throws Exception;
+
+	ResultMessage<FeeType> listWhitApi(FeeType feeType) throws Exception;
+
+	ResultMessage<FeeType> listByPageWhitApi(FeeType feeType) throws Exception;
 }

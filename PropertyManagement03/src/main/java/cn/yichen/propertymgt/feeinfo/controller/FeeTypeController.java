@@ -34,11 +34,11 @@ public class FeeTypeController {
 	
 	@RequestMapping("/list")
 	public ResultMessage<FeeType> list(FeeType feeType) throws Exception {
-		ResultMessage<FeeType> rs = new ResultMessage<>("OK", "取得收费类型列表");
-		List<FeeType> list = service.getListByCriteria(feeType);
-		rs.setList(list);
-		rs.setCount(list.size());
-		return rs;
+//		ResultMessage<FeeType> rs = new ResultMessage<>("OK", "取得收费类型列表");
+//		List<FeeType> list = service.getListByCriteria(feeType);
+//		rs.setList(list);
+//		rs.setCount(list.size());
+		return service.listWhitApi(feeType);
 	}
 	
 	@RequestMapping("/list/page")
@@ -46,14 +46,15 @@ public class FeeTypeController {
 			@RequestParam(required = false, defaultValue = "1") int page, 
 			@RequestParam(required = false, defaultValue = "10") int rows) throws Exception {
 		
-		ResultMessage<FeeType> rs = new ResultMessage<>("OK", "取得收费类型列表");
-		rs.setList(service.getListByCriteriaWithPage(feeType, page, rows));
-		int count = service.getCountByCriteria(feeType);
-		rs.setCount(count);
-		rs.setPage(page);
-		rs.setRows(rows);
-		rs.setPageCount(count % rows == 0 ? count/rows : count/rows + 1);
-		return rs;
+//		ResultMessage<FeeType> rs = new ResultMessage<>("OK", "取得收费类型列表");
+//		rs.setList(service.getListByCriteriaWithPage(feeType, page, rows));
+//		int count = service.getCountByCriteria(feeType);
+//		rs.setCount(count);
+//		rs.setPage(page);
+//		rs.setRows(rows);
+//		rs.setPageCount(count % rows == 0 ? count/rows : count/rows + 1);
+		
+		return service.listByPageWhitApi(feeType);
 	}
 	
 	@RequestMapping("/add")
