@@ -14,7 +14,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("Building")
 public class Building implements Serializable {
 	
-	private int no=0; //序号
+	private Integer no=0; //序号
 	private Area area=null; //小区序号
 	private String code=null; //楼号
 	private String address=null; //楼宇地址

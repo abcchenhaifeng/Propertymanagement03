@@ -113,6 +113,18 @@ public class BuildingController {
 	public Building getByNo(int no) throws Exception{
 		return service.getByNo(no);
 	}
+	
+	//取得所有楼宇地址
+	@GetMapping("/get/bulingtypeno")
+	public List<Building> getListAllWithbulingtypeno() throws Exception{
+		return service.getListOnlyWithBuildingType();
+	}
+	
+	//取得所有楼宇地址
+	@GetMapping("/get/address")
+	public List<Building> getListAllWithaddress() throws Exception{
+		return service.getListOnlyWithAddress();
+	}
 //	
 //	@Param("areano") int areano,@Param("baddress") String baddress,
 //	@Param("buildingtypeno") int buildingtypeno,@Param("minhouse") int minhouse,@Param("maxhouse") int maxhouse, 
@@ -122,7 +134,7 @@ public class BuildingController {
 	public ResultMessage<Building> getListByConditionWithPage(
 			@RequestParam(required = false,defaultValue ="0") int areano,@RequestParam(required = false,defaultValue ="") String baddress,
 			@RequestParam(required = false,defaultValue ="0") int buildingtypeno,@RequestParam(required = false,defaultValue ="0") int minhouse,@RequestParam(required = false,defaultValue ="0") int maxhouse, 
-			@RequestParam(required = false,defaultValue ="0") int rows,@RequestParam(required = false,defaultValue ="0") int page) throws Exception {
+			@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue ="1") int page) throws Exception {
 	
 		ResultMessage<Building> result=new ResultMessage<Building>("OK","取得楼宇列表分页成功");
 		result.setCount(service.getCountByCondition(areano, baddress, buildingtypeno, minhouse, maxhouse));

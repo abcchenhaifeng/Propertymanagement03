@@ -132,4 +132,14 @@ public class BuildingServiceImpl implements IBuildingService {
 		return pageCount;
 	}
 
+	@Override
+	public List<Building> getListOnlyWithAddress() throws Exception {
+		return mapper.selectListAllOnlyWithAddress();
+	}
+
+	@Override
+	public List<Building> getListOnlyWithBuildingType() throws Exception {
+		return mapper.selectListAllOnlyWithBuildingType();
+	}
+
 }

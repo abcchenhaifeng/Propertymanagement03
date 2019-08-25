@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+
+import cn.yichen.propertymgt.baseinfo.model.Building;
 import cn.yichen.propertymgt.baseinfo.model.BuildingType;
 
 /**
@@ -32,5 +34,12 @@ public interface IBuildingTypeMapper {
 	public List<BuildingType> selectListByAllWithPage(@Param("start") int start,@Param("rows") int rows) throws Exception;
 	//取得类型个数
 	public int selectCountByAll() throws Exception;
+	
+	//根据综合检索条件取得楼宇类型列表
+	public List<BuildingType> selectListByConditionWithPage(
+			@Param("typeno") int typeno,@Param("start") int start,@Param("rows") int rows) throws Exception;
+	
+	//根据综合检索条件取得不同楼宇类型个数
+	public int selectCountByCondition(int typeno) throws Exception;
 
 }

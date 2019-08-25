@@ -42,12 +42,26 @@
 	  select IFNULL(count(TYPENO), 0) from BuildingType
 	 </select>
 
-
-
-
-
-
-
+	 <!-- 根据综合检索条件取得楼宇类型列表 -->
+  <select id="selectListByConditionWithPage" resultMap="BuildingTypeMap">
+   select * from BuildingType
+  <where>
+     <if test="typeno!=null and typeno!='' and typeno!=0">
+      and TYPENO =#{typeno}
+     </if>
+  </where>
+    limit #{start},#{rows}
+  </select>
+  
+  <!-- 根据综合检索条件取得不同楼宇类型个数 -->
+  <select id="selectCountByCondition" resultType="int">
+  select IFNULL(count(TYPENO), 0) from BuildingType
+  <where>
+    <if test="typeno!=0">
+      and TYPENO =#{typeno}
+     </if>
+  </where>
+  </select>
 
 
 </mapper>

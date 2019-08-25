@@ -37,6 +37,14 @@ public interface IBuildingService {
 	public int getCountByAll() throws Exception;
 	//取得楼宇页数
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	//取得指定建筑类型的楼宇列表,参数:buildTypeNo 
+	public List<Building> getListOnlyWithAddress() throws Exception;
+	
+	//取得指定建筑类型的楼宇列表,参数:buildTypeNo 
+	public List<Building> getListOnlyWithBuildingType() throws Exception;
+	
+	
 	//根据综合检索条件取得楼宇列表
 	public List<Building> getListByConditionWithPage(int areano,String baddress,int buildingtypeno,int minhouse,int maxhouse,int rows,int page) throws Exception;
 	

@@ -13,13 +13,13 @@ $(function(){
 	//设置系统页面标题
 	$("span#maintille").html("&emsp;楼宇信息管理");
 	$.jgrid.defaults.styleUI="Bootstrap";
-	//显示客户列表
+	//显示楼宇列表
 	$("table#BuildingGrid").jqGrid({
 		url: host+'building/list/condition/page',
 		//url: host+'building/list/all/withareaandbuildtype',
 		datatype: "json",
 		colModel: [
-			{ label: '楼号', name: 'no', width: 40,align:"center" },
+			{ label: '楼号', name: 'code', width: 40,align:"center" },
 			{ label: '小区号', name: 'area.no', width: 40,align:"center" },
 			{ label: '楼宇地址', name: 'address', width: 80,align:"center" },
 			{ label: '建筑物类型编号', name: 'buildingtype.typeno', width: 100,align:"center" },
@@ -58,7 +58,7 @@ $(function(){
 	});
 	
 	//取得楼宇地址类型列表，填充类型下拉框
-	$.getJSON(host+"building/list/all/withareaandbuildtype",function(btypeList){
+	$.getJSON(host+"building/get/address",function(btypeList){
 		if(btypeList){
 			$.each(btypeList,function(index,btypeno){
 				$("select#BuildingSelection").append("<option value='"+btypeno.address+"'>"+btypeno.address+"</option>");
@@ -67,10 +67,10 @@ $(function(){
 	});
 	
 	//取得楼宇编号列表，填充类型下拉框
-	$.getJSON(host+"building/list/all/withareaandbuildtype",function(btypeList){
+	$.getJSON(host+"building/get/bulingtypeno",function(btypeList){
 		if(btypeList){
 			$.each(btypeList,function(index,btypeno){
-				$("select#BuildingNoSelection").append("<option value='"+btypeno.no+"'>"+btypeno.no+"</option>");
+				$("select#BuildingNoSelection").append("<option value='"+btypeno.buildingtype.typeno+"'>"+btypeno.buildingtype.typeno+"</option>");
 			});
 		}
 	});
@@ -83,29 +83,7 @@ $(function(){
 		
 	}
 	
-//	//定义类型的更新事件的处理
-//	$("select#typeno").off().on("change",function(){
-//		typeno=$("select#typeno").val();
-//		
-//		CustomerName=$("input[name='CustomerName']").val();
-//		
-//		feeStartDate=$("input#feeStartDate").val();
-//
-//		feeEndDate=$("input#feeEndDate").val();
-//		
-//		if(CustomerName==""){
-//			CustomerName=null;
-//		}
-//		
-//		if(feeStartDate==""){
-//			feeStartDate=null;
-//		}
-//		if(feeEndDate==""){
-//			feeEndDate=null;
-//		}
-//		reloadCustomerList();
-//	});
-//	
+
 	//定义小区类型输入更改事件
 	$("select#AreaSelection").off().on("change",function(){
 		areano=$("select#AreaSelection").val();
@@ -138,215 +116,210 @@ $(function(){
 	});
 
 
-//	//===========================增加员工处理================================================
-//	$("a#CustomerAddLink").off().on("click",function(){
-//		$("div#CustomerDialog").load("customer/add.html",function(){
-//			//验证员工提交数据
-//			$("form#CustomerAddForm").validate({
-//				  rules: {
-//				  cname:{
-//				    	required: true,
-//				    	remote: host+"customer/checkidexist"
-//				        },
-//				  contact:{
-//					  required:true,
+	//===========================增加楼宇处理================================================
+	$("a#BuildingAddLink").off().on("click",function(){
+		$("div#BuildingDialog").load("building/add.html",function(){	
+			//验证员工提交数据
+			$("form#BuildingAddForm").validate({
+				  rules: {
+					 code:{
+				    	required: true,
+				    	//remote: host+"customer/checkidexist"
+				        },
+//				     area.no:{
+//					    required:true,
 //				          },
-//				  mobile:{
-//				    	required:true,
-//				    	mobile:true			    	
-//				         },
-//				  cardcode:{
-//					  required:true,
-//					  card:true
+				     address:{
+				    	required:true,
+				    	//mobile:true			    	
+				         },
+//				    buildingtype.typeno:{
+//					    required:true,
+//					  //card:true
 //				            },
-//				  feeStartDate:{
-//					  required:true,
-//				                },
-//				  feeEndDate:{
-//					  required:true, 
-//				             },
-//				  cstatus:{
-//					  required:true,
-//				          }       
-//				  },
-//				  
-//				  messages:{
-//					cname:{
-//					      required: "请输入姓名",
-//					      remote:"该客户信息已经存进"
-//					    },
-//					    contact:{
-//					       required: "请输入联系人姓名"		   
-//					    },	    
-//						
-//						cardcode:{
-//							required: "请输入身份证号码"  
-//			            },
-//			            feeStartDate:{
-//			            	required: "请输入收费开始日期"    
+				    home:{
+					    required:true, 
+				             },
+				    house:{
+					   required:true,
+				          }       
+				  },
+				  
+				  messages:{
+					  code:{
+					      required: "请输入楼宇编码",
+					     //remote:"该客户信息已经存进"
+					    },
+//					    area.no:{
+//					       required: "请输入小区号"		   
+//					    },	    	
+					    address:{
+							required: "请输入地址"  
+			            },
+//			            buildingtype.typeno:{
+//			            	required: "请输入楼宇类型号"    
 //		                },
-//						feeEndDate:{
-//							required: "请输入收费截止日期"  	  
-//						},
-//						cstatus:{
-//							required: "请输入当前客户状态"    
-//						} 
-//				 }
-//				  
-//			});
-//			
-//			//拦截增加提交表单
-//			$("form#CustomerAddForm").ajaxForm(function(result){
-//				if(result.status=="OK"){
-//					reloadCustomerList();//更新员工列表
-//				}
-//				$("div#CustomerDialog").dialog( "close" );
-//				$("div#CustomerDialog").dialog( "destroy" );
-//				$("div#CustomerDialog").html("");
-//				
-//			});
-//			$("div#CustomerDialog").dialog({
-//				title:"客户增加",
-//				width:950
-//			});
-//			//点击取消按钮，管理弹出窗口
-//			$("input[value='取消']").off().on("click",function(){
-//				$("div#CustomerDialog").dialog("close");
-//				$("div#CustomerDialog").dialog("destroy")
-//				$("div#CustomerDialog").html("");
-//			});
-//			
-//		});
-//	});
-//	
-//	
-//	//================================查看员工处理=============================================================
-//	$("a#CustomerViewLink").off().on("click",function(){
-//		if(CustomerId==null){
-//			jqueryEject.Econfirm({
-//				title: '客户信息',
-//				message: '请选择要查看的客户',
-//				define: function() {
-//					setMessage(message, 5000);
-//				},
-//				cancel: function() {}
-//			});			
-//		}
-//		else{
-//			$("div#CustomerDialog").load("customer/view.html",function(){
-//				//取得指定的员工信息
-//				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
-//					setMessage("查看详细", 5000);
-//					if(em){
-//						$("input#id").val(em.customerNo);
-//						$("input#cname").val(em.cname);
-//						$("input#contact").val(em.contact);
-//						$("input#cardcode").val(em.cardcode);
-//						$("input#mobile").val(em.mobile);
-//						$("input#feeStartDate").val(em.feeStartDate);
-//						$("input#feeEndDate").val(em.feeEndDate);
-//						$("input#cstatus").val(em.cstatus);
-//	
-//					}
-//				});
-//				
-//				
-//				$("div#CustomerDialog").dialog({
-//					title:"客户详细",
-//					width:800
-//				});
-//				//点击取消按钮，管理弹出窗口
-//				$("input[value='关闭']").off().on("click",function(){
-//					$("div#CustomerDialog").dialog("close");
-//					$("div#CustomerDialog").dialog("destroy")
-//					$("div#CustomerDialog").html("");
-//				});
-//			});
-//		}
-//	});
-//	//===============================修改员工处理===============================================================
-//	$("a#CustomerModifyLink").off().on("click",function(){
-//		if(CustomerId==null){	
-//			jqueryEject.Econfirm({
-//				title: '客户信息',
-//				message: '请选择要修改的客户',
-//				define: function() {
-//				setMessage(message, 5000);
-//				},
-//				cancel: function() {}
-//			});
-//		}
-//		else{
-//			$("div#CustomerDialog").load("customer/modify.html",function(){
-//				//取得指定的员工信息
-//				$.getJSON(host+"/customer/get",{no:CustomerId},function(em){
-//					if(em){
-//						
-//						$("input[name='customertype.typeno']").val(em.customertype.typeno);
-//						$("input[name='cname']").val(em.cname);
-//						$("input[name='contact']").val(em.contact);
-//						$("input[name='cardcode']").val(em.cardcode);
-//						$("input[name='mobile']").val(em.mobile);
-//						$("input[name='feeStartDate']").val(em.feeStartDate);
-//						$("input[name='feeEndDate']").val(em.feeEndDate);
-//						$("select[name='cstatus']").val(em.cstatus);
-//						$("input[name='customerNo']").val(CustomerId);
-//	
-//					}
-//				});
-//				//拦截修改提交表单
-//				$("form#CustomerModifyForm").ajaxForm(function(result){
-//					if(result.status=="OK"){
-//						setMessage("添加成功", 5000);
-//						reloadCustomerList();//更新客户列表
-//					}
-//					
-//					$("div#CustomerDialog").dialog( "close" );
-//					$("div#CustomerDialog").dialog( "destroy" );
-//					$("div#CustomerDialog").html("");
-//					
-//				});
-//				$("div#CustomerDialog").dialog({
-//					title:"客户修改",
-//					width:800
-//				});
-//				//点击取消按钮，管理弹出窗口
-//				$("input[value='取消']").off().on("click",function(){
-//					$("div#CustomerDialog").dialog("close");
-//					$("div#CustomerDialog").dialog("destroy")
-//					$("div#CustomerDialog").html("");
-//				});
-//				
-//				
-//			});
-//		}
-//	});	
-//	
-//	//===============================删除员工处理==============================================================
-//	//点击删除按钮事件处理
-//	$("a#CustomerDeleteLink").off().on("click",function(event){
-//		
-//		if(CustomerId==null){
-//			jqueryEject.Econfirm({
-//			title: '删除',
-//			message: '请选择要删除的客户',
-//			define: function() {
-//				setMessage(message, 5000);
-//			},
-//			cancel: function() {}
-//		});
-//		}
-//		else {
-//                $.post(host+"customer/delete",{customerNo:CustomerId},function(result){
-//                	if(result.status=="OK"){
-//                		setMessage("删除成功", 5000);
-//                		reloadCustomerList();//更新客户列表
-//					}
-//					
-//                });
-//		}
-//		
-//	});
+		                home:{
+							required: "请输入居民数",
+							min:0
+						},
+						house:{
+							required: "请输入公建数",
+							min:0
+						} 
+				 }
+				  
+			});
+			//拦截增加提交表单
+			$("form#BuildingAddForm").ajaxForm(function(result){
+				alert(result.status);
+				if(result.status=="OK"){
+					reloadBuildingList();//更新楼宇列表
+				}
+				$("div#BuildingDialog").dialog( "close" );
+				$("div#BuildingDialog").dialog( "destroy" );
+				$("div#BuildingDialog").html("");
+				
+			});
+			$("div#BuildingDialog").dialog({
+				title:"楼宇增加",
+				width:950
+			});
+			//点击取消按钮，管理弹出窗口
+			$("input[value='取消']").off().on("click",function(){
+				$("div#BuildingDialog").dialog("close");
+				$("div#BuildingDialog").dialog("destroy")
+				$("div#BuildingDialog").html("");
+			});
+			
+		});
+	});
+	
+	
+//	================================查看楼宇处理=============================================================
+	$("a#BuildingViewLink").off().on("click",function(){
+		if(buildingno==null){
+			jqueryEject.Econfirm({
+				title: '楼宇信息',
+				message: '请选择要查看的楼宇',
+				define: function() {
+					setMessage(message, 5000);
+				},
+				cancel: function() {}
+			});			
+		}
+		else{
+			$("div#BuildingDialog").load("building/view.html",function(){
+				//取得指定的楼宇信息
+				$.getJSON(host+"/building/get",{no:buildingno},function(em){
+					setMessage("查看详细", 5000);
+					if(em){
+						$("input[name='code']").val(em.code);
+						$("input[name='area.no']").val(em.area.no);
+						$("input[name='no']").val(em.no);
+						$("input[name='address']").val(em.address);
+						$("input[name='buildingtype.typeno']").val(em.buildingtype.typeno);
+						$("input[name='direction']").val(em.direction);
+						$("input[name='home']").val(em.home);
+						$("input[name='house']").val(em.house);
+					}
+				});
+				
+				
+				$("div#BuildingDialog").dialog({
+					title:"楼宇详细",
+					width:800
+				});
+				//点击取消按钮，管理弹出窗口
+				$("input[value='关闭']").off().on("click",function(){
+					$("div#BuildingDialog").dialog("close");
+					$("div#BuildingDialog").dialog("destroy")
+					$("div#BuildingDialog").html("");
+				});
+			});
+		}
+	});
+	//===============================修改楼宇处理===============================================================
+	$("a#BuildingModifyLink").off().on("click",function(){
+		alert(buildingno);
+		if(buildingno==null){	
+			jqueryEject.Econfirm({
+				title: '楼宇信息',
+				message: '请选择要修改的楼宇',
+				define: function() {
+				setMessage(message, 5000);
+				},
+				cancel: function() {}
+			});
+		}
+		else{
+			$("div#BuildingDialog").load("building/modify.html",function(){
+				//取得指定的楼宇信息
+				$.getJSON(host+"/building/get",{no:buildingno},function(em){
+					if(em){	
+						$("input[name='code']").val(em.code);
+						$("input[name='no']").val(em.no);
+						$("input[name='area.no']").val(em.area.no);
+						$("input[name='address']").val(em.address);
+						$("input[name='buildingtype.typeno']").val(em.buildingtype.typeno);
+						$("input[name='direction']").val(em.direction);
+						$("input[name='home']").val(em.home);
+						$("input[name='house']").val(em.house);
+					}
+				});
+				//拦截修改提交表单
+				$("form#BuildingModifyForm").ajaxForm(function(result){
+					if(result.status=="OK"){
+						setMessage("添加成功", 5000);
+						reloadBuildingList();//更新楼宇列表
+					}
+					
+					$("div#BuildingDialog").dialog( "close" );
+					$("div#BuildingDialog").dialog( "destroy" );
+					$("div#BuildingDialog").html("");
+					
+				});
+				$("div#BuildingDialog").dialog({
+					title:"楼宇修改",
+					width:800
+				});
+				//点击取消按钮，管理弹出窗口
+				$("input[value='取消']").off().on("click",function(){
+					$("div#BuildingDialog").dialog("close");
+					$("div#BuildingDialog").dialog("destroy")
+					$("div#BuildingDialog").html("");
+				});
+				
+				
+			});
+		}
+	});	
+	
+	//===============================删除楼宇处理==============================================================
+	//点击删除按钮事件处理
+	$("a#BuildingDeleteLink").off().on("click",function(event){
+		
+		if(buildingno==null){
+			jqueryEject.Econfirm({
+			title: '删除',
+			message: '请选择要删除的楼宇',
+			define: function() {
+				setMessage(message, 5000);
+			},
+			cancel: function() {}
+		});
+		}
+		else {
+                $.post(host+"building/delete",{no:buildingno},function(result){
+                	if(result.status=="OK"){
+                		setMessage("删除成功", 5000);
+                		reloadBuildingList();//更新楼宇列表
+					}
+					
+                });
+		}
+		
+	});
 });
 	
 	

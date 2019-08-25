@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.yichen.propertymgt.baseinfo.model.Building;
 import cn.yichen.propertymgt.baseinfo.model.BuildingType;
 import cn.yichen.propertymgt.baseinfo.service.IBuildingTypeService;
 import cn.yichen.propertymgt.vo.ResultMessage;
@@ -65,5 +66,20 @@ public class BuildingTypeController {
 	@GetMapping("/get")
 	public BuildingType getBuildTypeByNo(int typeno) throws Exception{
 		return service.getBuildTypeByNo(typeno);
+	}
+	
+	//按检索条件取得小区列表
+	@GetMapping(value="/list/condition/page")
+	public ResultMessage<BuildingType> getListByConditionWithPage(
+			@RequestParam(required = false,defaultValue ="0") int typeno,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue ="1") int page) throws Exception {
+	
+		ResultMessage<BuildingType> result=new ResultMessage<BuildingType>("OK","取得楼宇列表分页成功");
+		result.setCount(service.getCountByCondition(typeno));
+		result.setPageCount(service.getPageCountByConditionWithPage(typeno, rows));
+		result.setList(service.getListByConditionWithPage(typeno, rows, page));
+		result.setPage(page);
+		result.setRows(rows);
+		
+		return result;
 	}
 }

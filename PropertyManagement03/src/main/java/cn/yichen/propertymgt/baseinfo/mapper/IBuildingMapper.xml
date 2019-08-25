@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="cn.yichen.propertymgt.baseinfo.mapper.IBuildingMapper">
 	
-	<cache />
+<!-- 	<cache /> -->
 	
 	<resultMap id="BuildingMap" type="building">
 		<id property="no" column="BuildingNo" />
@@ -18,12 +18,12 @@
 	 <!-- 增加楼宇 -->
   <insert id="create" keyProperty="no" keyColumn="BuildingNo" useGeneratedKeys="true" flushCache="true">
   	insert into Building (AreaNo,BCODE,BAddress,BuildingTypeNo,Direction,TotalHome,TotalHouse) 
-  	values (#{area.no},#{code},#{address},#{buildingtype.no},#{direction},#{home},#{house})
+  	values (#{area.no},#{code},#{address},#{buildingtype.typeno},#{direction},#{home},#{house})
   </insert>
   
   <!-- 修改楼宇 -->
   <update id="update" flushCache="true">
-  	update Building set AreaNo=#{area.no},BCODE=#{code},BAddress=#{address},BuildingTypeNo=#{buildingtype.no},
+  	update Building set AreaNo=#{area.no},BCODE=#{code},BAddress=#{address},BuildingTypeNo=#{buildingtype.typeno},
   	Direction=#{direction},TotalHome=#{home},TotalHouse=#{house} where BuildingNo=#{no} 
   </update>
   
@@ -94,6 +94,16 @@
   <select id="selectByNo" resultMap="BuildingMapWithAreaAndBuildingType" >
   	select a.*,b.*,c.* from Building a inner join Area b on a.AreaNo=b.AREANO 
   	inner join BuildingType c on a.BuildingTypeNo=c.TYPENO where BuildingNo=#{no} 	
+  </select>
+  
+  <!-- 取得所有非重复的楼宇地址 -->
+  <select id="selectListAllOnlyWithAddress" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select distinct(BAddress) from Building
+  </select>
+  
+  <!-- 取得所有非重复的楼宇类型号 -->
+  <select id="selectListAllOnlyWithBuildingType" resultMap="BuildingMapWithAreaAndBuildingType" >
+  	select distinct(b.TypeNo) from Building a,BuildingType b where a.BuildingTypeNo=b.TypeNo
   </select>
   
   <!-- 取得楼宇的个数，使用IFNULL函数判断count函数结果是否为null, 为null返回0 -->

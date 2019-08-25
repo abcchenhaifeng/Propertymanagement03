@@ -45,6 +45,16 @@ public interface IBuildingMapper {
 	public List<Building> selectListByAllWithPage(@Param("start") int start,@Param("rows") int rows) throws Exception;
 	//取得楼宇的个数
 	public int selectCountByAll() throws Exception;
+	
+	//取得所有非重复的楼宇地址
+	public List<Building> selectListAllOnlyWithAddress() throws Exception;
+	
+	//取得所有非重复的楼宇类型号
+	public List<Building> selectListAllOnlyWithBuildingType() throws Exception;
+	
+	//修改时取得未载入的楼宇型号
+	public List<Building> selectListAllWithNewBuildingType(int buildTypeNo) throws Exception;
+	
 	//根据综合检索条件取得楼宇列表
 	public List<Building> selectListByConditionWithPage(
 			@Param("areano") int areano,@Param("baddress") String baddress,

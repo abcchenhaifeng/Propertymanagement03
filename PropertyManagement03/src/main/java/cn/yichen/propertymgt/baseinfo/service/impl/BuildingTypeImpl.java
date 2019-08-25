@@ -72,4 +72,27 @@ public class BuildingTypeImpl implements IBuildingTypeService {
 		return pageCount;
 	}
 
+	@Override
+	public List<BuildingType> getListByConditionWithPage(int typeno, int rows, int page) throws Exception {
+		return mapper.selectListByConditionWithPage(typeno, rows*(page-1), rows);
+	}
+
+	@Override
+	public int getCountByCondition(int typeno) throws Exception {
+		return mapper.selectCountByCondition(typeno);
+	}
+
+	@Override
+	public int getPageCountByConditionWithPage(int typeno, int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountByCondition(typeno);
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+
 }

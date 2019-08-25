@@ -2,6 +2,7 @@ package cn.yichen.propertymgt.baseinfo.service;
 
 import java.util.List;
 
+import cn.yichen.propertymgt.baseinfo.model.Building;
 import cn.yichen.propertymgt.baseinfo.model.BuildingType;
 
 /**
@@ -28,5 +29,14 @@ public interface IBuildingTypeService {
 	public int getCountByAll() throws Exception;
 	//取得建筑类型页数
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	//根据综合检索条件取得楼宇列表
+	public List<BuildingType> getListByConditionWithPage(int typeno,int rows,int page) throws Exception;
+	
+	//根据综合检索条件取得楼宇个数
+	public int getCountByCondition(int typeno) throws Exception;
+	
+	//根据综合检索条件取得楼宇显示的页数
+	public int getPageCountByConditionWithPage(int typeno,int rows) throws Exception;
 	
 }
