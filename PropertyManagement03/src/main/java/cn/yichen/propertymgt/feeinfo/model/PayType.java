@@ -6,55 +6,37 @@ import java.math.BigDecimal;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 2019年8月7日23:34:05
+ * 
+ * @date 2019年8月27日 下午2:33:07
  * @author YiChen(李冠永)
- * #付款类型
+ * @Description 付款类型
  *
  */
 @Alias("PayType")
 public class PayType implements Serializable {
-    private Integer typeno;
+	private Integer typeno;
 
-    private String typename;
+	private String typename;
 
-    private Double payfee;
+	public Integer getTypeno() {
+		return typeno;
+	}
 
-    private String payto;
+	public void setTypeno(Integer typeno) {
+		this.typeno = typeno;
+	}
 
-    public Integer getTypeno() {
-        return typeno;
-    }
+	public String getTypename() {
+		return typename;
+	}
 
-    public void setTypeno(Integer typeno) {
-        this.typeno = typeno;
-    }
-
-    public String getTypename() {
-        return typename;
-    }
-
-    public void setTypename(String typename) {
-        this.typename = typename == null ? null : typename.trim();
-    }
-
-    public Double getPayfee() {
-        return payfee;
-    }
-
-    public void setPayfee(Double payfee) {
-        this.payfee = payfee;
-    }
-
-    public String getPayto() {
-        return payto;
-    }
-
-    public void setPayto(String payto) {
-        this.payto = payto == null ? null : payto.trim();
-    }
+	public void setTypename(String typename) {
+		this.typename = typename;
+	}
 
 	@Override
 	public String toString() {
-		return "Paytype [typeno=" + typeno + ", typename=" + typename + ", payfee=" + payfee + ", payto=" + payto + "]";
+		return "PayType [typeno=" + typeno + ", typename=" + typename + "]";
 	}
+
 }

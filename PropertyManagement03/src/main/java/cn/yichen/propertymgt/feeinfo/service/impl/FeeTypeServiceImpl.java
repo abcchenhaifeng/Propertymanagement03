@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -40,7 +39,7 @@ public class FeeTypeServiceImpl implements IFeeTypeService {
 	}
 	
 	@Override
-//	@HystrixCommand(fallbackMethod = "getlistByPageError")
+	@HystrixCommand(fallbackMethod = "getlistByPageError")
 	public ResultMessage<FeeType> listByPageWhitApi(FeeType feeType) throws Exception {
 		StringBuffer url = new StringBuffer("http://propertyfeemgtclient/feetype/list/page?"+new Date().getTime());
 		Map<String, Object> params = new HashMap<>();

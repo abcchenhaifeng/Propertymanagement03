@@ -26,7 +26,7 @@
 
 	<sql id="userInfoWhen">
 		<if test="userInfo != null">
-			<if test="userInfo.id != null"> and USERID = #{userInfo.id} </if>
+			<if test="userInfo.id != null"> and USERID like '%${userInfo.id}%' </if>
 			<!-- <if test="userInfo.password != null"> and UPASSWORD = #{userInfo.password} 
 				</if> -->
 			<if test="userInfo.username != null"> and UNAME like '%${userInfo.username}%' </if>

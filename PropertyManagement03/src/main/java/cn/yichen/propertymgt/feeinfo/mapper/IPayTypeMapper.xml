@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yichen.propertymgt.feeinfo.mapper.IPayTypeMapper">
+
+	<cache/>
+	
+	<resultMap type="PayType" id="PayTypeMap">
+		<id column="TYPENO" property="typeno"/>
+		<result column="TYPENAME" property="typename"/>
+	</resultMap>
+	
+	<sql id="PayTypeWhen">
+		<if test="payType != null">
+			<if test="payType.typeno != null">and pt.TYPENO = #{payType.typeno}</if>
+			<if test="payType.typename != null">and pt.TYPENAME like '%${payType.typename}%'</if>
+		</if>
+	</sql>
+	
+	<insert id="create" flushCache="true">
+		insert into PayType(TYPENAME) values(#{typename})
+	</insert>
+	
+	<delete id="delete" flushCache="true">
+		delete from PayType where TYPENO = #{no}
+	</delete>
+	
+	<update id="update" flushCache="true">
+		update PayType set TYPENAME = #{typename} where TYPENO = #{typeno}
+	</update>
+	
+	<select id="selectByNo" resultMap="PayTypeMap">
+		select pt.TYPENO, pt.TYPENAME from PayType pt where pt.TYPENO = #{no}
+	</select>
+	
+	<select id="selectListByCriteria" resultMap="PayTypeMap">
+		select pt.TYPENO, pt.TYPENAME from PayType pt 
+		<where>
+			<include refid="PayTypeWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectListByCriteriaWithPage" resultMap="PayTypeMap">
+		select pt.TYPENO, pt.TYPENAME from PayType pt 
+		<where>
+			<include refid="PayTypeWhen"></include>
+			and pt.TYPENO >= (select TYPENO from PayType ORDER BY TYPENO LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteria" resultType="int">
+		select IFNULL(count(pt.TYPENO), 0) from PayType pt
+		<where>
+			<include refid="PayTypeWhen"></include>
+		</where>
+	</select>
+	
+	<select id="selectCountByCriteriaAndPage" resultType="int">
+		select IFNULL(count(pt.TYPENO), 0) from PayType pt
+		<where>
+			<include refid="PayTypeWhen"></include>
+			and pt.TYPENO >= (select TYPENO from PayType ORDER BY TYPENO LIMIT
+			#{start}, 1) LIMIT #{rows}
+		</where>
+	</select>
+
+</mapper>
