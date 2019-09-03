@@ -13,8 +13,8 @@ var doSomethingWhenDialogClose = function () {};
 
 $(() => {
 
-	checkLogin();
-	login_user = JSON.parse(sessionStorage.getItem("user"));
+//	checkLogin();
+//	login_user = JSON.parse(sessionStorage.getItem("user"));
 	
 	$("#login_username").text(login_user.username);
 
